@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+inst/doc
+.bib
+.aux
+.sty
+.bbl
+.toc
+.log
+.png
+
