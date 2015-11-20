@@ -300,13 +300,19 @@ superheat <- function(X,
 
 
   # remove the cluster boxes if we have more than 100 cols/rows
-  if ((bottom.heat.label == "variable") | (left.heat.label == "variable") | (bottom.heat.label == "none") | (left.heat.label == "none")) {
-    if ((nrow(X) > 100) | (ncol(X) > 100)) {
-      warning('"cluster.box" set to FALSE when nrow(X) or ncol(X) exceeds 100 and "bottom.heat.label" or "left.heat.label" are set to "variable" or "none"')
+  if (!cluster.cols & ((bottom.heat.label == "variable") | (bottom.heat.label == "none"))) {
+    if (ncol(X) > 100) {
+      warning('"cluster.box" set to FALSE when ncol(X) exceeds 100 and "bottom.heat.label" is set to "variable" or "none"')
       cluster.box <- FALSE
     }
   }
 
+  if (!cluster.rows & ((left.heat.label == "variable") | (left.heat.label == "none"))) {
+    if (nrow(X) > 100) {
+      warning('"cluster.box" set to FALSE when nrow(X) exceeds 100 and "left.heat.label" is set to "variable" or "none"')
+      cluster.box <- FALSE
+    }
+  }
 
 
   ##################### perform clustering if needed ######################
