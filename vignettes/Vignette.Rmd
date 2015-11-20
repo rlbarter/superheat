@@ -451,7 +451,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can change the cluster/variable label size (the default is 0.1)
+* You can change the cluster/variable label size (the default is 0.1) and the label text angle
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 

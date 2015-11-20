@@ -236,6 +236,9 @@ superheat <- function(X,
                         title.size = 5,
                         print.plot = TRUE) {
 
+
+
+
   smoothing.method <- match.arg(smoothing.method)
   yt.plot.type <- match.arg(yt.plot.type)
   yr.plot.type <- match.arg(yr.plot.type)
@@ -295,6 +298,14 @@ superheat <- function(X,
     bottom.heat.label <- "variable"
   }
 
+
+  # remove the cluster boxes if we have more than 100 cols/rows
+  if ((bottom.heat.label == "variable") | (left.heat.label == "variable") | (bottom.heat.label == "none") | (left.heat.label == "none")) {
+    if ((nrow(X) > 100) | (ncol(X) > 100)) {
+      warning('"cluster.box" set to FALSE when nrow(X) or ncol(X) exceeds 100 and "bottom.heat.label" or "left.heat.label" are set to "variable" or "none"')
+      cluster.box <- FALSE
+    }
+  }
 
 
 
@@ -386,6 +397,9 @@ superheat <- function(X,
 
 
   ################### Generate the heatmap #########################
+
+
+
 
   if (cluster.box) {
     if (left.heat.label == "variable") {
