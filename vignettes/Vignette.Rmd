@@ -245,7 +245,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr.plot.type = "bar")
 ```
 
-<!--
+
 * A boxplot
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
@@ -256,7 +256,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr.plot.type = "boxplot")
 ```
 
--->
+
 ### Layout
 
 

@@ -67,8 +67,15 @@ generate_scatter <- function(y,
 
     if (plot.type == "boxplot") {
       gg.top <- ggplot2::ggplot(y.df) +
-        theme_top +
-        ggplot2::scale_x_discrete(name = "", expand = c(0.01, 0.01))
+        theme_top
+      # calculate the midpoints of the boxplot positions
+      selected.clusters.df <- data.frame(cluster = unique(membership),
+                                         n = as.vector(table(membership)))
+      selected.clusters.df <- selected.clusters.df %>%
+        dplyr::mutate(increment = (n/sum(selected.clusters.df$n)) * length(unique(membership)))
+      breaks <- c(1, 1 + cumsum(selected.clusters.df$increment))
+      midpoints <- matrix(c(c(breaks, NA), c(NA, breaks)), ncol = 2, byrow = F)
+      midpoints <- apply(midpoints, 1, mean)[2:(length(breaks))]
     } else {
       gg.top <- ggplot2::ggplot(y.df) +
         theme_top +
@@ -147,11 +154,20 @@ generate_scatter <- function(y,
                                               size = smooth.size) +
         ggplot2::scale_color_manual(values = rep(y.pal, length = length(unique(membership))))
       } else if (plot.type == "boxplot") {
-      gg.top <- gg.top +
-        ggplot2::geom_boxplot(ggplot2::aes(x = membership,
-                                       y = y,
-                                       fill = factor(membership))) +
-        ggplot2::scale_fill_manual(values = rep(y.pal, length = length(unique(membership))))
+        w <- table(membership)/(length(membership)/length(unique(membership)))
+        y.df.temp <- y.df
+        y.df.temp$midpoints <- factor(y.df.temp$membership)
+        levels(y.df.temp$midpoints) <- midpoints
+        gg.top <- gg.top +
+          plyr::llply(unique(membership), function(i) {ggplot2::geom_boxplot(ggplot2::aes(x = as.numeric(as.vector(midpoints)),
+                                                                                          y = y,
+                                                                                          fill = factor(membership)),
+                                                                             width = w[i],
+                                                                             data = subset(y.df.temp, membership == i)) }) +
+          ggplot2::scale_fill_manual(values = rep(y.pal, length = length(unique(membership)))) +
+          ggplot2::scale_x_continuous(limits = c(min(breaks), max(breaks)), expand = c(0,0))
+
+        rm(y.df.temp)
     } else if (is.null(y.obs.col) && (plot.type == "bar")) {
       gg.top <- gg.top +
         ggplot2::geom_bar(ggplot2::aes(x = x,
@@ -211,8 +227,15 @@ generate_scatter <- function(y,
     if (plot.type == "boxplot") {
       gg.right <- ggplot2::ggplot(y.df) +
         ggplot2::coord_flip() +
-        theme_right +
-        ggplot2::scale_x_discrete(name = "", expand = c(0.01, 0.01))
+        theme_right
+        # calculate midpoints of the boxplot positions
+      selected.clusters.df <- data.frame(cluster = unique(membership),
+                                       n = as.vector(table(membership)))
+      selected.clusters.df <- selected.clusters.df %>%
+        dplyr::mutate(increment = (n/sum(selected.clusters.df$n)) * length(unique(membership)))
+      breaks <- c(1, 1 + cumsum(selected.clusters.df$increment))
+      midpoints <- matrix(c(c(breaks, NA), c(NA, breaks)), ncol = 2, byrow = F)
+      midpoints <- apply(midpoints, 1, mean)[2:(length(breaks))]
     } else {
       gg.right <- ggplot2::ggplot(y.df) +
         ggplot2::coord_flip() +
@@ -302,11 +325,19 @@ generate_scatter <- function(y,
                                                   size = smooth.size) +
         ggplot2::scale_color_manual(values = rep(y.pal, length = length(unique(membership))))
     } else if (plot.type == "boxplot") {
+      w <- table(membership)/(length(membership)/length(unique(membership)))
+      y.df.temp <- y.df
+      y.df.temp$midpoints <- factor(y.df.temp$membership)
+      levels(y.df.temp$midpoints) <- midpoints
       gg.right <- gg.right +
-        ggplot2::geom_boxplot(ggplot2::aes(x = membership,
+        plyr::llply(unique(membership), function(i) {ggplot2::geom_boxplot(ggplot2::aes(x = as.numeric(as.vector(midpoints)),
                                        y = y,
-                                       fill = factor(membership))) +
-        ggplot2::scale_fill_manual(values = rep(y.pal, length = length(unique(membership))))
+                                       fill = factor(membership)),
+                                       width = w[i],
+                                       data = subset(y.df.temp, membership == i)) }) +
+        ggplot2::scale_fill_manual(values = rep(y.pal, length = length(unique(membership)))) +
+        ggplot2::scale_x_continuous(limits = c(min(breaks), max(breaks)), expand = c(0,0))
+      rm(y.df.temp)
     } else if (is.null(y.obs.col) && (plot.type == "bar")) {
       gg.right <- gg.right +
         ggplot2::geom_bar(ggplot2::aes(x = x,
