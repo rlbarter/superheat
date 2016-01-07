@@ -2,20 +2,20 @@ Package: superheat
 Type: Package
 Title: A graphical method for graphically exploring datasets and model assessment
 Version: 0.1
-Authors@R: person("Rebecca", "Barter", email = "rebeccabarter@berkeley.edu", 
- 	          role = c("aut", "cre"))
-Description: A package which can be used to explore datasets and assess the adequacy of model fit. The plot is highly customizable and has a large number of aesthetic options.
+Authors@R: person("Rebecca", "Barter", email = "rebeccabarter@berkeley.edu", role = c("aut", "cre"))
+Description: A package which can be used to explore datasets and assess the adequacy of model fits using supervised heatmaps. The plot is highly customizable and has a large number of aesthetic options.
+Depends: R (>= 3.2.3)
 License: CC0
 LazyData: TRUE
-Imports: dplyr,
-    ggplot2,
-    grid,
-    gtable,
-    magrittr,
-    plyr,
-    scales,
-Suggests: gridExtra,
-    knitr,
-    pander,
-    testthat
+Imports: dplyr (>= 0.4.3),
+    ggplot2 (>= 2.0.0),
+    grid (>= 3.2.3),
+    gtable (>= 0.1.2),
+    magrittr (>= 1.5),
+    plyr (>= 1.8.3),
+    scales (>= 0.3.0),
+Suggests: gridExtra (>= 2.0.0),
+    knitr (>= 1.11),
+    pander (>= 0.6.0),
+    testthat (>= 0.11.0)
 VignetteBuilder: knitr

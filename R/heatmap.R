@@ -76,7 +76,7 @@ generate_heat <- function(X,
 
 
 
-  # plot colour limits:
+  # plot color limits:
   max.col <- max(X.df$value)
   min.col <- min(X.df$value)
   range.X <- seq(min.col, max.col, length = 100)
@@ -93,11 +93,12 @@ generate_heat <- function(X,
   }
   # make the plot
   gg.legend <- ggplot2::ggplot(X.df) +
-    ggplot2::geom_raster(ggplot2::aes(x = x, y = y, fill = value),
-                         colour = "black") +
+    ggplot2::geom_raster(ggplot2::aes(x = x, y = y,
+                                      fill = value,
+                                      color = "black")) +
     #ggplot2::coord_fixed() +
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
-                                  colours = heat.pal,
+                                  colors = heat.pal,
                                   name = "",
                                   breaks = breaks) +
     ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
