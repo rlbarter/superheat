@@ -173,10 +173,9 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                        y = y,
                                        fill = factor(membership)),
-                          ymax = nrow(y.df) + 1,
+                          #ylim = c(0,nrow(y.df) + 1),
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
-                          binwidth = 0,
                           width = 1) +
         ggplot2::scale_fill_manual(values = rep(y.pal, length = length(unique(membership))))
     } else if (!is.null(y.obs.col) && (plot.type == "bar")) {
@@ -184,10 +183,9 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                        y = y,
                                        fill = factor(membership)),
-                          ymax = nrow(y.df) + 1,
+                          #ylim = c(0,nrow(y.df) + 1),
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
-                          binwidth = 0,
                           width = 1) +
         ggplot2::scale_fill_manual(values = unique(y.obs.col))
     }
@@ -343,10 +341,9 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                          y = y,
                                          fill = factor(membership)),
-                          ymax = nrow(y.df) + 1,
+                          #ylim = c(0,nrow(y.df) + 1),
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
-                          binwidth = 0,
                           width = 1) +
         ggplot2::scale_fill_manual(values = rep(y.pal, length = length(unique(membership))))
     } else if (!is.null(y.obs.col) && (plot.type == "bar")) {
@@ -354,10 +351,9 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                        y = y,
                                        fill = factor(col, levels = unique(col))),
-                          ymax = nrow(y.df) + 1,
+                          #ylim = c(0,nrow(y.df) + 1),
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
-                          binwidth = 0,
                           width = 1) +
         ggplot2::scale_fill_manual(values = unique(y.obs.col))
     }
