@@ -15,13 +15,20 @@ generate_scatter <- function(y,
                              point.alpha = 1,
                              y.obs.col = NULL,
                              y.pal = NULL,
+                             y.bar.col = NULL,
                              smoothing.method = c("loess","lm"),
-                             smooth.size = 0.5,
+                             y.line.size = NULL,
                              smooth.se = TRUE) {
 
   if (is.null(y.obs.col) && is.null(y.pal)) {
-    y.pal = c("Grey 61","Grey 43")
+    y.pal <- c("Grey 61","Grey 43")
   }
+
+
+  if (is.null(y.bar.col)) y.bar.col <- "white"
+
+
+
 
 
   id <- 1:length(y)
@@ -107,14 +114,14 @@ generate_scatter <- function(y,
                                                                  y = y,
                                                                  col = factor(membership)),
                                                   method = smoothing.method,
-                                                size = smooth.size,
+                                                size = y.line.size,
                                                 se = smooth.se)
       }
       if (plot.type == "scatterline") {
         gg.top <- gg.top + ggplot2::geom_line(ggplot2::aes(x = x,
                                                              y = y,
                                                              col = factor(membership)),
-                                                size = smooth.size)
+                                                size = y.line.size)
       }
 
     } else if (!is.null(y.obs.col) && (plot.type %in% c("scatter","scattersmooth","scatterline"))) {
@@ -130,28 +137,28 @@ generate_scatter <- function(y,
                                                                  y = y,
                                                                  col = factor(col, levels = unique(col))),
                                                     method = smoothing.method,
-                                                size = smooth.size,
+                                                size = y.line.size,
                                                 se = smooth.se)
       }
       if (plot.type == "scatterline") {
         gg.top <- gg.top + ggplot2::geom_line(ggplot2::aes(x = x,
                                                              y = y,
                                                              col = factor(col, levels = unique(col))),
-                                                size = smooth.size)
+                                                size = y.line.size)
       }
     } else if (plot.type == "smooth") {
         gg.top <- gg.top + ggplot2::stat_smooth(ggplot2::aes(x = x,
                                                                  y = y,
                                                                  col = factor(membership)),
                                                     method = smoothing.method,
-                                                size = smooth.size,
+                                                size = y.line.size,
                                                 se = smooth.se) +
           ggplot2::scale_color_manual(values = rep(y.pal, length = length(unique(membership))))
     } else if (plot.type == "line") {
       gg.top <- gg.top + ggplot2::geom_line(ggplot2::aes(x = x,
                                                            y = y,
                                                            col = factor(membership)),
-                                              size = smooth.size) +
+                                              size = y.line.size) +
         ggplot2::scale_color_manual(values = rep(y.pal, length = length(unique(membership))))
       } else if (plot.type == "boxplot") {
         w <- table(membership)/(length(membership)/length(unique(membership)))
@@ -173,7 +180,7 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                        y = y,
                                        fill = factor(membership)),
-                          #ylim = c(0,nrow(y.df) + 1),
+                          col = y.bar.col,
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
                           width = 1) +
@@ -183,7 +190,7 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                        y = y,
                                        fill = factor(membership)),
-                          #ylim = c(0,nrow(y.df) + 1),
+                          col = y.bar.col,
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
                           width = 1) +
@@ -277,14 +284,14 @@ generate_scatter <- function(y,
                                                                  y = y,
                                                                  col = factor(membership)),
                                                     method = smoothing.method,
-                                                    size = smooth.size,
+                                                    size = y.line.size,
                                                     se = smooth.se)
       }
       if (plot.type == "scatterline") {
         gg.right <- gg.right + ggplot2::geom_line(ggplot2::aes(x = x,
                                                                  y = y,
                                                                  col = factor(membership)),
-                                                    size = smooth.size)
+                                                    size = y.line.size)
       }
     } else if (!is.null(y.obs.col) && (plot.type %in% c("scatter", "scattersmooth", "scatterline"))) {
       gg.right <- gg.right +
@@ -299,28 +306,28 @@ generate_scatter <- function(y,
                                                                  y = y,
                                                                  col = factor(col, levels = unique(col))),
                                                     method = smoothing.method,
-                                                    size = smooth.size,
+                                                    size = y.line.size,
                                                     se = smooth.se)
       }
       if (plot.type == "scatterline") {
         gg.right <- gg.right + ggplot2::geom_line(ggplot2::aes(x = x,
                                                                  y = y,
                                                                  col = factor(col, levels = unique(col))),
-                                                    size = smooth.size)
+                                                    size = y.line.size)
       }
     } else if (plot.type == "smooth") {
         gg.right <- gg.right + ggplot2::stat_smooth(ggplot2::aes(x = x,
                                                                  y = y,
                                                                  col = factor(membership)),
                                                     method = smoothing.method,
-                                                    size = smooth.size,
+                                                    size = y.line.size,
                                                     se = smooth.se) +
           ggplot2::scale_color_manual(values = rep(y.pal, length = length(unique(membership))))
     } else if (plot.type == "line") {
       gg.right <- gg.right + ggplot2::geom_line(ggplot2::aes(x = x,
                                                                y = y,
                                                                col = factor(membership)),
-                                                  size = smooth.size) +
+                                                  size = y.line.size) +
         ggplot2::scale_color_manual(values = rep(y.pal, length = length(unique(membership))))
     } else if (plot.type == "boxplot") {
       w <- table(membership)/(length(membership)/length(unique(membership)))
@@ -341,7 +348,7 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                          y = y,
                                          fill = factor(membership)),
-                          #ylim = c(0,nrow(y.df) + 1),
+                          col = y.bar.col,
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
                           width = 1) +
@@ -351,7 +358,7 @@ generate_scatter <- function(y,
         ggplot2::geom_bar(ggplot2::aes(x = x,
                                        y = y,
                                        fill = factor(col, levels = unique(col))),
-                          #ylim = c(0,nrow(y.df) + 1),
+                          col = y.bar.col,
                           position = ggplot2::position_dodge(0),
                           stat = "identity",
                           width = 1) +

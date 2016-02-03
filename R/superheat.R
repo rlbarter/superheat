@@ -102,6 +102,8 @@
 #'          of the heatmap.
 #' @param yr.plot.size a number specifying the size of the scatter plot to the
 #'          right of the heatmap.
+#' @param yt.line.size the thickness of the (smoothing) line in the top plot.
+#' @param yr.line.size the thickness of the (smoothing) line in the right plot.
 #' @param bottom.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
 #' @param left.text.size the size of the left heatmap label text. The
@@ -141,6 +143,10 @@
 #'          the colour of each cluster in \code{yt}.
 #' @param yr.pal a vector the same length as the number of clusters which specifies
 #'          the colour of each cluster in \code{yr}.
+#' @param yt.bar.col a character which specifies the colour of the boundary of the
+#'          bars in the barplot of \code{yt}.
+#' @param yr.bar.col a character which specifies the colour of the boundary of the
+#'          bars in the barplot of \code{yr}.
 #' @param yt.point.size the size of the points in the top scatterplot. The
 #'          default is 2.
 #' @param yr.point.size the size of the points in the right scatterplot. The
@@ -190,7 +196,6 @@ superheat <- function(X,
                         box.size = 0.5,
                         box.col = "black",
                         smoothing.method = c("loess","lm"),
-                        line.size = 0.5,
                         smooth.se = TRUE,
                         legend = TRUE,
                         order.cols = NULL, # how to order within clusters (must be an integer vector e..g c(1,3,2) means the ordering is the first, third then second observation
@@ -226,10 +231,14 @@ superheat <- function(X,
                         yr.obs.col = NULL,
                         yt.pal = NULL,
                         yr.pal = NULL,
+                        yt.bar.col = NULL,
+                        yr.bar.col = NULL,
                         yt.point.size = 2,
                         yt.point.alpha = 1,
                         yr.point.size = 2,
                         yr.point.alpha = 1,
+                        yr.line.size = NULL,
+                        yt.line.size = NULL,
                         legend.size = 2,
                         padding = 1,
                         title = NULL,
@@ -442,6 +451,8 @@ superheat <- function(X,
     y <- yt
     y.obs.col <- yt.obs.col
     y.pal <- yt.pal
+    y.bar.col <- yt.bar.col
+    y.line.size <- yt.line.size
     membership <- membership.cols
     location <- "top"
     axis.name <- yt.axis.name
@@ -464,6 +475,8 @@ superheat <- function(X,
     y <- yr
     y.obs.col <- yr.obs.col
     y.pal <- yr.pal
+    y.bar.col <- yr.bar.col
+    y.line.size <- yr.line.size
     membership <- membership.rows
     location <- "right"
     axis.name <- yr.axis.name
