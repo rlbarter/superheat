@@ -27,7 +27,7 @@ generate_scatter <- function(y,
 
   if (is.null(y.bar.col)) y.bar.col <- "white"
 
-
+  if (is.null(y.line.size)) y.line.size <- 1
 
 
 
