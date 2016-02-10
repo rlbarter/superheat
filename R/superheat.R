@@ -324,6 +324,9 @@ superheat <- function(X,
   }
 
 
+  if (!is.null(left.label.text.col) & length(left.label.text.col) != nrow(X)) stop('"left.label.text.col" must be the same length as "nrow(X)"')
+  if (!is.null(bottom.label.text.col) & length(bottom.label.text.col) != ncol(X)) stop('"bottom.label.text.col" must be the same length as "ncol(X)"')
+
   ##################### perform clustering if needed ######################
 
 

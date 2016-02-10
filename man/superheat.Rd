@@ -12,13 +12,13 @@ superheat(X, yt = NULL, yr = NULL, yt.plot.type = c("scatter", "bar",
   cluster.rows = TRUE, cluster.cols = FALSE,
   clustering.method = c("kmeans", "hierarchical"), cluster.box = TRUE,
   box.size = 0.5, box.col = "black", smoothing.method = c("loess", "lm"),
-  line.size = 0.5, smooth.se = TRUE, legend = TRUE, order.cols = NULL,
-  order.rows = NULL, left.heat.label = NULL, bottom.heat.label = NULL,
-  yt.axis = T, yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3,
-  yt.plot.size = 0.3, yr.plot.size = 0.3, yt.axis.name = NULL,
-  yr.axis.name = NULL, yr.axis.size = 10, yt.axis.size = 10,
-  yr.axis.name.size = 10, yt.axis.name.size = 10, bottom.text.size = 5,
-  left.text.size = 5, bottom.text.angle = NULL, left.text.angle = NULL,
+  smooth.se = TRUE, legend = TRUE, order.cols = NULL, order.rows = NULL,
+  left.heat.label = NULL, bottom.heat.label = NULL, yt.axis = T,
+  yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
+  yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
+  yr.axis.size = 10, yt.axis.size = 10, yr.axis.name.size = 10,
+  yt.axis.name.size = 10, bottom.text.size = 5, left.text.size = 5,
+  bottom.text.angle = NULL, left.text.angle = NULL,
   bottom.label.size = 0.1, left.label.size = 0.1,
   heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, left.label.pal = NULL,
@@ -26,8 +26,9 @@ superheat(X, yt = NULL, yr = NULL, yt.plot.type = c("scatter", "bar",
   bottom.label.text.col = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
   yt.pal = NULL, yr.pal = NULL, yt.bar.col = NULL, yr.bar.col = NULL,
   yt.point.size = 2, yt.point.alpha = 1, yr.point.size = 2,
-  yr.point.alpha = 1, legend.size = 2, padding = 1, title = NULL,
-  title.size = 5, print.plot = TRUE)
+  yr.point.alpha = 1, yr.line.size = NULL, yt.line.size = NULL,
+  legend.size = 2, padding = 1, title = NULL, title.size = 5,
+  print.plot = TRUE)
 }
 \arguments{
 \item{X}{an optional matrix or data frame containing the variables in the
@@ -96,10 +97,6 @@ around the clusters in the heatmap.}
 \item{smoothing.method}{if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 this argument specifies the smoothing method to use. The default is
 \code{loess}. The alternative option is \code{lm}.}
-
-\item{line.size}{the thickness of the line if \code{plot.type} is
-\code{"scattersmooth"}, \code{"smooth"}, \code{"scatterline"} or
-\code{"line"}. The default is 0.5.}
 
 \item{smooth.se}{logical. Should the smoothed curve have a standard error
 around it?}
@@ -218,11 +215,11 @@ the colour of each cluster in \code{yt}.}
 \item{yr.pal}{a vector the same length as the number of clusters which specifies
 the colour of each cluster in \code{yr}.}
 
-\item{yt.bar.col}{a vector the same length as the number of clusters which specifies
-the colour of the boundary of the bars in the barplot of \code{yt}.}
+\item{yt.bar.col}{a character which specifies the colour of the boundary of the
+bars in the barplot of \code{yt}.}
 
-\item{yr.bar.col}{a vector the same length as the number of clusters which specifies
-the colour of the boundary of the bars in the barplot of \code{yr}.}
+\item{yr.bar.col}{a character which specifies the colour of the boundary of the
+bars in the barplot of \code{yr}.}
 
 \item{yt.point.size}{the size of the points in the top scatterplot. The
 default is 2.}
@@ -236,6 +233,10 @@ default is 2.}
 \item{yr.point.alpha}{the transparancy of the points in the top scatterplot.
 The default is 1, which corresponds to no transparancy.}
 
+\item{yr.line.size}{the thickness of the (smoothing) line in the right plot.}
+
+\item{yt.line.size}{the thickness of the (smoothing) line in the top plot.}
+
 \item{legend.size}{a number specifying the size of the legend. The default
 is 2.}
 
@@ -248,6 +249,10 @@ The default is 1cm.}
 
 \item{print.plot}{logical. If \code{TRUE} (default), the plot will be
 printed to the screen when the function is called.}
+
+\item{line.size}{the thickness of the line if \code{plot.type} is
+\code{"scattersmooth"}, \code{"smooth"}, \code{"scatterline"} or
+\code{"line"}. The default is 0.5.}
 }
 \value{
 \code{plot} a plot with the properties specified by the above arguments.
