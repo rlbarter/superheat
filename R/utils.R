@@ -80,14 +80,14 @@ stop_errors <- function(X,
                         title.size = 5,
                         print.plot = TRUE) {
 
-
-  if (!is.null(membership.rows) && !cluster.rows) {
-    warning("'cluster.rows = FALSE' is overridden by the supplied 'membership.rows' argument.")
+  if ((!is.null(membership.rows) | !is.null(n.clusters.rows)) && !cluster.rows) {
+    cluster.rows <- TRUE
   }
 
-  if (!cluster.rows && !is.null(n.clusters.rows)) {
-    warning("'cluster.rows = FALSE' is overridden by the supplied 'n.clusters.rows' argument.")
+  if ((!is.null(membership.cols) | !is.null(n.clusters.cols)) && !cluster.cols) {
+    cluster.cols <- TRUE
   }
+
 
 
   if (is.matrix(X) && sum(!(apply(X, 2, class) %in% c("numeric", "integer")) > 0)) {

@@ -242,7 +242,8 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            yr.plot.type = "bar")
+            yr.plot.type = "bar",
+            yr.bar.col = "grey")
 ```
 
 
@@ -418,7 +419,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
             left.label.pal = c("blue","red","purple"),
-            left.label.text.col = c("white","yellow","white"))
+            left.label.text.col = c("white","black","white"))
 ```
 
 
