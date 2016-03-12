@@ -370,13 +370,14 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 * If your data are centered around 0 (e.g. standardized values), you may want to use a diverging palette. You can do this using the `heat.pal` and `heat.pal.values` arguments, specifying that the center of your palette should be at 0.
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
+library(RColorBrewer)
 scaled_iris <- scale(iris[,c("Sepal.Width","Sepal.Length","Petal.Width")])
 superheat(X = scaled_iris, 
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            heat.pal = c("blue", "white", "red"),
-            heat.pal.values = c(0, (-min(scaled_iris))/diff(range(scaled_iris)), 1))
+            heat.pal = brewer.pal(9, "RdBu"),
+            heat.pal.values = c(0,  (-min(scaled_iris))/diff(range(scaled_iris)), 1))
 ```
 
 *  You can specify the colour of the points in the scatterplot (replace `yr` with `yt` for the top scatterplot). Note that the order of the points in the `yr.obs.col` vector correspond to the order of the points in `yr`.
