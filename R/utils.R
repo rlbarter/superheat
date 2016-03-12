@@ -38,7 +38,7 @@ stop_errors <- function(X,
                         membership.cols = NULL, # membership for cols
                         n.clusters.rows = NULL,
                         n.clusters.cols = NULL,
-                        cluster.rows = TRUE,
+                        cluster.rows = FALSE,
                         cluster.cols = FALSE,
                         clustering.method = c("kmeans", "hierarchical"),
                         cluster.box = TRUE,
@@ -120,11 +120,11 @@ stop_errors <- function(X,
     stop("invalid clustering method", paste("", clustering.method))
 
   if (is.null(membership.cols) && cluster.cols && is.null(n.clusters.cols)) {
-    stop("Please supply either a 'membership.cols' vector or the number of column clusters 'n.clusters.cols'.")
+    stop("Please supply either a 'membership.cols' vector or the number of column clusters 'n.clusters.cols' or set 'cluster.cols = FALSE'.")
   }
 
   if (is.null(membership.rows) && cluster.rows && is.null(n.clusters.rows)) {
-    stop("Please supply either a 'membership.rows' vector or the number of row clusters 'n.clusters.rows'.")
+    stop("Please supply either a 'membership.rows' vector or the number of row clusters 'n.clusters.rows' or set 'cluster.cols = FALSE'.")
   }
 
   if (!is.null(left.heat.label) && (left.heat.label == "cluster") && (is.null(membership.rows)) && is.null(n.clusters.rows)) {

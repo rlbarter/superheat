@@ -189,7 +189,7 @@ superheat <- function(X,
                         membership.cols = NULL, # membership for cols
                         n.clusters.rows = NULL,
                         n.clusters.cols = NULL,
-                        cluster.rows = TRUE,
+                        cluster.rows = FALSE,
                         cluster.cols = FALSE,
                         clustering.method = c("kmeans", "hierarchical"),
                         cluster.box = TRUE,
@@ -307,18 +307,33 @@ superheat <- function(X,
     bottom.heat.label <- "variable"
   }
 
+  # remove variable labels if more than 50 rows
+  if (left.heat.label == "variable") {
+    if (nrow(X) > 50) {
+      warning('"left.heat.label" set to "none" when nrow(X) exceeds 50')
+      left.heat.label <- "none"
+    }
+  }
+
+  if (bottom.heat.label == "variable") {
+    if (ncol(X) > 50) {
+      warning('"bottom.heat.label" set to "none" when ncol(X) exceeds 50')
+      bottom.heat.label <- "none"
+    }
+  }
+
 
   # remove the cluster boxes if we have more than 100 cols/rows
   if (!cluster.cols & ((bottom.heat.label == "variable") | (bottom.heat.label == "none"))) {
     if (ncol(X) > 100) {
-      warning('"cluster.box" set to FALSE when ncol(X) exceeds 100 and "bottom.heat.label" is set to "variable" or "none"')
+      warning('"cluster.box" set to FALSE when ncol(X) exceeds 100 and when "bottom.heat.label" is set to either "variable" or "none"')
       cluster.box <- FALSE
     }
   }
 
   if (!cluster.rows & ((left.heat.label == "variable") | (left.heat.label == "none"))) {
     if (nrow(X) > 100) {
-      warning('"cluster.box" set to FALSE when nrow(X) exceeds 100 and "left.heat.label" is set to "variable" or "none"')
+      warning('"cluster.box" set to FALSE when nrow(X) exceeds 100 and when "left.heat.label" is set to either "variable" or "none"')
       cluster.box <- FALSE
     }
   }
