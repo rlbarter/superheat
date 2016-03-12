@@ -531,6 +531,24 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
+## Saving the images
+
+The best format for saving superheat images is as a .png file. To do this in R, the easiest way is to envoke the `png()` function (remember to call `dev.off()` when you're done!)
+
+```{r, fig.align = 'center', fig.height = 5, fig.width = 6, eval = FALSE}
+
+png("superheat.png", height = 500, width = 800)
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr = iris[,"Petal.Length"],
+            membership.rows = iris[,"Species"],
+            yr.axis.name = "Petal.Length",
+            order.rows = order(iris$Sepal.Width))
+dev.off()
+```
+
+
+
+
 --------
 
 ## The end
@@ -540,3 +558,13 @@ Thanks for using the package! I hope you find it helpful in your data exploratio
 
 
 --------
+
+
+<!-- 
+
+tools::compactPDF("vignettes/", gs_quality = "ebook")
+rmarkdown::render("Vignettes/Vignette.Rmd", c("html_document"))
+
+
+
+--> 
