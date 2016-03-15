@@ -435,6 +435,22 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             box.col = "white")
 ```
 
+
+
+
+### Heatmap smoothing
+
+* You can smooth the colors within each cluster of the heatmap
+
+```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
+
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr = iris[,"Petal.Length"],
+            membership.rows = iris[,"Species"],
+            yr.axis.name = "Petal.Length",
+            smooth.heat = TRUE)
+```
+
 ### Sizing
 
 There are a number of options to change the text size, point size and legend size in the plot. For example, you can specify the following arguments in the `superheat` function:
