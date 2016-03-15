@@ -26,6 +26,8 @@
 #' @param yr.plot.type character specifying the right plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
 #'          "smooth", "boxplot", "scatterline" and "line".
+#' @param smooth.heat logical. If \code{TRUE}, then the color of the heatmap is
+#'          smoothed within clusters.
 #' @param scale logical. If \code{TRUE}, the columns of X are centered and scaled.
 #' @param membership.rows an optional vector specifying the cluster membership
 #'          of the rows/observations in X. If not specified, the default settings
@@ -184,6 +186,7 @@ superheat <- function(X,
                         yr = NULL,
                         yt.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),
                         yr.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),
+                        smooth.heat = FALSE,
                         scale = FALSE,
                         membership.rows = NULL, # membership for rows
                         membership.cols = NULL, # membership for cols
@@ -310,14 +313,14 @@ superheat <- function(X,
   # remove variable labels if more than 50 rows
   if (left.heat.label == "variable") {
     if (nrow(X) > 50) {
-      warning('"left.heat.label" set to "none" when nrow(X) exceeds 50')
+      warning('Cannot set "left.heat.label" to "variable" when nrow(X) exceeds 50')
       left.heat.label <- "none"
     }
   }
 
   if (bottom.heat.label == "variable") {
     if (ncol(X) > 50) {
-      warning('"bottom.heat.label" set to "none" when ncol(X) exceeds 50')
+      warning('Cannot set "bottom.heat.label" to "variable" when ncol(X) exceeds 50')
       bottom.heat.label <- "none"
     }
   }
@@ -326,14 +329,14 @@ superheat <- function(X,
   # remove the cluster boxes if we have more than 100 cols/rows
   if (!cluster.cols & ((bottom.heat.label == "variable") | (bottom.heat.label == "none"))) {
     if (ncol(X) > 100) {
-      warning('"cluster.box" set to FALSE when ncol(X) exceeds 100 and when "bottom.heat.label" is set to either "variable" or "none"')
+    #  warning('"cluster.box" set to FALSE when ncol(X) exceeds 100 and when "bottom.heat.label" is set to either "variable" or "none"')
       cluster.box <- FALSE
     }
   }
 
   if (!cluster.rows & ((left.heat.label == "variable") | (left.heat.label == "none"))) {
     if (nrow(X) > 100) {
-      warning('"cluster.box" set to FALSE when nrow(X) exceeds 100 and when "left.heat.label" is set to either "variable" or "none"')
+    #  warning('"cluster.box" set to FALSE when nrow(X) exceeds 100 and when "left.heat.label" is set to either "variable" or "none"')
       cluster.box <- FALSE
     }
   }
@@ -445,11 +448,16 @@ superheat <- function(X,
     }
   }
 
+
   heat.arg.list <- c(as.list(environment()))
   heat.arg.list <- heat.arg.list[names(formals(generate_heat))]
   heat.arg.list <- heat.arg.list[!is.na(names(heat.arg.list))]
 
-  heat <- do.call(generate_heat, heat.arg.list)
+  if (smooth.heat) {
+    heat <- do.call(generate_smooth_heat, heat.arg.list)
+  } else {
+    heat <- do.call(generate_heat, heat.arg.list)
+  }
   gg.heat <- heat$gg.heat
   if (legend) {
     gg.legend <- heat$gg.legend

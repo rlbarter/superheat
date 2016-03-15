@@ -7,9 +7,9 @@
 superheat(X, yt = NULL, yr = NULL, yt.plot.type = c("scatter", "bar",
   "boxplot", "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), scale = FALSE, membership.rows = NULL,
-  membership.cols = NULL, n.clusters.rows = NULL, n.clusters.cols = NULL,
-  cluster.rows = FALSE, cluster.cols = FALSE,
+  "scatterline", "line"), smooth.heat = FALSE, scale = FALSE,
+  membership.rows = NULL, membership.cols = NULL, n.clusters.rows = NULL,
+  n.clusters.cols = NULL, cluster.rows = FALSE, cluster.cols = FALSE,
   clustering.method = c("kmeans", "hierarchical"), cluster.box = TRUE,
   box.size = 0.5, box.col = "black", smoothing.method = c("loess", "lm"),
   smooth.se = TRUE, legend = TRUE, order.cols = NULL, order.rows = NULL,
@@ -55,6 +55,9 @@ cluster or variable in the plot.}
 \item{yr.plot.type}{character specifying the right plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
 "smooth", "boxplot", "scatterline" and "line".}
+
+\item{smooth.heat}{logical. If \code{TRUE}, then the color of the heatmap is
+smoothed within clusters.}
 
 \item{scale}{logical. If \code{TRUE}, the columns of X are centered and scaled.}
 
