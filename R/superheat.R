@@ -128,7 +128,8 @@
 #' @param heat.pal.values a vector specifying the location of each color in the
 #'          color palatte. Each entry should be a number between 0 and 1. This
 #'          corresponds to the \code{values} argumnet for the ggplot2
-#'          \code{\link[ggplot2]{scale_color_gradientn}} function.
+#'          \code{\link[ggplot2]{scale_color_gradientn}} function. The default
+#'          values correspond to the equally spaced quantiles.
 #' @param left.label.pal a vector specifying the left cluster/variable label color
 #'          palette.
 #' @param bottom.label.pal a vector specifying the bottom cluster/variable label color

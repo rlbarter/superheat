@@ -84,7 +84,9 @@ generate_heat <- function(X,
   value <- X.df$value
 
   if (is.null(heat.pal.values)) {
-    heat.pal.values <- c(0, 0.5, 1)
+    probs <- seq(0, 1, length = length(heat.pal))
+    quantiles <- quantile(X.df$value, probs)
+    heat.pal.values <- (quantiles - min(quantiles))/(max(quantiles) - min(quantiles))
   }
   # make the plot
   gg.legend <- ggplot2::ggplot(X.df) +
@@ -190,6 +192,8 @@ generate_smooth_heat <- function(X,
 
 
 
+
+
   # need to order obs by same order as residuals residuals
   X.order <- X[order.y, order.x]
   # convert the x-y correlation matrix to a long-form "tidy" data frame
@@ -278,7 +282,9 @@ generate_smooth_heat <- function(X,
   value <- X.df$value
 
   if (is.null(heat.pal.values)) {
-    heat.pal.values <- c(0, 0.5, 1)
+    probs <- seq(0, 1, length = length(heat.pal))
+    quantiles <- quantile(X.df$value, probs)
+    heat.pal.values <- (quantiles - min(quantiles))/(max(quantiles) - min(quantiles))
   }
   # make the plot
   gg.legend <- ggplot2::ggplot(X.df) +
