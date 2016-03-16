@@ -126,7 +126,7 @@
 #'          corresponds to the \code{color} argumnet for the ggplot2
 #'          \code{\link[ggplot2]{scale_color_gradientn}} function.
 #' @param heat.pal.values a vector specifying the location of each color in the
-#'          color palatte. Each entry should be a number between 0 and 1. This
+#'          color palette. Each entry should be a number between 0 and 1. This
 #'          corresponds to the \code{values} argumnet for the ggplot2
 #'          \code{\link[ggplot2]{scale_color_gradientn}} function. The default
 #'          values correspond to the equally spaced quantiles.
@@ -286,11 +286,11 @@ superheat <- function(X,
   }
 
 
-  if (!is.null(membership.cols) | !is.null(n.clusters.cols)) {
+  if (!is.null(membership.cols) | (!is.null(n.clusters.cols) && n.clusters.cols > 0)) {
     cluster.cols <- TRUE
   }
 
-  if (!is.null(membership.rows) | !is.null(n.clusters.rows)) {
+  if (!is.null(membership.rows) | (!is.null(n.clusters.rows) && n.clusters.rows > 0)) {
     cluster.rows <- TRUE
   }
 

@@ -23,6 +23,7 @@ Suggests:
     gridExtra (>= 2.0.0),
     knitr (>= 1.11),
     pander (>= 0.6.0),
-    testthat (>= 0.11.0)
+    testthat (>= 0.11.0),
+    RColorBrewer
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
