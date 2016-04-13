@@ -315,14 +315,14 @@ generate_smooth_heat <- function(X,
 
   if (cluster.vline) {
     for (i in 1:length(clines)) {
-      gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i] + 0.5,
+      gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i],
                                                    size = cluster.vline.size,
                                                    col = cluster.vline.col)
     }
   }
   if (cluster.hline) {
     for (i in 1:length(rlines)) {
-      gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i] + 0.5,
+      gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i],
                                                    size = cluster.hline.size,
                                                    col = cluster.hline.col)
     }
