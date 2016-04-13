@@ -15,18 +15,19 @@ superheat(X, yt = NULL, yr = NULL, yt.plot.type = c("scatter", "bar",
   cluster.vline.size = 0.5, cluster.hline.col = "black",
   cluster.vline.col = "black", smoothing.method = c("loess", "lm"),
   smooth.se = TRUE, legend = TRUE, order.cols = NULL, order.rows = NULL,
-  left.heat.label = NULL, bottom.heat.label = NULL, yt.axis = T,
-  yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
+  heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
+  heat.pal = NULL, heat.pal.values = NULL, left.heat.label = NULL,
+  bottom.heat.label = NULL, bottom.text.size = 5, left.text.size = 5,
+  bottom.text.angle = NULL, left.text.angle = NULL,
+  bottom.label.size = 0.1, left.label.size = 0.1, left.label.pal = NULL,
+  bottom.label.pal = NULL, left.label.text.col = NULL,
+  bottom.label.text.col = NULL, column.title = NULL, row.title = NULL,
+  column.title.size = 5, row.title.size = 5, yt.axis = T, yr.axis = T,
+  yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
   yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
   yr.axis.size = 10, yt.axis.size = 10, yr.axis.name.size = 10,
   yt.axis.name.size = 10, yr.axis.name.angle = NULL,
-  yt.axis.name.angle = NULL, bottom.text.size = 5, left.text.size = 5,
-  bottom.text.angle = NULL, left.text.angle = NULL,
-  bottom.label.size = 0.1, left.label.size = 0.1,
-  heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
-  heat.pal = NULL, heat.pal.values = NULL, left.label.pal = NULL,
-  bottom.label.pal = NULL, left.label.text.col = NULL,
-  bottom.label.text.col = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
+  yt.axis.name.angle = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
   yt.pal = NULL, yr.pal = NULL, yt.bar.col = NULL, yr.bar.col = NULL,
   yt.point.size = 2, yt.point.alpha = 1, yr.point.size = 2,
   yr.point.alpha = 1, yr.line.size = NULL, yt.line.size = NULL,
@@ -126,6 +127,21 @@ Note that this vector must be a rearranged 1:ncol(X) vector.}
 provided), then this vector specifies the order within the clusters.
 Note that this vector must be a rearranged 1:nrow(X) vector.}
 
+\item{heat.col.scheme}{A character specifying the heatmap colour scheme.
+The default is "red", and other options include "purple", "blue",
+"grey" and "green". If you wish to supply your own colour scheme,
+you can use the \code{heat.pal} argument.}
+
+\item{heat.pal}{a vector specifying a manual heatmap color palette. This
+corresponds to the \code{color} argumnet for the ggplot2
+\code{\link[ggplot2]{scale_color_gradientn}} function.}
+
+\item{heat.pal.values}{a vector specifying the location of each color in the
+color palette. Each entry should be a number between 0 and 1. This
+corresponds to the \code{values} argumnet for the ggplot2
+\code{\link[ggplot2]{scale_color_gradientn}} function. The default
+values correspond to the equally spaced quantiles.}
+
 \item{left.heat.label}{the type of label provided to the left of the heatmap.
 The default is "cluster" (which provides the cluster names) if
 clustering was performed on the rowss. Otherwise, the default is
@@ -137,6 +153,48 @@ The default is "cluster" (which provides the cluster names) if
 clustering was performed on the columns. Otherwise, the default is
 "variable" (which provides the variable names). The final option
 ("none") removes the label all together.}
+
+\item{bottom.text.size}{the size of the bottom heatmap label text. The
+default is 5.}
+
+\item{left.text.size}{the size of the left heatmap label text. The
+default is 5.}
+
+\item{bottom.text.angle}{number of degrees to rotate the text on the bottom
+cluster/variable labels. The default is 0.}
+
+\item{left.text.angle}{number of degrees to rotate the text on the left
+cluster/variable labels. The default is 90.}
+
+\item{bottom.label.size}{a number specifying the size of the bottom
+cluster/variable labels.}
+
+\item{left.label.size}{a number specifying the size of the left
+cluster/variable labels.}
+
+\item{left.label.pal}{a vector specifying the left cluster/variable label color
+palette.}
+
+\item{bottom.label.pal}{a vector specifying the bottom cluster/variable label color
+palette.}
+
+\item{left.label.text.col}{a character or character vector specifying the
+left cluster/variable label text color.}
+
+\item{bottom.label.text.col}{a character or character vector specifying the
+bottom cluster/variable label text color.}
+
+\item{column.title}{a string specifying the overall column name (will appear
+below the bottom.labels)}
+
+\item{row.title}{a string specifying the overall row name (will appear to the
+left of the left.labels)}
+
+\item{column.title.size}{a number specifying the size of the column name. The
+default is 5.}
+
+\item{row.title.size}{a number specifying the size of the row name. The
+default is 5.}
 
 \item{yt.axis}{logical. If \code{TRUE} (default), and there is a
 scatterplot plotted above the heatmap (\code{yt} is provided), then
@@ -175,51 +233,6 @@ the axis.}
 \item{yr.axis.name.angle}{a number specifying the angle of the axis name.}
 
 \item{yt.axis.name.angle}{a number specifying the angle of the axis name.}
-
-\item{bottom.text.size}{the size of the bottom heatmap label text. The
-default is 5.}
-
-\item{left.text.size}{the size of the left heatmap label text. The
-default is 5.}
-
-\item{bottom.text.angle}{number of degrees to rotate the text on the bottom
-cluster/variable labels. The default is 0.}
-
-\item{left.text.angle}{number of degrees to rotate the text on the left
-cluster/variable labels. The default is 90.}
-
-\item{bottom.label.size}{a number specifying the size of the bottom
-cluster/variable labels.}
-
-\item{left.label.size}{a number specifying the size of the left
-cluster/variable labels.}
-
-\item{heat.col.scheme}{A character specifying the heatmap colour scheme.
-The default is "red", and other options include "purple", "blue",
-"grey" and "green". If you wish to supply your own colour scheme,
-you can use the \code{heat.pal} argument.}
-
-\item{heat.pal}{a vector specifying a manual heatmap color palette. This
-corresponds to the \code{color} argumnet for the ggplot2
-\code{\link[ggplot2]{scale_color_gradientn}} function.}
-
-\item{heat.pal.values}{a vector specifying the location of each color in the
-color palette. Each entry should be a number between 0 and 1. This
-corresponds to the \code{values} argumnet for the ggplot2
-\code{\link[ggplot2]{scale_color_gradientn}} function. The default
-values correspond to the equally spaced quantiles.}
-
-\item{left.label.pal}{a vector specifying the left cluster/variable label color
-palette.}
-
-\item{bottom.label.pal}{a vector specifying the bottom cluster/variable label color
-palette.}
-
-\item{left.label.text.col}{a character or character vector specifying the
-left cluster/variable label text color.}
-
-\item{bottom.label.text.col}{a character or character vector specifying the
-bottom cluster/variable label text color.}
 
 \item{yt.obs.col}{a vector specifying the colour of individual points in the
 top scatterplot.}

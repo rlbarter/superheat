@@ -382,6 +382,8 @@ generate_grobs <- function(layout,
     if (!is.null(gg.row.title))
       l <- l + 1
 
+    if (!is.null(gg.title))
+      t <- t + 1
 
 
     if (!is.null(gg.bottom))

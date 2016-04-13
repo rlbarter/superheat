@@ -318,6 +318,32 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 
 
 
+* Adding a column name
+
+```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr = iris[,"Petal.Length"],
+            membership.rows = iris[,"Species"],
+            yr.axis.name = "Petal.Length",
+            column.title = "I'm a column name!")
+```
+
+
+
+* Adding a row name
+
+```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr = iris[,"Petal.Length"],
+            membership.rows = iris[,"Species"],
+            yr.axis.name = "Petal.Length",
+            row.title = "I'm a row name!")
+```
+
+
+
+
+
 
 * Adding white padding (in cm) around the plot (the default is 2cm):
 
