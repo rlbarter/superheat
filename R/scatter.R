@@ -10,6 +10,7 @@ generate_scatter <- function(y,
                              col = NULL,
                              axis.size = 10,
                              axis.name.size = 10,
+                             axis.name.angle = NULL,
                              num.ticks = 3,
                              point.size = 2,
                              point.alpha = 1,
@@ -19,6 +20,12 @@ generate_scatter <- function(y,
                              smoothing.method = c("loess","lm"),
                              y.line.size = NULL,
                              smooth.se = TRUE) {
+
+  # specify axis name angle
+  if (location == "top" && is.null(axis.name.angle)) axis.name.angle <- 90
+  if (location == "right" && is.null(axis.name.angle)) axis.name.angle <- 0
+
+
 
   if (is.null(y.obs.col) && is.null(y.pal)) {
     y.pal <- c("Grey 61","Grey 43")
@@ -203,6 +210,9 @@ generate_scatter <- function(y,
         ggplot2::geom_hline(yintercept = 0, col = "grey")
     }
 
+    # rotate axis name
+    gg.top <- gg.top + ggplot2::theme(axis.title.y = ggplot2::element_text(angle = axis.name.angle))
+
     return(gg.top)
   }
 
@@ -369,6 +379,10 @@ generate_scatter <- function(y,
       gg.right <- gg.right +
         ggplot2::geom_hline(yintercept = 0, col = "grey")
     }
+
+    # rotate axis name
+    gg.right <- gg.right + ggplot2::theme(axis.title.x = ggplot2::element_text(angle = axis.name.angle))
+
 
     return(gg.right)
   }

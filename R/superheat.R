@@ -96,6 +96,8 @@
 #'          the axis.
 #' @param yt.axis.name.size a number specifying the size of the axis name.
 #' @param yr.axis.name.size a number specifying the size of the axis name.
+#' @param yt.axis.name.angle a number specifying the angle of the axis name.
+#' @param yr.axis.name.angle a number specifying the angle of the axis name.
 #' @param yt.num.ticks the number of ticks on the \code{yt} axis. This does
 #'          not always work perfectly.
 #' @param yr.num.ticks the number of ticks on the \code{yr} axis. This does
@@ -218,6 +220,8 @@ superheat <- function(X,
                         yt.axis.size = 10,
                         yr.axis.name.size = 10,
                         yt.axis.name.size = 10,
+                        yr.axis.name.angle = NULL,
+                        yt.axis.name.angle = NULL,
                         bottom.text.size = 5,
                         left.text.size = 5,
                         bottom.text.angle = NULL,
@@ -483,6 +487,7 @@ superheat <- function(X,
     axis.name <- yt.axis.name
     axis.size <- yt.axis.size
     axis.name.size <- yt.axis.name.size
+    axis.name.angle <- yt.axis.name.angle
     point.size <- yt.point.size
     point.alpha <- yt.point.alpha
     plot.type <- yt.plot.type
@@ -507,6 +512,7 @@ superheat <- function(X,
     axis.name <- yr.axis.name
     axis.size <- yr.axis.size
     axis.name.size <- yr.axis.name.size
+    axis.name.angle <- yr.axis.name.angle
     point.size <- yr.point.size
     point.alpha <- yr.point.alpha
     plot.type <- yr.plot.type
