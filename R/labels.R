@@ -314,3 +314,34 @@ generate_title <- function(title = NULL,
   return(gg.title)
 
 }
+
+
+
+
+
+
+generate_names <- function(name = NULL,
+                           name.size = 5,
+                           location = c("left", "bottom")) {
+  theme <- themes()
+  theme_clust_labels <- theme$theme_clust_labels
+
+
+  df <- data.frame(x = 0, y = 0, name = name)
+  # define variables to fix visible binding check -- bit of a hack
+  x <- df$x
+  y <- df$y
+  if (location == "bottom") {
+    gg.name <- ggplot2::ggplot(df) +
+      ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = name), size = name.size)
+  } else if (location == "left") {
+    gg.name <- ggplot2::ggplot(df) +
+      ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = name), size = name.size, angle = 90)
+  }
+
+  gg.name <- gg.name + theme_clust_labels
+
+
+  return(gg.name)
+
+}

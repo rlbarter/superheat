@@ -124,6 +124,10 @@
 #'          cluster/variable labels.
 #' @param left.label.size a number specifying the size of the left
 #'          cluster/variable labels.
+#' @param column.name a string specifying the overall column name (will appear
+#'          below the bottom.labels)
+#' @param row.name a string specifying the overall row name (will appear to the
+#'          left of the left.labels)
 #' @param heat.col.scheme A character specifying the heatmap colour scheme.
 #'          The default is "red", and other options include "purple", "blue",
 #'          "grey" and "green". If you wish to supply your own colour scheme,
@@ -193,6 +197,7 @@ superheat <- function(X,
                         yr = NULL,
                         yt.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),
                         yr.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),
+
                         smooth.heat = FALSE,
                         scale = FALSE,
                         membership.rows = NULL, # membership for rows
@@ -202,6 +207,7 @@ superheat <- function(X,
                         cluster.rows = FALSE,
                         cluster.cols = FALSE,
                         clustering.method = c("kmeans", "hierarchical"),
+
                         cluster.hline = TRUE,
                         cluster.vline = TRUE,
                         cluster.hline.size = 0.5,
@@ -213,8 +219,28 @@ superheat <- function(X,
                         legend = TRUE,
                         order.cols = NULL, # how to order within clusters (must be an integer vector e..g c(1,3,2) means the ordering is the first, third then second observation
                         order.rows = NULL,
+                        heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
+                        heat.pal = NULL,
+                        heat.pal.values = NULL,
+
                         left.heat.label = NULL,
                         bottom.heat.label = NULL,
+                        bottom.text.size = 5,
+                        left.text.size = 5,
+                        bottom.text.angle = NULL,
+                        left.text.angle = NULL,
+                        bottom.label.size = 0.1,
+                        left.label.size = 0.1,
+                        left.label.pal = NULL,
+                        bottom.label.pal = NULL,
+                        left.label.text.col = NULL,
+                        bottom.label.text.col = NULL,
+
+                        column.name = NULL,
+                        row.name = NULL,
+                        column.name.size = 5,
+                        row.name.size = 5,
+
                         yt.axis = T,
                         yr.axis = T,
                         yt.num.ticks = 3,
@@ -229,19 +255,6 @@ superheat <- function(X,
                         yt.axis.name.size = 10,
                         yr.axis.name.angle = NULL,
                         yt.axis.name.angle = NULL,
-                        bottom.text.size = 5,
-                        left.text.size = 5,
-                        bottom.text.angle = NULL,
-                        left.text.angle = NULL,
-                        bottom.label.size = 0.1,
-                        left.label.size = 0.1,
-                        heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
-                        heat.pal = NULL,
-                        heat.pal.values = NULL,
-                        left.label.pal = NULL,
-                        bottom.label.pal = NULL,
-                        left.label.text.col = NULL,
-                        bottom.label.text.col = NULL,
                         yt.obs.col = NULL,
                         yr.obs.col = NULL,
                         yt.pal = NULL,
@@ -254,6 +267,7 @@ superheat <- function(X,
                         yr.point.alpha = 1,
                         yr.line.size = NULL,
                         yt.line.size = NULL,
+
                         legend.size = 2,
                         padding = 1,
                         title = NULL,
@@ -325,14 +339,14 @@ superheat <- function(X,
   # remove variable labels if more than 50 rows
   if (left.heat.label == "variable") {
     if (nrow(X) > 50) {
-      warning('Cannot set "left.heat.label" to "variable" when nrow(X) exceeds 50')
+      # warning('Cannot set "left.heat.label" to "variable" when nrow(X) exceeds 50')
       left.heat.label <- "none"
     }
   }
 
   if (bottom.heat.label == "variable") {
     if (ncol(X) > 50) {
-      warning('Cannot set "bottom.heat.label" to "variable" when ncol(X) exceeds 50')
+      # warning('Cannot set "bottom.heat.label" to "variable" when ncol(X) exceeds 50')
       bottom.heat.label <- "none"
     }
   }
@@ -615,6 +629,19 @@ superheat <- function(X,
 
   if (!is.null(title)) {
     gg.title <- generate_title(title = title, title.size = title.size)
+  }
+
+
+  if (!is.null(column.name)) {
+    gg.column.name <- generate_names(name = column.name,
+                                     name.size = column.name.size,
+                                     location = "bottom")
+  }
+
+  if (!is.null(row.name)) {
+    gg.row.name <- generate_names(name = row.name,
+                                  name.size = row.name.size,
+                                  location = "left")
   }
 
 

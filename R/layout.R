@@ -8,6 +8,8 @@ generate_layout <- function(gg.heat,
                             gg.left = NULL,
                             gg.legend = NULL,
                             gg.title = NULL,
+                            gg.row.name = NULL,
+                            gg.column.name = NULL,
                             yt.axis = T,
                             yr.axis = T,
                             yt.axis.name = NULL,
@@ -76,9 +78,26 @@ generate_layout <- function(gg.heat,
   }
 
 
-  if (!is.null(title)) {
+  # add title
+  if (!is.null(gg.title)) {
 
     layout <- gtable::gtable_add_rows(layout, grid::unit(0.2, "null"), pos = 0)
+
+  }
+
+
+  # add row names
+  if (!is.null(gg.row.name)) {
+
+    layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null"), pos = 0)
+
+  }
+
+
+  # add row names
+  if (!is.null(gg.column.name)) {
+
+    layout <- gtable::gtable_add_rows(layout, grid::unit(0.1, "null"), pos = -1)
 
   }
 
@@ -103,12 +122,12 @@ generate_grobs <- function(layout,
                            gg.left = NULL,
                            gg.legend = NULL,
                            gg.title = NULL,
+                           gg.row.name = NULL,
+                           gg.column.name = NULL,
                            yt.axis = T,
                            yr.axis = T,
                            yt.axis.name = T,
                            yr.axis.name = T,
-                           title = NULL,
-                           title.size = 5,
                            padding = 1,
                            bottom.label.size = 0.1,
                            left.label.size = 0.1) {
@@ -130,6 +149,10 @@ generate_grobs <- function(layout,
     if (is.null(gg.top) && !is.null(gg.left))
       l <- l + 1
     if (!is.null(gg.title))
+      t <- t + 1
+    if (!is.null(gg.row.name))
+      l <- l + 1
+    if (!is.null(gg.column.name))
       t <- t + 1
     if (bottom.label.size > 0.1  && !is.null(gg.bottom) && !is.null(gg.right) && yr.axis)
       t <- t + 1
@@ -160,6 +183,8 @@ generate_grobs <- function(layout,
       l <- l + 2
     if (!is.null(gg.title))
       t <- t + 1
+    if (!is.null(gg.row.name))
+      l <- l + 1
     if (left.label.size > 0.1 && !is.null(gg.top) && yt.axis)
       l <- l + 1
 
@@ -195,6 +220,8 @@ generate_grobs <- function(layout,
       l <- l + 2
     if (!is.null(gg.title))
       t <- t + 1
+    if (!is.null(gg.row.name))
+      l <- l + 1
     if (left.label.size > 0.1 && !is.null(gg.top) && yt.axis)
       l <- l + 1
 
@@ -239,6 +266,8 @@ generate_grobs <- function(layout,
       t <- t + 1
     if (!is.null(gg.title))
       t <- t + 1
+    if (!is.null(gg.row.name))
+      l <- l + 1
 
     r <- l
     if (left.label.size > 0.1 && !is.null(gg.top) && yt.axis)
@@ -266,6 +295,8 @@ generate_grobs <- function(layout,
       l <- l + 2
     if (!is.null(gg.title))
       t <- t + 1
+    if (!is.null(gg.row.name))
+      l <- l + 1
 
     b <- t
     if (bottom.label.size > 0.1 && !is.null(gg.right) && yr.axis)
@@ -287,7 +318,7 @@ generate_grobs <- function(layout,
 
 
   ####### Place title grobs #################
-  if (!is.null(title)) {
+  if (!is.null(gg.title)) {
 
 
     # place text
@@ -305,6 +336,67 @@ generate_grobs <- function(layout,
                                                           trim = TRUE,
                                                           fixed = TRUE), t = t, l = l)
   }
+
+
+
+  ############ placing row and column name grobs ################
+
+  if (!is.null(gg.row.name)) {
+
+
+    # place text
+    l <- 1
+    t <- 1
+
+    if (!is.null(gg.title))
+      t <- t + 1
+
+    if (!is.null(gg.top))
+      t <- t + 1
+
+    if (!is.null(gg.top) && yt.axis && (left.label.size <= 0.1))
+      l <- l + 1
+
+
+
+    layout <- gtable::gtable_add_grob(layout, gtable::gtable_filter(ggplot2::ggplotGrob(gg.row.name),
+                                                                   pattern = "panel",
+                                                                   trim = TRUE,
+                                                                   fixed = TRUE), t = t, l = l)
+  }
+
+
+
+
+  if (!is.null(gg.column.name)) {
+
+
+    t <- nrow(layout)
+    l <- 1
+    if (!is.null(gg.top) && yt.axis)
+      l <- l + 2
+    if (is.null(gg.top) && !is.null(gg.left))
+      l <- l + 1
+    if (left.label.size > 0.1 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
+      l <- l + 1
+    if (!is.null(gg.row.name))
+      l <- l + 1
+
+    if (!is.null(gg.legend))
+      t <- t - 1
+
+
+
+    layout <- gtable::gtable_add_grob(layout, gtable::gtable_filter(ggplot2::ggplotGrob(gg.column.name),
+                                                                   pattern = "panel",
+                                                                   trim = TRUE,
+                                                                   fixed = TRUE), t = t, l = l)
+  }
+
+
+
+
+
 
 
 

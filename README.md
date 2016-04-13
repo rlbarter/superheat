@@ -17,3 +17,11 @@ Once you've installed the package, you can load the library in the standard way:
 ``` r
 library(superheat)
 ```
+
+
+
+Basic usage:
+
+``` r
+superheat(iris[,-5])
+```
