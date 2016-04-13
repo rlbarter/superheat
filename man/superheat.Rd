@@ -10,14 +10,17 @@ superheat(X, yt = NULL, yr = NULL, yt.plot.type = c("scatter", "bar",
   "scatterline", "line"), smooth.heat = FALSE, scale = FALSE,
   membership.rows = NULL, membership.cols = NULL, n.clusters.rows = NULL,
   n.clusters.cols = NULL, cluster.rows = FALSE, cluster.cols = FALSE,
-  clustering.method = c("kmeans", "hierarchical"), cluster.box = TRUE,
-  box.size = 0.5, box.col = "black", smoothing.method = c("loess", "lm"),
+  clustering.method = c("kmeans", "hierarchical"), cluster.hline = TRUE,
+  cluster.vline = TRUE, cluster.hline.size = 0.5,
+  cluster.vline.size = 0.5, cluster.hline.col = "black",
+  cluster.vline.col = "black", smoothing.method = c("loess", "lm"),
   smooth.se = TRUE, legend = TRUE, order.cols = NULL, order.rows = NULL,
   left.heat.label = NULL, bottom.heat.label = NULL, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
   yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
   yr.axis.size = 10, yt.axis.size = 10, yr.axis.name.size = 10,
-  yt.axis.name.size = 10, bottom.text.size = 5, left.text.size = 5,
+  yt.axis.name.size = 10, yr.axis.name.angle = NULL,
+  yt.axis.name.angle = NULL, bottom.text.size = 5, left.text.size = 5,
   bottom.text.angle = NULL, left.text.angle = NULL,
   bottom.label.size = 0.1, left.label.size = 0.1,
   heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
@@ -90,12 +93,19 @@ is to use K-means clustering, the alternative option ("hierarchical")
 performs heirarchical clustering. Antoher alternative is to provide
 a membership vector.}
 
-\item{cluster.box}{logical. If \code{TRUE} (default), then boxes are plotted
-around the clusters in the heatmap.}
+\item{cluster.hline}{logical. If \code{TRUE} (default), then horizontal lines
+are plotted around the row clusters in the heatmap.}
 
-\item{box.size}{the thickness of the cluster.box lines. The default is 0.5.}
+\item{cluster.vline}{logical. If \code{TRUE} (default), then vertical lines
+are plotted around the column clusters in the heatmap.}
 
-\item{box.col}{the colour of the cluster.box lines.}
+\item{cluster.hline.size}{the thickness of the cluster lines. The default is 0.5.}
+
+\item{cluster.vline.size}{the thickness of the cluster lines. The default is 0.5.}
+
+\item{cluster.hline.col}{the colour of the cluster lines.}
+
+\item{cluster.vline.col}{the colour of the cluster lines.}
 
 \item{smoothing.method}{if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 this argument specifies the smoothing method to use. The default is
@@ -162,6 +172,10 @@ the axis.}
 
 \item{yt.axis.name.size}{a number specifying the size of the axis name.}
 
+\item{yr.axis.name.angle}{a number specifying the angle of the axis name.}
+
+\item{yt.axis.name.angle}{a number specifying the angle of the axis name.}
+
 \item{bottom.text.size}{the size of the bottom heatmap label text. The
 default is 5.}
 
@@ -190,7 +204,7 @@ corresponds to the \code{color} argumnet for the ggplot2
 \code{\link[ggplot2]{scale_color_gradientn}} function.}
 
 \item{heat.pal.values}{a vector specifying the location of each color in the
-color palatte. Each entry should be a number between 0 and 1. This
+color palette. Each entry should be a number between 0 and 1. This
 corresponds to the \code{values} argumnet for the ggplot2
 \code{\link[ggplot2]{scale_color_gradientn}} function. The default
 values correspond to the equally spaced quantiles.}

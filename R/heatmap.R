@@ -13,9 +13,12 @@ generate_heat <- function(X,
                           legend.size = 2,
                           axis.size = 10,
                           label.size = 10,
-                          cluster.box = TRUE,
-                          box.size = 0.5,
-                          box.col = "black") {
+                          cluster.hline = TRUE,
+                          cluster.vline = TRUE,
+                          cluster.hline.size = 0.5,
+                          cluster.vline.size = 0.5,
+                          cluster.hline.col = "black",
+                          cluster.vline.col = "black") {
 
 
 
@@ -65,8 +68,10 @@ generate_heat <- function(X,
 
 
 
-  if (cluster.box) {
+  if (cluster.hline) {
     rlines <- c(0,cumsum(table(membership.rows)))
+  }
+  if (cluster.vline) {
     clines <- c(0,cumsum(table(membership.cols)))
   }
 
@@ -104,16 +109,18 @@ generate_heat <- function(X,
 
 
 
-  if (cluster.box) {
+  if (cluster.vline) {
     for (i in 1:length(clines)) {
       gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i] + 0.5,
-                                                   size = box.size,
-                                                   col = box.col)
+                                                   size = cluster.vline.size,
+                                                   col = cluster.vline.col)
     }
+  }
+  if (cluster.hline) {
     for (i in 1:length(rlines)) {
       gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i] + 0.5,
-                                                   size = box.size,
-                                                   col = box.col)
+                                                   size = cluster.hline.size,
+                                                   col = cluster.hline.col)
     }
   }
 
@@ -138,9 +145,12 @@ generate_smooth_heat <- function(X,
                           legend.size = 2,
                           axis.size = 10,
                           label.size = 10,
-                          cluster.box = TRUE,
-                          box.size = 0.5,
-                          box.col = "black") {
+                          cluster.hline = TRUE,
+                          cluster.vline = TRUE,
+                          cluster.hline.size = 0.5,
+                          cluster.vline.size = 0.5,
+                          cluster.hline.col = "black",
+                          cluster.vline.col = "black") {
 
 
 
@@ -302,16 +312,19 @@ generate_smooth_heat <- function(X,
 
 
 
-  if (cluster.box) {
+
+  if (cluster.vline) {
     for (i in 1:length(clines)) {
-      gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i],
-                                                   size = box.size,
-                                                   col = box.col)
+      gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i] + 0.5,
+                                                   size = cluster.vline.size,
+                                                   col = cluster.vline.col)
     }
+  }
+  if (cluster.hline) {
     for (i in 1:length(rlines)) {
-      gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i],
-                                                   size = box.size,
-                                                   col = box.col)
+      gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i] + 0.5,
+                                                   size = cluster.hline.size,
+                                                   col = cluster.hline.col)
     }
   }
 

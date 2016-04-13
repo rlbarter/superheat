@@ -8,7 +8,7 @@ Description: A package which can be used to explore datasets and assess
     the adequacy of model fits using supervised heatmaps. The plot is highly
     customizable and has a large number of aesthetic options.
 Depends:
-    R
+    R (>= 3.1)
 License: CC0
 LazyData: TRUE
 Imports:

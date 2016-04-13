@@ -52,10 +52,14 @@
 #'          performs heirarchical clustering. Antoher alternative is to provide
 #'          a membership vector.
 #' @param legend logical. If set to \code{FALSE}, then no legend is given.
-#' @param cluster.box logical. If \code{TRUE} (default), then boxes are plotted
-#'          around the clusters in the heatmap.
-#' @param box.size the thickness of the cluster.box lines. The default is 0.5.
-#' @param box.col the colour of the cluster.box lines.
+#' @param cluster.hline logical. If \code{TRUE} (default), then horizontal lines
+#'          are plotted around the row clusters in the heatmap.
+#' @param cluster.vline logical. If \code{TRUE} (default), then vertical lines
+#'          are plotted around the column clusters in the heatmap.
+#' @param cluster.hline.size the thickness of the cluster lines. The default is 0.5.
+#' @param cluster.vline.size the thickness of the cluster lines. The default is 0.5.
+#' @param cluster.hline.col the colour of the cluster lines.
+#' @param cluster.vline.col the colour of the cluster lines.
 #' @param smoothing.method if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 #'          this argument specifies the smoothing method to use. The default is
 #'          \code{loess}. The alternative option is \code{lm}.
@@ -198,9 +202,12 @@ superheat <- function(X,
                         cluster.rows = FALSE,
                         cluster.cols = FALSE,
                         clustering.method = c("kmeans", "hierarchical"),
-                        cluster.box = TRUE,
-                        box.size = 0.5,
-                        box.col = "black",
+                        cluster.hline = TRUE,
+                        cluster.vline = TRUE,
+                        cluster.hline.size = 0.5,
+                        cluster.vline.size = 0.5,
+                        cluster.hline.col = "black",
+                        cluster.vline.col = "black",
                         smoothing.method = c("loess","lm"),
                         smooth.se = TRUE,
                         legend = TRUE,
@@ -334,15 +341,15 @@ superheat <- function(X,
   # remove the cluster boxes if we have more than 100 cols/rows
   if (!cluster.cols & ((bottom.heat.label == "variable") | (bottom.heat.label == "none"))) {
     if (ncol(X) > 100) {
-    #  warning('"cluster.box" set to FALSE when ncol(X) exceeds 100 and when "bottom.heat.label" is set to either "variable" or "none"')
-      cluster.box <- FALSE
+    #  warning('"cluster.vline" set to FALSE when ncol(X) exceeds 100 and when "bottom.heat.label" is set to either "variable" or "none"')
+      cluster.vline <- FALSE
     }
   }
 
   if (!cluster.rows & ((left.heat.label == "variable") | (left.heat.label == "none"))) {
     if (nrow(X) > 100) {
-    #  warning('"cluster.box" set to FALSE when nrow(X) exceeds 100 and when "left.heat.label" is set to either "variable" or "none"')
-      cluster.box <- FALSE
+    #  warning('"cluster.hline" set to FALSE when nrow(X) exceeds 100 and when "left.heat.label" is set to either "variable" or "none"')
+      cluster.hline <- FALSE
     }
   }
 
@@ -440,12 +447,14 @@ superheat <- function(X,
 
 
 
-  if (cluster.box) {
+  if (cluster.hline) {
     if (left.heat.label == "variable") {
       membership.r <- 1:nrow(X)
     } else if (left.heat.label == "cluster") {
       membership.r <- membership.rows
     }
+  }
+  if (cluster.vline) {
     if (bottom.heat.label == "variable") {
       membership.c <- 1:ncol(X)
     } else if (bottom.heat.label == "cluster") {
