@@ -124,10 +124,14 @@
 #'          cluster/variable labels.
 #' @param left.label.size a number specifying the size of the left
 #'          cluster/variable labels.
-#' @param column.name a string specifying the overall column name (will appear
+#' @param column.title a string specifying the overall column name (will appear
 #'          below the bottom.labels)
-#' @param row.name a string specifying the overall row name (will appear to the
+#' @param row.title a string specifying the overall row name (will appear to the
 #'          left of the left.labels)
+#' @param column.title.size a number specifying the size of the column name. The
+#'          default is 5.
+#' @param row.title.size a number specifying the size of the row name. The
+#'          default is 5.
 #' @param heat.col.scheme A character specifying the heatmap colour scheme.
 #'          The default is "red", and other options include "purple", "blue",
 #'          "grey" and "green". If you wish to supply your own colour scheme,
@@ -236,10 +240,10 @@ superheat <- function(X,
                         left.label.text.col = NULL,
                         bottom.label.text.col = NULL,
 
-                        column.name = NULL,
-                        row.name = NULL,
-                        column.name.size = 5,
-                        row.name.size = 5,
+                        column.title = NULL,
+                        row.title = NULL,
+                        column.title.size = 5,
+                        row.title.size = 5,
 
                         yt.axis = T,
                         yr.axis = T,
@@ -632,15 +636,15 @@ superheat <- function(X,
   }
 
 
-  if (!is.null(column.name)) {
-    gg.column.name <- generate_names(name = column.name,
-                                     name.size = column.name.size,
+  if (!is.null(column.title)) {
+    gg.column.title <- generate_names(name = column.title,
+                                     name.size = column.title.size,
                                      location = "bottom")
   }
 
-  if (!is.null(row.name)) {
-    gg.row.name <- generate_names(name = row.name,
-                                  name.size = row.name.size,
+  if (!is.null(row.title)) {
+    gg.row.title <- generate_names(name = row.title,
+                                  name.size = row.title.size,
                                   location = "left")
   }
 
