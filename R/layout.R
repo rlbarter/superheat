@@ -72,6 +72,20 @@ generate_layout <- function(gg.heat,
 
 
 
+  # add row names
+  if (!is.null(gg.row.title)) {
+
+    layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null"), pos = 0)
+
+  }
+
+
+  # add column names
+  if (!is.null(gg.column.title)) {
+
+    layout <- gtable::gtable_add_rows(layout, grid::unit(0.1, "null"), pos = -1)
+
+  }
   # location for legend
   if (!is.null(gg.legend)) {
     layout <- gtable::gtable_add_rows(layout, grid::unit(0.2, "null"))
@@ -86,20 +100,6 @@ generate_layout <- function(gg.heat,
   }
 
 
-  # add row names
-  if (!is.null(gg.row.title)) {
-
-    layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null"), pos = 0)
-
-  }
-
-
-  # add row names
-  if (!is.null(gg.column.title)) {
-
-    layout <- gtable::gtable_add_rows(layout, grid::unit(0.1, "null"), pos = -1)
-
-  }
 
 
 

@@ -240,11 +240,6 @@ superheat <- function(X,
                         left.label.text.col = NULL,
                         bottom.label.text.col = NULL,
 
-                        column.title = NULL,
-                        row.title = NULL,
-                        column.title.size = 5,
-                        row.title.size = 5,
-
                         yt.axis = T,
                         yr.axis = T,
                         yt.num.ticks = 3,
@@ -276,6 +271,10 @@ superheat <- function(X,
                         padding = 1,
                         title = NULL,
                         title.size = 5,
+                        column.title = NULL,
+                        row.title = NULL,
+                        column.title.size = 5,
+                        row.title.size = 5,
                         print.plot = TRUE) {
 
 
