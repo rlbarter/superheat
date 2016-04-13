@@ -371,7 +371,7 @@ generate_grobs <- function(layout,
   if (!is.null(gg.column.title)) {
 
 
-    t <- nrow(layout)
+    t <- 2
     l <- 1
     if (!is.null(gg.top) && yt.axis)
       l <- l + 2
@@ -382,9 +382,14 @@ generate_grobs <- function(layout,
     if (!is.null(gg.row.title))
       l <- l + 1
 
-    if (!is.null(gg.legend))
-      t <- t - 1
 
+
+    if (!is.null(gg.bottom))
+      t <- t + 1
+
+    b <- t
+    if (bottom.label.size < 0.1 && !is.null(gg.right) && yr.axis)
+      b <- t + 1
 
 
     layout <- gtable::gtable_add_grob(layout, gtable::gtable_filter(ggplot2::ggplotGrob(gg.column.title),
