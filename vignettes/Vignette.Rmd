@@ -47,7 +47,7 @@ devtools::install_github("rlbarter/superheat")
 
 
 
-Next, you can load the `superheat` library into your workspace:
+Next, load the `superheat` library into your workspace:
 
 ```{r}
 library(superheat)
@@ -264,7 +264,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 
 It is not necessary to have all components at all times in your plot. For example, if you do not supply a `yt` vector, no top scatterplot is provided. Similarly if you do not supply a  `yr` vector. Further options include:
 
-* You can remove the legend:
+* Removing the legend:
 
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
@@ -276,7 +276,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can remove the left cluster/variable labels
+* Removing the left cluster/variable labels
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
@@ -286,7 +286,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             left.heat.label = "none")
 ```
 
-* You can remove the bottom cluster/variable labels
+* Removing the bottom cluster/variable labels
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
@@ -297,7 +297,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can remove the scatterplot axis (similarly for the top axis)
+* Removing the scatterplot axis (similarly for the top axis)
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
@@ -306,7 +306,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr.axis = F)
 ```
 
-* You can add a title
+* Adding a title
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
@@ -319,7 +319,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 
 
 
-* You can add white padding (in cm) around the plot (the default is 2cm):
+* Adding white padding (in cm) around the plot (the default is 2cm):
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
@@ -330,7 +330,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* you can remove the cluster boxes:
+* Removing the horizontal cluster lines:
 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -338,7 +338,18 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            cluster.box = FALSE)
+            cluster.hline = F)
+```
+
+
+* Removing the vertical cluster lines:
+
+```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr = iris[,"Petal.Length"],
+            membership.rows = iris[,"Species"],
+            yr.axis.name = "Petal.Length",
+            cluster.vline = F)
 ```
 
 ### Colour palettes
@@ -356,7 +367,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             heat.col.scheme = "blue")
 ```
 
-* You can also specify your own colour scheme for the heatmap using the `heat.pal` argument. You can specify as many colours as you want.
+* Specifying your own colour scheme for the heatmap using the `heat.pal` argument: you can specify as many colours as you want.
 
  
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -394,7 +405,7 @@ superheat(X = scaled_iris,
             heat.pal.values = c(0, 0.2, 0.25, 0.3, 0.7, 0.8, 1))
 ```
 
-*  You can specify the colour of the points in the scatterplot (replace `yr` with `yt` for the top scatterplot). Note that the order of the points in the `yr.obs.col` vector correspond to the order of the points in `yr`.
+*  Specifying the colour of the points in the scatterplot (replace `yr` with `yt` for the top scatterplot): note that the order of the points in the `yr.obs.col` vector correspond to the order of the points in `yr`.
 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -410,7 +421,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 
 
 
-*  Or you can simply specify the colour for each cluster of `yr`.
+*  Specifying the colour for each cluster of `yr`.
 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -423,7 +434,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can specify the cluster label (and variable label) colors. (The equivalent for the bottom labels can be specified using `bottom.label.pal` and `bottom.label.text.col`)
+* Specifying the cluster label (and variable label) colors. (The equivalent for the bottom labels can be specified using `bottom.label.pal` and `bottom.label.text.col`)
 
 
 
@@ -438,7 +449,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can specify the colour of the cluster boxes
+* Specifying the colour of the cluster boxes
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
@@ -446,7 +457,8 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            box.col = "white")
+            cluster.hline.col = "white",
+          cluster.vline.col = "red")
 ```
 
 
@@ -454,7 +466,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 
 ### Heatmap smoothing
 
-* You can smooth the colors within each cluster of the heatmap
+* Smoothing the colors within each cluster of the heatmap
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
@@ -470,7 +482,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 There are a number of options to change the text size, point size and legend size in the plot. For example, you can specify the following arguments in the `superheat` function:
 
 
-* You can change the legend size
+* Changing the legend size
 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -483,7 +495,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can change the cluster/variable label size (the default is 0.1) and the label text angle
+* Changing the cluster/variable label size (the default is 0.1) and the label text angle
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
@@ -498,7 +510,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can change the cluster/variable label text size (the default is 5)
+* Changing the cluster/variable label text size (the default is 5)
 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -512,7 +524,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can change the scatterplot axis size and the axis label size (the default for both is 10). 
+* Changing the scatterplot axis size and the axis label size (the default for both is 10). 
 
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -526,7 +538,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr.axis.name.size = 20)
 ```
 
-* you can change the point size
+* Changing the point size
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
@@ -538,7 +550,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
-* You can change the thickness of the cluster boxes
+* Changing the thickness of the cluster boxes
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
@@ -546,12 +558,13 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            box.size = 2)
+            cluster.vline.size = 2,
+            cluster.hline.size = 2)
 ```
 
 ### Ordering
 
-* you can change order of observations within each cluster. For example, we can order the observations by Sepal.Width
+* Changing order of observations within each cluster. For example, we can order the observations by Sepal.Width
 
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
