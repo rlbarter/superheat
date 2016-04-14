@@ -97,7 +97,8 @@ generate_scatter <- function(y,
     }
 
 
-
+    # hack for visible bindings
+    n <- num.ticks
 
 
     gg.top <- gg.top +

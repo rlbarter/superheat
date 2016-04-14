@@ -25,6 +25,74 @@ to_df <- function(X) {
 
 
 
+to_cluster_df <- function(X, smooth.heat, membership.cols, membership.rows) {
+  # X is a text matrix
+
+
+  # wil be used in conjunction with generate_text_heat
+  if(!is.matrix(X)) stop("X must be a matrix")
+
+  # converts matrix into a x-y data frame
+  # need to have xmin, xmax, ymin, ymax
+  X.vec <- as.vector(X) # convert the matrix to a vector
+
+  # expand matrix into full matrix
+  membership.rows.numeric <- as.numeric(factor(membership.rows, levels = unique(membership.rows)))
+  membership.cols.numeric <- as.numeric(factor(membership.cols, levels = unique(membership.cols)))
+  membership.matrix <- X[membership.rows.numeric, membership.cols.numeric]
+
+  row.matrix <- matrix(rep(1:nrow(membership.matrix), ncol(membership.matrix)),
+                       ncol = ncol(membership.matrix),
+                       byrow = F)
+
+  col.matrix <- matrix(rep(1:ncol(membership.matrix), nrow(membership.matrix)),
+                       ncol = ncol(membership.matrix),
+                       byrow = T)
+
+
+
+  if (!smooth.heat) {
+    x <- c()
+    y <- c()
+    for (text in unique(as.vector(membership.matrix))) {
+      x <- c(x, mean(col.matrix[membership.matrix == text]))
+      y <- c(y, mean(row.matrix[membership.matrix == text]))
+    }
+  } else {
+    x <- c()
+    y <- c()
+    for (text in unique(as.vector(membership.matrix))) {
+      x <- c(x, mean(col.matrix[membership.matrix == text]))
+      y <- c(y, mean(row.matrix[membership.matrix == text]))
+    }
+    # fix position for smoothed option
+    x <- x - 0.5
+  }
+
+
+
+
+
+  X.mat <- cbind(value = X.vec,
+                 # convert vector to matrix with columns
+                 # for the x and y coordinates
+                 x = x,
+                 y = y)
+  X.df <- as.data.frame(X.mat)
+  X.df$x <- as.numeric(x)
+  X.df$y <- as.numeric(y)
+
+
+
+  return(X.df)
+}
+
+
+
+
+
+
+
 
 
 

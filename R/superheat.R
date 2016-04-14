@@ -197,6 +197,9 @@
 
 
 superheat <- function(X,
+                      X.text = NULL,
+                      X.text.size = 5,
+                      X.text.col = "black",
                         yt = NULL,
                         yr = NULL,
                         yt.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),

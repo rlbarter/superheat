@@ -3,6 +3,10 @@
 
 
 generate_heat <- function(X,
+                          smooth.heat = FALSE,
+                          X.text = NULL,
+                          X.text.size = 5,
+                          X.text.col = "black",
                           membership.rows = NULL,
                           membership.cols = NULL,
                           order.x = NULL, # order of variables
@@ -127,6 +131,18 @@ generate_heat <- function(X,
   gg.heat <- gg.legend + ggplot2::theme(legend.position = "none")
 
 
+  if (!is.null(X.text)) {
+    gg.heat <- gg.heat + generate_text_heat(X.text,
+                                            X.text.size = X.text.size,
+                                            X.text.col = X.text.col,
+                                            smooth.heat = smooth.heat,
+                                            membership.rows = membership.rows,
+                                            membership.cols = membership.cols) +
+      ggplot2::scale_colour_manual(values = unique(X.text.col)) +
+      ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
+  }
+
+
   return(list(gg.heat = gg.heat, gg.legend = gg.legend))
 }
 
@@ -135,23 +151,26 @@ generate_heat <- function(X,
 
 
 generate_smooth_heat <- function(X,
-                          membership.rows = NULL,
-                          membership.cols = NULL,
-                          order.x = NULL, # order of variables
-                          order.y = NULL, # order of observations
-                          heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
-                          heat.pal = NULL,
-                          heat.pal.values = NULL,
-                          legend.size = 2,
-                          axis.size = 10,
-                          label.size = 10,
-                          cluster.hline = TRUE,
-                          cluster.vline = TRUE,
-                          cluster.hline.size = 0.5,
-                          cluster.vline.size = 0.5,
-                          cluster.hline.col = "black",
-                          cluster.vline.col = "black") {
-
+                                  X.text = NULL,
+                                 X.text.size = 5,
+                                 X.text.col = "black",
+                                  smooth.heat = TRUE,
+                                  membership.rows = NULL,
+                                  membership.cols = NULL,
+                                  order.x = NULL, # order of variables
+                                  order.y = NULL, # order of observations
+                                  heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
+                                  heat.pal = NULL,
+                                  heat.pal.values = NULL,
+                                  legend.size = 2,
+                                  axis.size = 10,
+                                  label.size = 10,
+                                  cluster.hline = TRUE,
+                                  cluster.vline = TRUE,
+                                  cluster.hline.size = 0.5,
+                                  cluster.vline.size = 0.5,
+                                  cluster.hline.col = "black",
+                                  cluster.vline.col = "black") {
 
 
   heat.col.scheme <- match.arg(heat.col.scheme)
@@ -331,8 +350,124 @@ generate_smooth_heat <- function(X,
   gg.heat <- gg.legend + ggplot2::theme(legend.position = "none")
 
 
+
+
+  if (!is.null(X.text)) {
+    gg.heat <- gg.heat + generate_text_heat(X.text,
+                                            X.text.size = X.text.size,
+                                            X.text.col = X.text.col,
+                                            smooth.heat = smooth.heat,
+                                            membership.rows = membership.rows,
+                                            membership.cols = membership.cols) +
+      ggplot2::scale_colour_manual(values = as.vector(X.text.col)) +
+      ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
+  }
+
   return(list(gg.heat = gg.heat, gg.legend = gg.legend))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+generate_text_heat <- function(X.text,
+                               X.text.size = 5,
+                               X.text.col = "black",
+                               smooth.heat,
+                               membership.rows = NULL,
+                               membership.cols = NULL) {
+
+
+
+  if (!is.null(membership.rows) && (nrow(X.text) != length(unique(membership.rows))))
+    stop("X.text must have the same number of rows as either row clusters or row variables")
+
+  if (!is.null(membership.cols) && (ncol(X.text) != length(unique(membership.cols))))
+    stop("X.text must have the same number of cols as cols clusters or col variables")
+
+
+  themes.arg.list <- c(as.list(environment()))
+  themes.arg.list <- themes.arg.list[names(formals(themes))]
+  themes.arg.list <- themes.arg.list[!is.na(names(themes.arg.list))]
+
+  # define the theme for the heatmap
+  theme <- do.call(themes, themes.arg.list)
+  theme_heatmap <- theme$theme_heatmap
+
+
+  if (is.data.frame(X.text)) {
+    X.text <- as.matrix(X.text)
+  }
+
+
+  # add membership columns and rows vector to X.smooth.df
+  if (is.null(membership.rows)) {
+    membership.rows <- 1:nrow(X.text)
+  }
+  if (is.null(membership.cols)) {
+    membership.cols <- 1:ncol(X.text)
+  }
+
+  if ((nrow(X.text) != length(unique(membership.rows))))
+    stop("Text matrix must have the same number of rows as X")
+
+  if ((ncol(X.text) != length(unique(membership.cols))))
+    stop("Text matrix must have the same number of cols as X")
+
+
+
+
+
+
+  X.order <- X.text
+  # convert the x-y correlation matrix to a long-form "tidy" data frame
+  X.df <- to_cluster_df(X.order,
+                        smooth.heat = smooth.heat,
+                        membership.rows = membership.rows,
+                        membership.cols = membership.cols)
+
+
+  X.df$size <- as.vector(X.text.size)
+  X.df$col <- as.vector(X.text.col)
+
+
+
+
+  # make the plot
+ gg.text <- ggplot2::geom_text(ggplot2::aes(x = x,
+                                    y = y,
+                                    label = value,
+                                    size = as.numeric(size),
+                                    col = col), data = X.df)
+
+
+
+
+
+  return(gg.text)
+}
+
+
+
+
+
+
+
+
 
 
 
