@@ -353,13 +353,16 @@ generate_smooth_heat <- function(X,
 
 
   if (!is.null(X.text)) {
+    col.values <- unique(as.vector(X.text.col))
+    names(col.values) <- unique(as.vector(X.text.col))
+
     gg.heat <- gg.heat + generate_text_heat(X.text,
                                             X.text.size = X.text.size,
                                             X.text.col = X.text.col,
                                             smooth.heat = smooth.heat,
                                             membership.rows = membership.rows,
                                             membership.cols = membership.cols) +
-      ggplot2::scale_colour_manual(values = as.vector(X.text.col)) +
+      ggplot2::scale_colour_manual(values = col.values) +
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
   }
 
