@@ -25,21 +25,54 @@ to_df <- function(X) {
 
 
 
-to_cluster_df <- function(X, smooth.heat, membership.cols, membership.rows) {
-  # X is a text matrix
+to_cluster_df <- function(X.text, smooth.heat, membership.cols, membership.rows) {
+  # X.text is a text matrix
 
 
+  
+  
   # wil be used in conjunction with generate_text_heat
-  if(!is.matrix(X)) stop("X must be a matrix")
+  if(!is.matrix(X.text)) stop("X.text must be a matrix")
 
+  
+  
+  
+  
   # converts matrix into a x-y data frame
   # need to have xmin, xmax, ymin, ymax
-  X.vec <- as.vector(X) # convert the matrix to a vector
+  X.vec <- as.vector(X.text) # convert the matrix to a vector
+  
+  # hacky way of dealing with repeated text entries
+  duplicates <- X.vec[duplicated(X.vec)]
+  
+  if (length(duplicates) > 0) {
+    
+    
+    # the location of the duplicated values
+    duplicated.index <- c()
+    # the number of times each was duplicated 
+    # we need this for when we remove the numbers at the end
+    # e.g. if the number has double digits, we need to remove 2 characters
+    duplicated.number.len <- c()
+    for (text in duplicates) {
+      duplicated.text <- X.vec[X.vec == text]
+      duplicated.index <- c(duplicated.index, which(X.vec == text))
+      
+      # the number of entires we will have to remove at the end:
+      duplicated.number.len <- c(duplicated.number.len, 
+                                 rep(nchar(length(duplicated.text)), length(duplicated.text)))
+      # add a number after each duplicate
+      X.vec[X.vec == text] <- paste0(duplicated.text, "...!...", 1:length(duplicated.text))
+    }
+  }
+  
+  
+  X.text <- matrix(X.vec, ncol = ncol(X.text))
 
   # expand matrix into full matrix
   membership.rows.numeric <- as.numeric(factor(membership.rows, levels = unique(membership.rows)))
   membership.cols.numeric <- as.numeric(factor(membership.cols, levels = unique(membership.cols)))
-  membership.matrix <- X[membership.rows.numeric, membership.cols.numeric]
+  membership.matrix <- X.text[membership.rows.numeric, membership.cols.numeric]
 
   row.matrix <- matrix(rep(1:nrow(membership.matrix), ncol(membership.matrix)),
                        ncol = ncol(membership.matrix),
@@ -50,28 +83,27 @@ to_cluster_df <- function(X, smooth.heat, membership.cols, membership.rows) {
                        byrow = T)
 
 
-
-  if (!smooth.heat) {
-    x <- c()
-    y <- c()
-    for (text in unique(as.vector(membership.matrix))) {
-      x <- c(x, mean(col.matrix[membership.matrix == text]))
-      y <- c(y, mean(row.matrix[membership.matrix == text]))
-    }
-  } else {
-    x <- c()
-    y <- c()
-    for (text in unique(as.vector(membership.matrix))) {
-      x <- c(x, mean(col.matrix[membership.matrix == text]))
-      y <- c(y, mean(row.matrix[membership.matrix == text]))
-    }
+  x <- c()
+  y <- c()
+  for (text in unique(as.vector(membership.matrix))) {
+    x <- c(x, mean(col.matrix[membership.matrix == text]))
+    y <- c(y, mean(row.matrix[membership.matrix == text]))
+  }
+  
+  if (smooth.heat) {
     # fix position for smoothed option
     x <- x - 0.5
+    y <- y - 0.5
   }
 
 
-
-
+  # remove the hacky addition to the duplicated text entries
+  if (length(duplicates) > 0) {
+    duplicated_split_words <- strsplit(X.vec[duplicated.index], "...!...")
+    X.vec[duplicated.index] <- sapply(duplicated_split_words, function(x) x[-length(x)])
+  }
+  
+  X.text <- matrix(X.vec, ncol = ncol(X.text))
 
   X.mat <- cbind(value = X.vec,
                  # convert vector to matrix with columns
@@ -83,6 +115,9 @@ to_cluster_df <- function(X, smooth.heat, membership.cols, membership.rows) {
   X.df$y <- as.numeric(y)
 
 
+  
+  
+  
 
   return(X.df)
 }
