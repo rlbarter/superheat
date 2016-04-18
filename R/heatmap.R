@@ -132,13 +132,17 @@ generate_heat <- function(X,
 
 
   if (!is.null(X.text)) {
+    
+    col.values <- unique(as.vector(X.text.col))
+    names(col.values) <- unique(as.vector(X.text.col))
+    
     gg.heat <- gg.heat + generate_text_heat(X.text,
                                             X.text.size = X.text.size,
                                             X.text.col = X.text.col,
                                             smooth.heat = smooth.heat,
                                             membership.rows = membership.rows,
                                             membership.cols = membership.cols) +
-      ggplot2::scale_colour_manual(values = unique(X.text.col)) +
+      ggplot2::scale_colour_manual(values = col.values) +
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
   }
 
@@ -426,10 +430,10 @@ generate_text_heat <- function(X.text,
   }
 
   if ((nrow(X.text) != length(unique(membership.rows))))
-    stop("Text matrix must have the same number of rows as X")
+    stop("X.text must have the same number of rows as X")
 
   if ((ncol(X.text) != length(unique(membership.cols))))
-    stop("Text matrix must have the same number of cols as X")
+    stop("X.text must have the same number of cols as X")
 
 
 
@@ -448,6 +452,12 @@ generate_text_heat <- function(X.text,
   X.df$col <- as.vector(X.text.col)
 
 
+  
+  # hacky fix for visible binding warning
+  x <- X.df$x
+  y <- X.df$y
+  value <- X.df$value
+  size <- X.df$size
 
 
   # make the plot

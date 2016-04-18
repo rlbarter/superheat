@@ -132,6 +132,9 @@ to_cluster_df <- function(X.text, smooth.heat, membership.cols, membership.rows)
 
 
 stop_errors <- function(X,
+                        X.text = NULL,
+                        X.text.size = NULL,
+                        X.text.col = NULL,
                         yt = NULL,
                         yr = NULL,
                         yt.plot.type = c("scatter","bar"),
@@ -200,6 +203,14 @@ stop_errors <- function(X,
   if (is.data.frame(X) && sum(!(sapply(X, class) %in% c("integer","numeric")) > 0)) {
     stop("'X' must contain numeric entries only")
   }
+  
+  
+  if (!is.null(X.text) && !is.matrix(X.text)) {
+    stop("'X.text' must be a matrix")
+  }
+  
+  
+  
 
 
   if (!is.null(left.heat.label)) {

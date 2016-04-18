@@ -6,8 +6,19 @@
 #'        can be plotted above and to the right of the heatmap. This plot allows
 #'        for the user to view X versus y for a multivariate X.
 #'
-#' @param X an optional matrix or data frame containing the variables in the
-#'          columns and the observations in the rows.
+#' 
+#' @param X a matrix or data frame whose values are to be plotted in the heatmap.
+#' @param X.text a matrix containing text entries to be plotted on top of the 
+#'          heatmap. The number of rows must match the number of columns of 
+#'          \code{X.text} (if no column clustering) or the number of column 
+#'          clusters of \code{X} (if column clustering). Similarly for the 
+#'          rows of \code{X.text}.
+#' @param X.text.size a single number or a matrix of numbers (whose dimension 
+#'          matches that of \code{X.text}) that contains numbers specifying 
+#'          the size of the text to be plotted.
+#' @param X.text.col a single character string or a matrix of character strings 
+#'          (whose dimension matches that of \code{X.text}) that 
+#'          contains characters specifying the colors of the text to be plotted.
 #' @param yt an optional argument (list or vector) specifying the plot above
 #'          the heatmap. If a vector is given it must be of length
 #'          \code{ncol(X)} and the order of the values in \code{yt} should
@@ -28,6 +39,7 @@
 #'          "smooth", "boxplot", "scatterline" and "line".
 #' @param smooth.heat logical. If \code{TRUE}, then the color of the heatmap is
 #'          smoothed within clusters.
+#'          
 #' @param scale logical. If \code{TRUE}, the columns of X are centered and scaled.
 #' @param membership.rows an optional vector specifying the cluster membership
 #'          of the rows/observations in X. If not specified, the default settings
