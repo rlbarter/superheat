@@ -1,0 +1,9 @@
+* using log directory ‘/Users/rebeccabarter/Google Drive/Berkeley PhD/Packages/Supervised Heatmaps/superheat/superheat.Rcheck’
+* using R version 3.2.2 (2015-08-14)
+* using platform: x86_64-apple-darwin11.4.2 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘superheat/DESCRIPTION’ ... ERROR
+Required fields missing or empty:
+  ‘Author’ ‘Maintainer’
+* DONE
+Status: 1 ERROR

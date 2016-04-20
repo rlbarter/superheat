@@ -171,3 +171,4 @@ g <- generate_layout(gg.heat = gg.heat,
                      gg.left = gg.left,
                      gg.legend = gg.legend)
 gtable::gtable_show_layout(g)
+

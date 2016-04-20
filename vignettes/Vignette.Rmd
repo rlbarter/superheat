@@ -61,18 +61,13 @@ library(superheat)
 
 As mentioned above, the primary aim of this package is to produce a supervised heatmap that can be used to both explore your data and diagnose areas of your data where your model may be performing sub-optimally (and to gives clues about possible improvements). The plot consists of two elements:
 
-1. *a clustered heatmap*: a clustered version of the $(n \times p)$ design matrix ${\bf X}$).
+1. *a heatmap*: a (possibly clustered) matrix ${\bf X}$).
 
-1. *a plot above and to the right of the heatmap*: these plots could be scatterplots, barplots, scatterplots with a smoothed curve, isolated smoothed curves and line plots.
+1. *a plot above and to the right of the heatmap*: these plots could be scatterplots, barplots, scatterplots with a smoothed curve, isolated smoothed curves and line plots. The entries of these additional plots correspond to the columns and rows of the heatmap, respectively.
 
-1. *cluster or variable labels below and to the left of the heatmap*: these labels correspond to the cluster numbers/names or the variable names.
+1. *cluster or row/column labels below and to the left of the heatmap*: these labels correspond to the cluster numbers/names or the row/column names.
 
 
-
---------------
-
-## Things you should keep in mind
-The heatmap in the center of the plot is of a matrix, ${\bf X}$, in which, by default, the rows are clustered into a number of distinct clusters. The colour scale is presented below the heatmap. 
 
 
 --------
@@ -97,7 +92,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap ma
             yt.axis.name = "coefficient")
 ```
 
-This plot shows us a heatmap of the design matrix, $X$, which consists of 150 rows (the first 10 of which are shown below) and 3 variables (the first three columns of the table below). We also have a species variable (the fourth column of the table below) that we are using as our cluster membership identifier. Finally, on the right hand side of the plot we are plotting a fourth variable `Sepal.Length`. We can see from this plot that the virginica species has longer petals and sepals than *Setosa* which has short sepals and particularly short petal width.
+This plot shows us a heatmap of the iris matrix, $X$, which consists of 150 rows (the first 10 of which are shown below) and 3 variables (the first three columns of the table below). We also have a species variable (the fourth column of the table below) that we are using as our cluster membership identifier. Finally, on the right hand side of the plot we are plotting a fourth variable `Sepal.Length`. We can see from this plot that the virginica species has longer petals and sepals than *Setosa* which has short sepals and particularly short petal width.
 
 ```{r, echo = FALSE, results = "asis"}
 pander::pandoc.table(iris[1:10,c("Sepal.Width","Sepal.Length","Petal.Width", "Species")])
@@ -105,29 +100,75 @@ pander::pandoc.table(iris[1:10,c("Sepal.Width","Sepal.Length","Petal.Width", "Sp
 
 
 
-Further, if you are one of those people who prefer their design matrix to be $n \times p$ instead of $p \times n$, we can accomodate you too! For example, we are plotting a heatmap of the transpose of $X$, as well as the `Sepal.Length` variable above (`yt` corresponds to the variable to be plotted on *top* of the heatmap and `yr` corresponds to the variable to be plotted to the *right* of the heatmap). Note that below we must specify `cluster.rows = FALSE`, since the default is to cluster the rows but not the columns.
-
-```{r, fig.align='center',fig.height = 7, fig.width = 5.5,  fig.show = 'hold'}
-
-superheat(X = t(iris[,c("Sepal.Width","Sepal.Length","Petal.Width")]), 
-            yt = iris[,"Petal.Length"], 
-            yt.axis.name = "Petal.Length",
-            membership.cols = iris[,"Species"], 
-            cluster.rows = FALSE,
-            yr = iris.coef[-1], # plot the model coefficients above
-            yr.plot.type = "bar", # make the plot above a barplot
-            yr.axis.name = "coefficient",
-            bottom.label.pal = "white")
-```
-
-
-
-
-
 --------
 
 ## Customizing the plot
 Below we continue with the iris example and show how to use the numerous options for customizing the plot
+
+
+### Adding text to the plot
+
+It is easy to add text to each cluster (or variable) cell in the heatmap using the `X.text` argument. 
+```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
+X.text <- matrix(c("Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Petal", "Petal", "Petal"), ncol = 3, byrow = T)
+
+X.text
+
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap matrix
+          X.text = X.text,
+            yr = iris[,"Petal.Length"], #plot Petal.Length to the right
+            yr.axis.name = "Petal.Length",
+            membership.rows = iris[,"Species"], # cluster the rows by species
+            yt = iris.coef[-1], # plot the model coefficients above
+            yt.plot.type = "bar", # make the plot above a barplot
+            yt.axis.name = "coefficient")
+```
+
+
+* Change the size of the text
+
+```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
+X.text <- matrix(c("Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Petal", "Petal", "Petal"), 
+                 ncol = 3, 
+                 byrow = T)
+
+X.text.size <- matrix(c(5, 5, 10, 5, 5, 15, 5, 5, 5), ncol = 3, byrow = T)
+
+
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap matrix
+          X.text = X.text,
+          X.text.size = X.text.size,
+            yr = iris[,"Petal.Length"], #plot Petal.Length to the right
+            yr.axis.name = "Petal.Length",
+            membership.rows = iris[,"Species"], # cluster the rows by species
+            yt = iris.coef[-1], # plot the model coefficients above
+            yt.plot.type = "bar", # make the plot above a barplot
+            yt.axis.name = "coefficient")
+```
+
+
+
+* Change the color of the text
+
+```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
+X.text <- matrix(c("Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Petal", "Petal", "Petal"), 
+                 ncol = 3, 
+                 byrow = T)
+
+X.text.col <- matrix(c("black", "black", "black", "red", "white", "red", "black", "black", "black"), ncol = 3, byrow = T)
+
+
+
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap matrix
+          X.text = X.text,
+          X.text.col = X.text.col,
+            yr = iris[,"Petal.Length"], #plot Petal.Length to the right
+            yr.axis.name = "Petal.Length",
+            membership.rows = iris[,"Species"], # cluster the rows by species
+            yt = iris.coef[-1], # plot the model coefficients above
+            yt.plot.type = "bar", # make the plot above a barplot
+            yt.axis.name = "coefficient")
+```
 
 
 ### Clustering options (row *and* column)
@@ -502,6 +543,9 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr.axis.name = "Petal.Length",
             smooth.heat = TRUE)
 ```
+
+
+
 
 ### Sizing
 

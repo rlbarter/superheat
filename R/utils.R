@@ -29,44 +29,44 @@ to_cluster_df <- function(X.text, smooth.heat, membership.cols, membership.rows)
   # X.text is a text matrix
 
 
-  
-  
+
+
   # wil be used in conjunction with generate_text_heat
   if(!is.matrix(X.text)) stop("X.text must be a matrix")
 
-  
-  
-  
-  
+
+
+
+
   # converts matrix into a x-y data frame
   # need to have xmin, xmax, ymin, ymax
   X.vec <- as.vector(X.text) # convert the matrix to a vector
-  
+
   # hacky way of dealing with repeated text entries
   duplicates <- X.vec[duplicated(X.vec)]
-  
+
   if (length(duplicates) > 0) {
-    
-    
+
+
     # the location of the duplicated values
     duplicated.index <- c()
-    # the number of times each was duplicated 
+    # the number of times each was duplicated
     # we need this for when we remove the numbers at the end
     # e.g. if the number has double digits, we need to remove 2 characters
     duplicated.number.len <- c()
     for (text in duplicates) {
       duplicated.text <- X.vec[X.vec == text]
       duplicated.index <- c(duplicated.index, which(X.vec == text))
-      
+
       # the number of entires we will have to remove at the end:
-      duplicated.number.len <- c(duplicated.number.len, 
+      duplicated.number.len <- c(duplicated.number.len,
                                  rep(nchar(length(duplicated.text)), length(duplicated.text)))
       # add a number after each duplicate
       X.vec[X.vec == text] <- paste0(duplicated.text, "...!...", 1:length(duplicated.text))
     }
   }
-  
-  
+
+
   X.text <- matrix(X.vec, ncol = ncol(X.text))
 
   # expand matrix into full matrix
@@ -89,7 +89,7 @@ to_cluster_df <- function(X.text, smooth.heat, membership.cols, membership.rows)
     x <- c(x, mean(col.matrix[membership.matrix == text]))
     y <- c(y, mean(row.matrix[membership.matrix == text]))
   }
-  
+
   if (smooth.heat) {
     # fix position for smoothed option
     x <- x - 0.5
@@ -102,7 +102,7 @@ to_cluster_df <- function(X.text, smooth.heat, membership.cols, membership.rows)
     duplicated_split_words <- strsplit(X.vec[duplicated.index], "...!...")
     X.vec[duplicated.index] <- sapply(duplicated_split_words, function(x) x[-length(x)])
   }
-  
+
   X.text <- matrix(X.vec, ncol = ncol(X.text))
 
   X.mat <- cbind(value = X.vec,
@@ -115,9 +115,9 @@ to_cluster_df <- function(X.text, smooth.heat, membership.cols, membership.rows)
   X.df$y <- as.numeric(y)
 
 
-  
-  
-  
+
+
+
 
   return(X.df)
 }
@@ -144,8 +144,6 @@ stop_errors <- function(X,
                         membership.cols = NULL, # membership for cols
                         n.clusters.rows = NULL,
                         n.clusters.cols = NULL,
-                        cluster.rows = FALSE,
-                        cluster.cols = FALSE,
                         clustering.method = c("kmeans", "hierarchical"),
                         cluster.box = TRUE,
                         legend = TRUE,
@@ -186,13 +184,6 @@ stop_errors <- function(X,
                         title.size = 5,
                         print.plot = TRUE) {
 
-  if ((!is.null(membership.rows) | !is.null(n.clusters.rows)) && !cluster.rows) {
-    cluster.rows <- TRUE
-  }
-
-  if ((!is.null(membership.cols) | !is.null(n.clusters.cols)) && !cluster.cols) {
-    cluster.cols <- TRUE
-  }
 
 
 
@@ -203,14 +194,14 @@ stop_errors <- function(X,
   if (is.data.frame(X) && sum(!(sapply(X, class) %in% c("integer","numeric")) > 0)) {
     stop("'X' must contain numeric entries only")
   }
-  
-  
+
+
   if (!is.null(X.text) && !is.matrix(X.text)) {
     stop("'X.text' must be a matrix")
   }
-  
-  
-  
+
+
+
 
 
   if (!is.null(left.heat.label)) {
@@ -233,13 +224,6 @@ stop_errors <- function(X,
   if (is.na(i.meth))
     stop("invalid clustering method", paste("", clustering.method))
 
-  if (is.null(membership.cols) && cluster.cols && is.null(n.clusters.cols)) {
-    stop("Please supply either a 'membership.cols' vector or the number of column clusters 'n.clusters.cols' or set 'cluster.cols = FALSE'.")
-  }
-
-  if (is.null(membership.rows) && cluster.rows && is.null(n.clusters.rows)) {
-    stop("Please supply either a 'membership.rows' vector or the number of row clusters 'n.clusters.rows' or set 'cluster.cols = FALSE'.")
-  }
 
   if (!is.null(left.heat.label) && (left.heat.label == "cluster") && (is.null(membership.rows)) && is.null(n.clusters.rows)) {
     stop("Cannot have 'left.heat.label = 'cluster'' if we have not clustered the rows")
