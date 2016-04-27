@@ -49,12 +49,6 @@ generate_cluster_label <- function(membership,
 
 
 
-  if (is.null(label.pal))
-    label.pal = c("Grey 71","Grey 53")
-
-  if (is.null(label.text.col))
-    label.text.col <- "black"
-
 
   cluster.size <- table(membership)
   cluster.size <- cluster.size[cluster.size != 0]
@@ -64,15 +58,37 @@ generate_cluster_label <- function(membership,
   n.cluster <- length(cluster.size)
 
 
+  if (!is.null(label.pal) && (length(label.pal) != n.cluster)) {
+    label.pal <- rep(label.pal, length = n.cluster)
+  }
+
+  if (!is.null(label.text.col) && (length(label.text.col) != n.cluster)) {
+    label.text.col <- rep(label.text.col, length = n.cluster)
+  }
+
+
+
+  if (is.null(label.pal))
+    label.pal = rep(c("Grey 71","Grey 53"), length = n.cluster)
+
+  if (is.null(label.text.col))
+    label.text.col <- "black"
+
+
+  label.text.col <- factor(label.text.col, levels = unique(label.text.col))
+  label.text.col <- droplevels(label.text.col)
+  names(label.text.col) <- label.text.col
+
+
+  label.pal <- factor(label.pal, levels = unique(label.pal))
+  label.pal <- droplevels(label.pal)
+  names(label.pal) <- label.pal
 
   # make the proportions of the label rectangles match the number of observations
   # in the heatmap clusters
   selected.clusters.df <- data.frame(cluster = cluster.names,
-                                     col = rep(label.pal,
-                                               length = n.cluster),
+                                     col = label.pal,
                                      n = cluster.size)
-  selected.clusters.df$col <- factor(selected.clusters.df$col,
-                                     levels = label.pal)
   selected.clusters.df$id <- 1:nrow(selected.clusters.df)
   selected.clusters.df <- selected.clusters.df %>%
     dplyr::mutate(increment = (n/sum(selected.clusters.df$n)) * n.cluster)
@@ -94,6 +110,8 @@ generate_cluster_label <- function(membership,
   increment <- selected.clusters.df$increment
 
   if (location == "left") {
+    label.pal <- as.character(label.pal)
+    names(label.pal) <- label.pal
     gg.left <- ggplot2::ggplot(selected.clusters.df,
                                      ggplot2::aes(xmin = 0,
                                                   xmax = 1,
@@ -102,7 +120,7 @@ generate_cluster_label <- function(membership,
                                                   fill = col)) +
       ggplot2::geom_rect() +
       theme_clust_labels +
-      ggplot2::scale_fill_manual(values = label.pal) +
+      ggplot2::scale_fill_manual(values = as.character(label.pal)) +
       ggplot2::geom_text(ggplot2::aes(x = 0.5,
                                       y = breaks + increment/2,
                                       label = cluster.names),
@@ -119,15 +137,19 @@ generate_cluster_label <- function(membership,
 
 
   if (location == "bottom") {
+
+    label.pal <- as.character(label.pal)
+    names(label.pal) <- label.pal
+    suppressWarnings(
     gg.bottom <- ggplot2::ggplot(selected.clusters.df,
                                        ggplot2::aes(xmin = breaks,
                                                     xmax = breaks + increment,
                                                     ymin = 0,
                                                     ymax = 1,
-                                                    fill = factor(col))) +
+                                                    fill = col)) +
       ggplot2::geom_rect() +
       theme_clust_labels +
-      ggplot2::scale_fill_manual(values = label.pal) +
+      ggplot2::scale_fill_manual(values = as.character(label.pal)) +
       ggplot2::geom_text(ggplot2::aes(y = 0.5,
                                       x = breaks + increment/2,
                                       label = cluster.names),
@@ -137,7 +159,7 @@ generate_cluster_label <- function(membership,
                          col = label.text.col,
                          angle = text.angle) +
       ggplot2::scale_x_continuous(expand = c(0, 0)) +
-      ggplot2::scale_y_continuous(expand = c(0, 0))
+      ggplot2::scale_y_continuous(expand = c(0, 0)))
 
     return(gg.bottom)
   }
@@ -200,10 +222,17 @@ generate_var_label <- function(names,
   theme_clust_labels <- theme$theme_clust_labels
 
 
+  if (!is.null(label.pal) && (length(label.pal) != length(names))) {
+    label.pal <- rep(label.pal, length = length(names))
+  }
+
+  if (!is.null(label.text.col) && (length(label.text.col) != length(names))) {
+    label.text.col <- rep(label.text.col, length = length(names))
+  }
 
 
   if (is.null(label.pal))
-    label.pal = c("Grey 71","Grey 53")
+    label.pal = rep(c("Grey 71","Grey 53"), length = length(names))
 
   if (is.null(label.text.col))
     label.text.col <- "black"
@@ -211,17 +240,23 @@ generate_var_label <- function(names,
 
 
 
+  label.text.col <- factor(label.text.col, levels = unique(label.text.col))
+  label.text.col <- droplevels(label.text.col)
+  names(label.text.col) <- label.text.col
+
+  label.pal <- factor(label.pal, levels = unique(label.pal))
+  label.pal <- droplevels(label.pal)
+  names(label.pal) <- label.pal
 
 
   # make the proportions of the label rectangles match the number of observations
   # in the heatmap clusters
   variable <- names # fix for visible binding note
+
+
   variables.df <- data.frame(variable = names,
-                                     col = rep(label.pal,
-                                               length = length(names)),
+                                     col = label.pal,
                                      n = 1)
-  variables.df$col <- factor(variables.df$col,
-                                     levels = label.pal)
   variables.df$id <- 1:nrow(variables.df)
   variables.df <- variables.df %>%
     dplyr::mutate(increment = (n/sum(variables.df$n)) * 1)
@@ -239,6 +274,8 @@ generate_var_label <- function(names,
   increment <- variables.df$increment
 
   if (location == "left") {
+    label.pal <- as.character(label.pal)
+    names(label.pal) <- label.pal
     gg.left <- ggplot2::ggplot(variables.df,
                                ggplot2::aes(xmin = 0,
                                             xmax = 1,
@@ -262,12 +299,14 @@ generate_var_label <- function(names,
 
 
   if (location == "bottom") {
+    label.pal <- as.character(label.pal)
+    names(label.pal) <- label.pal
     gg.bottom <- ggplot2::ggplot(variables.df,
                                  ggplot2::aes(xmin = breaks,
                                               xmax = breaks + increment,
                                               ymin = 0,
                                               ymax = 1,
-                                              fill = factor(col))) +
+                                              fill = col)) +
       ggplot2::geom_rect() +
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = label.pal) +
