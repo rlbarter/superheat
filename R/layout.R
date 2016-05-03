@@ -101,7 +101,7 @@ generate_layout <- function(gg.heat,
 
   }
 
-gtable::gtable_show_layout(layout)
+#gtable::gtable_show_layout(layout)
 
 
 
