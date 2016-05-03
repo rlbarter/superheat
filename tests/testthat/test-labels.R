@@ -1,7 +1,7 @@
-# tests for correct layout table
+# tests for correct labels table
 
 library(testthat)
-context("layout")
+context("labels")
 
 X <- matrix(rep(c(1, 1, 2, 1, 4, 5,1 ,7, 5, 2, 1,8), 2), ncol = 3)
 cluster.rows <- c(1, 2, 1, 1, 2, 3, 4, 4)
