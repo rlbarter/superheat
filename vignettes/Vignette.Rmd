@@ -680,6 +680,4 @@ Thanks for using the package! I hope you find it helpful in your data exploratio
 tools::compactPDF("vignettes/", gs_quality = "ebook")
 rmarkdown::render("Vignettes/Vignette.Rmd", c("html_document"))
 
-
-
 --> 
