@@ -58,7 +58,7 @@ generate_layout <- function(gg.heat,
   if (!is.null(gg.bottom) && is.null(gg.right) |
       (!is.null(gg.bottom) && !is.null(gg.right) && !yr.axis)) {
     layout <- gtable::gtable_add_rows(layout, grid::unit(bottom.label.size, "null"))
-  } else if ((bottom.label.size > 0.1) && !is.null(gg.bottom) && yr.axis) {
+  } else if ((bottom.label.size > 0.2) && !is.null(gg.bottom) && yr.axis) {
     layout <- gtable::gtable_add_rows(layout, grid::unit(bottom.label.size - 0.2, "null"))
   }
 
@@ -66,7 +66,7 @@ generate_layout <- function(gg.heat,
   if ((!is.null(gg.left) && !yt.axis && !is.null(gg.top)) |
       (!is.null(gg.left) && is.null(gg.top))) {
     layout <- gtable::gtable_add_cols(layout, grid::unit(left.label.size, "null"), 0)
-  } else if ((left.label.size > 0.1) && !is.null(gg.left) && !is.null(gg.top) && yt.axis) {
+  } else if ((left.label.size > 0.2) && !is.null(gg.left) && !is.null(gg.top) && yt.axis) {
     layout <- gtable::gtable_add_cols(layout, grid::unit(left.label.size - 0.2, "null"), 0)
   }
 
@@ -81,7 +81,9 @@ generate_layout <- function(gg.heat,
 
 
   # add column names
-  if (!is.null(gg.column.title)) {
+  if ((!is.null(gg.column.title) && is.null(gg.right)) |
+      (!is.null(gg.column.title) && !is.null(gg.right) && !yr.axis) |
+      !is.null(gg.column.title) && !is.null(gg.right) && yr.axis && (bottom.label.size > 0.2)){
 
     layout <- gtable::gtable_add_rows(layout, grid::unit(0.1, "null"), pos = -1)
 
@@ -99,7 +101,7 @@ generate_layout <- function(gg.heat,
 
   }
 
-
+gtable::gtable_show_layout(layout)
 
 
 
@@ -135,28 +137,21 @@ generate_grobs <- function(layout,
 
 
   if (!is.null(gg.legend)) {
-    t <- 2
+    t <- nrow(layout)
     l <- 1
-    if (!is.null(gg.top))
-      t <- t + 1
-    if ((is.null(gg.right) && !is.null(gg.bottom)) |
-        (!is.null(gg.right) && !yr.axis))
-      t <- t + 1
-    if (!is.null(gg.right) && yr.axis)
-      t <- t + 2
+
+
+
     if (!is.null(gg.top) && yt.axis)
       l <- l + 2
+    if (!is.null(gg.left) && !yt.axis) {
+      l <- l + 1
+    }
     if (is.null(gg.top) && !is.null(gg.left))
       l <- l + 1
-    if (!is.null(gg.title))
-      t <- t + 1
     if (!is.null(gg.row.title))
       l <- l + 1
-    if (!is.null(gg.column.title))
-      t <- t + 1
-    if (bottom.label.size > 0.1  && !is.null(gg.bottom) && !is.null(gg.right) && yr.axis)
-      t <- t + 1
-    if (left.label.size > 0.1 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
+    if (left.label.size > 0.2 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
       l <- l + 1
 
     layout <- gtable::gtable_add_grob(layout, gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
@@ -185,7 +180,7 @@ generate_grobs <- function(layout,
       t <- t + 1
     if (!is.null(gg.row.title))
       l <- l + 1
-    if (left.label.size > 0.1 && !is.null(gg.top) && yt.axis)
+    if (left.label.size > 0.2 && !is.null(gg.top) && yt.axis)
       l <- l + 1
 
 
@@ -213,7 +208,9 @@ generate_grobs <- function(layout,
   if (!is.null(gg.top)) {
     t <- 1
     l <- 1
-    if (!is.null(gg.left) && !yt.axis && is.null(yt.axis.name)) {
+
+
+    if (!is.null(gg.left) && !yt.axis) {
       l <- l + 1
     }
     if (yt.axis)
@@ -222,7 +219,7 @@ generate_grobs <- function(layout,
       t <- t + 1
     if (!is.null(gg.row.title))
       l <- l + 1
-    if (left.label.size > 0.1 && !is.null(gg.top) && yt.axis)
+    if (left.label.size > 0.2 && !is.null(gg.top) && yt.axis)
       l <- l + 1
 
 
@@ -260,7 +257,7 @@ generate_grobs <- function(layout,
     l <- 1
 
     # if (resid.axis) l <- l + 1
-    if ((left.label.size <= 0.1) && !is.null(gg.top) && yt.axis && !is.null(yt.axis.name))
+    if ((left.label.size <= 0.2) && !is.null(gg.top) && yt.axis && !is.null(yt.axis.name))
       l <- l + 1
     if (!is.null(gg.top))
       t <- t + 1
@@ -270,7 +267,7 @@ generate_grobs <- function(layout,
       l <- l + 1
 
     r <- l
-    if (left.label.size > 0.1 && !is.null(gg.top) && yt.axis)
+    if (left.label.size > 0.2 && !is.null(gg.top) && yt.axis)
       r <- r + 2
 
 
@@ -299,10 +296,14 @@ generate_grobs <- function(layout,
       l <- l + 1
 
     b <- t
-    if (bottom.label.size > 0.1 && !is.null(gg.right) && yr.axis)
+    if (bottom.label.size > 0.2 && !is.null(gg.right) && yr.axis)
       b <- t + 2
-    if (left.label.size > 0.1 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
+    if (left.label.size > 0.2 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
         l <- l + 1
+
+    if (!is.null(gg.left) && !yt.axis) {
+      l <- l + 1
+    }
 
 
 
@@ -354,7 +355,7 @@ generate_grobs <- function(layout,
     if (!is.null(gg.top))
       t <- t + 1
 
-    if (!is.null(gg.top) && yt.axis && (left.label.size <= 0.1))
+    if (!is.null(gg.top) && yt.axis && (left.label.size <= 0.2))
       l <- l + 1
 
 
@@ -375,9 +376,13 @@ generate_grobs <- function(layout,
     l <- 1
     if (!is.null(gg.top) && yt.axis)
       l <- l + 2
+    if (!is.null(gg.left) && !yt.axis) {
+      l <- l + 1
+    }
+
     if (is.null(gg.top) && !is.null(gg.left))
       l <- l + 1
-    if (left.label.size > 0.1 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
+    if (left.label.size > 0.2 && !is.null(gg.left) && !is.null(gg.top) && yt.axis)
       l <- l + 1
     if (!is.null(gg.row.title))
       l <- l + 1
@@ -385,13 +390,18 @@ generate_grobs <- function(layout,
     if (!is.null(gg.title))
       t <- t + 1
 
-
     if (!is.null(gg.bottom))
       t <- t + 1
 
-    b <- t
-    if (bottom.label.size < 0.1 && !is.null(gg.right) && yr.axis)
-      b <- t + 1
+    if (!is.null(gg.bottom) && (!is.null(gg.right) && yr.axis) && (bottom.label.size > 0.2))
+      t <- t + 2
+
+    if (!is.null(gg.top))
+      t <- t + 1
+
+
+
+
 
 
     layout <- gtable::gtable_add_grob(layout, gtable::gtable_filter(ggplot2::ggplotGrob(gg.column.title),
