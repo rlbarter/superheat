@@ -21,13 +21,13 @@ test_that("Removing legend", {
 
 test_that("Removing left labels", {
   superheat(X,
-            left.heat.label = "none")
+            left.label = "none")
 })
 
 
 test_that("Removing bottom labels", {
   superheat(X,
-            bottom.heat.label = "none")
+            bottom.label = "none")
 })
 
 
@@ -84,7 +84,7 @@ test_that("Adding column name with right plot and no axes and no bottom labels",
             column.title = "colname",
             yr = 1:8,
             yr.axis = F,
-            bottom.heat.label = "none")
+            bottom.label = "none")
 })
 
 test_that("Adding column name with right plot and no axes and big bottom labels", {
@@ -108,7 +108,7 @@ test_that("Adding column name with right plot and axes and no bottom labels", {
   superheat(X,
             column.title = "colname",
             yr = 1:8,
-            bottom.heat.label = "none")
+            bottom.label = "none")
 })
 
 
@@ -137,7 +137,7 @@ test_that("Adding column name with top plot and no axes and no bottom labels", {
             column.title = "colname",
             yt = 1:3,
             yt.axis = F,
-            bottom.heat.label = "none")
+            bottom.label = "none")
 })
 
 test_that("Adding column name with top plot and no axes and no left labels", {
@@ -145,7 +145,7 @@ test_that("Adding column name with top plot and no axes and no left labels", {
             column.title = "colname",
             yt = 1:3,
             yt.axis = F,
-            left.heat.label = "none")
+            left.label = "none")
 })
 
 
@@ -154,7 +154,7 @@ test_that("Adding column name with top plot and axes and no left labels", {
   superheat(X,
             column.title = "colname",
             yt = 1:3,
-            left.heat.label = "none")
+            left.label = "none")
 })
 
 

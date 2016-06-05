@@ -5,8 +5,8 @@
 \title{Generate heatmap variable labels.}
 \usage{
 generate_var_label(names, location = c("bottom", "left"), label.pal = NULL,
-  label.text.col = NULL, bottom.text.size = 5, left.text.size = 5,
-  text.angle = NULL)
+  label.text.col = NULL, bottom.label.text.size = 5,
+  left.label.text.size = 5, text.angle = NULL)
 }
 \arguments{
 \item{names}{a vector specifying the label names.}
@@ -19,10 +19,10 @@ generate_var_label(names, location = c("bottom", "left"), label.pal = NULL,
 \item{label.text.col}{a character or character vector specifying the
 cluster/variable label text color.}
 
-\item{bottom.text.size}{the size of the bottom heatmap label text. The
+\item{bottom.label.text.size}{the size of the bottom heatmap label text. The
 default is 5.}
 
-\item{left.text.size}{the size of the left heatmap label text. The
+\item{left.label.text.size}{the size of the left heatmap label text. The
 default is 5.}
 
 \item{text.angle}{number of degrees to rotate the text on the left

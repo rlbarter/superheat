@@ -405,7 +405,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            cluster.hline = F)
+            grid.hline = F)
 ```
 
 
@@ -416,7 +416,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            cluster.vline = F)
+            grid.vline = F)
 ```
 
 ### Colour palettes
@@ -524,8 +524,8 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            cluster.hline.col = "white",
-          cluster.vline.col = "red")
+            grid.hline.col = "white",
+          grid.vline.col = "red")
 ```
 
 
@@ -628,8 +628,8 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            cluster.vline.size = 2,
-            cluster.hline.size = 2)
+            grid.vline.size = 2,
+            grid.hline.size = 2)
 ```
 
 ### Ordering

@@ -17,12 +17,12 @@ generate_heat <- function(X,
                           legend.size = 2,
                           axis.size = 10,
                           label.size = 10,
-                          cluster.hline = TRUE,
-                          cluster.vline = TRUE,
-                          cluster.hline.size = 0.5,
-                          cluster.vline.size = 0.5,
-                          cluster.hline.col = "black",
-                          cluster.vline.col = "black") {
+                          grid.hline = TRUE,
+                          grid.vline = TRUE,
+                          grid.hline.size = 0.5,
+                          grid.vline.size = 0.5,
+                          grid.hline.col = "black",
+                          grid.vline.col = "black") {
 
 
 
@@ -72,10 +72,10 @@ generate_heat <- function(X,
 
 
 
-  if (cluster.hline) {
+  if (grid.hline) {
     rlines <- c(0,cumsum(table(membership.rows)))
   }
-  if (cluster.vline) {
+  if (grid.vline) {
     clines <- c(0,cumsum(table(membership.cols)))
   }
 
@@ -113,18 +113,18 @@ generate_heat <- function(X,
 
 
 
-  if (cluster.vline) {
+  if (grid.vline) {
     for (i in 1:length(clines)) {
       gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i] + 0.5,
-                                                   size = cluster.vline.size,
-                                                   col = cluster.vline.col)
+                                                   size = grid.vline.size,
+                                                   col = grid.vline.col)
     }
   }
-  if (cluster.hline) {
+  if (grid.hline) {
     for (i in 1:length(rlines)) {
       gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i] + 0.5,
-                                                   size = cluster.hline.size,
-                                                   col = cluster.hline.col)
+                                                   size = grid.hline.size,
+                                                   col = grid.hline.col)
     }
   }
 
@@ -169,12 +169,12 @@ generate_smooth_heat <- function(X,
                                   legend.size = 2,
                                   axis.size = 10,
                                   label.size = 10,
-                                  cluster.hline = TRUE,
-                                  cluster.vline = TRUE,
-                                  cluster.hline.size = 0.5,
-                                  cluster.vline.size = 0.5,
-                                  cluster.hline.col = "black",
-                                  cluster.vline.col = "black") {
+                                  grid.hline = TRUE,
+                                  grid.vline = TRUE,
+                                  grid.hline.size = 0.5,
+                                  grid.vline.size = 0.5,
+                                  grid.hline.col = "black",
+                                  grid.vline.col = "black") {
 
 
   heat.col.scheme <- match.arg(heat.col.scheme)
@@ -336,18 +336,18 @@ generate_smooth_heat <- function(X,
 
 
 
-  if (cluster.vline) {
+  if (grid.vline) {
     for (i in 1:length(clines)) {
       gg.legend <- gg.legend + ggplot2::geom_vline(xintercept = clines[i],
-                                                   size = cluster.vline.size,
-                                                   col = cluster.vline.col)
+                                                   size = grid.vline.size,
+                                                   col = grid.vline.col)
     }
   }
-  if (cluster.hline) {
+  if (grid.hline) {
     for (i in 1:length(rlines)) {
       gg.legend <- gg.legend + ggplot2::geom_hline(yintercept = rlines[i],
-                                                   size = cluster.hline.size,
-                                                   col = cluster.hline.col)
+                                                   size = grid.hline.size,
+                                                   col = grid.hline.col)
     }
   }
 

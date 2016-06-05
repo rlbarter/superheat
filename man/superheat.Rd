@@ -8,16 +8,16 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   membership.rows = NULL, membership.cols = NULL, n.clusters.rows = NULL,
   n.clusters.cols = NULL, clustering.method = c("kmeans", "hierarchical"),
   order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
-  scale = FALSE, left.heat.label = NULL, bottom.heat.label = NULL,
+  scale = FALSE, left.label = NULL, bottom.label = NULL,
   heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, X.text.size = 5,
   X.text.col = "black", yt.plot.type = c("scatter", "bar", "boxplot",
   "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
   "scatterline", "line"), legend = TRUE, legend.size = 2,
-  cluster.hline = TRUE, cluster.vline = TRUE, cluster.hline.size = 0.5,
-  cluster.vline.size = 0.5, cluster.hline.col = "black",
-  cluster.vline.col = "black", smoothing.method = c("loess", "lm"),
+  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
+  grid.vline.size = 0.5, grid.hline.col = "black",
+  grid.vline.col = "black", smoothing.method = c("loess", "lm"),
   smooth.se = TRUE, yt.axis = T, yr.axis = T, yt.num.ticks = 3,
   yr.num.ticks = 3, yt.plot.size = 0.3, yr.plot.size = 0.3,
   yt.axis.name = NULL, yr.axis.name = NULL, yr.axis.size = 10,
@@ -26,13 +26,14 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yr.obs.col = NULL, yt.pal = NULL, yr.pal = NULL, yt.bar.col = NULL,
   yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
   yr.point.size = 2, yr.point.alpha = 1, yr.line.size = NULL,
-  yt.line.size = NULL, bottom.text.size = 5, left.text.size = 5,
-  bottom.text.angle = NULL, left.text.angle = NULL,
-  bottom.label.size = 0.1, left.label.size = 0.1, left.label.pal = NULL,
-  bottom.label.pal = NULL, left.label.text.col = NULL,
-  bottom.label.text.col = NULL, column.title = NULL, row.title = NULL,
-  column.title.size = 5, row.title.size = 5, padding = 1, title = NULL,
-  title.size = 5, print.plot = TRUE)
+  yt.line.size = NULL, bottom.label.text.size = 5,
+  left.label.text.size = 5, bottom.label.text.angle = NULL,
+  left.label.text.angle = NULL, bottom.label.size = 0.1,
+  left.label.size = 0.1, left.label.pal = NULL, bottom.label.pal = NULL,
+  left.label.text.col = NULL, bottom.label.text.col = NULL,
+  column.title = NULL, row.title = NULL, column.title.size = 5,
+  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
+  print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix or data frame whose values are to be plotted in the heatmap.}
@@ -86,13 +87,13 @@ of the heatmap within clusters.}
 \item{scale}{a logical specifying whether or not to cener and scale the
 columns of X.}
 
-\item{left.heat.label}{the type of label provided to the left of the heatmap.
+\item{left.label}{the type of label provided to the left of the heatmap.
 The default is "cluster" (which provides the cluster names) if
 clustering was performed on the rowss. Otherwise, the default is
 "variable" (which provides the variable names). The final option
 ("none") removes the label all together.}
 
-\item{bottom.heat.label}{the type of label provided to the left of the heatmap.
+\item{bottom.label}{the type of label provided to the left of the heatmap.
 The default is "cluster" (which provides the cluster names) if
 clustering was performed on the columns. Otherwise, the default is
 "variable" (which provides the variable names). The final option
@@ -134,19 +135,19 @@ colors of each text entry in \code{X.text}.}
 \item{legend.size}{a number specifying the size of the legend. The default
 is 2.}
 
-\item{cluster.hline}{a logical specifying whether horizontal lines are
+\item{grid.hline}{a logical specifying whether horizontal lines are
 plotted around the row clusters in the heatmap.}
 
-\item{cluster.vline}{a logical specifying whether vertical lines are
+\item{grid.vline}{a logical specifying whether vertical lines are
 plotted around the column clusters in the heatmap.}
 
-\item{cluster.hline.size}{the thickness of the cluster lines. The default is 0.5.}
+\item{grid.hline.size}{the thickness of the cluster lines. The default is 0.5.}
 
-\item{cluster.vline.size}{the thickness of the cluster lines. The default is 0.5.}
+\item{grid.vline.size}{the thickness of the cluster lines. The default is 0.5.}
 
-\item{cluster.hline.col}{the colour of the cluster lines.}
+\item{grid.hline.col}{the colour of the cluster lines.}
 
-\item{cluster.vline.col}{the colour of the cluster lines.}
+\item{grid.vline.col}{the colour of the cluster lines.}
 
 \item{smoothing.method}{if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 this argument specifies the smoothing method to use. The default is
@@ -223,16 +224,16 @@ The default is 1, which corresponds to no transparancy.}
 
 \item{yt.line.size}{the thickness of the (smoothing) line in the \code{yt} plot.}
 
-\item{bottom.text.size}{the size of the bottom heatmap label text. The
+\item{bottom.label.text.size}{the size of the bottom heatmap label text. The
 default is 5.}
 
-\item{left.text.size}{the size of the left heatmap label text. The
+\item{left.label.text.size}{the size of the left heatmap label text. The
 default is 5.}
 
-\item{bottom.text.angle}{number of degrees to rotate the text on the bottom
+\item{bottom.label.text.angle}{number of degrees to rotate the text on the bottom
 cluster/variable labels. The default is 0.}
 
-\item{left.text.angle}{number of degrees to rotate the text on the left
+\item{left.label.text.angle}{number of degrees to rotate the text on the left
 cluster/variable labels. The default is 90.}
 
 \item{bottom.label.size}{a number specifying the size of the bottom

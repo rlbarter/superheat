@@ -7,9 +7,9 @@
 #' @param label.pal a vector specifying the cluster/variable label color palette.
 #' @param label.text.col a character or character vector specifying the
 #'          cluster/variable label text color.
-#' @param bottom.text.size the size of the bottom heatmap label text. The
+#' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
-#' @param left.text.size the size of the left heatmap label text. The
+#' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
 #' @param location will these labels be on the bottom ("bottom") or on the left
 #'          ("left)?
@@ -24,8 +24,8 @@ generate_cluster_label <- function(membership,
                                    location = c("bottom", "left"),
                                    label.pal = NULL,
                                    label.text.col = NULL,
-                                   bottom.text.size = 5,
-                                   left.text.size = 5,
+                                   bottom.label.text.size = 5,
+                                   left.label.text.size = 5,
                                    text.angle = NULL) {
 
 
@@ -126,7 +126,7 @@ generate_cluster_label <- function(membership,
                                       label = cluster.names),
                          hjust = "centre",
                          vjust = "centre",
-                         size = left.text.size,
+                         size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
       ggplot2::scale_y_continuous(expand = c(0,0)) +
@@ -155,7 +155,7 @@ generate_cluster_label <- function(membership,
                                       label = cluster.names),
                          hjust = "centre",
                          vjust = "centre",
-                         size = bottom.text.size,
+                         size = bottom.label.text.size,
                          col = label.text.col,
                          angle = text.angle) +
       ggplot2::scale_x_continuous(expand = c(0, 0)) +
@@ -184,9 +184,9 @@ generate_cluster_label <- function(membership,
 #' @param label.pal a vector specifying the cluster/variable label color palette.
 #' @param label.text.col a character or character vector specifying the
 #'          cluster/variable label text color.
-#' @param bottom.text.size the size of the bottom heatmap label text. The
+#' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
-#' @param left.text.size the size of the left heatmap label text. The
+#' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
 #' @param location will these labels be on the bottom ("bottom") or on the left
 #'          ("left)?
@@ -200,8 +200,8 @@ generate_var_label <- function(names,
                                location = c("bottom", "left"),
                                label.pal = NULL,
                                label.text.col = NULL,
-                               bottom.text.size = 5,
-                               left.text.size = 5,
+                               bottom.label.text.size = 5,
+                               left.label.text.size = 5,
                                text.angle = NULL) {
 
 
@@ -288,7 +288,7 @@ generate_var_label <- function(names,
       ggplot2::geom_text(ggplot2::aes(x = 0.5, y = breaks + increment/2, label = variable),
                          hjust = "centre",
                          vjust = "centre",
-                         size = left.text.size,
+                         size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
       ggplot2::scale_y_continuous(expand = c(0,0)) +
@@ -315,7 +315,7 @@ generate_var_label <- function(names,
                                       label = variable),
                          hjust = "centre",
                          vjust = "centre",
-                         size = bottom.text.size,
+                         size = bottom.label.text.size,
                          col = label.text.col,
                          angle = text.angle) +
       ggplot2::scale_x_continuous(expand = c(0, 0)) +

@@ -55,12 +55,12 @@
 #'          columns of X.
 
 
-#' @param left.heat.label the type of label provided to the left of the heatmap.
+#' @param left.label the type of label provided to the left of the heatmap.
 #'          The default is "cluster" (which provides the cluster names) if
 #'          clustering was performed on the rowss. Otherwise, the default is
 #'          "variable" (which provides the variable names). The final option
 #'          ("none") removes the label all together.
-#' @param bottom.heat.label the type of label provided to the left of the heatmap.
+#' @param bottom.label the type of label provided to the left of the heatmap.
 #'          The default is "cluster" (which provides the cluster names) if
 #'          clustering was performed on the columns. Otherwise, the default is
 #'          "variable" (which provides the variable names). The final option
@@ -106,14 +106,14 @@
 #'
 #' @param legend logical. If set to \code{FALSE}, then no legend is given.
 
-#' @param cluster.hline a logical specifying whether horizontal lines are
+#' @param grid.hline a logical specifying whether horizontal lines are
 #'          plotted around the row clusters in the heatmap.
-#' @param cluster.vline a logical specifying whether vertical lines are
+#' @param grid.vline a logical specifying whether vertical lines are
 #'          plotted around the column clusters in the heatmap.
-#' @param cluster.hline.size the thickness of the cluster lines. The default is 0.5.
-#' @param cluster.vline.size the thickness of the cluster lines. The default is 0.5.
-#' @param cluster.hline.col the colour of the cluster lines.
-#' @param cluster.vline.col the colour of the cluster lines.
+#' @param grid.hline.size the thickness of the cluster lines. The default is 0.5.
+#' @param grid.vline.size the thickness of the cluster lines. The default is 0.5.
+#' @param grid.hline.col the colour of the cluster lines.
+#' @param grid.vline.col the colour of the cluster lines.
 #'
 #' @param smoothing.method if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 #'          this argument specifies the smoothing method to use. The default is
@@ -167,13 +167,13 @@
 #' @param yr.point.alpha the transparancy of the points in the \code{yr} scatterplot.
 #'          The default is 1, which corresponds to no transparancy.
 #'
-#' @param bottom.text.size the size of the bottom heatmap label text. The
+#' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
-#' @param left.text.size the size of the left heatmap label text. The
+#' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
-#' @param bottom.text.angle number of degrees to rotate the text on the bottom
+#' @param bottom.label.text.angle number of degrees to rotate the text on the bottom
 #'          cluster/variable labels. The default is 0.
-#' @param left.text.angle number of degrees to rotate the text on the left
+#' @param left.label.text.angle number of degrees to rotate the text on the left
 #'          cluster/variable labels. The default is 90.
 #' @param bottom.label.size a number specifying the size of the bottom
 #'          cluster/variable label panel.
@@ -240,8 +240,8 @@ superheat <- function(X,
                       smooth.heat = FALSE,
                       scale = FALSE,
 
-                      left.heat.label = NULL,
-                      bottom.heat.label = NULL,
+                      left.label = NULL,
+                      bottom.label = NULL,
 
                       heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
                       heat.pal = NULL,
@@ -256,12 +256,12 @@ superheat <- function(X,
                       legend = TRUE,
                       legend.size = 2,
 
-                      cluster.hline = TRUE,
-                      cluster.vline = TRUE,
-                      cluster.hline.size = 0.5,
-                      cluster.vline.size = 0.5,
-                      cluster.hline.col = "black",
-                      cluster.vline.col = "black",
+                      grid.hline = TRUE,
+                      grid.vline = TRUE,
+                      grid.hline.size = 0.5,
+                      grid.vline.size = 0.5,
+                      grid.hline.col = "black",
+                      grid.vline.col = "black",
 
                       smoothing.method = c("loess","lm"),
                       smooth.se = TRUE,
@@ -293,10 +293,10 @@ superheat <- function(X,
                       yr.line.size = NULL,
                       yt.line.size = NULL,
 
-                      bottom.text.size = 5,
-                      left.text.size = 5,
-                      bottom.text.angle = NULL,
-                      left.text.angle = NULL,
+                      bottom.label.text.size = 5,
+                      left.label.text.size = 5,
+                      bottom.label.text.angle = NULL,
+                      left.label.text.angle = NULL,
                       bottom.label.size = 0.1,
                       left.label.size = 0.1,
                       left.label.pal = NULL,
@@ -367,48 +367,48 @@ superheat <- function(X,
 
 
 
-  if (is.null(left.heat.label) && !cluster.rows) {
-    left.heat.label <- "variable"
-  } else if (is.null(left.heat.label) && cluster.rows) {
-    left.heat.label <- "cluster"
+  if (is.null(left.label) && !cluster.rows) {
+    left.label <- "variable"
+  } else if (is.null(left.label) && cluster.rows) {
+    left.label <- "cluster"
   }
 
 
 
-  if (is.null(bottom.heat.label) && cluster.cols) {
-    bottom.heat.label <- "cluster"
-  } else if (is.null(bottom.heat.label) && !cluster.cols) {
-    bottom.heat.label <- "variable"
+  if (is.null(bottom.label) && cluster.cols) {
+    bottom.label <- "cluster"
+  } else if (is.null(bottom.label) && !cluster.cols) {
+    bottom.label <- "variable"
   }
 
   # remove variable labels if more than 50 rows
-  if (left.heat.label == "variable") {
+  if (left.label == "variable") {
     if (nrow(X) > 50) {
-      # warning('Cannot set "left.heat.label" to "variable" when nrow(X) exceeds 50')
-      left.heat.label <- "none"
+      # warning('Cannot set "left.label" to "variable" when nrow(X) exceeds 50')
+      left.label <- "none"
     }
   }
 
-  if (bottom.heat.label == "variable") {
+  if (bottom.label == "variable") {
     if (ncol(X) > 50) {
-      # warning('Cannot set "bottom.heat.label" to "variable" when ncol(X) exceeds 50')
-      bottom.heat.label <- "none"
+      # warning('Cannot set "bottom.label" to "variable" when ncol(X) exceeds 50')
+      bottom.label <- "none"
     }
   }
 
 
   # remove the cluster boxes if we have more than 100 cols/rows
-  if (!cluster.cols & ((bottom.heat.label == "variable") | (bottom.heat.label == "none"))) {
+  if (!cluster.cols & ((bottom.label == "variable") | (bottom.label == "none"))) {
     if (ncol(X) > 100) {
-    #  warning('"cluster.vline" set to FALSE when ncol(X) exceeds 100 and when "bottom.heat.label" is set to either "variable" or "none"')
-      cluster.vline <- FALSE
+    #  warning('"grid.vline" set to FALSE when ncol(X) exceeds 100 and when "bottom.label" is set to either "variable" or "none"')
+      grid.vline <- FALSE
     }
   }
 
-  if (!cluster.rows & ((left.heat.label == "variable") | (left.heat.label == "none"))) {
+  if (!cluster.rows & ((left.label == "variable") | (left.label == "none"))) {
     if (nrow(X) > 100) {
-    #  warning('"cluster.hline" set to FALSE when nrow(X) exceeds 100 and when "left.heat.label" is set to either "variable" or "none"')
-      cluster.hline <- FALSE
+    #  warning('"grid.hline" set to FALSE when nrow(X) exceeds 100 and when "left.label" is set to either "variable" or "none"')
+      grid.hline <- FALSE
     }
   }
 
@@ -506,17 +506,17 @@ superheat <- function(X,
 
 
 
-  if (cluster.hline) {
-    if (left.heat.label == "variable") {
+  if (grid.hline) {
+    if (left.label == "variable") {
       membership.r <- 1:nrow(X)
-    } else if (left.heat.label == "cluster") {
+    } else if (left.label == "cluster") {
       membership.r <- membership.rows
     }
   }
-  if (cluster.vline) {
-    if (bottom.heat.label == "variable") {
+  if (grid.vline) {
+    if (bottom.label == "variable") {
       membership.c <- 1:ncol(X)
-    } else if (bottom.heat.label == "cluster") {
+    } else if (bottom.label == "cluster") {
       membership.c <- membership.cols
     }
   }
@@ -607,25 +607,25 @@ superheat <- function(X,
 
 
 
-  if (bottom.heat.label == "variable") {
+  if (bottom.label == "variable") {
     names <- colnames(X)
     location <- "bottom"
     label.pal <- bottom.label.pal
     label.text.col <- bottom.label.text.col
-    text.angle <- bottom.text.angle
+    text.angle <- bottom.label.text.angle
 
     var.arg.list <- c(as.list(environment()))
     var.arg.list <- var.arg.list[names(formals(generate_var_label))]
     var.arg.list <- var.arg.list[!is.na(names(var.arg.list))]
 
     gg.bottom <- do.call(generate_var_label, var.arg.list)
-  } else if (bottom.heat.label == "cluster") {
+  } else if (bottom.label == "cluster") {
 
     location <- "bottom"
     membership <- membership.cols
     label.pal = bottom.label.pal
     label.text.col = bottom.label.text.col
-    text.angle <- bottom.text.angle
+    text.angle <- bottom.label.text.angle
 
     clust.lab.arg.list <- c(as.list(environment()))
     clust.lab.arg.list <- clust.lab.arg.list[names(formals(generate_cluster_label))]
@@ -640,25 +640,25 @@ superheat <- function(X,
 
 
 
-  if (left.heat.label == "variable") {
+  if (left.label == "variable") {
     names <- rownames(X)
     location <- "left"
     label.pal = left.label.pal
     label.text.col = left.label.text.col
-    text.angle <- left.text.angle
+    text.angle <- left.label.text.angle
 
     var.arg.list <- c(as.list(environment()))
     var.arg.list <- var.arg.list[names(formals(generate_var_label))]
     var.arg.list <- var.arg.list[!is.na(names(var.arg.list))]
 
     gg.left <- do.call(generate_var_label, var.arg.list)
-  } else if (left.heat.label == "cluster") {
+  } else if (left.label == "cluster") {
 
     location <- "left"
     membership <- membership.rows
     label.pal = left.label.pal
     label.text.col = left.label.text.col
-    text.angle <- left.text.angle
+    text.angle <- left.label.text.angle
 
     clust.lab.arg.list <- c(as.list(environment()))
     clust.lab.arg.list <- clust.lab.arg.list[names(formals(generate_cluster_label))]
