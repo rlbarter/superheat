@@ -191,7 +191,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 Again we note that, by default, if no membership vectors are supplied, the default is to cluster the rows but not the columns. As a result, the number of row clusters must be supplied (above we have `n.clusters.rows = 3`), otherwise an error will be produced. If you wish to cluster the columns also, you could specify a number of column clusters using the `n.cluster.col` argument.
 
 
-If you wanted to keep the variable names as the labels, you could simply specify `bottom.heat.label = "variable"`.
+If you wanted to keep the variable names as the labels, you could simply specify `bottom.label = "variable"`.
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
 set.seed(134)
@@ -200,7 +200,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr.axis.name = "Petal.Length",
             n.clusters.rows = 3,
             n.clusters.col = 2,
-            bottom.heat.label = "variable")
+            bottom.label = "variable")
 ```
 
 
@@ -324,7 +324,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"], 
             yr.axis.name = "Petal.Length",
             membership.rows = iris[,"Species"],
-            left.heat.label = "none")
+            left.label = "none")
 ```
 
 * Removing the bottom cluster/variable labels
@@ -334,7 +334,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"], 
             yr.axis.name = "Petal.Length",
             membership.rows = iris[,"Species"],
-            bottom.heat.label = "none")
+            bottom.label = "none")
 ```
 
 
@@ -454,7 +454,7 @@ superheat(X = scaled_iris,
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            heat.pal = brewer.pal(7, "RdBu"))
+            heat.pal = brewer.pal(8, "RdBu"))
 ```
 
 
@@ -468,7 +468,7 @@ superheat(X = scaled_iris,
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            heat.pal = brewer.pal(7, "RdBu"),
+            heat.pal = brewer.pal(8, "RdBu"),
             heat.pal.values = c(0, 0.2, 0.25, 0.3, 0.7, 0.8, 1))
 ```
 
@@ -525,7 +525,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
             grid.hline.col = "white",
-          grid.vline.col = "red")
+            grid.vline.col = "red")
 ```
 
 
@@ -574,9 +574,9 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
             bottom.label.size = 0.5,
-            bottom.text.angle = 90,
+            bottom.label.text.angle = 90,
             left.label.size = 0.4,
-            left.text.angle = 0)
+            left.label.text.angle = 0)
 ```
 
 
@@ -589,8 +589,8 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            left.text.size = 7,
-            bottom.text.size = 2)
+            left.label.text.size = 7,
+            bottom.label.text.size = 2)
 ```
 
 
