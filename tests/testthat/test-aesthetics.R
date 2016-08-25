@@ -59,6 +59,3 @@ test_that("all additional plot options work", {
                         membership.cols = c(rep(1, 25), rep(2, 25))),
               not(throws_error()))
   })
-
-
-

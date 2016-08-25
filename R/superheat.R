@@ -239,7 +239,7 @@ superheat <- function(X,
                       n.clusters.cols = NULL,
                       clustering.method = c("kmeans", "hierarchical"),
 
-                      order.cols = NULL, # how to order within clusters (must be an integer vector e..g c(1,3,2) means the ordering is the first, third then second observation
+                      order.cols = NULL,
                       order.rows = NULL,
 
                       smooth.heat = FALSE,
@@ -248,7 +248,8 @@ superheat <- function(X,
                       left.label = NULL,
                       bottom.label = NULL,
 
-                      heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
+                      heat.col.scheme = c("red", "purple", "blue",
+                                          "grey", "green"),
                       heat.pal = NULL,
                       heat.pal.values = NULL,
 
@@ -256,10 +257,10 @@ superheat <- function(X,
                       X.text.col = "black",
                       X.text.angle = 0,
 
-                      yt.plot.type = c("scatter","bar","boxplot",
-                                       "scattersmooth","smooth",
+                      yt.plot.type = c("scatter", "bar", "boxplot",
+                                       "scattersmooth", "smooth",
                                        "scatterline", "line"),
-                      yr.plot.type = c("scatter","bar","boxplot",
+                      yr.plot.type = c("scatter", "bar", "boxplot",
                                        "scattersmooth","smooth",
                                        "scatterline", "line"),
 
@@ -275,7 +276,7 @@ superheat <- function(X,
                       grid.hline.col = "black",
                       grid.vline.col = "black",
 
-                      smoothing.method = c("loess","lm"),
+                      smoothing.method = c("loess", "lm"),
                       smooth.se = TRUE,
 
                       yt.axis = T,
@@ -368,13 +369,13 @@ superheat <- function(X,
       (!is.null(n.clusters.cols) && n.clusters.cols > 0)) {
     cluster.cols <- TRUE
   } else {
-    cluster.cols = FALSE
+    cluster.cols <- FALSE
   }
   if (!is.null(membership.rows) |
       (!is.null(n.clusters.rows) && n.clusters.rows > 0)) {
     cluster.rows <- TRUE
   } else {
-    cluster.rows = FALSE
+    cluster.rows <- FALSE
   }
 
   # if there are no row labels provided and cluster.rows is FALSE,
@@ -475,7 +476,7 @@ superheat <- function(X,
                                 order.rows = order.rows)
     order.df.rows <- order.df.rows %>%
       dplyr::arrange(membership.rows) %>%
-      ungroup
+      dplyr::ungroup()
   } else {
     # if there is no clustering, just put all rows in the same cluster
     order.df.rows <- data.frame(membership.rows = 1,
@@ -487,7 +488,7 @@ superheat <- function(X,
                                 order.cols = order.cols)
     order.df.cols <- order.df.cols %>%
       dplyr::arrange(membership.cols) %>%
-      ungroup
+      dplyr::ungroup()
   } else {
     # if there is no clustering, just put all columns in the same cluster
     order.df.cols <- data.frame(membership.cols = 1, order.cols = order.cols)

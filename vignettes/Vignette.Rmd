@@ -137,12 +137,12 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap ma
           X.text = X.text,
           X.text.size = X.text.size,
           X.text.angle = 30,
-            yr = iris[,"Petal.Length"], #plot Petal.Length to the right
-            yr.axis.name = "Petal.Length",
-            membership.rows = iris[,"Species"], # cluster the rows by species
-            yt = iris.coef[-1], # plot the model coefficients above
-            yt.plot.type = "bar", # make the plot above a barplot
-            yt.axis.name = "coefficient")
+          yr = iris[,"Petal.Length"], #plot Petal.Length to the right
+          yr.axis.name = "Petal.Length",
+          membership.rows = iris[,"Species"], # cluster the rows by species
+          yt = iris.coef[-1], # plot the model coefficients above
+          yt.plot.type = "bar", # make the plot above a barplot
+          yt.axis.name = "coefficient")
 ```
 
 
@@ -557,10 +557,10 @@ There are a number of options to change the text size, point size and legend siz
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
-            yr = iris[,"Petal.Length"],
-            membership.rows = iris[,"Species"],
-            yr.axis.name = "Petal.Length",
-            legend.width = 2,
+          yr = iris[,"Petal.Length"],
+          membership.rows = iris[,"Species"],
+          yr.axis.name = "Petal.Length",
+          legend.width = 2,
           legend.height = 0.2)
 ```
 

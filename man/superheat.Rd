@@ -14,8 +14,8 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   X.text.col = "black", X.text.angle = 0, yt.plot.type = c("scatter",
   "bar", "boxplot", "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), legend = TRUE, legend.height = 0.2,
-  legend.width = 2, legend.text.size = 12, grid.hline = TRUE,
+  "scatterline", "line"), legend = TRUE, legend.height = 0.1,
+  legend.width = 1.5, legend.text.size = 12, grid.hline = TRUE,
   grid.vline = TRUE, grid.hline.size = 0.5, grid.vline.size = 0.5,
   grid.hline.col = "black", grid.vline.col = "black",
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
@@ -135,10 +135,10 @@ entry in \code{X.text}.}
 \item{legend}{logical. If set to \code{FALSE}, then no legend is provided}
 
 \item{legend.height}{a number specifying the height of the legend. The default
-is 0.2.}
+is 0.1.}
 
 \item{legend.width}{a number specifying the width of the legend. The default
-is 2.}
+is 1.5.}
 
 \item{legend.text.size}{a number specifying the size of the text on the
 legend axis. The default is 12.}
