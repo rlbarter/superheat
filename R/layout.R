@@ -98,9 +98,15 @@ generate_layout <- function(gg.heat,
   # add row title position
   if (!is.null(gg.row.title)) {
     # if a row title is provided, add a column on the left
-    # note that we have not yet added a legend, we have only
-    # added the bottom labels and axis positions for the right plot
-    layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null"), pos = 0)
+    # when either of the two conditions occur:
+    #   - there is a top plot but there are no top axis
+    #   - there are left labels and no top plot
+    #   - there are left labels that extend beyond the top plot axis
+    if (!(!is.null(gg.top) && yt.axis) |
+        is.null(gg.top) && !is.null(gg.left) |
+        !is.null(gg.top) && yt.axis && !is.null(gg.left) && left.label.size >= 0.2) {
+      layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null"), pos = 0)
+    }
   }
 
   # add column title position
@@ -121,8 +127,18 @@ generate_layout <- function(gg.heat,
 
   # location for legend
   if (!is.null(gg.legend)) {
+    # if there is are no right-plot axes or no column name, then add a blank row
+    if ((is.null(gg.right) | (!is.null(gg.right) && yr.axis == F)) &&
+        is.null(gg.column.title)) {
+      layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
+    }
+
     # the legend is always in the very bottom row
-    layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
+    # the only time we do not need to add a row for it is when there are no
+    # bottom labels and there is a right plot and axis
+    if (!(is.null(gg.bottom) && !is.null(gg.right) && yr.axis)) {
+      layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
+    }
   }
 
   # add title
@@ -285,8 +301,16 @@ generate_grobs <- function(layout,
     if (!is.null(gg.title)) {
       t <- t + 1
     }
-    # if there is a row title, move the left labels one column to the right
-    if (!is.null(gg.row.title)) {
+    # if there is a row title and a col has been added for it
+    # (this only happens when any of the following conditions occur:
+    #   - there is a top plot but there are no top axis
+    #   - there are left labels and no top plot
+    #   - there are left labels that extend beyond the top plot axis
+    # move the left labels one column to the right
+    if (!is.null(gg.row.title) &&
+        (!(!is.null(gg.top) && yt.axis) |
+         is.null(gg.top) && !is.null(gg.left) |
+         !is.null(gg.top) && yt.axis && !is.null(gg.left) && left.label.size >= 0.2)) {
       l <- l + 1
     }
     # if the width of the left labels are larger than 0.2
@@ -294,7 +318,7 @@ generate_grobs <- function(layout,
     # ensure that the left labels fill the entire space by
     # extending the right-side of the grob
     r <- l
-    if (left.label.size > 0.2 && !is.null(gg.top) && yt.axis) {
+    if (left.label.size >= 0.2 && !is.null(gg.top) && yt.axis) {
       r <- r + 2 # add 1 for the top plot axis itself and 1 for the axis title
     }
 
@@ -385,18 +409,12 @@ generate_grobs <- function(layout,
       t <- t + 1
     }
     # if there is a top plot with axis but no row labels,
-    # move the row title two column to the right
-    # (one for the axis and one for the axis label)
+    # move the row title one columns to the right
     if (!is.null(gg.top) && yt.axis && is.null(gg.left)) {
-      l <- l + 2
-    }
-    # if there is a top plot with axis but the row labels are narrower
-    # than the axis, move the row title two column to the right
-    # (one for the axis and one for the axis label)
-    if (!is.null(gg.top) && yt.axis &&
-        !is.null(gg.left) && left.label.size <= 0.2) {
       l <- l + 1
     }
+
+
 
     # place the row title grob in the specified position
     layout <- gtable::gtable_add_grob(layout,
