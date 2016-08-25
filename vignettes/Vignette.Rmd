@@ -2,13 +2,11 @@
 title: '`superheat`: An R package for generating supervised heatmaps'
 author: "Rebecca Barter"
 output:
-  html_document:
-    toc: yes
-  pdf_document:
-    toc: yes
+  rmarkdown::html_vignette
 header-includes: \usepackage{graphicx}
 vignette: |
-  %\VignetteIndexEntry{Using the superheat package for visually assessing  data and model fitting} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Using the superheat package for generating heatmaps} %\VignetteEngine{knitr::rmarkdown} 
+  \usepackage[utf8]{inputenc}
 ---
 
 
@@ -125,7 +123,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap ma
 ```
 
 
-* Change the size of the text
+* Change the size and angle of the text
 
 ```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
 X.text <- matrix(c("Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Petal", "Petal", "Petal"), 
@@ -138,6 +136,7 @@ X.text.size <- matrix(c(5, 5, 10, 5, 5, 15, 5, 5, 5), ncol = 3, byrow = T)
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap matrix
           X.text = X.text,
           X.text.size = X.text.size,
+          X.text.angle = 30,
             yr = iris[,"Petal.Length"], #plot Petal.Length to the right
             yr.axis.name = "Petal.Length",
             membership.rows = iris[,"Species"], # cluster the rows by species
@@ -561,7 +560,8 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            legend.size = 4)
+            legend.width = 2,
+          legend.height = 0.2)
 ```
 
 
@@ -574,7 +574,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
             bottom.label.size = 0.5,
-            bottom.label.text.angle = 90,
+            bottom.label.text.angle = 45,
             left.label.size = 0.4,
             left.label.text.angle = 0)
 ```
@@ -668,7 +668,7 @@ dev.off()
 
 ## The end
 
-Thanks for using the package! I hope you find it helpful in your data exploration adventures. The development page can be found at <https://github.com/rlbarter/superheat>. For pull requests and suggestions please follow the standard protocol. For pressing questions or comments feel free to email me at rebeccabarter@berkeley.edu.
+Thanks for using the package! I hope you find it helpful in your data exploration adventures. The github development page can be found at <https://github.com/rlbarter/superheat>. For pull requests and suggestions please follow the standard protocol. For pressing questions or comments feel free to email me at rebeccabarter@berkeley.edu.
 
 
 

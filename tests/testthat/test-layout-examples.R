@@ -168,9 +168,74 @@ test_that("Adding column name with top plot and no axes and big left labels", {
 })
 
 
+
 test_that("Adding column name with top plot and axes and big bottom labels", {
   superheat(X,
             column.title = "colname",
             yt = 1:3,
             bottom.label.size = 0.3)
 })
+
+
+
+###
+
+
+test_that("Adding row name with top plot", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3)
+})
+
+
+test_that("Adding row name with top plot and no axes", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3,
+            yt.axis = F)
+})
+
+
+test_that("Adding row name with top plot and no axes and no bottom labels", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3,
+            yt.axis = F,
+            bottom.label = "none")
+})
+
+test_that("Adding row name with top plot and no axes and no left labels", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3,
+            yt.axis = F,
+            left.label = "none")
+})
+
+
+
+test_that("Adding row name with top plot and axes and no left labels", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3,
+            left.label = "none")
+})
+
+
+
+test_that("Adding row name with top plot and no axes and big left labels", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3,
+            left.label.size = 0.3)
+
+})
+
+
+test_that("Adding row name with top plot and axes and big bottom labels", {
+  superheat(X,
+            row.title = "rowname",
+            yt = 1:3,
+            bottom.label.size = 0.3)
+})
+

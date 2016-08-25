@@ -11,29 +11,29 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   scale = FALSE, left.label = NULL, bottom.label = NULL,
   heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, X.text.size = 5,
-  X.text.col = "black", yt.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"),
+  X.text.col = "black", X.text.angle = 0, yt.plot.type = c("scatter",
+  "bar", "boxplot", "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), legend = TRUE, legend.size = 2,
-  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
-  grid.vline.size = 0.5, grid.hline.col = "black",
-  grid.vline.col = "black", smoothing.method = c("loess", "lm"),
-  smooth.se = TRUE, yt.axis = T, yr.axis = T, yt.num.ticks = 3,
-  yr.num.ticks = 3, yt.plot.size = 0.3, yr.plot.size = 0.3,
-  yt.axis.name = NULL, yr.axis.name = NULL, yr.axis.size = 10,
-  yt.axis.size = 10, yr.axis.name.size = 10, yt.axis.name.size = 10,
-  yr.axis.name.angle = NULL, yt.axis.name.angle = NULL, yt.obs.col = NULL,
-  yr.obs.col = NULL, yt.pal = NULL, yr.pal = NULL, yt.bar.col = NULL,
-  yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
-  yr.point.size = 2, yr.point.alpha = 1, yr.line.size = NULL,
-  yt.line.size = NULL, bottom.label.text.size = 5,
-  left.label.text.size = 5, bottom.label.text.angle = NULL,
-  left.label.text.angle = NULL, bottom.label.size = 0.1,
-  left.label.size = 0.1, left.label.pal = NULL, bottom.label.pal = NULL,
-  left.label.text.col = NULL, bottom.label.text.col = NULL,
-  column.title = NULL, row.title = NULL, column.title.size = 5,
-  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
-  print.plot = TRUE)
+  "scatterline", "line"), legend = TRUE, legend.height = 0.2,
+  legend.width = 2, legend.text.size = 12, grid.hline = TRUE,
+  grid.vline = TRUE, grid.hline.size = 0.5, grid.vline.size = 0.5,
+  grid.hline.col = "black", grid.vline.col = "black",
+  smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
+  yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
+  yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
+  yr.axis.size = 10, yt.axis.size = 10, yr.axis.name.size = 10,
+  yt.axis.name.size = 10, yr.axis.name.angle = NULL,
+  yt.axis.name.angle = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
+  yt.pal = NULL, yr.pal = NULL, yt.bar.col = NULL, yr.bar.col = NULL,
+  yt.point.size = 2, yt.point.alpha = 1, yr.point.size = 2,
+  yr.point.alpha = 1, yr.line.size = NULL, yt.line.size = NULL,
+  bottom.label.text.size = 5, left.label.text.size = 5,
+  bottom.label.text.angle = NULL, left.label.text.angle = NULL,
+  bottom.label.size = 0.1, left.label.size = 0.1, left.label.pal = NULL,
+  bottom.label.pal = NULL, left.label.text.col = NULL,
+  bottom.label.text.col = NULL, column.title = NULL, row.title = NULL,
+  column.title.size = 5, row.title.size = 5, padding = 1, title = NULL,
+  title.size = 5, print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix or data frame whose values are to be plotted in the heatmap.}
@@ -41,8 +41,7 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
 \item{X.text}{a matrix containing text entries to be plotted on
 top of the heatmap cells. The number of rows must match either the
 number of columns of \code{X} or the number of column clusters of
-\code{X} (depending on whether the columns are clustered). Similarly
-for the rows.}
+\code{X}. Similarly for the rows.}
 
 \item{yt}{a vector of values to plot above the heatmap. The length of
 \code{yt} must be equal to the number of columns of \code{X}.}
@@ -50,12 +49,11 @@ for the rows.}
 \item{yr}{a vector of values to plot to the right of the heatmap.
 The length of \code{yr} must be equal to the number of rows of \code{X}.}
 
-\item{membership.rows}{a vector specifying the cluster membership of the rows/observations in X. If not specified, the default settings
-are to perform hierarchical clustering on the rows.}
+\item{membership.rows}{a vector specifying the cluster membership
+of the rows in X.}
 
-\item{membership.cols}{an optional vector specifying the cluster membership
-of the columns/variables in X. If not specified, the default settings
-are to present the columns in the order they are provided in \code{X}.}
+\item{membership.cols}{a vector specifying the cluster membership
+of the columns in X.}
 
 \item{n.clusters.rows}{a number specifying the number of row clusters. The
 default is 0 (indicating no clustering of the rows). This argument
@@ -71,38 +69,38 @@ The default ("kmeans") is to use K-means clustering, the alternative
 option ("hierarchical") performs heirarchical clustering. Antoher
 (suggested) alternative is to provide a membership vector.}
 
-\item{order.cols}{a vector of specifying the ordering of the columns of
-\code{X}. If clustering is performed (or a membership vector is
-provided), then this vector specifies the order within the clusters.
-Note that this vector must be a rearranged \code{1:ncol(X)} vector.}
+\item{order.cols}{a vector of specifying the ordering of the
+columns of \code{X}. If the columns are clustered, then this
+vector specifies the order within the clusters. Note that
+this vector must be a rearranged \code{1:ncol(X)} vector.}
 
 \item{order.rows}{a vector of specifying the ordering of the rows of
-\code{X}. If clustering is performed (or a membership vector is
-provided), then this vector specifies the order within the clusters.
-Note that this vector must be a rearranged 1:nrow(X) vector.}
+\code{X}. If the rows are clustered, then this vector
+specifies the order within the clusters. Note that this
+vector must be a rearranged \code{1:nrow(X)} vector.}
 
 \item{smooth.heat}{a logical specifying whether or not to smooth the color
-of the heatmap within clusters.}
+of the heatmap within clusters (by taking the median value).}
 
 \item{scale}{a logical specifying whether or not to cener and scale the
 columns of X.}
 
 \item{left.label}{the type of label provided to the left of the heatmap.
 The default is "cluster" (which provides the cluster names) if
-clustering was performed on the rowss. Otherwise, the default is
-"variable" (which provides the variable names). The final option
-("none") removes the label all together.}
+clustering was performed on the rows. Otherwise, the default is
+"variable" (which provides the variable names). The final option,
+"none", removes the label all together.}
 
 \item{bottom.label}{the type of label provided to the left of the heatmap.
 The default is "cluster" (which provides the cluster names) if
 clustering was performed on the columns. Otherwise, the default is
-"variable" (which provides the variable names). The final option
-("none") removes the label all together.}
+"variable" (which provides the variable names). The final option,
+"none", removes the label all together.}
 
 \item{heat.col.scheme}{A character specifying the heatmap colour scheme.
 The default is "red", and other options include "purple", "blue",
 "grey" and "green". If you wish to supply your own colour scheme,
-you can use the \code{heat.pal} argument.}
+use the \code{heat.pal} argument.}
 
 \item{heat.pal}{a vector specifying a manual heatmap color palette. This
 corresponds to the \code{color} argumnet for the ggplot2
@@ -112,7 +110,7 @@ corresponds to the \code{color} argumnet for the ggplot2
 color palette. Each entry should be a number between 0 and 1. This
 corresponds to the \code{values} argumnet for the ggplot2
 \code{\link[ggplot2]{scale_color_gradientn}} function. The default
-values correspond to the corresponding quantiles.}
+values are the corresponding quantiles.}
 
 \item{X.text.size}{a single number or a matrix of numbers (whose dimension
 matches that of \code{X.text}) that specifies the size of each text
@@ -122,6 +120,10 @@ entry in \code{X.text}.}
 (whose dimension matches that of \code{X.text}) that specifies the
 colors of each text entry in \code{X.text}.}
 
+\item{X.text.angle}{a single number or a matrix of numbers (whose dimension
+matches that of \code{X.text}) that specifies the angle of each text
+entry in \code{X.text}.}
+
 \item{yt.plot.type}{a character specifying the \code{yt} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
 "smooth", "boxplot", "scatterline" and "line".}
@@ -130,31 +132,39 @@ colors of each text entry in \code{X.text}.}
 "scatter", and other options include "bar", "scattersmooth",
 "smooth", "boxplot", "scatterline" and "line".}
 
-\item{legend}{logical. If set to \code{FALSE}, then no legend is given.}
+\item{legend}{logical. If set to \code{FALSE}, then no legend is provided}
 
-\item{legend.size}{a number specifying the size of the legend. The default
+\item{legend.height}{a number specifying the height of the legend. The default
+is 0.2.}
+
+\item{legend.width}{a number specifying the width of the legend. The default
 is 2.}
 
-\item{grid.hline}{a logical specifying whether horizontal lines are
-plotted around the row clusters in the heatmap.}
+\item{legend.text.size}{a number specifying the size of the text on the
+legend axis. The default is 12.}
 
-\item{grid.vline}{a logical specifying whether vertical lines are
-plotted around the column clusters in the heatmap.}
+\item{grid.hline}{a logical specifying whether horizontal grid lines are
+plotted in the heatmap.}
 
-\item{grid.hline.size}{the thickness of the cluster lines. The default is 0.5.}
+\item{grid.vline}{a logical specifying whether vertical grid lines are
+plotted in the heatmap.}
 
-\item{grid.vline.size}{the thickness of the cluster lines. The default is 0.5.}
+\item{grid.hline.size}{the thickness of the horizontal grid lines.
+The default is 0.5.}
 
-\item{grid.hline.col}{the colour of the cluster lines.}
+\item{grid.vline.size}{the thickness of the vertical grid lines.
+The default is 0.5.}
 
-\item{grid.vline.col}{the colour of the cluster lines.}
+\item{grid.hline.col}{the colour of the horizontal grid lines.}
+
+\item{grid.vline.col}{the colour of the vertical grid lines.}
 
 \item{smoothing.method}{if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 this argument specifies the smoothing method to use. The default is
 \code{loess}. The alternative option is \code{lm}.}
 
 \item{smooth.se}{a logical specifying whether the smoothed \code{yt} and \code{yr}
-curves should have a standard errors around them?}
+curves have standard error curves.}
 
 \item{yt.axis}{a logical specifying the presence of an axis for the \code{yt}
 plot.}
@@ -172,9 +182,9 @@ not always work perfectly as it is coerced into looking pretty.}
 
 \item{yr.plot.size}{a number specifying the size of the \code{yr} plot.}
 
-\item{yt.axis.name}{a character specifying the \code{yt} axis label.}
+\item{yt.axis.name}{a character specifying the \code{yt} axis name}
 
-\item{yr.axis.name}{a character specifying the \code{yr} axis label.}
+\item{yr.axis.name}{a character specifying the \code{yr} axis name.}
 
 \item{yr.axis.size}{a number specifying the size of the numbers on
 the axis.}
@@ -283,17 +293,20 @@ The default is 1cm.}
 \code{membership.rows} the row cluster membership vector
 }
 \description{
-superheat is used to generate an exploratory plot that consists of a
-       (clustered) matrix X displayed as heatmap. Scatterplots, boxplots,
-       barplots and line plots can be plotted over the columns and rows
-       of the heatmap, adding an additional layer of information.
+Superheat is used to generate an exploratory plot that consists of a
+       (possibly clustered) matrix, X, displayed as heatmap.
+       Scatterplots, boxplots, barplots, line plots and boxplots can
+       be plotted adjacent to the columns and rows of the heatmap,
+       adding an additional layer of information.
 }
 \examples{
 # plot a heatmap of the numerical iris variables
 # cluster by species and plot Sepal.Length on the right
-superheat(X = iris[,-c(1, 5)],
-            yr = iris[,1],
-            yr.axis.name = "Sepal.Length",
-            membership.rows = iris$Species)
+# save the superheat object to access the membership vectors
+sh <- superheat(X = iris[,-c(1, 5)],
+                yr = iris[,1],
+                yr.axis.name = "Sepal.Length",
+                membership.rows = iris$Species)
+sh$membership.rows
 }
 

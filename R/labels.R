@@ -32,9 +32,9 @@ generate_cluster_label <- function(membership,
   location <- match.arg(location)
 
 
-  if ((location == "bottom") && is.null(text.angle))
+  if ( (location == "bottom") && is.null(text.angle) )
     text.angle <- 0
-  if ((location == "left") && is.null(text.angle))
+  if ( (location == "left") && is.null(text.angle) )
     text.angle <- 90
 
   # define themes
@@ -68,11 +68,13 @@ generate_cluster_label <- function(membership,
 
 
 
-  if (is.null(label.pal))
-    label.pal = rep(c("Grey 71","Grey 53"), length = n.cluster)
+  if (is.null(label.pal)) {
+    label.pal <- rep(c("Grey 71", "Grey 53"), length = n.cluster)
+  }
 
-  if (is.null(label.text.col))
+  if (is.null(label.text.col)) {
     label.text.col <- "black"
+  }
 
 
   label.text.col <- factor(label.text.col, levels = unique(label.text.col))
@@ -84,16 +86,16 @@ generate_cluster_label <- function(membership,
   label.pal <- droplevels(label.pal)
   names(label.pal) <- label.pal
 
-  # make the proportions of the label rectangles match the number of observations
+  # make the proportions of the label rectangles match the num of observations
   # in the heatmap clusters
   selected.clusters.df <- data.frame(cluster = cluster.names,
                                      col = label.pal,
                                      n = cluster.size)
   selected.clusters.df$id <- 1:nrow(selected.clusters.df)
   selected.clusters.df <- selected.clusters.df %>%
-    dplyr::mutate(increment = (n/sum(selected.clusters.df$n)) * n.cluster)
+    dplyr::mutate(increment = (n / sum(selected.clusters.df$n)) * n.cluster)
   breaks <- c(1, 1 + cumsum(selected.clusters.df$increment))
-  selected.clusters.df$breaks <- breaks[-(nrow(selected.clusters.df) + 1)]
+  selected.clusters.df$breaks <- breaks[ -(nrow(selected.clusters.df) + 1) ]
 
 
 
@@ -101,7 +103,7 @@ generate_cluster_label <- function(membership,
     selected.clusters.df <- selected.clusters.df %>%
       dplyr::mutate(cluster.names = cluster)
   } else {
-    selected.clusters.df$cluster.names = cluster.names
+    selected.clusters.df$cluster.names <- cluster.names
     }
 
   # define variables to fix visible binding check -- bit of a hack
@@ -122,15 +124,15 @@ generate_cluster_label <- function(membership,
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = as.character(label.pal)) +
       ggplot2::geom_text(ggplot2::aes(x = 0.5,
-                                      y = breaks + increment/2,
+                                      y = breaks + increment / 2,
                                       label = cluster.names),
                          hjust = "centre",
                          vjust = "centre",
                          size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
-      ggplot2::scale_y_continuous(expand = c(0,0)) +
-      ggplot2::scale_x_continuous(expand = c(0,0))
+      ggplot2::scale_y_continuous(expand = c(0, 0)) +
+      ggplot2::scale_x_continuous(expand = c(0, 0))
 
     return(gg.left)
   }
@@ -151,7 +153,7 @@ generate_cluster_label <- function(membership,
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = as.character(label.pal)) +
       ggplot2::geom_text(ggplot2::aes(y = 0.5,
-                                      x = breaks + increment/2,
+                                      x = breaks + increment / 2,
                                       label = cluster.names),
                          hjust = "centre",
                          vjust = "centre",
@@ -207,10 +209,12 @@ generate_var_label <- function(names,
 
   location <- match.arg(location)
 
-  if ((location == "bottom") && is.null(text.angle))
+  if ( (location == "bottom") && is.null(text.angle) ) {
     text.angle <- 0
-  if ((location == "left") && is.null(text.angle))
+  }
+  if ( (location == "left") && is.null(text.angle) ) {
     text.angle <- 90
+  }
 
   # define themes
   themes.arg.list <- c(as.list(environment()))
@@ -231,8 +235,9 @@ generate_var_label <- function(names,
   }
 
 
-  if (is.null(label.pal))
-    label.pal = rep(c("Grey 71","Grey 53"), length = length(names))
+  if (is.null(label.pal)) {
+    label.pal <- rep(c("Grey 71", "Grey 53"), length = length(names))
+  }
 
   if (is.null(label.text.col))
     label.text.col <- "black"
@@ -249,19 +254,19 @@ generate_var_label <- function(names,
   names(label.pal) <- label.pal
 
 
-  # make the proportions of the label rectangles match the number of observations
+  # make the proportions of the label rectangles match the num of observations
   # in the heatmap clusters
   variable <- names # fix for visible binding note
 
 
   variables.df <- data.frame(variable = names,
-                                     col = label.pal,
-                                     n = 1)
+                             col = label.pal,
+                             n = 1)
   variables.df$id <- 1:nrow(variables.df)
   variables.df <- variables.df %>%
-    dplyr::mutate(increment = (n/sum(variables.df$n)) * 1)
+    dplyr::mutate(increment = (n / sum(variables.df$n)) * 1)
   breaks <- c(1, 1 + cumsum(variables.df$increment))
-  variables.df$breaks <- breaks[-(nrow(variables.df) + 1)]
+  variables.df$breaks <- breaks[ -(nrow(variables.df) + 1) ]
 
 
 
@@ -270,7 +275,6 @@ generate_var_label <- function(names,
 
   # define variables to fix visible binding check -- bit of a hack
   n <- variables.df$n
-  cluster <- variables.df$cluster
   increment <- variables.df$increment
 
   if (location == "left") {
@@ -285,14 +289,16 @@ generate_var_label <- function(names,
       ggplot2::geom_rect() +
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = label.pal) +
-      ggplot2::geom_text(ggplot2::aes(x = 0.5, y = breaks + increment/2, label = variable),
+      ggplot2::geom_text(ggplot2::aes(x = 0.5,
+                                      y = breaks + increment / 2,
+                                      label = variable),
                          hjust = "centre",
                          vjust = "centre",
                          size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
-      ggplot2::scale_y_continuous(expand = c(0,0)) +
-      ggplot2::scale_x_continuous(expand = c(0,0))
+      ggplot2::scale_y_continuous(expand = c(0, 0)) +
+      ggplot2::scale_x_continuous(expand = c(0, 0))
 
     return(gg.left)
   }
@@ -311,7 +317,7 @@ generate_var_label <- function(names,
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = label.pal) +
       ggplot2::geom_text(ggplot2::aes(y = 0.5,
-                                      x = breaks + increment/2,
+                                      x = breaks + increment / 2,
                                       label = variable),
                          hjust = "centre",
                          vjust = "centre",
@@ -328,13 +334,6 @@ generate_var_label <- function(names,
 }
 
 
-
-
-
-
-
-
-
 generate_title <- function(title = NULL,
                            title.size = 5) {
   theme <- themes()
@@ -346,7 +345,8 @@ generate_title <- function(title = NULL,
   x <- df$x
   y <- df$y
   gg.title <- ggplot2::ggplot(df) +
-    ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = title), size = title.size) +
+    ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = title),
+                       size = title.size) +
     theme_clust_labels
 
 
@@ -356,15 +356,11 @@ generate_title <- function(title = NULL,
 
 
 
-
-
-
 generate_names <- function(name = NULL,
                            name.size = 5,
                            location = c("left", "bottom")) {
   theme <- themes()
   theme_clust_labels <- theme$theme_clust_labels
-
 
   df <- data.frame(x = 0, y = 0, name = name)
   # define variables to fix visible binding check -- bit of a hack
@@ -372,14 +368,15 @@ generate_names <- function(name = NULL,
   y <- df$y
   if (location == "bottom") {
     gg.name <- ggplot2::ggplot(df) +
-      ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = name), size = name.size)
+      ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = name),
+                         size = name.size)
   } else if (location == "left") {
     gg.name <- ggplot2::ggplot(df) +
-      ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = name), size = name.size, angle = 90)
+      ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = name),
+                         size = name.size, angle = 90)
   }
 
   gg.name <- gg.name + theme_clust_labels
-
 
   return(gg.name)
 

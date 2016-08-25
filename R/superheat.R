@@ -1,37 +1,36 @@
 
 #' Generate supervised heatmaps.
 #'
-#' superheat is used to generate an exploratory plot that consists of a
-#'        (clustered) matrix X displayed as heatmap. Scatterplots, boxplots,
-#'        barplots and line plots can be plotted over the columns and rows
-#'        of the heatmap, adding an additional layer of information.
+#' Superheat is used to generate an exploratory plot that consists of a
+#'        (possibly clustered) matrix, X, displayed as heatmap.
+#'        Scatterplots, boxplots, barplots, line plots and boxplots can
+#'        be plotted adjacent to the columns and rows of the heatmap,
+#'        adding an additional layer of information.
 #'
 #'
 #' @param X a matrix or data frame whose values are to be plotted in the heatmap.
 #' @param X.text a matrix containing text entries to be plotted on
 #'          top of the heatmap cells. The number of rows must match either the
 #'          number of columns of \code{X} or the number of column clusters of
-#'          \code{X} (depending on whether the columns are clustered). Similarly
-#'          for the rows.
+#'          \code{X}. Similarly for the rows.
 #' @param yt a vector of values to plot above the heatmap. The length of
 #'          \code{yt} must be equal to the number of columns of \code{X}.
 #' @param yr a vector of values to plot to the right of the heatmap.
 #'          The length of \code{yr} must be equal to the number of rows of \code{X}.
-#' @param membership.rows a vector specifying the cluster membership of the rows/observations in X. If not specified, the default settings
-#'          are to perform hierarchical clustering on the rows.
-#' @param membership.cols an optional vector specifying the cluster membership
-#'          of the columns/variables in X. If not specified, the default settings
-#'          are to present the columns in the order they are provided in \code{X}.
+#' @param membership.rows a vector specifying the cluster membership
+#'          of the rows in X.
+#' @param membership.cols a vector specifying the cluster membership
+#'          of the columns in X.
 
 
-#' @param order.cols a vector of specifying the ordering of the columns of
-#'          \code{X}. If clustering is performed (or a membership vector is
-#'          provided), then this vector specifies the order within the clusters.
-#'          Note that this vector must be a rearranged \code{1:ncol(X)} vector.
+#' @param order.cols a vector of specifying the ordering of the
+#'          columns of \code{X}. If the columns are clustered, then this
+#'          vector specifies the order within the clusters. Note that
+#'          this vector must be a rearranged \code{1:ncol(X)} vector.
 #' @param order.rows a vector of specifying the ordering of the rows of
-#'          \code{X}. If clustering is performed (or a membership vector is
-#'          provided), then this vector specifies the order within the clusters.
-#'          Note that this vector must be a rearranged 1:nrow(X) vector.
+#'          \code{X}. If the rows are clustered, then this vector
+#'          specifies the order within the clusters. Note that this
+#'          vector must be a rearranged \code{1:nrow(X)} vector.
 
 
 #' @param n.clusters.rows a number specifying the number of row clusters. The
@@ -50,28 +49,28 @@
 
 
 #' @param smooth.heat a logical specifying whether or not to smooth the color
-#'          of the heatmap within clusters.
+#'          of the heatmap within clusters (by taking the median value).
 #' @param scale a logical specifying whether or not to cener and scale the
 #'          columns of X.
 
 
 #' @param left.label the type of label provided to the left of the heatmap.
 #'          The default is "cluster" (which provides the cluster names) if
-#'          clustering was performed on the rowss. Otherwise, the default is
-#'          "variable" (which provides the variable names). The final option
-#'          ("none") removes the label all together.
+#'          clustering was performed on the rows. Otherwise, the default is
+#'          "variable" (which provides the variable names). The final option,
+#'          "none", removes the label all together.
 #' @param bottom.label the type of label provided to the left of the heatmap.
 #'          The default is "cluster" (which provides the cluster names) if
 #'          clustering was performed on the columns. Otherwise, the default is
-#'          "variable" (which provides the variable names). The final option
-#'          ("none") removes the label all together.
+#'          "variable" (which provides the variable names). The final option,
+#'          "none", removes the label all together.
 
 
 
 #' @param heat.col.scheme A character specifying the heatmap colour scheme.
 #'          The default is "red", and other options include "purple", "blue",
 #'          "grey" and "green". If you wish to supply your own colour scheme,
-#'          you can use the \code{heat.pal} argument.
+#'          use the \code{heat.pal} argument.
 #' @param heat.pal a vector specifying a manual heatmap color palette. This
 #'          corresponds to the \code{color} argumnet for the ggplot2
 #'          \code{\link[ggplot2]{scale_color_gradientn}} function.
@@ -79,23 +78,21 @@
 #'          color palette. Each entry should be a number between 0 and 1. This
 #'          corresponds to the \code{values} argumnet for the ggplot2
 #'          \code{\link[ggplot2]{scale_color_gradientn}} function. The default
-#'          values correspond to the corresponding quantiles.
+#'          values are the corresponding quantiles.
 
 
 #'
 #' @param X.text.size a single number or a matrix of numbers (whose dimension
 #'          matches that of \code{X.text}) that specifies the size of each text
 #'          entry in \code{X.text}.
+#' @param X.text.angle a single number or a matrix of numbers (whose dimension
+#'          matches that of \code{X.text}) that specifies the angle of each text
+#'          entry in \code{X.text}.
 #' @param X.text.col a single character string or a matrix of character strings
 #'          (whose dimension matches that of \code{X.text}) that specifies the
 #'          colors of each text entry in \code{X.text}.
 #'
 #'
-
-
-
-
-
 #'
 #' @param yt.plot.type a character specifying the \code{yt} plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
@@ -104,22 +101,24 @@
 #'          "scatter", and other options include "bar", "scattersmooth",
 #'          "smooth", "boxplot", "scatterline" and "line".
 #'
-#' @param legend logical. If set to \code{FALSE}, then no legend is given.
+#' @param legend logical. If set to \code{FALSE}, then no legend is provided
 
-#' @param grid.hline a logical specifying whether horizontal lines are
-#'          plotted around the row clusters in the heatmap.
-#' @param grid.vline a logical specifying whether vertical lines are
-#'          plotted around the column clusters in the heatmap.
-#' @param grid.hline.size the thickness of the cluster lines. The default is 0.5.
-#' @param grid.vline.size the thickness of the cluster lines. The default is 0.5.
-#' @param grid.hline.col the colour of the cluster lines.
-#' @param grid.vline.col the colour of the cluster lines.
+#' @param grid.hline a logical specifying whether horizontal grid lines are
+#'          plotted in the heatmap.
+#' @param grid.vline a logical specifying whether vertical grid lines are
+#'          plotted in the heatmap.
+#' @param grid.hline.size the thickness of the horizontal grid lines.
+#'          The default is 0.5.
+#' @param grid.vline.size the thickness of the vertical grid lines.
+#'          The default is 0.5.
+#' @param grid.hline.col the colour of the horizontal grid lines.
+#' @param grid.vline.col the colour of the vertical grid lines.
 #'
 #' @param smoothing.method if \code{plot.type = "scattersmooth"} or \code{"smooth"}
 #'          this argument specifies the smoothing method to use. The default is
 #'          \code{loess}. The alternative option is \code{lm}.
 #' @param smooth.se a logical specifying whether the smoothed \code{yt} and \code{yr}
-#'          curves should have a standard errors around them?
+#'          curves have standard error curves.
 
 
 
@@ -127,8 +126,8 @@
 #'          plot.
 #' @param yr.axis a logical specifying the presence of an axis for the \code{yr}
 #'          plot.
-#' @param yt.axis.name a character specifying the \code{yt} axis label.
-#' @param yr.axis.name a character specifying the \code{yr} axis label.
+#' @param yt.axis.name a character specifying the \code{yt} axis name
+#' @param yr.axis.name a character specifying the \code{yr} axis name.
 #' @param yr.axis.size a number specifying the size of the numbers on
 #'          the axis.
 #' @param yt.axis.size a number specifying the size of the numbers on
@@ -198,8 +197,12 @@
 #' @param row.title.size a number specifying the size of the row name. The
 #'          default is 5.
 
-#' @param legend.size a number specifying the size of the legend. The default
-#'        is 2.
+#' @param legend.height a number specifying the height of the legend. The default
+#'        is 0.1.
+#' @param legend.width a number specifying the width of the legend. The default
+#'        is 1.5.
+#' @param legend.text.size a number specifying the size of the text on the
+#'        legend axis. The default is 12.
 #' @param padding the amount (in cm) of white space (padding) around the plot.
 #'          The default is 1cm.
 #' @param title a character string specifying a main heading.
@@ -213,10 +216,12 @@
 #' @examples
 #' # plot a heatmap of the numerical iris variables
 #' # cluster by species and plot Sepal.Length on the right
-#' superheat(X = iris[,-c(1, 5)],
-#'             yr = iris[,1],
-#'             yr.axis.name = "Sepal.Length",
-#'             membership.rows = iris$Species)
+#' # save the superheat object to access the membership vectors
+#' sh <- superheat(X = iris[,-c(1, 5)],
+#'                 yr = iris[,1],
+#'                 yr.axis.name = "Sepal.Length",
+#'                 membership.rows = iris$Species)
+#' sh$membership.rows
 #' @importFrom magrittr "%>%"
 #' @export
 
@@ -249,12 +254,19 @@ superheat <- function(X,
 
                       X.text.size = 5,
                       X.text.col = "black",
+                      X.text.angle = 0,
 
-                      yt.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),
-                      yr.plot.type = c("scatter","bar","boxplot","scattersmooth","smooth", "scatterline", "line"),
+                      yt.plot.type = c("scatter","bar","boxplot",
+                                       "scattersmooth","smooth",
+                                       "scatterline", "line"),
+                      yr.plot.type = c("scatter","bar","boxplot",
+                                       "scattersmooth","smooth",
+                                       "scatterline", "line"),
 
                       legend = TRUE,
-                      legend.size = 2,
+                      legend.height = 0.1,
+                      legend.width = 1.5,
+                      legend.text.size = 12,
 
                       grid.hline = TRUE,
                       grid.vline = TRUE,
@@ -314,139 +326,133 @@ superheat <- function(X,
                       title.size = 5,
 
                       print.plot = TRUE) {
+  # The primary superheat function for plotting super heatmaps.
 
-
-
-
+  # match the arguments to those provided
   smoothing.method <- match.arg(smoothing.method)
   yt.plot.type <- match.arg(yt.plot.type)
   yr.plot.type <- match.arg(yr.plot.type)
+  heat.col.scheme <- match.arg(heat.col.scheme)
 
-  if (is.null(colnames(X))) colnames(X) <- 1:ncol(X)
-  if (is.null(rownames(X))) rownames(X) <- 1:nrow(X)
+  # if there are no column/row names, number them numerically
+  if (is.null(colnames(X))) {
+    colnames(X) <- 1:ncol(X)
+  }
+  if (is.null(rownames(X))) {
+    rownames(X) <- 1:nrow(X)
+  }
 
-
-
-
-
+  # should you standardize the matrix
+  # (each column will have mean 0 and variance 1)
   if (scale) {
     X <- scale(X)
   }
-  ##################### run error check on arguments
+  # run error check on arguments
   stop.arg.list <- c(as.list(environment()))
   stop.arg.list <- stop.arg.list[names(formals(stop_errors))]
   stop.arg.list <- stop.arg.list[!is.na(names(stop.arg.list))]
-
   do.call(stop_errors, stop.arg.list)
 
-
-  ##################### set variables ##########################
-  heat.col.scheme <- match.arg(heat.col.scheme)
-
+  # if there is no yt or yr axis name provided, set the name to the name of
+  # the object provided by the yr/yt argument
   if (is.null(yr.axis.name)) {
     yr.axis.name <- eval(substitute(internala(yr)))
   }
-
   if (is.null(yt.axis.name)) {
     yt.axis.name <- eval(substitute(internala(yt)))
   }
 
-
-  if (!is.null(membership.cols) | (!is.null(n.clusters.cols) && n.clusters.cols > 0)) {
+  # if there is a column (row) membership vector or a number of clusters to
+  # generate is provided, then set cluster.cols to TRUE
+  if (!is.null(membership.cols) |
+      (!is.null(n.clusters.cols) && n.clusters.cols > 0)) {
     cluster.cols <- TRUE
   } else {
     cluster.cols = FALSE
   }
-
-  if (!is.null(membership.rows) | (!is.null(n.clusters.rows) && n.clusters.rows > 0)) {
+  if (!is.null(membership.rows) |
+      (!is.null(n.clusters.rows) && n.clusters.rows > 0)) {
     cluster.rows <- TRUE
   } else {
     cluster.rows = FALSE
   }
 
-
-
-
+  # if there are no row labels provided and cluster.rows is FALSE,
+  # then set the default label type to be "variable",
+  # otherwise set it to "TRUE"cluster"
   if (is.null(left.label) && !cluster.rows) {
     left.label <- "variable"
   } else if (is.null(left.label) && cluster.rows) {
     left.label <- "cluster"
   }
 
-
-
+  # if there are no bottom labels provided and cluster.cols is FALSE,
+  # then set the default label type to be "variable",
+  # otherwise set it to "TRUE"cluster"
   if (is.null(bottom.label) && cluster.cols) {
     bottom.label <- "cluster"
   } else if (is.null(bottom.label) && !cluster.cols) {
     bottom.label <- "variable"
   }
 
-  # remove variable labels if more than 50 rows
+  # remove variable labels if more than 50 rows/cols
   if (left.label == "variable") {
     if (nrow(X) > 50) {
-      # warning('Cannot set "left.label" to "variable" when nrow(X) exceeds 50')
       left.label <- "none"
     }
   }
-
   if (bottom.label == "variable") {
     if (ncol(X) > 50) {
-      # warning('Cannot set "bottom.label" to "variable" when ncol(X) exceeds 50')
       bottom.label <- "none"
     }
   }
 
-
-  # remove the cluster boxes if we have more than 100 cols/rows
-  if (!cluster.cols & ((bottom.label == "variable") | (bottom.label == "none"))) {
+  # remove the heatmap grid lines if there are more than 100 cols/rows
+  # do this only when there are variable labels or no labels
+  # (but we want there to be grid lines when there are more than 100
+  #  rows/columns but we are grouping by cluster. In this case the grid
+  #  lines correspond to the clusters rather than the variables)
+  if (!cluster.cols &
+      ((bottom.label == "variable") | (bottom.label == "none"))) {
     if (ncol(X) > 100) {
-    #  warning('"grid.vline" set to FALSE when ncol(X) exceeds 100 and when "bottom.label" is set to either "variable" or "none"')
-      grid.vline <- FALSE
+       grid.vline <- FALSE
     }
   }
-
-  if (!cluster.rows & ((left.label == "variable") | (left.label == "none"))) {
+  if (!cluster.rows &
+      ((left.label == "variable") | (left.label == "none"))) {
     if (nrow(X) > 100) {
-    #  warning('"grid.hline" set to FALSE when nrow(X) exceeds 100 and when "left.label" is set to either "variable" or "none"')
       grid.hline <- FALSE
     }
   }
 
-
-
-  ##################### perform clustering if needed ######################
-
-
+  # if cluster.rows is TRUE and no row membership is provided,
+  # then perform clustering
   if (is.null(membership.rows) && cluster.rows) {
+    # identify the number of row clusters specified
     n.clusters <- n.clusters.rows
+    # perform the clustering
     cluster.arg.list <- c(as.list(environment()))
     cluster.arg.list <- cluster.arg.list[names(formals(generate_cluster))]
     cluster.arg.list <- cluster.arg.list[!is.na(names(cluster.arg.list))]
-
-
-    # do a heat to make sure that valid args have been provided
+    # extract the membership vector
     membership.rows <- do.call(generate_cluster, cluster.arg.list)
   }
 
+  # if cluster.cols is TRUE and no column membership is provided,
+  # then perform clustering
   if (is.null(membership.cols) && cluster.cols) {
+    # identify the number of row clusters specified
     n.clusters <- n.clusters.cols
+    # perform the clustering
     cluster.arg.list <- c(as.list(environment()))
     cluster.arg.list <- cluster.arg.list[names(formals(generate_cluster))]
     cluster.arg.list <- cluster.arg.list[!is.na(names(cluster.arg.list))]
     cluster.arg.list$X <- t(cluster.arg.list$X)
-
-    # do a heat to make sure that valid args have been provided
+    # extract the membership vector
     membership.cols <- do.call(generate_cluster, cluster.arg.list)
   }
 
-
-
-
-
-
-  ######################## the default if clustering was not performed ###############
-
-
+  # the default if clustering was not performed
   if (!cluster.cols) {
     membership.cols <- 1:ncol(X)
   }
@@ -454,13 +460,8 @@ superheat <- function(X,
     membership.rows <- 1:nrow(X)
   }
 
-
-
-
-
-
-  ####################### Set the observation order within clusters ####################
-
+  # if a specific row/col ordering is not provided,
+  # define the ordering to be that given in the original matrix
   if (is.null(order.rows)) {
     order.rows <- 1:nrow(X)
   }
@@ -468,26 +469,31 @@ superheat <- function(X,
     order.cols <- 1:ncol(X)
   }
 
-
+  # re-order the rows by cluster
   if (cluster.rows) {
-    order.df.rows <- data.frame(membership.rows = membership.rows[order.rows], order.rows = order.rows)
-    order.df.rows <- order.df.rows %>% dplyr::arrange(membership.rows)
-    order.df.rows <- dplyr::ungroup(order.df.rows)
+    order.df.rows <- data.frame(membership.rows = membership.rows[order.rows],
+                                order.rows = order.rows)
+    order.df.rows <- order.df.rows %>%
+      dplyr::arrange(membership.rows) %>%
+      ungroup
   } else {
-    order.df.rows <- data.frame(membership.rows = 1, order.rows = order.rows)
+    # if there is no clustering, just put all rows in the same cluster
+    order.df.rows <- data.frame(membership.rows = 1,
+                                order.rows = order.rows)
   }
-
+  # re-order the columns by cluster
   if (cluster.cols) {
-    order.df.cols <- data.frame(membership.cols = membership.cols[order.cols], order.cols = order.cols)
-    order.df.cols <- order.df.cols %>% dplyr::arrange(membership.cols)
-    order.df.cols <- dplyr::ungroup(order.df.cols)
+    order.df.cols <- data.frame(membership.cols = membership.cols[order.cols],
+                                order.cols = order.cols)
+    order.df.cols <- order.df.cols %>%
+      dplyr::arrange(membership.cols) %>%
+      ungroup
   } else {
+    # if there is no clustering, just put all columns in the same cluster
     order.df.cols <- data.frame(membership.cols = 1, order.cols = order.cols)
   }
 
-
-  ###################### Reorder X, yr and yt ######################
-
+  # Reorder X, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
   if (!is.null(yr)) {
     yr <- yr[order.df.rows$order.rows]
@@ -498,53 +504,28 @@ superheat <- function(X,
   membership.rows <- membership.rows[order.df.rows$order.rows]
   membership.cols <- membership.cols[order.df.cols$order.cols]
 
-
-
-
-  ################### Generate the heatmap #########################
-
-
-
-
-  if (grid.hline) {
-    if (left.label == "variable") {
-      membership.r <- 1:nrow(X)
-    } else if (left.label == "cluster") {
-      membership.r <- membership.rows
-    }
-  }
-  if (grid.vline) {
-    if (bottom.label == "variable") {
-      membership.c <- 1:ncol(X)
-    } else if (bottom.label == "cluster") {
-      membership.c <- membership.cols
-    }
-  }
-
-
+  # Extract the arguments relevant to the heatmap function
   heat.arg.list <- c(as.list(environment()))
   heat.arg.list <- heat.arg.list[names(formals(generate_heat))]
   heat.arg.list <- heat.arg.list[!is.na(names(heat.arg.list))]
 
+  # if heatmap smoothing is specified, use the generate_smooth_heat function,
+  # otherwise, use the generate_heat function
   if (smooth.heat) {
     heat <- do.call(generate_smooth_heat, heat.arg.list)
   } else {
     heat <- do.call(generate_heat, heat.arg.list)
   }
+  # extract the heatmap object from the output
   gg.heat <- heat$gg.heat
+  # extract the legend object from the output
   if (legend) {
     gg.legend <- heat$gg.legend
   }
 
-
-
-
-
-
-
-  ######################## Generate the scatterplots ########################
-
+  # Generate the top and right plots
   if (!is.null(yt)) {
+    # define all arguments of the top plot
     y <- yt
     y.obs.col <- yt.obs.col
     y.pal <- yt.pal
@@ -561,15 +542,19 @@ superheat <- function(X,
     plot.type <- yt.plot.type
     num.ticks <- yt.num.ticks
 
-    scatter.arg.list <- c(as.list(environment()))
-    scatter.arg.list <- scatter.arg.list[names(formals(generate_scatter))]
-    scatter.arg.list <- scatter.arg.list[!is.na(names(scatter.arg.list))]
-
-
-    gg.top <- do.call(generate_scatter, scatter.arg.list)
+    # generate the top plot
+    # identify variables defined in the environment
+    plot.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_add_on_plot
+    plot.arg.list <- plot.arg.list[names(formals(generate_add_on_plot))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_add_on_plot
+    plot.arg.list <- plot.arg.list[!is.na(names(plot.arg.list))]
+    gg.top <- do.call(generate_add_on_plot, plot.arg.list)
   }
 
   if (!is.null(yr)) {
+    # define all arguments of the right plot
     y <- yr
     y.obs.col <- yr.obs.col
     y.pal <- yr.pal
@@ -586,85 +571,93 @@ superheat <- function(X,
     plot.type <- yr.plot.type
     num.ticks <- yr.num.ticks
 
-    scatter.arg.list <- c(as.list(environment()))
-    scatter.arg.list <- scatter.arg.list[names(formals(generate_scatter))]
-    scatter.arg.list <- scatter.arg.list[!is.na(names(scatter.arg.list))]
-
-
-    gg.right <- do.call(generate_scatter, scatter.arg.list)
+    # generate the top plot
+    # identify variables defined in the environment
+    plot.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_add_on_plot
+    plot.arg.list <- plot.arg.list[names(formals(generate_add_on_plot))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_add_on_plot
+    plot.arg.list <- plot.arg.list[!is.na(names(plot.arg.list))]
+    gg.right <- do.call(generate_add_on_plot, plot.arg.list)
   }
 
-
-
-
-
-
-
-  ##################### Generate the heatmap labels ##############################
-
-
-
-
-
-
+  # Generate the bottom heatmap labels. There are two types:
+  # variable: each individual column has its own label
+  # cluster: all columns within a cluster are given a combined cluster name
   if (bottom.label == "variable") {
+    # define the arguments for generating the bottom "variable" label
     names <- colnames(X)
     location <- "bottom"
     label.pal <- bottom.label.pal
     label.text.col <- bottom.label.text.col
     text.angle <- bottom.label.text.angle
 
-    var.arg.list <- c(as.list(environment()))
-    var.arg.list <- var.arg.list[names(formals(generate_var_label))]
-    var.arg.list <- var.arg.list[!is.na(names(var.arg.list))]
-
-    gg.bottom <- do.call(generate_var_label, var.arg.list)
+    # generate the bottom label
+    # identify variables defined in the environment
+    label.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_var_label
+    label.arg.list <- label.arg.list[names(formals(generate_var_label))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_var_label
+    label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
+    gg.bottom <- do.call(generate_var_label, label.arg.list)
   } else if (bottom.label == "cluster") {
-
+    # define the arguments for generating the bottom "cluster" label
     location <- "bottom"
     membership <- membership.cols
     label.pal = bottom.label.pal
     label.text.col = bottom.label.text.col
     text.angle <- bottom.label.text.angle
 
-    clust.lab.arg.list <- c(as.list(environment()))
-    clust.lab.arg.list <- clust.lab.arg.list[names(formals(generate_cluster_label))]
-    clust.lab.arg.list <- clust.lab.arg.list[!is.na(names(clust.lab.arg.list))]
-
-    gg.bottom <- do.call(generate_cluster_label, clust.lab.arg.list)
+    # generate the bottom label
+    # identify variables defined in the environment
+    label.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_var_label
+    label.arg.list <- label.arg.list[names(formals(generate_cluster_label))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_var_label
+    label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
+    gg.bottom <- do.call(generate_cluster_label, label.arg.list)
   }
 
-
-
-
-
-
-
+  # Generate the left heatmap labels. There are two types:
+  # variable: each individual column has its own label
+  # cluster: all columns within a cluster are given a combined cluster name
   if (left.label == "variable") {
+    # define the arguments for generating the left "variable" label
     names <- rownames(X)
     location <- "left"
     label.pal = left.label.pal
     label.text.col = left.label.text.col
     text.angle <- left.label.text.angle
 
-    var.arg.list <- c(as.list(environment()))
-    var.arg.list <- var.arg.list[names(formals(generate_var_label))]
-    var.arg.list <- var.arg.list[!is.na(names(var.arg.list))]
-
-    gg.left <- do.call(generate_var_label, var.arg.list)
+    # generate the left label
+    # identify variables defined in the environment
+    label.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_var_label
+    label.arg.list <- label.arg.list[names(formals(generate_var_label))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_var_label
+    label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
+    gg.left <- do.call(generate_var_label, label.arg.list)
   } else if (left.label == "cluster") {
-
+    # define the arguments for generating the left "cluster" label
     location <- "left"
     membership <- membership.rows
     label.pal = left.label.pal
     label.text.col = left.label.text.col
     text.angle <- left.label.text.angle
 
-    clust.lab.arg.list <- c(as.list(environment()))
-    clust.lab.arg.list <- clust.lab.arg.list[names(formals(generate_cluster_label))]
-    clust.lab.arg.list <- clust.lab.arg.list[!is.na(names(clust.lab.arg.list))]
-
-    gg.left <- do.call(generate_cluster_label, clust.lab.arg.list)
+    # generate the left label
+    # identify variables defined in the environment
+    label.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_var_label
+    label.arg.list <- label.arg.list[names(formals(generate_cluster_label))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_var_label
+    label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
+    gg.left <- do.call(generate_cluster_label, label.arg.list)
   }
 
 
@@ -713,7 +706,10 @@ superheat <- function(X,
     grid::grid.draw(grob.layout)
   }
 
-  to.return <- list(layout = layout, plot = grob.layout, membership.cols = membership.cols, membership.rows = membership.rows)
+  to.return <- list(layout = layout,
+                    plot = grob.layout,
+                    membership.cols = membership.cols,
+                    membership.rows = membership.rows)
 
   return(invisible(to.return))
 

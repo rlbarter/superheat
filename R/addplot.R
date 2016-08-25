@@ -2,7 +2,7 @@
 
 
 
-generate_scatter <- function(y,
+generate_add_on_plot <- function(y,
                              location = c("top","right"),
                              membership,
                              plot.type = c("scatter","bar", "boxplot","scattersmooth", "smooth", "scatterline", "line"),
