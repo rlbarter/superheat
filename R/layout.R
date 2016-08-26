@@ -140,7 +140,13 @@ generate_layout <- function(gg.heat,
         (!is.null(gg.right) && bottom.label.size > 0.2) |
         (!is.null(gg.right) && yr.axis &&
          !is.null(gg.column.title) && is.null(gg.bottom))) {
-      layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
+      layout <- gtable::gtable_add_rows(layout,
+                                        grid::unit(legend.height, "null"))
+    }
+    # if there is both no right plot, AND a column title, add an extra row
+    if (is.null(gg.right) && is.null(gg.column.title)) {
+      layout <- gtable::gtable_add_rows(layout,
+                                        grid::unit(legend.height, "null"))
     }
 
     # the legend is always in the very bottom row
