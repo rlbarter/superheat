@@ -127,9 +127,19 @@ generate_layout <- function(gg.heat,
 
   # location for legend
   if (!is.null(gg.legend)) {
-    # if there is are no right-plot axes or no column name, then add a blank row
-    if ((is.null(gg.right) | (!is.null(gg.right) && yr.axis == F)) &&
-        is.null(gg.column.title)) {
+    # Add a blank row for the following conditions:
+    #   - there is no right plot OR there is a column name
+    #   - there is a right plot but there are no right-plot axes AND
+    #     there is no column name,
+    #   - there is a right plot, with and axis, but the bottom labels
+    #     are larger than 0.2
+    #   - if there a right plot with axis AND column name AND no bottom labels
+    if ((is.null(gg.right) | is.null(gg.column.title)) |
+        ((!is.null(gg.right) && yr.axis == F) &&
+          is.null(gg.column.title)) |
+        (!is.null(gg.right) && bottom.label.size > 0.2) |
+        (!is.null(gg.right) && yr.axis &&
+         !is.null(gg.column.title) && is.null(gg.bottom))) {
       layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
     }
 
@@ -368,6 +378,8 @@ generate_grobs <- function(layout,
                                                             pattern = "panel",
                                                             trim = TRUE, fixed = TRUE),
                                       t = t, l = l, b = b)
+    # save the value b
+    b.bottom <- b
   }
 
 
@@ -428,22 +440,27 @@ generate_grobs <- function(layout,
   # Grobs affecting the column title position
   #   - title
   #   - top plot
+
   if (!is.null(gg.column.title)) {
-    # begin by placing the column title in the bottom row in the right-most column
-    t <- nrow(layout)
+    # if there are bottom labels, place the column title in the row below them
+    if (!is.null(gg.bottom)) {
+      t <- b.bottom + 1
+    } else {
+      # otherwise, begin by placing the column title below the heatmap
+      t <- 2
+      if (!is.null(gg.title)) {
+        t <- t + 1
+      }
+      if (!is.null(gg.top)) {
+        t <- t + 1
+      }
+    }
+
+    # place the grob in the right-most column
     l <- ncol(layout)
     # if there is a right-plot, move the column title one column to the left
     if (!is.null(gg.right)) {
       l <- l - 1
-    }
-    # if there is a legend, move the column title one row up
-    if (!is.null(gg.legend)) {
-      t <- t - 1
-    }
-    # if there is a right plot with axis but no column labels,
-    # move the column title one column up
-    if (!is.null(gg.right) && yr.axis && is.null(gg.bottom)) {
-      t <- t - 1
     }
 
     # place the column title in the appropriate place
