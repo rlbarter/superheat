@@ -25,3 +25,5 @@ Basic usage:
 ``` r
 superheat(iris[,-5])
 ```
+
+[![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
