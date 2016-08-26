@@ -5,7 +5,7 @@
 If you find any bugs, have any feature requests or feedback, please submit an issue.
 
 
-To download and install the package, use `devtools`:
+To download and install the development version of the package, use `devtools`:
 
 ``` r
 install.packages("devtools")

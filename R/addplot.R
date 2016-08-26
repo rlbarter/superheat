@@ -13,7 +13,7 @@ generate_add_on_plot <- function(y,
                                  point.size = 2,
                                  point.alpha = 1,
                                  y.obs.col = NULL,
-                                 y.pal = NULL,
+                                 y.cluster.col = NULL,
                                  y.bar.col = NULL,
                                  smoothing.method = c("loess", "lm"),
                                  y.line.size = NULL,
@@ -30,8 +30,8 @@ generate_add_on_plot <- function(y,
     axis.name.angle <- 0
   }
   # specify default label colors
-  if (is.null(y.obs.col) && is.null(y.pal)) {
-    y.pal <- c("Grey 61", "Grey 43")
+  if (is.null(y.obs.col) && is.null(y.cluster.col)) {
+    y.cluster.col <- c("Grey 61", "Grey 43")
   }
   # specify default geom_bar outline color
   if (is.null(y.bar.col)) {
@@ -156,7 +156,7 @@ generate_add_on_plot <- function(y,
                                        col = factor(membership)),
                           size = point.size,
                           alpha = point.alpha) +
-      ggplot2::scale_color_manual(values = rep(y.pal, length = n.clusters))
+      ggplot2::scale_color_manual(values = rep(y.cluster.col, length = n.clusters))
     if (plot.type == "scattersmooth") {
       # if specified, add a smoothed line, curve, etc
       # (determined by smoothing.method)
@@ -214,7 +214,7 @@ generate_add_on_plot <- function(y,
                              method = smoothing.method,
                              size = y.line.size,
                              se = smooth.se) +
-        ggplot2::scale_color_manual(values = rep(y.pal, length = n.clusters))
+        ggplot2::scale_color_manual(values = rep(y.cluster.col, length = n.clusters))
   } else if (plot.type == "line") {
     # for the "line" plot type, add a smoothed line to the empty gg.add
     gg.add <- gg.add +
@@ -222,13 +222,15 @@ generate_add_on_plot <- function(y,
                                       y = y,
                                       col = factor(membership)),
                          size = y.line.size) +
-      ggplot2::scale_color_manual(values = rep(y.pal, length = n.clusters))
+      ggplot2::scale_color_manual(values = rep(y.cluster.col, length = n.clusters))
     } else if (plot.type == "boxplot") {
       # calculate the boxplot positions to be the center of each cluster
       # first identify each unique cluster and the number (size) of
       # data points in each cluster
       clust.boundary.df <- data.frame(cluster = unique(membership),
                                       size = as.vector(table(membership)))
+      # fix visible binding note in package check
+      size <- clust.boundary.df$size
       # calculate the position of the beginning and end of each cluster
       # (e.g. the grid lines on the heatmap), scaled by the
       # number of clusters
@@ -264,7 +266,7 @@ generate_add_on_plot <- function(y,
                                 data = subset(y.df.boxplot, membership == i))
           }
         ) +
-        ggplot2::scale_fill_manual(values = rep(y.pal,
+        ggplot2::scale_fill_manual(values = rep(y.cluster.col,
                                                 length = n.clusters)) +
         ggplot2::scale_x_continuous(limits = c(min(boundary),
                                                max(boundary)),
@@ -282,7 +284,7 @@ generate_add_on_plot <- function(y,
                         position = ggplot2::position_dodge(0),
                         stat = "identity",
                         width = 1) +
-      ggplot2::scale_fill_manual(values = rep(y.pal,
+      ggplot2::scale_fill_manual(values = rep(y.cluster.col,
                                               length = n.clusters))
   } else if (!is.null(y.obs.col) && (plot.type == "bar")) {
     # for the "bar" plot type, add a bar plot to the empty gg.add

@@ -423,6 +423,7 @@ generate_text_heat <- function(X.text,
   y <- X.df$y
   value <- X.df$value
   size <- X.df$size
+  angle <- X.df$angle
 
   # make the plot
   gg.text <- ggplot2::geom_text(ggplot2::aes(x = x,

@@ -4,7 +4,7 @@
 \alias{generate_var_label}
 \title{Generate heatmap variable labels.}
 \usage{
-generate_var_label(names, location = c("bottom", "left"), label.pal = NULL,
+generate_var_label(names, location = c("bottom", "left"), label.col = NULL,
   label.text.col = NULL, bottom.label.text.size = 5,
   left.label.text.size = 5, text.angle = NULL)
 }
@@ -14,7 +14,7 @@ generate_var_label(names, location = c("bottom", "left"), label.pal = NULL,
 \item{location}{will these labels be on the bottom ("bottom") or on the left
 ("left)?}
 
-\item{label.pal}{a vector specifying the cluster/variable label color palette.}
+\item{label.col}{a vector specifying the cluster/variable label color palette.}
 
 \item{label.text.col}{a character or character vector specifying the
 cluster/variable label text color.}

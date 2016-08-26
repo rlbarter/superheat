@@ -1,22 +1,29 @@
 
 #' Generate supervised heatmaps.
 #'
-#' Superheat is used to generate an exploratory plot that consists of a
-#'        (possibly clustered) matrix, X, displayed as heatmap.
+#' Superheat is used to generate and customize heatmaps.
 #'        Scatterplots, boxplots, barplots, line plots and boxplots can
 #'        be plotted adjacent to the columns and rows of the heatmap,
 #'        adding an additional layer of information.
 #'
 #'
-#' @param X a matrix or data frame whose values are to be plotted in the heatmap.
+#' @param X a matrix whose values are to be plotted in the heatmap.
 #' @param X.text a matrix containing text entries to be plotted on
-#'          top of the heatmap cells. The number of rows must match either the
-#'          number of columns of \code{X} or the number of column clusters of
-#'          \code{X}. Similarly for the rows.
-#' @param yt a vector of values to plot above the heatmap. The length of
-#'          \code{yt} must be equal to the number of columns of \code{X}.
-#' @param yr a vector of values to plot to the right of the heatmap.
-#'          The length of \code{yr} must be equal to the number of rows of \code{X}.
+#'          top of the heatmap cells. The number of rows/columns must match
+#'          either the number of rows/columns of \code{X} or the number of
+#'          row/column clusters of \code{X}.
+#' @param yt a vector of values to plot above the heatmap (the "top plot").
+#'          The length of \code{yt} must be equal to the number of columns
+#'          of \code{X}.
+#' @param yr a vector of values to plot to the right of the heatmap (the
+#'          "right plot"). The length of \code{yr} must be equal to the
+#'          number of rows of \code{X}.
+#' @param yt.plot.type a character specifying the \code{yt} plot type. The default is
+#'          "scatter", and other options include "bar", "scattersmooth",
+#'          "smooth", "boxplot", "scatterline" and "line".
+#' @param yr.plot.type character specifying the \code{yr} plot type. The default is
+#'          "scatter", and other options include "bar", "scattersmooth",
+#'          "smooth", "boxplot", "scatterline" and "line".
 #' @param membership.rows a vector specifying the cluster membership
 #'          of the rows in X.
 #' @param membership.cols a vector specifying the cluster membership
@@ -26,44 +33,49 @@
 #' @param order.cols a vector of specifying the ordering of the
 #'          columns of \code{X}. If the columns are clustered, then this
 #'          vector specifies the order within the clusters. Note that
-#'          this vector must be a rearranged \code{1:ncol(X)} vector.
+#'          this vector must be a rearranged \code{1:ncol(X)} vector which
+#'          specifies the new location of each column.
 #' @param order.rows a vector of specifying the ordering of the rows of
 #'          \code{X}. If the rows are clustered, then this vector
 #'          specifies the order within the clusters. Note that this
-#'          vector must be a rearranged \code{1:nrow(X)} vector.
+#'          vector must be a rearranged \code{1:nrow(X)} vector which
+#'          specifies the new location of each row.
 
 
-#' @param n.clusters.rows a number specifying the number of row clusters. The
-#'          default is 0 (indicating no clustering of the rows). This argument
-#'          is ignored if \code{membership.rows} is provided.
-#' @param n.clusters.cols a number specifying the number of column clusters. The
-#'          default is 0 (indicating no clustering of the columns). This argument
-#'          is ignored if \code{membership.columns} is provided.
+#' @param n.clusters.rows a number specifying the number of row clusters to
+#'          generate. The default is 0 (indicating no clustering of the rows).
+#'          This argument is ignored if \code{membership.rows} is provided.
+#' @param n.clusters.cols a number specifying the number of column clusters to
+#'          generate. The default is 0 (indicating no clustering of the columns).
+#'          This argument is ignored if \code{membership.columns} is provided.
 #' @param clustering.method the clustering method to use whenever
 #'          \code{n.clusters.cols} or \code{n.clusters.rows} is specified.
 #'          The default ("kmeans") is to use K-means clustering, the alternative
-#'          option ("hierarchical") performs heirarchical clustering. Antoher
-#'          (suggested) alternative is to provide a membership vector.
+#'          option ("hierarchical") performs hierarchical clustering. Another
+#'          (suggested) alternative is to provide a row and/or column
+#'          membership vector.
 
 
 
 
-#' @param smooth.heat a logical specifying whether or not to smooth the color
+#' @param smooth.heat a logical specifying whether or not to smooth the colour
 #'          of the heatmap within clusters (by taking the median value).
-#' @param scale a logical specifying whether or not to cener and scale the
+#' @param scale a logical specifying whether or not to center and scale the
 #'          columns of X.
 
 
-#' @param left.label the type of label provided to the left of the heatmap.
-#'          The default is "cluster" (which provides the cluster names) if
-#'          clustering was performed on the rows. Otherwise, the default is
-#'          "variable" (which provides the variable names). The final option,
-#'          "none", removes the label all together.
-#' @param bottom.label the type of label provided to the left of the heatmap.
-#'          The default is "cluster" (which provides the cluster names) if
-#'          clustering was performed on the columns. Otherwise, the default is
-#'          "variable" (which provides the variable names). The final option,
-#'          "none", removes the label all together.
+#' @param left.label a character specifying the type of the label provided to
+#'          the left of the heatmap. If clustering was performed on the rows,
+#'          then the default type is "cluster" (which provides the cluster
+#'          names). Otherwise, the default is "variable" (which provides the
+#'          variable names). The final option, "none", removes the left labels
+#'          all together.
+#' @param bottom.label a character specifying the type of the label provided
+#'          to the left of the heatmap. If clustering was performed on the
+#'          columns, then the default type is "cluster" (which provides the
+#'          cluster names). Otherwise, the default is "variable" (which
+#'          provides the variable names). The final option, "none", removes the
+#'          label all together.
 
 
 
@@ -71,17 +83,17 @@
 #'          The default is "red", and other options include "purple", "blue",
 #'          "grey" and "green". If you wish to supply your own colour scheme,
 #'          use the \code{heat.pal} argument.
-#' @param heat.pal a vector specifying a manual heatmap color palette. This
-#'          corresponds to the \code{color} argumnet for the ggplot2
-#'          \code{\link[ggplot2]{scale_color_gradientn}} function.
-#' @param heat.pal.values a vector specifying the location of each color in the
-#'          color palette. Each entry should be a number between 0 and 1. This
-#'          corresponds to the \code{values} argumnet for the ggplot2
-#'          \code{\link[ggplot2]{scale_color_gradientn}} function. The default
+#' @param heat.pal a vector of colour names specifying a manual heatmap colour
+#'          palette. This corresponds to the \code{colour} argument for the
+#'          ggplot2 \code{\link[ggplot2]{scale_colour_gradientn}} function.
+#' @param heat.pal.values a vector specifying the location of each colour in the
+#'          colour palette specified by \code{heat.pal}. Each entry should be a
+#'          number between 0 and 1. This corresponds to the \code{values}
+#'          argument for the ggplot2
+#'          \code{\link[ggplot2]{scale_colour_gradientn}} function. The default
 #'          values are the corresponding quantiles.
 
 
-#'
 #' @param X.text.size a single number or a matrix of numbers (whose dimension
 #'          matches that of \code{X.text}) that specifies the size of each text
 #'          entry in \code{X.text}.
@@ -90,18 +102,13 @@
 #'          entry in \code{X.text}.
 #' @param X.text.col a single character string or a matrix of character strings
 #'          (whose dimension matches that of \code{X.text}) that specifies the
-#'          colors of each text entry in \code{X.text}.
+#'          colours of each text entry in \code{X.text}.
 #'
 #'
 #'
-#' @param yt.plot.type a character specifying the \code{yt} plot type. The default is
-#'          "scatter", and other options include "bar", "scattersmooth",
-#'          "smooth", "boxplot", "scatterline" and "line".
-#' @param yr.plot.type character specifying the \code{yr} plot type. The default is
-#'          "scatter", and other options include "bar", "scattersmooth",
-#'          "smooth", "boxplot", "scatterline" and "line".
+
 #'
-#' @param legend logical. If set to \code{FALSE}, then no legend is provided
+#' @param legend logical. If set to \code{FALSE}, then no legend is provided.
 
 #' @param grid.hline a logical specifying whether horizontal grid lines are
 #'          plotted in the heatmap.
@@ -114,19 +121,20 @@
 #' @param grid.hline.col the colour of the horizontal grid lines.
 #' @param grid.vline.col the colour of the vertical grid lines.
 #'
-#' @param smoothing.method if \code{plot.type = "scattersmooth"} or \code{"smooth"}
-#'          this argument specifies the smoothing method to use. The default is
-#'          \code{loess}. The alternative option is \code{lm}.
+#' @param smoothing.method if \code{plot.type = "scattersmooth"} or
+#'          \code{"smooth"}, this argument specifies the smoothing method to
+#'          use. The default is "loess" for a curve. The alternative option is
+#'          "lm" for a line.
 #' @param smooth.se a logical specifying whether the smoothed \code{yt} and \code{yr}
 #'          curves have standard error curves.
 
 
 
-#' @param yt.axis a logical specifying the presence of an axis for the \code{yt}
-#'          plot.
-#' @param yr.axis a logical specifying the presence of an axis for the \code{yr}
-#'          plot.
-#' @param yt.axis.name a character specifying the \code{yt} axis name
+#' @param yt.axis a logical specifying the presence of an axis for the
+#'          \code{yt} plot.
+#' @param yr.axis a logical specifying the presence of an axis for the
+#'          \code{yr} plot.
+#' @param yt.axis.name a character specifying the \code{yt} axis name.
 #' @param yr.axis.name a character specifying the \code{yr} axis name.
 #' @param yr.axis.size a number specifying the size of the numbers on
 #'          the axis.
@@ -142,55 +150,59 @@
 #'          not always work perfectly as it is coerced into looking pretty.
 #' @param yt.plot.size a number specifying the size of the \code{yt} plot.
 #' @param yr.plot.size a number specifying the size of the \code{yr} plot.
-#' @param yt.line.size the thickness of the (smoothing) line in the \code{yt} plot.
-#' @param yr.line.size the thickness of the (smoothing) line in the \code{yr} plot.
+#' @param yt.line.size the thickness of the (smoothing) line in the \code{yt}
+#'          plot.
+#' @param yr.line.size the thickness of the (smoothing) line in the \code{yr}
+#'          plot.
 #'
 #' @param yt.obs.col a vector specifying the colour of individual points in the
 #'          \code{yt} plot.
 #' @param yr.obs.col a vector specifying the colour of individual points in the
 #'          \code{yr} plot.
-#' @param yt.pal a vector the same length as the number of clusters which specifies
-#'          the colour of each cluster in \code{yt}.
-#' @param yr.pal a vector the same length as the number of clusters which specifies
-#'          the colour of each cluster in \code{yr}.
-#' @param yt.bar.col a character which specifies the colour of the boundary of the
-#'          bars in the barplot of \code{yt}.
-#' @param yr.bar.col a character which specifies the colour of the boundary of the
-#'          bars in the barplot of \code{yr}.
-#' @param yt.point.size the size of the points in the \code{yt} scatterplot. The
-#'          default is 2.
-#' @param yr.point.size the size of the points in the \code{yr} scatterplot. The
-#'          default is 2.
-#' @param yt.point.alpha the transparancy of the points in the \code{yt} scatterplot.
-#'          The default is 1, which corresponds to no transparancy.
-#' @param yr.point.alpha the transparancy of the points in the \code{yr} scatterplot.
-#'          The default is 1, which corresponds to no transparancy.
+#' @param yt.cluster.col a vector the same length as the number of clusters
+#'          which specifies the colour of each cluster in \code{yt}.
+#' @param yr.cluster.col a vector the same length as the number of clusters
+#'          which specifies the colour of each cluster in \code{yr}.
+#' @param yt.bar.col a character which specifies the colour of the boundary of
+#'          the bars in the barplot of \code{yt}.
+#' @param yr.bar.col a character which specifies the colour of the boundary of
+#'          the bars in the barplot of \code{yr}.
+#' @param yt.point.size the size of the points in the \code{yt} scatterplot.
+#'          The default is 2.
+#' @param yr.point.size the size of the points in the \code{yr} scatterplot.
+#'          The default is 2.
+#' @param yt.point.alpha the transparency of the points in the \code{yt}
+#'          scatterplot. The default is 1, which corresponds to no
+#'          transparency.
+#' @param yr.point.alpha the transparency of the points in the \code{yr}
+#'          scatterplot. The default is 1, which corresponds to no
+#'          transparency.
 #'
 #' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
 #' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
-#' @param bottom.label.text.angle number of degrees to rotate the text on the bottom
-#'          cluster/variable labels. The default is 0.
-#' @param left.label.text.angle number of degrees to rotate the text on the left
-#'          cluster/variable labels. The default is 90.
+#' @param bottom.label.text.angle number of degrees to rotate the text on the
+#'          bottom cluster/variable labels. The default is 0.
+#' @param left.label.text.angle number of degrees to rotate the text on the
+#'          left cluster/variable labels. The default is 90.
 #' @param bottom.label.size a number specifying the size of the bottom
 #'          cluster/variable label panel.
 #' @param left.label.size a number specifying the size of the left
 #'          cluster/variable label panel.
 #'
-#' @param left.label.pal a vector specifying the left cluster/variable label color
-#'          palette.
-#' @param bottom.label.pal a vector specifying the bottom cluster/variable label color
-#'          palette.
+#' @param left.label.col a vector specifying the left cluster/variable label
+#'          colour palette.
+#' @param bottom.label.col a vector specifying the bottom cluster/variable
+#'          label colour palette.
 #' @param left.label.text.col a character or character vector specifying the
-#'          left cluster/variable label text color.
+#'          left cluster/variable label text colour.
 #' @param bottom.label.text.col a character or character vector specifying the
-#'          bottom cluster/variable label text color.
+#'          bottom cluster/variable label text colour.
 #'
-#' @param column.title a string specifying the overall column name (will appear
+#' @param column.title a string specifying the overall column name (located
 #'          below the bottom.labels).
-#' @param row.title a string specifying the overall row name (will appear to the
+#' @param row.title a string specifying the overall row name (located to the
 #'          left of the left.labels).
 #' @param column.title.size a number specifying the size of the column name. The
 #'          default is 5.
@@ -201,10 +213,10 @@
 #'        is 0.1.
 #' @param legend.width a number specifying the width of the legend. The default
 #'        is 1.5.
-#' @param legend.text.size a number specifying the size of the text on the
+#' @param legend.text.size a number specifying the size of the numbers on the
 #'        legend axis. The default is 12.
 #' @param padding the amount (in cm) of white space (padding) around the plot.
-#'          The default is 1cm.
+#'          The default is 1 cm.
 #' @param title a character string specifying a main heading.
 #' @param title.size the size of the title. The default is 5.
 #' @param print.plot a logical specifying whether or not to output the plot.
@@ -223,6 +235,8 @@
 #'                 membership.rows = iris$Species)
 #' sh$membership.rows
 #' @importFrom magrittr "%>%"
+#' @importFrom stats "as.dist" "cor" "cutree" "dist" "hclust" "kmeans"
+#'                   "median" "quantile"
 #' @export
 
 
@@ -295,8 +309,8 @@ superheat <- function(X,
                       yt.axis.name.angle = NULL,
                       yt.obs.col = NULL,
                       yr.obs.col = NULL,
-                      yt.pal = NULL,
-                      yr.pal = NULL,
+                      yt.cluster.col = NULL,
+                      yr.cluster.col = NULL,
                       yt.bar.col = NULL,
                       yr.bar.col = NULL,
                       yt.point.size = 2,
@@ -312,8 +326,8 @@ superheat <- function(X,
                       left.label.text.angle = NULL,
                       bottom.label.size = 0.1,
                       left.label.size = 0.1,
-                      left.label.pal = NULL,
-                      bottom.label.pal = NULL,
+                      left.label.col = NULL,
+                      bottom.label.col = NULL,
                       left.label.text.col = NULL,
                       bottom.label.text.col = NULL,
 
@@ -529,7 +543,7 @@ superheat <- function(X,
     # define all arguments of the top plot
     y <- yt
     y.obs.col <- yt.obs.col
-    y.pal <- yt.pal
+    y.cluster.col <- yt.cluster.col
     y.bar.col <- yt.bar.col
     y.line.size <- yt.line.size
     membership <- membership.cols
@@ -558,7 +572,7 @@ superheat <- function(X,
     # define all arguments of the right plot
     y <- yr
     y.obs.col <- yr.obs.col
-    y.pal <- yr.pal
+    y.cluster.col <- yr.cluster.col
     y.bar.col <- yr.bar.col
     y.line.size <- yr.line.size
     membership <- membership.rows
@@ -590,7 +604,7 @@ superheat <- function(X,
     # define the arguments for generating the bottom "variable" label
     names <- colnames(X)
     location <- "bottom"
-    label.pal <- bottom.label.pal
+    label.col <- bottom.label.col
     label.text.col <- bottom.label.text.col
     text.angle <- bottom.label.text.angle
 
@@ -607,7 +621,7 @@ superheat <- function(X,
     # define the arguments for generating the bottom "cluster" label
     location <- "bottom"
     membership <- membership.cols
-    label.pal = bottom.label.pal
+    label.col = bottom.label.col
     label.text.col = bottom.label.text.col
     text.angle <- bottom.label.text.angle
 
@@ -629,7 +643,7 @@ superheat <- function(X,
     # define the arguments for generating the left "variable" label
     names <- rownames(X)
     location <- "left"
-    label.pal = left.label.pal
+    label.col = left.label.col
     label.text.col = left.label.text.col
     text.angle <- left.label.text.angle
 
@@ -646,7 +660,7 @@ superheat <- function(X,
     # define the arguments for generating the left "cluster" label
     location <- "left"
     membership <- membership.rows
-    label.pal = left.label.pal
+    label.col = left.label.col
     label.text.col = left.label.text.col
     text.angle <- left.label.text.angle
 

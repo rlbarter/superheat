@@ -24,30 +24,33 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yr.axis.size = 10, yt.axis.size = 10, yr.axis.name.size = 10,
   yt.axis.name.size = 10, yr.axis.name.angle = NULL,
   yt.axis.name.angle = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
-  yt.pal = NULL, yr.pal = NULL, yt.bar.col = NULL, yr.bar.col = NULL,
-  yt.point.size = 2, yt.point.alpha = 1, yr.point.size = 2,
-  yr.point.alpha = 1, yr.line.size = NULL, yt.line.size = NULL,
-  bottom.label.text.size = 5, left.label.text.size = 5,
-  bottom.label.text.angle = NULL, left.label.text.angle = NULL,
-  bottom.label.size = 0.1, left.label.size = 0.1, left.label.pal = NULL,
-  bottom.label.pal = NULL, left.label.text.col = NULL,
-  bottom.label.text.col = NULL, column.title = NULL, row.title = NULL,
-  column.title.size = 5, row.title.size = 5, padding = 1, title = NULL,
-  title.size = 5, print.plot = TRUE)
+  yt.cluster.col = NULL, yr.cluster.col = NULL, yt.bar.col = NULL,
+  yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
+  yr.point.size = 2, yr.point.alpha = 1, yr.line.size = NULL,
+  yt.line.size = NULL, bottom.label.text.size = 5,
+  left.label.text.size = 5, bottom.label.text.angle = NULL,
+  left.label.text.angle = NULL, bottom.label.size = 0.1,
+  left.label.size = 0.1, left.label.col = NULL, bottom.label.col = NULL,
+  left.label.text.col = NULL, bottom.label.text.col = NULL,
+  column.title = NULL, row.title = NULL, column.title.size = 5,
+  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
+  print.plot = TRUE)
 }
 \arguments{
-\item{X}{a matrix or data frame whose values are to be plotted in the heatmap.}
+\item{X}{a matrix whose values are to be plotted in the heatmap.}
 
 \item{X.text}{a matrix containing text entries to be plotted on
-top of the heatmap cells. The number of rows must match either the
-number of columns of \code{X} or the number of column clusters of
-\code{X}. Similarly for the rows.}
+top of the heatmap cells. The number of rows/columns must match
+either the number of rows/columns of \code{X} or the number of
+row/column clusters of \code{X}.}
 
-\item{yt}{a vector of values to plot above the heatmap. The length of
-\code{yt} must be equal to the number of columns of \code{X}.}
+\item{yt}{a vector of values to plot above the heatmap (the "top plot").
+The length of \code{yt} must be equal to the number of columns
+of \code{X}.}
 
-\item{yr}{a vector of values to plot to the right of the heatmap.
-The length of \code{yr} must be equal to the number of rows of \code{X}.}
+\item{yr}{a vector of values to plot to the right of the heatmap (the
+"right plot"). The length of \code{yr} must be equal to the
+number of rows of \code{X}.}
 
 \item{membership.rows}{a vector specifying the cluster membership
 of the rows in X.}
@@ -55,61 +58,67 @@ of the rows in X.}
 \item{membership.cols}{a vector specifying the cluster membership
 of the columns in X.}
 
-\item{n.clusters.rows}{a number specifying the number of row clusters. The
-default is 0 (indicating no clustering of the rows). This argument
-is ignored if \code{membership.rows} is provided.}
+\item{n.clusters.rows}{a number specifying the number of row clusters to
+generate. The default is 0 (indicating no clustering of the rows).
+This argument is ignored if \code{membership.rows} is provided.}
 
-\item{n.clusters.cols}{a number specifying the number of column clusters. The
-default is 0 (indicating no clustering of the columns). This argument
-is ignored if \code{membership.columns} is provided.}
+\item{n.clusters.cols}{a number specifying the number of column clusters to
+generate. The default is 0 (indicating no clustering of the columns).
+This argument is ignored if \code{membership.columns} is provided.}
 
 \item{clustering.method}{the clustering method to use whenever
 \code{n.clusters.cols} or \code{n.clusters.rows} is specified.
 The default ("kmeans") is to use K-means clustering, the alternative
-option ("hierarchical") performs heirarchical clustering. Antoher
-(suggested) alternative is to provide a membership vector.}
+option ("hierarchical") performs hierarchical clustering. Another
+(suggested) alternative is to provide a row and/or column
+membership vector.}
 
 \item{order.cols}{a vector of specifying the ordering of the
 columns of \code{X}. If the columns are clustered, then this
 vector specifies the order within the clusters. Note that
-this vector must be a rearranged \code{1:ncol(X)} vector.}
+this vector must be a rearranged \code{1:ncol(X)} vector which
+specifies the new location of each column.}
 
 \item{order.rows}{a vector of specifying the ordering of the rows of
 \code{X}. If the rows are clustered, then this vector
 specifies the order within the clusters. Note that this
-vector must be a rearranged \code{1:nrow(X)} vector.}
+vector must be a rearranged \code{1:nrow(X)} vector which
+specifies the new location of each row.}
 
-\item{smooth.heat}{a logical specifying whether or not to smooth the color
+\item{smooth.heat}{a logical specifying whether or not to smooth the colour
 of the heatmap within clusters (by taking the median value).}
 
-\item{scale}{a logical specifying whether or not to cener and scale the
+\item{scale}{a logical specifying whether or not to center and scale the
 columns of X.}
 
-\item{left.label}{the type of label provided to the left of the heatmap.
-The default is "cluster" (which provides the cluster names) if
-clustering was performed on the rows. Otherwise, the default is
-"variable" (which provides the variable names). The final option,
-"none", removes the label all together.}
+\item{left.label}{a character specifying the type of the label provided to
+the left of the heatmap. If clustering was performed on the rows,
+then the default type is "cluster" (which provides the cluster
+names). Otherwise, the default is "variable" (which provides the
+variable names). The final option, "none", removes the left labels
+all together.}
 
-\item{bottom.label}{the type of label provided to the left of the heatmap.
-The default is "cluster" (which provides the cluster names) if
-clustering was performed on the columns. Otherwise, the default is
-"variable" (which provides the variable names). The final option,
-"none", removes the label all together.}
+\item{bottom.label}{a character specifying the type of the label provided
+to the left of the heatmap. If clustering was performed on the
+columns, then the default type is "cluster" (which provides the
+cluster names). Otherwise, the default is "variable" (which
+provides the variable names). The final option, "none", removes the
+label all together.}
 
 \item{heat.col.scheme}{A character specifying the heatmap colour scheme.
 The default is "red", and other options include "purple", "blue",
 "grey" and "green". If you wish to supply your own colour scheme,
 use the \code{heat.pal} argument.}
 
-\item{heat.pal}{a vector specifying a manual heatmap color palette. This
-corresponds to the \code{color} argumnet for the ggplot2
-\code{\link[ggplot2]{scale_color_gradientn}} function.}
+\item{heat.pal}{a vector of colour names specifying a manual heatmap colour
+palette. This corresponds to the \code{colour} argument for the
+ggplot2 \code{\link[ggplot2]{scale_colour_gradientn}} function.}
 
-\item{heat.pal.values}{a vector specifying the location of each color in the
-color palette. Each entry should be a number between 0 and 1. This
-corresponds to the \code{values} argumnet for the ggplot2
-\code{\link[ggplot2]{scale_color_gradientn}} function. The default
+\item{heat.pal.values}{a vector specifying the location of each colour in the
+colour palette specified by \code{heat.pal}. Each entry should be a
+number between 0 and 1. This corresponds to the \code{values}
+argument for the ggplot2
+\code{\link[ggplot2]{scale_colour_gradientn}} function. The default
 values are the corresponding quantiles.}
 
 \item{X.text.size}{a single number or a matrix of numbers (whose dimension
@@ -118,7 +127,7 @@ entry in \code{X.text}.}
 
 \item{X.text.col}{a single character string or a matrix of character strings
 (whose dimension matches that of \code{X.text}) that specifies the
-colors of each text entry in \code{X.text}.}
+colours of each text entry in \code{X.text}.}
 
 \item{X.text.angle}{a single number or a matrix of numbers (whose dimension
 matches that of \code{X.text}) that specifies the angle of each text
@@ -132,7 +141,7 @@ entry in \code{X.text}.}
 "scatter", and other options include "bar", "scattersmooth",
 "smooth", "boxplot", "scatterline" and "line".}
 
-\item{legend}{logical. If set to \code{FALSE}, then no legend is provided}
+\item{legend}{logical. If set to \code{FALSE}, then no legend is provided.}
 
 \item{legend.height}{a number specifying the height of the legend. The default
 is 0.1.}
@@ -140,7 +149,7 @@ is 0.1.}
 \item{legend.width}{a number specifying the width of the legend. The default
 is 1.5.}
 
-\item{legend.text.size}{a number specifying the size of the text on the
+\item{legend.text.size}{a number specifying the size of the numbers on the
 legend axis. The default is 12.}
 
 \item{grid.hline}{a logical specifying whether horizontal grid lines are
@@ -159,18 +168,19 @@ The default is 0.5.}
 
 \item{grid.vline.col}{the colour of the vertical grid lines.}
 
-\item{smoothing.method}{if \code{plot.type = "scattersmooth"} or \code{"smooth"}
-this argument specifies the smoothing method to use. The default is
-\code{loess}. The alternative option is \code{lm}.}
+\item{smoothing.method}{if \code{plot.type = "scattersmooth"} or
+\code{"smooth"}, this argument specifies the smoothing method to
+use. The default is "loess" for a curve. The alternative option is
+"lm" for a line.}
 
 \item{smooth.se}{a logical specifying whether the smoothed \code{yt} and \code{yr}
 curves have standard error curves.}
 
-\item{yt.axis}{a logical specifying the presence of an axis for the \code{yt}
-plot.}
+\item{yt.axis}{a logical specifying the presence of an axis for the
+\code{yt} plot.}
 
-\item{yr.axis}{a logical specifying the presence of an axis for the \code{yr}
-plot.}
+\item{yr.axis}{a logical specifying the presence of an axis for the
+\code{yr} plot.}
 
 \item{yt.num.ticks}{the number of ticks on the \code{yt} axis. This does
 not always work perfectly as it is coerced into looking pretty.}
@@ -182,7 +192,7 @@ not always work perfectly as it is coerced into looking pretty.}
 
 \item{yr.plot.size}{a number specifying the size of the \code{yr} plot.}
 
-\item{yt.axis.name}{a character specifying the \code{yt} axis name}
+\item{yt.axis.name}{a character specifying the \code{yt} axis name.}
 
 \item{yr.axis.name}{a character specifying the \code{yr} axis name.}
 
@@ -206,33 +216,37 @@ the axis.}
 \item{yr.obs.col}{a vector specifying the colour of individual points in the
 \code{yr} plot.}
 
-\item{yt.pal}{a vector the same length as the number of clusters which specifies
-the colour of each cluster in \code{yt}.}
+\item{yt.cluster.col}{a vector the same length as the number of clusters
+which specifies the colour of each cluster in \code{yt}.}
 
-\item{yr.pal}{a vector the same length as the number of clusters which specifies
-the colour of each cluster in \code{yr}.}
+\item{yr.cluster.col}{a vector the same length as the number of clusters
+which specifies the colour of each cluster in \code{yr}.}
 
-\item{yt.bar.col}{a character which specifies the colour of the boundary of the
-bars in the barplot of \code{yt}.}
+\item{yt.bar.col}{a character which specifies the colour of the boundary of
+the bars in the barplot of \code{yt}.}
 
-\item{yr.bar.col}{a character which specifies the colour of the boundary of the
-bars in the barplot of \code{yr}.}
+\item{yr.bar.col}{a character which specifies the colour of the boundary of
+the bars in the barplot of \code{yr}.}
 
-\item{yt.point.size}{the size of the points in the \code{yt} scatterplot. The
-default is 2.}
+\item{yt.point.size}{the size of the points in the \code{yt} scatterplot.
+The default is 2.}
 
-\item{yt.point.alpha}{the transparancy of the points in the \code{yt} scatterplot.
-The default is 1, which corresponds to no transparancy.}
+\item{yt.point.alpha}{the transparency of the points in the \code{yt}
+scatterplot. The default is 1, which corresponds to no
+transparency.}
 
-\item{yr.point.size}{the size of the points in the \code{yr} scatterplot. The
-default is 2.}
+\item{yr.point.size}{the size of the points in the \code{yr} scatterplot.
+The default is 2.}
 
-\item{yr.point.alpha}{the transparancy of the points in the \code{yr} scatterplot.
-The default is 1, which corresponds to no transparancy.}
+\item{yr.point.alpha}{the transparency of the points in the \code{yr}
+scatterplot. The default is 1, which corresponds to no
+transparency.}
 
-\item{yr.line.size}{the thickness of the (smoothing) line in the \code{yr} plot.}
+\item{yr.line.size}{the thickness of the (smoothing) line in the \code{yr}
+plot.}
 
-\item{yt.line.size}{the thickness of the (smoothing) line in the \code{yt} plot.}
+\item{yt.line.size}{the thickness of the (smoothing) line in the \code{yt}
+plot.}
 
 \item{bottom.label.text.size}{the size of the bottom heatmap label text. The
 default is 5.}
@@ -240,11 +254,11 @@ default is 5.}
 \item{left.label.text.size}{the size of the left heatmap label text. The
 default is 5.}
 
-\item{bottom.label.text.angle}{number of degrees to rotate the text on the bottom
-cluster/variable labels. The default is 0.}
+\item{bottom.label.text.angle}{number of degrees to rotate the text on the
+bottom cluster/variable labels. The default is 0.}
 
-\item{left.label.text.angle}{number of degrees to rotate the text on the left
-cluster/variable labels. The default is 90.}
+\item{left.label.text.angle}{number of degrees to rotate the text on the
+left cluster/variable labels. The default is 90.}
 
 \item{bottom.label.size}{a number specifying the size of the bottom
 cluster/variable label panel.}
@@ -252,22 +266,22 @@ cluster/variable label panel.}
 \item{left.label.size}{a number specifying the size of the left
 cluster/variable label panel.}
 
-\item{left.label.pal}{a vector specifying the left cluster/variable label color
-palette.}
+\item{left.label.col}{a vector specifying the left cluster/variable label
+colour palette.}
 
-\item{bottom.label.pal}{a vector specifying the bottom cluster/variable label color
-palette.}
+\item{bottom.label.col}{a vector specifying the bottom cluster/variable
+label colour palette.}
 
 \item{left.label.text.col}{a character or character vector specifying the
-left cluster/variable label text color.}
+left cluster/variable label text colour.}
 
 \item{bottom.label.text.col}{a character or character vector specifying the
-bottom cluster/variable label text color.}
+bottom cluster/variable label text colour.}
 
-\item{column.title}{a string specifying the overall column name (will appear
+\item{column.title}{a string specifying the overall column name (located
 below the bottom.labels).}
 
-\item{row.title}{a string specifying the overall row name (will appear to the
+\item{row.title}{a string specifying the overall row name (located to the
 left of the left.labels).}
 
 \item{column.title.size}{a number specifying the size of the column name. The
@@ -277,7 +291,7 @@ default is 5.}
 default is 5.}
 
 \item{padding}{the amount (in cm) of white space (padding) around the plot.
-The default is 1cm.}
+The default is 1 cm.}
 
 \item{title}{a character string specifying a main heading.}
 
@@ -293,8 +307,7 @@ The default is 1cm.}
 \code{membership.rows} the row cluster membership vector
 }
 \description{
-Superheat is used to generate an exploratory plot that consists of a
-       (possibly clustered) matrix, X, displayed as heatmap.
+Superheat is used to generate and customize heatmaps.
        Scatterplots, boxplots, barplots, line plots and boxplots can
        be plotted adjacent to the columns and rows of the heatmap,
        adding an additional layer of information.

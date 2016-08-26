@@ -2,3 +2,11 @@
 
 export(superheat)
 importFrom(magrittr,"%>%")
+importFrom(stats,"as.dist")
+importFrom(stats,"cor")
+importFrom(stats,"cutree")
+importFrom(stats,"dist")
+importFrom(stats,"hclust")
+importFrom(stats,"kmeans")
+importFrom(stats,"median")
+importFrom(stats,"quantile")

@@ -28,32 +28,32 @@ test_that("no warning when clustering cols", {
 
 test_that("no warning when coloring left labels", {
   superheat(X,
-            left.label.pal = c("red", "blue"))
+            left.label.col = c("red", "blue"))
 })
 
 
 test_that("no warning when coloring left labels", {
   superheat(X,
-            left.label.pal = c("red", "blue", "red"))
+            left.label.col = c("red", "blue", "red"))
 })
 
 
 
 test_that("no warning when coloring left labels", {
   superheat(X,
-            left.label.pal = c("red", "blue", "green", "red", "red", "blue", "purple"))
+            left.label.col = c("red", "blue", "green", "red", "red", "blue", "purple"))
 })
 
 
 test_that("no warning when coloring bottom labels", {
   superheat(X,
-            bottom.label.pal = c("red", "blue", "green"))
+            bottom.label.col = c("red", "blue", "green"))
 })
 
 
 test_that("no warning when coloring bottom labels", {
   superheat(X,
-            bottom.label.pal = c("red", "blue"))
+            bottom.label.col = c("red", "blue"))
 })
 
 
@@ -61,14 +61,14 @@ test_that("no warning when coloring bottom labels", {
 test_that("no warning when clustering and coloring bottom labels", {
   superheat(X,
             membership.cols = cluster.cols,
-            bottom.label.pal = c("red", "blue"))
+            bottom.label.col = c("red", "blue"))
 })
 
 
 test_that("no warning when clustering and coloring left labels", {
   superheat(X,
             membership.rows = cluster.rows,
-            left.label.pal = c("red", "blue", "green", "purple"))
+            left.label.col = c("red", "blue", "green", "purple"))
 })
 
 

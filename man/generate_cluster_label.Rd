@@ -5,7 +5,7 @@
 \title{Generate clustered heatmap labels.}
 \usage{
 generate_cluster_label(membership, location = c("bottom", "left"),
-  label.pal = NULL, label.text.col = NULL, bottom.label.text.size = 5,
+  label.col = NULL, label.text.col = NULL, bottom.label.text.size = 5,
   left.label.text.size = 5, text.angle = NULL)
 }
 \arguments{
@@ -14,7 +14,7 @@ generate_cluster_label(membership, location = c("bottom", "left"),
 \item{location}{will these labels be on the bottom ("bottom") or on the left
 ("left)?}
 
-\item{label.pal}{a vector specifying the cluster/variable label color palette.}
+\item{label.col}{a vector specifying the cluster/variable label color palette.}
 
 \item{label.text.col}{a character or character vector specifying the
 cluster/variable label text color.}
