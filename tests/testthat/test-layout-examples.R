@@ -164,7 +164,6 @@ test_that("Adding column name with top plot and no axes and big left labels", {
             column.title = "colname",
             yt = 1:3,
             left.label.size = 0.3)
-
 })
 
 
