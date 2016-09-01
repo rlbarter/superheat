@@ -121,6 +121,14 @@
 #'          The default is 0.5.
 #' @param grid.hline.col the colour of the horizontal grid lines.
 #' @param grid.vline.col the colour of the vertical grid lines.
+#' @param force.grid.hline a logical describing whether or not to force the
+#'          horizontal grid lines to appear (relevant only when X has more
+#'          than 50 rows). Note that by default there are no horizontal
+#'          grid lines when there are more than 50 rows.
+#' @param force.grid.vline a logical describing whether or not to force the
+#'          vertical grid lines to appear (relevant only when X has more
+#'          than 50 columns). Note that by default there are no vertical
+#'          grid lines when there are more than 50 columns.
 #'
 #' @param smoothing.method if \code{plot.type = "scattersmooth"} or
 #'          \code{"smooth"}, this argument specifies the smoothing method to
@@ -200,6 +208,15 @@
 #'          left cluster/variable label text colour.
 #' @param bottom.label.text.col a character or character vector specifying the
 #'          bottom cluster/variable label text colour.
+#'
+#' @param force.bottom.label a logical describing whether or not to force the
+#'          bottom labels to appear (relevant only when X has more than 50
+#'          columns). Note that by default there are no labels when there are
+#'          more than 50 columns.
+#' @param force.left.label a logical describing whether or not to force the
+#'          left labels to appear (relevant only when X has more than 50
+#'          rows). Note that by default there are no labels when there are
+#'          more than 50 rows.
 #'
 #' @param column.title a string specifying the overall column name (located
 #'          below the bottom.labels).
@@ -291,6 +308,8 @@ superheat <- function(X,
                       grid.vline.size = 0.5,
                       grid.hline.col = "black",
                       grid.vline.col = "black",
+                      force.grid.hline = F,
+                      force.grid.vline = F,
 
                       smoothing.method = c("loess", "lm"),
                       smooth.se = TRUE,
@@ -332,6 +351,8 @@ superheat <- function(X,
                       bottom.label.col = NULL,
                       left.label.text.col = NULL,
                       bottom.label.text.col = NULL,
+                      force.left.label = F,
+                      force.bottom.label = F,
 
                       column.title = NULL,
                       row.title = NULL,
@@ -413,31 +434,31 @@ superheat <- function(X,
   }
 
   # remove variable labels if more than 50 rows/cols
-  if (left.label == "variable") {
+  if ((left.label == "variable") && !force.left.label) {
     if (nrow(X) > 50) {
       left.label <- "none"
     }
   }
-  if (bottom.label == "variable") {
+  if (bottom.label == "variable" && !force.bottom.label) {
     if (ncol(X) > 50) {
       bottom.label <- "none"
     }
   }
 
-  # remove the heatmap grid lines if there are more than 100 cols/rows
+  # remove the heatmap grid lines if there are more than 50 cols/rows
   # do this only when there are variable labels or no labels
-  # (but we want there to be grid lines when there are more than 100
+  # (but we want there to be grid lines when there are more than 50
   #  rows/columns but we are grouping by cluster. In this case the grid
   #  lines correspond to the clusters rather than the variables)
   if (!cluster.cols &
       ((bottom.label == "variable") | (bottom.label == "none"))) {
-    if (ncol(X) > 100) {
+    if ((ncol(X) > 50) && !force.grid.vline) {
        grid.vline <- FALSE
     }
   }
   if (!cluster.rows &
       ((left.label == "variable") | (left.label == "none"))) {
-    if (nrow(X) > 100) {
+    if ((nrow(X) > 50) && !force.grid.hline) {
       grid.hline <- FALSE
     }
   }

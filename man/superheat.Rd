@@ -18,23 +18,24 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   legend.height = 0.1, legend.width = 1.5, legend.text.size = 12,
   grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
   grid.vline.size = 0.5, grid.hline.col = "black",
-  grid.vline.col = "black", smoothing.method = c("loess", "lm"),
-  smooth.se = TRUE, yt.axis = T, yr.axis = T, yt.num.ticks = 3,
-  yr.num.ticks = 3, yt.plot.size = 0.3, yr.plot.size = 0.3,
-  yt.axis.name = NULL, yr.axis.name = NULL, yr.axis.size = 10,
-  yt.axis.size = 10, yr.axis.name.size = 10, yt.axis.name.size = 10,
-  yr.axis.name.angle = NULL, yt.axis.name.angle = NULL, yt.obs.col = NULL,
-  yr.obs.col = NULL, yt.cluster.col = NULL, yr.cluster.col = NULL,
-  yt.bar.col = NULL, yr.bar.col = NULL, yt.point.size = 2,
-  yt.point.alpha = 1, yr.point.size = 2, yr.point.alpha = 1,
-  yr.line.size = NULL, yt.line.size = NULL, bottom.label.text.size = 5,
+  grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
+  smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
+  yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
+  yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
+  yr.axis.size = 10, yt.axis.size = 10, yr.axis.name.size = 10,
+  yt.axis.name.size = 10, yr.axis.name.angle = NULL,
+  yt.axis.name.angle = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
+  yt.cluster.col = NULL, yr.cluster.col = NULL, yt.bar.col = NULL,
+  yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
+  yr.point.size = 2, yr.point.alpha = 1, yr.line.size = NULL,
+  yt.line.size = NULL, bottom.label.text.size = 5,
   left.label.text.size = 5, bottom.label.text.angle = NULL,
   left.label.text.angle = NULL, bottom.label.size = 0.1,
   left.label.size = 0.1, left.label.col = NULL, bottom.label.col = NULL,
   left.label.text.col = NULL, bottom.label.text.col = NULL,
-  column.title = NULL, row.title = NULL, column.title.size = 5,
-  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
-  print.plot = TRUE)
+  force.left.label = F, force.bottom.label = F, column.title = NULL,
+  row.title = NULL, column.title.size = 5, row.title.size = 5,
+  padding = 1, title = NULL, title.size = 5, print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix whose values are to be plotted in the heatmap.}
@@ -170,6 +171,16 @@ The default is 0.5.}
 
 \item{grid.vline.col}{the colour of the vertical grid lines.}
 
+\item{force.grid.hline}{a logical describing whether or not to force the
+horizontal grid lines to appear (relevant only when X has more
+than 50 rows). Note that by default there are no horizontal
+grid lines when there are more than 50 rows.}
+
+\item{force.grid.vline}{a logical describing whether or not to force the
+vertical grid lines to appear (relevant only when X has more
+than 50 columns). Note that by default there are no vertical
+grid lines when there are more than 50 columns.}
+
 \item{smoothing.method}{if \code{plot.type = "scattersmooth"} or
 \code{"smooth"}, this argument specifies the smoothing method to
 use. The default is "loess" for a curve. The alternative option is
@@ -279,6 +290,16 @@ left cluster/variable label text colour.}
 
 \item{bottom.label.text.col}{a character or character vector specifying the
 bottom cluster/variable label text colour.}
+
+\item{force.left.label}{a logical describing whether or not to force the
+left labels to appear (relevant only when X has more than 50
+rows). Note that by default there are no labels when there are
+more than 50 rows.}
+
+\item{force.bottom.label}{a logical describing whether or not to force the
+bottom labels to appear (relevant only when X has more than 50
+columns). Note that by default there are no labels when there are
+more than 50 columns.}
 
 \item{column.title}{a string specifying the overall column name (located
 below the bottom.labels).}
