@@ -1,5 +1,7 @@
 # superheat: An R package for supervised heatmaps
 
+[![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
+
 *superheat* is an R package for generating supervised heatmaps. Supervised heatmaps serve two primary purposes: (1) visualization of complex data and (2) visualization of model fit. See the [vignette](https://cdn.rawgit.com/rlbarter/superheat/master/vignettes/Vignette.html) for usage.
 
 If you find any bugs, have any feature requests or feedback, please submit an issue.
@@ -25,5 +27,3 @@ Basic usage:
 ``` r
 superheat(iris[,-5])
 ```
-
-[![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)

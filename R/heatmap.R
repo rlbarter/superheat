@@ -12,6 +12,7 @@ generate_heat <- function(X,
                                               "blue", "grey", "green"),
                           heat.pal = NULL,
                           heat.pal.values = NULL,
+                          heat.na.col = "grey50",
                           legend.height = 0.1,
                           legend.width = 1.5,
                           legend.text.size = 12,
@@ -74,11 +75,11 @@ generate_heat <- function(X,
   }
 
   # plot color limits:
-  max.col <- max(X.df$value)
-  min.col <- min(X.df$value)
+  max.col <- max(X.df$value, na.rm = T)
+  min.col <- min(X.df$value, na.rm = T)
   range.X <- seq(min.col, max.col, length = 100)
   # specify location of breaks
-  breaks <- signif(as.vector(quantile(range.X)), 1)
+  breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
 
   # define variables to fix visible binding check -- bit of a hack
   x <- X.df$x
@@ -89,7 +90,7 @@ generate_heat <- function(X,
   # quantiles of the data matrix
   if (is.null(heat.pal.values)) {
     probs <- seq(0, 1, length = length(heat.pal))
-    quantiles <- quantile(X.df$value, probs)
+    quantiles <- quantile(X.df$value, probs, na.rm = T)
     heat.pal.values <- (quantiles - min(quantiles)) /
       (max(quantiles) - min(quantiles))
   }
@@ -101,7 +102,8 @@ generate_heat <- function(X,
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
                                   colors = heat.pal,
                                   name = "",
-                                  breaks = breaks) +
+                                  breaks = breaks,
+                                  na.value = heat.na.col) +
     ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
     ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
@@ -168,6 +170,7 @@ generate_smooth_heat <- function(X,
                                                      "blue", "grey", "green"),
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
+                                 heat.na.col = "grey50",
                                  legend.width = 1.5,
                                  legend.height = 0.1,
                                  legend.text.size = 12,
@@ -291,10 +294,10 @@ generate_smooth_heat <- function(X,
   X.df <- dplyr::inner_join(X.df, rect_cranges, by = "cclust")
 
   # plot color limits:
-  max.col <- max(X.df$value)
-  min.col <- min(X.df$value)
+  max.col <- max(X.df$value, na.rm = T)
+  min.col <- min(X.df$value, na.rm = T)
   range.X <- seq(min.col, max.col, length = 100)
-  breaks <- signif(as.vector(quantile(range.X)), 1)
+  breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
 
   # define variables to fix visible binding check -- bit of a hack
   xmax <- X.df$xmax
@@ -305,7 +308,7 @@ generate_smooth_heat <- function(X,
 
   if (is.null(heat.pal.values)) {
     probs <- seq(0, 1, length = length(heat.pal))
-    quantiles <- quantile(X.df$value, probs)
+    quantiles <- quantile(X.df$value, probs, na.rm = T)
     heat.pal.values <- (quantiles - min(quantiles)) /
       (max(quantiles) - min(quantiles))
   }
@@ -317,7 +320,8 @@ generate_smooth_heat <- function(X,
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
                                   colors = heat.pal,
                                   name = "",
-                                  breaks = breaks) +
+                                  breaks = breaks,
+                                  na.value = heat.na.col) +
     ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
     ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
