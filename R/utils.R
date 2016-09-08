@@ -276,13 +276,6 @@ stop_errors <- function(X,
     stop("'n.clusters.rows' must be a single integer.")
   }
 
-  if (!is.null(yt) && (length(yt) != ncol(X))) {
-    stop("'yt' must have length equal to the number of columns of 'X'.")
-  }
-
-  if (!is.null(yr) && (length(yr) != nrow(X))) {
-    stop("'yr' must have length equal to the number of rows of 'X'.")
-  }
 
   if (!is.null(order.cols) && (!identical(sort(order.cols), 1:ncol(X)))) {
     stop("'order.cols' must be a vector containing the column indexes of 'X'.")
@@ -291,5 +284,6 @@ stop_errors <- function(X,
   if (!is.null(order.rows) && (!identical(sort(order.rows), 1:nrow(X)))) {
     stop("'order.rows' must be a vector containing the row indexes of 'X'.")
   }
+
 
 }

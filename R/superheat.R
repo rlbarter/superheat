@@ -391,6 +391,8 @@ superheat <- function(X,
   stop.arg.list <- stop.arg.list[!is.na(names(stop.arg.list))]
   do.call(stop_errors, stop.arg.list)
 
+
+
   # if there is no yt or yr axis name provided, set the name to the name of
   # the object provided by the yr/yt argument
   if (is.null(yr.axis.name)) {
@@ -414,6 +416,51 @@ superheat <- function(X,
   } else {
     cluster.rows <- FALSE
   }
+
+  # how many column clusters
+  if (cluster.cols) {
+    if (!is.null(n.clusters.cols)) {
+      n.col.clusters <- n.clusters.cols
+    } else if (!is.null(membership.cols)) {
+      n.col.clusters <- length(unique(membership.cols))
+    }
+  }
+
+  # how many row clusters
+  if (cluster.rows) {
+    if (!is.null(n.clusters.rows)) {
+      n.row.clusters <- n.clusters.rows
+    } else if (!is.null(membership.rows)) {
+      n.row.clusters <- length(unique(membership.rows))
+    }
+  }
+  if ((!cluster.cols && !is.null(yt) && (length(yt) != ncol(X))) |
+      ((cluster.cols && !is.null(yt) && (length(yt) != n.col.clusters)) && 
+       (cluster.cols && !is.null(yt) && (length(yt) != ncol(X))))) {
+    stop(paste("'yt' must have length equal to either the number of columns",
+               "of 'X' or the number of column clusters of 'X'."))
+  }
+
+  if ((!cluster.rows && !is.null(yr) && (length(yr) != nrow(X))) |
+      ((cluster.rows && !is.null(yr) && (length(yr) != n.row.clusters)) &&
+       (cluster.rows && !is.null(yr) && (length(yr) != nrow(X))))) {
+    stop(paste("'yr' must have length equal to either the number of rows",
+               "of 'X' or the number of row clusters of 'X'."))
+  }
+
+  # shoot an error if a top plot is provided and is set to boxplot
+  # but the columns are not clustered. Reason being that boxplots need to
+  # aggregate data.
+  if (!is.null(yt) && !cluster.cols && (yt.plot.type == "boxplot")) {
+    stop("Cannot set yt.plot.type = 'boxplot' without clustering the columns.")
+  }
+  # shoot an error if a right plot is provided and is set to boxplot
+  # but the rows are not clustered. Reason being that boxplots need to
+  # aggregate data.
+  if (!is.null(yr) && !cluster.rows && (yr.plot.type == "boxplot")) {
+    stop("Cannot set yr.plot.type = 'boxplot' without clustering the rows.")
+  }
+
 
   # if there are no row labels provided and cluster.rows is FALSE,
   # then set the default label type to be "variable",
@@ -534,10 +581,18 @@ superheat <- function(X,
   # Reorder X, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
   if (!is.null(yr)) {
-    yr <- yr[order.df.rows$order.rows]
+    # only rearrange within cluster if the right plot is for each 
+    # data point (rather than for each cluster)
+    if (length(yr) == nrow(X)) {
+      yr <- yr[order.df.rows$order.rows]  
+    }
   }
   if (!is.null(yt)) {
-    yt <- yt[order.df.cols$order.cols]
+    # only rearrange within cluster if the top plot is for each 
+    # data point (rather than for each cluster)
+    if (length(yt) == ncol(X)) {
+      yt <- yt[order.df.cols$order.cols]
+    }
   }
   membership.rows <- membership.rows[order.df.rows$order.rows]
   membership.cols <- membership.cols[order.df.cols$order.cols]

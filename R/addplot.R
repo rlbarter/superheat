@@ -1,4 +1,5 @@
-generate_add_on_plot <- function(y,
+generate_add_on_plot <- function(X,
+                                 y,
                                  location = c("top", "right"),
                                  membership,
                                  plot.type = c("scatter", "bar", "boxplot",
@@ -19,6 +20,16 @@ generate_add_on_plot <- function(y,
                                  y.line.size = NULL,
                                  smooth.se = TRUE) {
 
+  
+  # is the plot for clusters or for individual data points?
+  if (((location == "top") && (length(y) != ncol(X))) |
+      ((location == "right") && (length(y) != nrow(X)))) {
+    clustered.plot <- T
+  } else {
+    clustered.plot <- F
+  }
+  
+  
   # detect arguments
   plot.type <- match.arg(plot.type)
 
@@ -67,14 +78,49 @@ generate_add_on_plot <- function(y,
   # membership: the cluster membership for each position/obs
   # col: the colour of each data point
   y.df <- data.frame(y = y, x = id)
-  y.df$membership <- factor(membership)
+  if (clustered.plot) {
+    y.df$membership <- levels(factor(membership))
+  } else {
+    y.df$membership <- factor(membership)
+  }
+  
   if (!is.null(y.obs.col)) {
     y.df$col <- y.obs.col
+  }
+
+  # if y is not being provided for all observations
+  # (then it must be for clusters)
+  # We need to make sure each value is plotted in the center of the cluster
+  if (clustered.plot) {
+    y.df$membership <- factor(unique(membership))
+    # calculate the positions to be the center of each cluster
+    # first identify each unique cluster and the number (size) of
+    # data points in each cluster
+    clust.boundary.df <- data.frame(cluster = unique(membership),
+                                    size = as.vector(table(membership)))
+    # fix visible binding note in package check
+    size <- clust.boundary.df$size
+    # calculate the position of the beginning and end of each cluster
+    # (e.g. the grid lines on the heatmap), scaled by the
+    # number of clusters
+    clust.boundary.df <- clust.boundary.df %>%
+      dplyr::mutate(increment = (size / sum(size)) * length(membership))
+    # specify a vector consisting of the location (axis boundary) of
+    # each boxplot
+    boundary <- c(1, 1 + cumsum(clust.boundary.df$increment))
+    # calculate the center of each boudary, removing the NA's at either end
+    midpoints <- matrix(c(c(boundary, NA), c(NA, boundary)),
+                        ncol = 2, byrow = F)
+    midpoints <- apply(midpoints, 1, mean)[2:(length(boundary))]
+
+    y.df$x <- midpoints
+    
   }
 
   # fix visible binding note
   x <- y.df$x
   y <- y.df$y
+  
 
   # define the location of the ticks for the axis
   # for all plots other than a bar plot:
@@ -83,19 +129,23 @@ generate_add_on_plot <- function(y,
   if (plot.type %in% c("scatter", "boxplot", "scattersmooth",
                        "smooth", "line", "scatterline")) {
     # equally spaced positions from the min to the max value
-    ticks <- seq(min((y.df$y)), max((y.df$y)), length = num.ticks)
-  } else if ((plot.type == "bar") && (min(y.df$y) > 0)) {
+    ticks <- seq(min(y.df$y, na.rm = T),
+                 max(y.df$y, na.rm = T), length = num.ticks)
+  } else if ((plot.type == "bar") && (min(y.df$y, na.rm = T) > 0)) {
     # for a bar plot, if the minimum value is positive,
     # then make sure that the axis starts at 0, rather than the minimum
-    ticks <- seq(0, max(y.df$y), length = num.ticks)
-  } else if ((plot.type == "bar") && (max(y.df$y) < 0)) {
+    ticks <- seq(0, max(y.df$y, na.rm = T), length = num.ticks)
+  } else if ((plot.type == "bar") && (max(y.df$y, na.rm = T) < 0)) {
     # for a bar plot, if the maximum value is negative,
     # then make sure that the axis ends at 0, rather than the maximum
-    ticks <- seq(min(y.df$y), 0, length = num.ticks)
-  } else if ((plot.type == "bar") && (max(y.df$y) > 0) && (min(y.df$y) < 0)) {
+    ticks <- seq(min(y.df$y, na.rm = T), 0, length = num.ticks)
+  } else if ((plot.type == "bar") &&
+             (max(y.df$y, na.rm = T) > 0) &&
+             (min(y.df$y, na.rm = T) < 0)) {
     # for a bar plot, there are both positive and negative values,
     # the axis should range from the min to the max
-    ticks <- seq(min(y.df$y), max(y.df$y), length = num.ticks)
+    ticks <- seq(min(y.df$y, na.rm = T), max(y.df$y, na.rm = T),
+                 length = num.ticks)
   }
 
   # define number of clusters
@@ -114,8 +164,7 @@ generate_add_on_plot <- function(y,
     } else {
       # for all other plot types, the x-axis is the standard x-axis
       gg.add <- ggplot2::ggplot(y.df) +
-        theme_top +
-        ggplot2::scale_x_continuous(name = "", expand = c(0.01, 0.01))
+        theme_top 
     }
   } else if (location == "right") {
       # for boxplots, we need to make sure that each boxplot
@@ -133,9 +182,29 @@ generate_add_on_plot <- function(y,
           # flip the coordinates so that the left vertical coordinate is
           # the x-axis
           ggplot2::coord_flip() +
-          theme_right +
-          ggplot2::scale_x_continuous(name = "", expand = c(0.01, 0.01))
+          theme_right 
+      
       }
+  }
+  
+  # make sure the additional plots are the correct distance from the edges
+  if (plot.type != "boxplot") {
+    if ((plot.type == "bar") && !clustered.plot) {
+      gg.add <- gg.add + 
+        ggplot2::scale_x_continuous(name = "",
+                                    expand = c(0, 0))
+    } else if (clustered.plot) {
+      gg.add <- gg.add + 
+        ggplot2::scale_x_continuous(name = "",
+                                    limits = c(min(boundary, na.rm = T),
+                                               max(boundary, na.rm = T)),
+                                    expand = c(0, 0))
+    } else {
+      gg.add <- gg.add +
+        ggplot2::scale_x_continuous(name = "",
+                                    expand = c(0, 0),
+                                    limits = c(0.5, length(y) + 0.5))
+    }
   }
 
   # define pretty breaks
@@ -276,16 +345,36 @@ generate_add_on_plot <- function(y,
   } else if (is.null(y.obs.col) && (plot.type == "bar")) {
     # for the "bar" plot type, add a bar plot to the empty gg.add
     # Case 1: no color specified for individual observations
-    gg.add <- gg.add +
-      ggplot2::geom_bar(ggplot2::aes(x = x,
-                                     y = y,
-                                     fill = factor(membership)),
-                        col = y.bar.col,
-                        position = ggplot2::position_dodge(0),
-                        stat = "identity",
-                        width = 1) +
+    if (clustered.plot) {
+      # add a variable for the width of the bar
+      y.df.bar <- y.df
+      y.df.bar$width <- clust.boundary.df$increment
+      # fix visible binding note in check()
+      width <- y.df.bar$width
+      gg.add <- gg.add +
+        ggplot2::geom_bar(ggplot2::aes(x = x,
+                                       y = y,
+                                       fill = factor(membership),
+                                       width = width),
+                          col = y.bar.col,
+                          position = ggplot2::position_dodge(0),
+                          stat = "identity",
+                          data = y.df.bar) +
       ggplot2::scale_fill_manual(values = rep(y.cluster.col,
-                                              length = n.clusters))
+                                              length = n.clusters)) 
+    } else {
+      gg.add <- gg.add +
+        ggplot2::geom_bar(ggplot2::aes(x = x,
+                                       y = y,
+                                       fill = factor(membership)),
+                          col = y.bar.col,
+                          position = ggplot2::position_dodge(0),
+                          stat = "identity",
+                          width = 1) +
+        ggplot2::scale_fill_manual(values = rep(y.cluster.col,
+                                                length = n.clusters)) 
+    }
+    
   } else if (!is.null(y.obs.col) && (plot.type == "bar")) {
     # for the "bar" plot type, add a bar plot to the empty gg.add
     # Case 2: color specified for individual observations
@@ -301,11 +390,14 @@ generate_add_on_plot <- function(y,
   }
 
   # add a 0 intercept line for the barplots
-  if ((plot.type == "bar") && (min(y.df$y) < 0) && (max(y.df$y) > 0)) {
+  if ((plot.type == "bar") && (min(y.df$y, na.rm = T) < 0) &&
+      (max(y.df$y, na.rm = T) > 0)) {
     gg.add <- gg.add +
       ggplot2::geom_hline(yintercept = 0, col = "grey")
   }
 
+
+  
   # rotate axis name
   gg.add <- gg.add +
     ggplot2::theme(axis.title.y =
