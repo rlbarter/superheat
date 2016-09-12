@@ -33,6 +33,8 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   left.label.text.angle = NULL, bottom.label.size = 0.1,
   left.label.size = 0.1, left.label.col = NULL, bottom.label.col = NULL,
   left.label.text.col = NULL, bottom.label.text.col = NULL,
+  left.label.text.alignment = c("center", "left", "right"),
+  bottom.label.text.alignment = c("center", "left", "right"),
   force.left.label = F, force.bottom.label = F, column.title = NULL,
   row.title = NULL, column.title.size = 5, row.title.size = 5,
   padding = 1, title = NULL, title.size = 5, print.plot = TRUE)
@@ -290,6 +292,12 @@ left cluster/variable label text colour.}
 
 \item{bottom.label.text.col}{a character or character vector specifying the
 bottom cluster/variable label text colour.}
+
+\item{left.label.text.alignment}{the text alignment of the label text. The
+default is "center". Alternate options are "left" and "right".}
+
+\item{bottom.label.text.alignment}{the text alignment of the label text. The
+default is "center". Alternate options are "left" and "right".}
 
 \item{force.left.label}{a logical describing whether or not to force the
 left labels to appear (relevant only when X has more than 50

@@ -199,6 +199,10 @@
 #'          cluster/variable label panel.
 #' @param left.label.size a number specifying the size of the left
 #'          cluster/variable label panel.
+#' @param bottom.label.text.alignment the text alignment of the label text. The
+#'          default is "center". Alternate options are "left" and "right".
+#' @param left.label.text.alignment the text alignment of the label text. The
+#'          default is "center". Alternate options are "left" and "right".
 #'
 #' @param left.label.col a vector specifying the left cluster/variable label
 #'          colour palette.
@@ -351,6 +355,9 @@ superheat <- function(X,
                       bottom.label.col = NULL,
                       left.label.text.col = NULL,
                       bottom.label.text.col = NULL,
+                      left.label.text.alignment = c("center", "left", "right"),
+                      bottom.label.text.alignment = c("center", "left", 
+                                                      "right"),
                       force.left.label = F,
                       force.bottom.label = F,
 
@@ -684,6 +691,7 @@ superheat <- function(X,
     location <- "bottom"
     label.col <- bottom.label.col
     label.text.col <- bottom.label.text.col
+    label.text.alignment <- bottom.label.text.alignment
     text.angle <- bottom.label.text.angle
 
     # generate the bottom label
@@ -699,8 +707,9 @@ superheat <- function(X,
     # define the arguments for generating the bottom "cluster" label
     location <- "bottom"
     membership <- membership.cols
-    label.col = bottom.label.col
-    label.text.col = bottom.label.text.col
+    label.col <- bottom.label.col
+    label.text.col <- bottom.label.text.col
+    label.text.alignment <- bottom.label.text.alignment
     text.angle <- bottom.label.text.angle
 
     # generate the bottom label
@@ -721,8 +730,9 @@ superheat <- function(X,
     # define the arguments for generating the left "variable" label
     names <- rownames(X)
     location <- "left"
-    label.col = left.label.col
-    label.text.col = left.label.text.col
+    label.col <- left.label.col
+    label.text.col <- left.label.text.col
+    label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
 
     # generate the left label
@@ -738,8 +748,9 @@ superheat <- function(X,
     # define the arguments for generating the left "cluster" label
     location <- "left"
     membership <- membership.rows
-    label.col = left.label.col
-    label.text.col = left.label.text.col
+    label.col <- left.label.col
+    label.text.col <- left.label.text.col
+    label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
 
     # generate the left label

@@ -591,6 +591,21 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
+* Changing the cluster/variable label text alignment
+
+```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
+
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr = iris[,"Petal.Length"],
+            membership.rows = iris[,"Species"],
+            yr.axis.name = "Petal.Length",
+            bottom.label.size = 0.4,
+            left.label.size = 0.3,
+            left.label.text.angle = 0,
+          left.label.text.alignment = "right")
+```
+
+
 * Changing the cluster/variable label text size (the default is 5)
 
 

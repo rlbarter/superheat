@@ -4,13 +4,15 @@
 #'
 #'
 #' @param membership a vector specifying the cluster membership.
-#' @param label.col a vector specifying the cluster/variable label color palette.
+#' @param label.col a vector specifying cluster/variable label color palette.
 #' @param label.text.col a character or character vector specifying the
 #'          cluster/variable label text color.
 #' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
 #' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
+#' @param label.text.alignment the text alignment of the label text. The
+#'          default is "center". Alternate options are "left" and "right".
 #' @param location will these labels be on the bottom ("bottom") or on the left
 #'          ("left)?
 #' @param text.angle number of degrees to rotate the text on the left
@@ -24,12 +26,27 @@ generate_cluster_label <- function(membership,
                                    location = c("bottom", "left"),
                                    label.col = NULL,
                                    label.text.col = NULL,
+                                   label.text.alignment = c("center", 
+                                                            "left", 
+                                                            "right"),
                                    bottom.label.text.size = 5,
                                    left.label.text.size = 5,
                                    text.angle = NULL) {
 
 
+  label.text.alignment <- match.arg(label.text.alignment)
   location <- match.arg(location)
+  
+  if (label.text.alignment == "center") {
+    alignment <- "center"
+    pos <- 0.5
+  } else if (label.text.alignment == "left") {
+    alignment <- 0
+    pos <- 0
+  } else if (label.text.alignment == "right") {
+    alignment <- 1
+    pos <- 1
+  }
 
 
   if ( (location == "bottom") && is.null(text.angle) )
@@ -123,10 +140,10 @@ generate_cluster_label <- function(membership,
       ggplot2::geom_rect() +
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = as.character(label.col)) +
-      ggplot2::geom_text(ggplot2::aes(x = 0.5,
+      ggplot2::geom_text(ggplot2::aes(x = pos,
                                       y = breaks + increment / 2,
                                       label = cluster.names),
-                         hjust = "centre",
+                         hjust = alignment,
                          vjust = "centre",
                          size = left.label.text.size,
                          angle = text.angle,
@@ -152,10 +169,10 @@ generate_cluster_label <- function(membership,
       ggplot2::geom_rect() +
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = as.character(label.col)) +
-      ggplot2::geom_text(ggplot2::aes(y = 0.5,
+      ggplot2::geom_text(ggplot2::aes(y = pos,
                                       x = breaks + increment / 2,
                                       label = cluster.names),
-                         hjust = "centre",
+                         hjust = alignment,
                          vjust = "centre",
                          size = bottom.label.text.size,
                          col = label.text.col,
@@ -190,6 +207,8 @@ generate_cluster_label <- function(membership,
 #'          default is 5.
 #' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
+#' @param label.text.alignment the text alignment of the label text. The
+#'          default is "center". Alternate options are "left" and "right".
 #' @param location will these labels be on the bottom ("bottom") or on the left
 #'          ("left)?
 #' @param text.angle number of degrees to rotate the text on the left
@@ -202,12 +221,26 @@ generate_var_label <- function(names,
                                location = c("bottom", "left"),
                                label.col = NULL,
                                label.text.col = NULL,
+                               label.text.alignment = c("center", 
+                                                        "left", 
+                                                        "right"),
                                bottom.label.text.size = 5,
                                left.label.text.size = 5,
                                text.angle = NULL) {
 
-
+  label.text.alignment <- match.arg(label.text.alignment)
   location <- match.arg(location)
+  
+  if (label.text.alignment == "center") {
+    alignment <- "center"
+    pos <- 0.5
+  } else if (label.text.alignment == "left") {
+    alignment <- 0
+    pos <- 0
+  } else if (label.text.alignment == "right") {
+    alignment <- 1
+    pos <- 1
+  }
 
   if ( (location == "bottom") && is.null(text.angle) ) {
     text.angle <- 0
@@ -289,10 +322,10 @@ generate_var_label <- function(names,
       ggplot2::geom_rect() +
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = label.col) +
-      ggplot2::geom_text(ggplot2::aes(x = 0.5,
+      ggplot2::geom_text(ggplot2::aes(x = pos,
                                       y = breaks + increment / 2,
                                       label = variable),
-                         hjust = "centre",
+                         hjust = alignment,
                          vjust = "centre",
                          size = left.label.text.size,
                          angle = text.angle,
@@ -316,10 +349,10 @@ generate_var_label <- function(names,
       ggplot2::geom_rect() +
       theme_clust_labels +
       ggplot2::scale_fill_manual(values = label.col) +
-      ggplot2::geom_text(ggplot2::aes(y = 0.5,
+      ggplot2::geom_text(ggplot2::aes(y = pos,
                                       x = breaks + increment / 2,
                                       label = variable),
-                         hjust = "centre",
+                         hjust = alignment,
                          vjust = "centre",
                          size = bottom.label.text.size,
                          col = label.text.col,

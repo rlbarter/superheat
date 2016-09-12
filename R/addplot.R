@@ -40,7 +40,7 @@ generate_add_on_plot <- function(X,
   if (location == "right" && is.null(axis.name.angle)) {
     axis.name.angle <- 0
   }
-  # specify default label colors
+  # specify default label colours
   if (is.null(y.obs.col) && is.null(y.cluster.col)) {
     y.cluster.col <- c("Grey 61", "Grey 43")
   }
