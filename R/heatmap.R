@@ -100,7 +100,7 @@ generate_heat <- function(X,
                                       fill = value,
                                       color = "black")) +
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
-                                  colors = heat.pal,
+                                  colours = heat.pal,
                                   name = "",
                                   breaks = breaks,
                                   na.value = heat.na.col) +
@@ -318,7 +318,7 @@ generate_smooth_heat <- function(X,
                                     ymin = ymin, ymax = ymax,
                                       fill = value)) +
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
-                                  colors = heat.pal,
+                                  colours = heat.pal,
                                   name = "",
                                   breaks = breaks,
                                   na.value = heat.na.col) +
