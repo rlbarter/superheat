@@ -30,8 +30,8 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yr.point.size = 2, yr.point.alpha = 1, yr.line.size = NULL,
   yt.line.size = NULL, bottom.label.text.size = 5,
   left.label.text.size = 5, bottom.label.text.angle = NULL,
-  left.label.text.angle = NULL, bottom.label.size = 0.1,
-  left.label.size = 0.1, left.label.col = NULL, bottom.label.col = NULL,
+  left.label.text.angle = NULL, bottom.label.size = 0.2,
+  left.label.size = 0.2, left.label.col = NULL, bottom.label.col = NULL,
   left.label.text.col = NULL, bottom.label.text.col = NULL,
   left.label.text.alignment = c("center", "left", "right"),
   bottom.label.text.alignment = c("center", "left", "right"),
@@ -270,10 +270,10 @@ default is 5.}
 default is 5.}
 
 \item{bottom.label.text.angle}{number of degrees to rotate the text on the
-bottom cluster/variable labels. The default is 0.}
+bottom cluster/variable labels. The default is 90.}
 
 \item{left.label.text.angle}{number of degrees to rotate the text on the
-left cluster/variable labels. The default is 90.}
+left cluster/variable labels. The default is 0.}
 
 \item{bottom.label.size}{a number specifying the size of the bottom
 cluster/variable label panel.}

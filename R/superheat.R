@@ -192,9 +192,9 @@
 #' @param left.label.text.size the size of the left heatmap label text. The
 #'          default is 5.
 #' @param bottom.label.text.angle number of degrees to rotate the text on the
-#'          bottom cluster/variable labels. The default is 0.
+#'          bottom cluster/variable labels. The default is 90.
 #' @param left.label.text.angle number of degrees to rotate the text on the
-#'          left cluster/variable labels. The default is 90.
+#'          left cluster/variable labels. The default is 0.
 #' @param bottom.label.size a number specifying the size of the bottom
 #'          cluster/variable label panel.
 #' @param left.label.size a number specifying the size of the left
@@ -349,14 +349,14 @@ superheat <- function(X,
                       left.label.text.size = 5,
                       bottom.label.text.angle = NULL,
                       left.label.text.angle = NULL,
-                      bottom.label.size = 0.1,
-                      left.label.size = 0.1,
+                      bottom.label.size = 0.2,
+                      left.label.size = 0.2,
                       left.label.col = NULL,
                       bottom.label.col = NULL,
                       left.label.text.col = NULL,
                       bottom.label.text.col = NULL,
                       left.label.text.alignment = c("center", "left", "right"),
-                      bottom.label.text.alignment = c("center", "left", 
+                      bottom.label.text.alignment = c("center", "left",
                                                       "right"),
                       force.left.label = F,
                       force.bottom.label = F,
@@ -442,7 +442,7 @@ superheat <- function(X,
     }
   }
   if ((!cluster.cols && !is.null(yt) && (length(yt) != ncol(X))) |
-      ((cluster.cols && !is.null(yt) && (length(yt) != n.col.clusters)) && 
+      ((cluster.cols && !is.null(yt) && (length(yt) != n.col.clusters)) &&
        (cluster.cols && !is.null(yt) && (length(yt) != ncol(X))))) {
     stop(paste("'yt' must have length equal to either the number of columns",
                "of 'X' or the number of column clusters of 'X'."))
@@ -489,12 +489,12 @@ superheat <- function(X,
 
   # remove variable labels if more than 50 rows/cols
   if ((left.label == "variable") && !force.left.label) {
-    if (nrow(X) > 50) {
+    if (nrow(X) > 100) {
       left.label <- "none"
     }
   }
   if (bottom.label == "variable" && !force.bottom.label) {
-    if (ncol(X) > 50) {
+    if (ncol(X) > 100) {
       bottom.label <- "none"
     }
   }
@@ -588,14 +588,14 @@ superheat <- function(X,
   # Reorder X, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
   if (!is.null(yr)) {
-    # only rearrange within cluster if the right plot is for each 
+    # only rearrange within cluster if the right plot is for each
     # data point (rather than for each cluster)
     if (length(yr) == nrow(X)) {
-      yr <- yr[order.df.rows$order.rows]  
+      yr <- yr[order.df.rows$order.rows]
     }
   }
   if (!is.null(yt)) {
-    # only rearrange within cluster if the top plot is for each 
+    # only rearrange within cluster if the top plot is for each
     # data point (rather than for each cluster)
     if (length(yt) == ncol(X)) {
       yt <- yt[order.df.cols$order.cols]

@@ -130,31 +130,22 @@ generate_layout <- function(gg.heat,
     # We always want the legend to be either two rows below the bottom of
     # the heatmap (if no bottom labels), or two rows below the bottom labels
     # Add a blank row for the following conditions:
-    #   - there is no right plot OR there is a column name
+    #   - there is a column name
     #   - there is a right plot but there are no right-plot axes AND
     #     there is no column name,
     #   - there is a right plot, with and axis, but the bottom labels
     #     are larger than 0.2
     #   - if there a right plot with axis AND column name AND no bottom labels
-    if ((is.null(gg.right) | is.null(gg.column.title)) |
+    if (is.null(gg.column.title) |
         ((!is.null(gg.right) && yr.axis == F) &&
           is.null(gg.column.title)) |
         (!is.null(gg.right) && bottom.label.size > 0.2) |
         (!is.null(gg.right) && yr.axis &&
-         !is.null(gg.column.title))) {
+         !is.null(gg.column.title) && is.null(gg.bottom))) {
       layout <- gtable::gtable_add_rows(layout,
-                                        grid::unit(legend.height, "null"))
+                                        grid::unit(0.1, "null"))
     }
-    # if there is
-    #   - both no right plot, AND a column title
-    #   - there is a right plot with no axis AND the bottom labels
-    #     are not wider than the axis would have been
-    # add an extra row
-    if ((is.null(gg.right) && is.null(gg.column.title)) |
-        (!is.null(gg.right) && !yr.axis && bottom.label.size <= 0.2)) {
-      layout <- gtable::gtable_add_rows(layout,
-                                        grid::unit(legend.height, "null"))
-    }
+
     # the legend is always in the very bottom row
     # the only time we do not need to add a row for it is when there are no
     # bottom labels and there is a right plot and axis
@@ -340,7 +331,7 @@ generate_grobs <- function(layout,
     # ensure that the left labels fill the entire space by
     # extending the right-side of the grob
     r <- l
-    if (left.label.size >= 0.2 && !is.null(gg.top) && yt.axis) {
+    if (left.label.size > 0.2 && !is.null(gg.top) && yt.axis) {
       r <- r + 2 # add 1 for the top plot axis itself and 1 for the axis title
     }
 

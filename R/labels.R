@@ -26,8 +26,8 @@ generate_cluster_label <- function(membership,
                                    location = c("bottom", "left"),
                                    label.col = NULL,
                                    label.text.col = NULL,
-                                   label.text.alignment = c("center", 
-                                                            "left", 
+                                   label.text.alignment = c("center",
+                                                            "left",
                                                             "right"),
                                    bottom.label.text.size = 5,
                                    left.label.text.size = 5,
@@ -36,7 +36,7 @@ generate_cluster_label <- function(membership,
 
   label.text.alignment <- match.arg(label.text.alignment)
   location <- match.arg(location)
-  
+
   if (label.text.alignment == "center") {
     alignment <- "center"
     pos <- 0.5
@@ -52,7 +52,7 @@ generate_cluster_label <- function(membership,
   if ( (location == "bottom") && is.null(text.angle) )
     text.angle <- 0
   if ( (location == "left") && is.null(text.angle) )
-    text.angle <- 90
+    text.angle <- 0
 
   # define themes
   themes.arg.list <- c(as.list(environment()))
@@ -221,8 +221,8 @@ generate_var_label <- function(names,
                                location = c("bottom", "left"),
                                label.col = NULL,
                                label.text.col = NULL,
-                               label.text.alignment = c("center", 
-                                                        "left", 
+                               label.text.alignment = c("center",
+                                                        "left",
                                                         "right"),
                                bottom.label.text.size = 5,
                                left.label.text.size = 5,
@@ -230,7 +230,7 @@ generate_var_label <- function(names,
 
   label.text.alignment <- match.arg(label.text.alignment)
   location <- match.arg(location)
-  
+
   if (label.text.alignment == "center") {
     alignment <- "center"
     pos <- 0.5
@@ -242,13 +242,13 @@ generate_var_label <- function(names,
     pos <- 1
   }
 
-  if ( (location == "bottom") && is.null(text.angle) ) {
+
+  if ((location == "bottom") && is.null(text.angle)) {
     text.angle <- 0
   }
-  if ( (location == "left") && is.null(text.angle) ) {
-    text.angle <- 90
+  if ((location == "left") && is.null(text.angle)) {
+    text.angle <- 0
   }
-
   # define themes
   themes.arg.list <- c(as.list(environment()))
   themes.arg.list <- themes.arg.list[names(formals(themes))]
