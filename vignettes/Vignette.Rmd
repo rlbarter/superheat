@@ -596,13 +596,15 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
 
 superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
-            yr = iris[,"Petal.Length"],
-            membership.rows = iris[,"Species"],
-            yr.axis.name = "Petal.Length",
-            bottom.label.size = 0.4,
-            left.label.size = 0.3,
-            left.label.text.angle = 0,
-          left.label.text.alignment = "right")
+          yr = iris[,"Petal.Length"],
+          membership.rows = iris[,"Species"],
+          yr.axis.name = "Petal.Length",
+          left.label.size = 0.3,
+          left.label.text.alignment = "right",
+          left.label.text.angle = 0,
+          bottom.label.size = 0.5,
+          bottom.label.text.alignment = "right",
+          bottom.label.text.angle = 90)
 ```
 
 
