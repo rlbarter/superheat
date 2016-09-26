@@ -309,6 +309,16 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 ```
 
 
+
+
+* A dendrogram (note that you cannot specity `yr` or row clustering information when setting the `yr.plot.type` to dendrogram)
+
+```{r, fig.align='center',fig.height = 5, fig.width = 6,  fig.show = 'hold'}
+superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], 
+            yr.plot.type = "dendrogram")
+```
+
+
 ### Layout
 
 

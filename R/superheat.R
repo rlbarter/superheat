@@ -24,14 +24,13 @@
 #'          "dendrogram", can only be used when \code{yt} is not specified
 #'          and clustering is not performed.
 #'          Instead, a dendrogram will be plotted next to the rows, and the
-#'          rows will be reordered by row mean.
+#'          rows will be reordered accordingly.
 #' @param yr.plot.type character specifying the \code{yr} plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
 #'          "smooth", "boxplot", "scatterline", "line". A special type
 #'          "dendrogram", can only be used when \code{yr} is not specified
-#'          and clustering is not performed.
-#'          Instead, a dendrogram will be plotted next to the rows, and the
-#'          rows will be reordered by row mean.
+#'          and clustering is not performed. Instead, a dendrogram will be plotted
+#'          next to the rows, and the rows will be reordered accordingly.
 #' @param membership.rows a vector specifying the cluster membership
 #'          of the rows in X.
 #' @param membership.cols a vector specifying the cluster membership
