@@ -8,6 +8,8 @@ generate_layout <- function(gg.heat,
                             gg.title = NULL,
                             gg.row.title = NULL,
                             gg.column.title = NULL,
+                            row.dendrogram = F,
+                            col.dendrogram = F,
                             yt.axis = T,
                             yr.axis = T,
                             yt.axis.name = NULL,
@@ -19,8 +21,19 @@ generate_layout <- function(gg.heat,
                             bottom.label.size = 0.1,
                             left.label.size = 0.1,
                             legend.height = 0.2) {
+
   # Generate the gtable object whose cells correspond to the heatmap
   # and additional elements such as the top and right plot, and labels.
+
+
+  # if there are dendrograms, remove the axes
+  if (row.dendrogram) {
+    yr.axis <- F
+  }
+
+  if (col.dendrogram) {
+    yt.axis <- F
+  }
 
   # heatmap in first position
   layout <- gtable::gtable_filter(ggplot2::ggplotGrob(gg.heat),
@@ -173,6 +186,8 @@ generate_grobs <- function(layout,
                            gg.title = NULL,
                            gg.row.title = NULL,
                            gg.column.title = NULL,
+                           row.dendrogram = F,
+                           col.dendrogram = F,
                            yt.axis = T,
                            yr.axis = T,
                            yt.axis.name = T,
@@ -180,6 +195,18 @@ generate_grobs <- function(layout,
                            padding = 1,
                            bottom.label.size = 0.1,
                            left.label.size = 0.1) {
+
+  # if there is a row dendrogram, make sure that gg.right is not null
+  if (row.dendrogram) {
+    yr.axis <- F
+  }
+
+  # if there is a col dendrogram, make sure that gg.top is not null
+  if (col.dendrogram) {
+    yt.axis <- F
+  }
+
+
 
   # Place legend grob in appropriate gtable cell in the bottom row
   # Grobs affecting legend position:
@@ -222,11 +249,14 @@ generate_grobs <- function(layout,
       t <- t + 1
     }
     # place the right plot in the specified position
+    # if it is a dendrogram, get the denrogram
+
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.right),
                                                             pattern = "panel", trim = TRUE,
                                                             fixed = TRUE),
                                       t = t, l = l)
+
     # place the right plot axis (ignoring the axis name) in the specified position,
     # one row below the right plot
     if (yr.axis) {
@@ -264,11 +294,14 @@ generate_grobs <- function(layout,
       l <- l - 1
     }
     # place the top plot in the specified position
+    # If it is a dendrogram, extract the dendrogram
+
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.top),
                                                             pattern = "panel",
                                                             trim = TRUE, fixed = TRUE),
                                       t = t, l = l)
+
     # place the top plot axis (ignoring the axis name) in the specified position,
     # one column to the left of the top plot
     if (yt.axis) {

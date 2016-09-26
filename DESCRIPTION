@@ -15,6 +15,7 @@ Imports:
     magrittr (>= 1.5),
     plyr (>= 1.8.3),
     scales (>= 0.3.0),
+    ggdendro,
 Suggests:
     knitr (>= 1.11),
     RColorBrewer,

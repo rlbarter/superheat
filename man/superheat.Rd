@@ -7,17 +7,18 @@
 superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   membership.rows = NULL, membership.cols = NULL, n.clusters.rows = NULL,
   n.clusters.cols = NULL, clustering.method = c("kmeans", "hierarchical"),
-  order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
+  dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
+  "minkowski"), order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
   scale = FALSE, left.label = NULL, bottom.label = NULL,
   heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
   X.text.size = 5, X.text.col = "black", X.text.angle = 0,
   yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), yr.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"), legend = TRUE,
-  legend.height = 0.1, legend.width = 1.5, legend.text.size = 12,
-  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
-  grid.vline.size = 0.5, grid.hline.col = "black",
+  "scatterline", "line", "dendrogram"), yr.plot.type = c("scatter", "bar",
+  "boxplot", "scattersmooth", "smooth", "scatterline", "line", "dendrogram"),
+  legend = TRUE, legend.height = 0.1, legend.width = 1.5,
+  legend.text.size = 12, grid.hline = TRUE, grid.vline = TRUE,
+  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
   grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
@@ -75,6 +76,10 @@ The default ("kmeans") is to use K-means clustering, the alternative
 option ("hierarchical") performs hierarchical clustering. Another
 (suggested) alternative is to provide a row and/or column
 membership vector.}
+
+\item{dist.method}{the distance method to use for hierarchical clustering.
+This must be one of "euclidean", "maximum", "manhattan",
+"canberra", "binary" or "minkowski".}
 
 \item{order.cols}{a vector of specifying the ordering of the
 columns of \code{X}. If the columns are clustered, then this
@@ -140,11 +145,19 @@ entry in \code{X.text}.}
 
 \item{yt.plot.type}{a character specifying the \code{yt} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
-"smooth", "boxplot", "scatterline" and "line".}
+"smooth", "boxplot", "scatterline" and "line". A special type
+"dendrogram", can only be used when \code{yt} is not specified
+and clustering is not performed.
+Instead, a dendrogram will be plotted next to the rows, and the
+rows will be reordered by row mean.}
 
 \item{yr.plot.type}{character specifying the \code{yr} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
-"smooth", "boxplot", "scatterline" and "line".}
+"smooth", "boxplot", "scatterline", "line". A special type
+"dendrogram", can only be used when \code{yr} is not specified
+and clustering is not performed.
+Instead, a dendrogram will be plotted next to the rows, and the
+rows will be reordered by row mean.}
 
 \item{legend}{logical. If set to \code{FALSE}, then no legend is provided.}
 

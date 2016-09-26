@@ -1,7 +1,8 @@
 generate_cluster <- function(X,
                              n.clusters,
                              clustering.method = c("kmeans", "hierarchical"),
-                             dist.method = NULL,
+                             dist.method = c("euclidean", "maximum", "manhattan",
+                                             "canberra", "binary", "minkowski"),
                              ...) {
 
   # calculate dissimilarity matrix
@@ -46,5 +47,5 @@ generate_cluster <- function(X,
       membership <- clust$cluster
   }
 
-  return(membership)
+  return(list(clust = clust, membership = membership))
 }
