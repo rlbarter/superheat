@@ -170,7 +170,7 @@ generate_smooth_heat <- function(X,
                                  membership.cols = NULL,
                                  order.x = NULL, # order of variables
                                  order.y = NULL, # order of observations
-                                 heat.col.scheme = c("red", "purple",
+                                 heat.col.scheme = c("viridis", "red", "purple",
                                                      "blue", "grey", "green"),
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
@@ -199,6 +199,10 @@ generate_smooth_heat <- function(X,
   theme_heatmap <- theme$theme_heatmap
 
   if (is.null(heat.pal)) {
+    if (heat.col.scheme == "viridis") {
+      heat.pal <- c("#440154FF", "#3B528BFF",
+                    "#21908CFF", "#5DC863FF", "#FDE725FF")
+    }
     if (heat.col.scheme == "red") {
       heat.pal <- c("#ffeda0", "#feb24c", "#f03b20")
     } else if (heat.col.scheme == "purple") {
