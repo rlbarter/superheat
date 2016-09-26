@@ -92,9 +92,9 @@
 
 
 #' @param heat.col.scheme A character specifying the heatmap colour scheme.
-#'          The default is "red", and other options include "purple", "blue",
-#'          "grey" and "green". If you wish to supply your own colour scheme,
-#'          use the \code{heat.pal} argument.
+#'          The default is "viridis", and other options include "red", purple",
+#'          "blue", "grey" and "green". If you wish to supply your own colour
+#'          scheme, use the \code{heat.pal} argument.
 #' @param heat.pal a vector of colour names specifying a manual heatmap colour
 #'          palette. This corresponds to the \code{colour} argument for the
 #'          ggplot2 \code{\link[ggplot2]{scale_colour_gradientn}} function.
@@ -298,7 +298,7 @@ superheat <- function(X,
                       left.label = NULL,
                       bottom.label = NULL,
 
-                      heat.col.scheme = c("red", "purple", "blue",
+                      heat.col.scheme = c("viridis", "red", "purple", "blue",
                                           "grey", "green"),
                       heat.pal = NULL,
                       heat.pal.values = NULL,
