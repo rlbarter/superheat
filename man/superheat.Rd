@@ -10,7 +10,7 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
   "minkowski"), order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
   scale = FALSE, left.label = NULL, bottom.label = NULL,
-  heat.col.scheme = c("red", "purple", "blue", "grey", "green"),
+  heat.col.scheme = c("red", "viridis", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
   X.text.size = 5, X.text.col = "black", X.text.angle = 0,
   yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
@@ -114,9 +114,9 @@ provides the variable names). The final option, "none", removes the
 label all together.}
 
 \item{heat.col.scheme}{A character specifying the heatmap colour scheme.
-The default is "red", and other options include "purple", "blue",
-"grey" and "green". If you wish to supply your own colour scheme,
-use the \code{heat.pal} argument.}
+The default is "red", and other options include "viridis", purple",
+"blue", "grey" and "green". If you wish to supply your own colour
+scheme, use the \code{heat.pal} argument.}
 
 \item{heat.pal}{a vector of colour names specifying a manual heatmap colour
 palette. This corresponds to the \code{colour} argument for the
@@ -149,15 +149,14 @@ entry in \code{X.text}.}
 "dendrogram", can only be used when \code{yt} is not specified
 and clustering is not performed.
 Instead, a dendrogram will be plotted next to the rows, and the
-rows will be reordered by row mean.}
+rows will be reordered accordingly.}
 
 \item{yr.plot.type}{character specifying the \code{yr} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
 "smooth", "boxplot", "scatterline", "line". A special type
 "dendrogram", can only be used when \code{yr} is not specified
-and clustering is not performed.
-Instead, a dendrogram will be plotted next to the rows, and the
-rows will be reordered by row mean.}
+and clustering is not performed. Instead, a dendrogram will be plotted
+next to the rows, and the rows will be reordered accordingly.}
 
 \item{legend}{logical. If set to \code{FALSE}, then no legend is provided.}
 

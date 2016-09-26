@@ -443,7 +443,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
 
 The default colour palates are as shown in the above examples, however the user can specify their own colour palates:
 
- * There are a number of optional colour schemes for the heatmap including "viridis" (the default), "red", purple", "blue" (shown below), "grey" and "green". These can be specified using the `heat.col.scheme` argument.
+ * There are a number of optional colour schemes for the heatmap including "red" (the default), "viridis", purple", "blue" (shown below), "grey" and "green". These can be specified using the `heat.col.scheme` argument.
  
  
 ```{r, fig.align = 'center', fig.height = 5, fig.width = 6}
@@ -451,7 +451,7 @@ superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")],
             yr = iris[,"Petal.Length"],
             membership.rows = iris[,"Species"],
             yr.axis.name = "Petal.Length",
-            heat.col.scheme = "red")
+            heat.col.scheme = "viridis")
 ```
 
 * Specifying your own colour scheme for the heatmap using the `heat.pal` argument: you can specify as many colours as you want.

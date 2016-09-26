@@ -170,7 +170,7 @@ generate_smooth_heat <- function(X,
                                  membership.cols = NULL,
                                  order.x = NULL, # order of variables
                                  order.y = NULL, # order of observations
-                                 heat.col.scheme = c("viridis", "red", "purple",
+                                 heat.col.scheme = c("red", "viridis", "purple",
                                                      "blue", "grey", "green"),
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
