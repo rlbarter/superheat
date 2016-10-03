@@ -5,8 +5,9 @@
 \title{Generate supervised heatmaps.}
 \usage{
 superheat(X, X.text = NULL, yt = NULL, yr = NULL,
-  membership.rows = NULL, membership.cols = NULL, n.clusters.rows = NULL,
-  n.clusters.cols = NULL, clustering.method = c("kmeans", "hierarchical"),
+  membership.rows = NULL, membership.cols = NULL, row.dendrogram = F,
+  col.dendrogram = F, n.clusters.rows = NULL, n.clusters.cols = NULL,
+  clustering.method = c("kmeans", "hierarchical"),
   dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
   "minkowski"), order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
   scale = FALSE, left.label = NULL, bottom.label = NULL,
@@ -14,11 +15,11 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
   X.text.size = 5, X.text.col = "black", X.text.angle = 0,
   yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line", "dendrogram"), yr.plot.type = c("scatter", "bar",
-  "boxplot", "scattersmooth", "smooth", "scatterline", "line", "dendrogram"),
-  legend = TRUE, legend.height = 0.1, legend.width = 1.5,
-  legend.text.size = 12, grid.hline = TRUE, grid.vline = TRUE,
-  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
+  "scatterline", "line"), yr.plot.type = c("scatter", "bar", "boxplot",
+  "scattersmooth", "smooth", "scatterline", "line"), legend = TRUE,
+  legend.height = 0.1, legend.width = 1.5, legend.text.size = 12,
+  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
+  grid.vline.size = 0.5, grid.hline.col = "black",
   grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
@@ -61,6 +62,14 @@ of the rows in X.}
 
 \item{membership.cols}{a vector specifying the cluster membership
 of the columns in X.}
+
+\item{row.dendrogram}{a logical specifying whether a dendrogram should be
+placed next to the rows. Can only be used when \code{yr} is not 
+specified and clustering is not performed.}
+
+\item{col.dendrogram}{a logical specifying whether a dendrogram should be
+placed next to the columns. Can only be used when \code{yt} is not 
+specified and clustering is not performed.}
 
 \item{n.clusters.rows}{a number specifying the number of row clusters to
 generate. The default is 0 (indicating no clustering of the rows).
@@ -145,18 +154,11 @@ entry in \code{X.text}.}
 
 \item{yt.plot.type}{a character specifying the \code{yt} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
-"smooth", "boxplot", "scatterline" and "line". A special type
-"dendrogram", can only be used when \code{yt} is not specified
-and clustering is not performed.
-Instead, a dendrogram will be plotted next to the rows, and the
-rows will be reordered accordingly.}
+"smooth", "boxplot", "scatterline" and "line".}
 
 \item{yr.plot.type}{character specifying the \code{yr} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",
-"smooth", "boxplot", "scatterline", "line". A special type
-"dendrogram", can only be used when \code{yr} is not specified
-and clustering is not performed. Instead, a dendrogram will be plotted
-next to the rows, and the rows will be reordered accordingly.}
+"smooth", "boxplot", "scatterline", and "line".}
 
 \item{legend}{logical. If set to \code{FALSE}, then no legend is provided.}
 

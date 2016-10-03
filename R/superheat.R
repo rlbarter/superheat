@@ -20,21 +20,20 @@
 #'          number of rows of \code{X}.
 #' @param yt.plot.type a character specifying the \code{yt} plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
-#'          "smooth", "boxplot", "scatterline" and "line". A special type
-#'          "dendrogram", can only be used when \code{yt} is not specified
-#'          and clustering is not performed.
-#'          Instead, a dendrogram will be plotted next to the rows, and the
-#'          rows will be reordered accordingly.
+#'          "smooth", "boxplot", "scatterline" and "line".
 #' @param yr.plot.type character specifying the \code{yr} plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
-#'          "smooth", "boxplot", "scatterline", "line". A special type
-#'          "dendrogram", can only be used when \code{yr} is not specified
-#'          and clustering is not performed. Instead, a dendrogram will be plotted
-#'          next to the rows, and the rows will be reordered accordingly.
+#'          "smooth", "boxplot", "scatterline", and "line".
 #' @param membership.rows a vector specifying the cluster membership
 #'          of the rows in X.
 #' @param membership.cols a vector specifying the cluster membership
 #'          of the columns in X.
+#' @param row.dendrogram a logical specifying whether a dendrogram should be
+#'          placed next to the rows. Can only be used when \code{yr} is not 
+#'          specified and clustering is not performed. 
+#' @param col.dendrogram a logical specifying whether a dendrogram should be
+#'          placed next to the columns. Can only be used when \code{yt} is not 
+#'          specified and clustering is not performed. 
 
 
 #' @param order.cols a vector of specifying the ordering of the
@@ -282,6 +281,8 @@ superheat <- function(X,
                       yr = NULL,
                       membership.rows = NULL, # membership for rows
                       membership.cols = NULL, # membership for cols
+                      row.dendrogram = F,
+                      col.dendrogram = F,
 
                       n.clusters.rows = NULL,
                       n.clusters.cols = NULL,
@@ -310,12 +311,10 @@ superheat <- function(X,
 
                       yt.plot.type = c("scatter", "bar", "boxplot",
                                        "scattersmooth", "smooth",
-                                       "scatterline", "line",
-                                       "dendrogram"),
+                                       "scatterline", "line"),
                       yr.plot.type = c("scatter", "bar", "boxplot",
                                        "scattersmooth","smooth",
-                                       "scatterline", "line",
-                                       "dendrogram"),
+                                       "scatterline", "line"),
 
                       legend = TRUE,
                       legend.height = 0.1,
@@ -418,16 +417,6 @@ superheat <- function(X,
 
 
 
-  # set a logical to true if we are plotting a dendogram
-  if (yr.plot.type == "dendrogram") {
-    row.dendrogram <- T
-  }
-
-  if (yt.plot.type == "dendrogram") {
-    col.dendrogram <- T
-  }
-
-
   # if there is no yt or yr axis name provided, set the name to the name of
   # the object provided by the yr/yt argument
   if (is.null(yr.axis.name)) {
@@ -499,17 +488,17 @@ superheat <- function(X,
 
   # spit out an error if someone tries to put in a dendrogram without
   # doing hierarchical clustering
-  if (cluster.cols && (yt.plot.type == "dendrogram")) {
+  if (cluster.cols && col.dendrogram) {
     stop("Cannot perform column clustering while placing a dendrogram")
   }
-  if (cluster.rows && (yr.plot.type == "dendrogram")) {
+  if (cluster.rows && row.dendrogram) {
     stop("Cannot perform row clustering while placing a dendrogram")
   }
 
-  if (!is.null(yr) && (yr.plot.type == "dendrogram")) {
+  if (!is.null(yr) && row.dendrogram) {
     stop("Cannot set 'yr' when placing a dendrogram")
   }
-  if (!is.null(yt) && (yt.plot.type == "dendrogram")) {
+  if (!is.null(yt) && col.dendrogram) {
     stop("Cannot set 'yt' when placing a dendrogram")
   }
 
@@ -599,11 +588,11 @@ superheat <- function(X,
 
   # note that we must obtain the hierarchical clustering
   # after rearranging the order of the rows and columns
-  if (yt.plot.type == "dendrogram") {
+  if (col.dendrogram) {
     clust.cols <- hclust(dist(t(X), method = dist.method))
   }
 
-  if (yr.plot.type == "dendrogram") {
+  if (row.dendrogram) {
     clust.rows <- hclust(dist(X, method = dist.method))
   }
 
@@ -620,19 +609,19 @@ superheat <- function(X,
 
   # if a specific row/col ordering is not provided,
   # define the ordering to be that given in the original matrix
-  if (is.null(order.rows) && (yr.plot.type != "dendrogram")) {
+  if (is.null(order.rows) && (!row.dendrogram)) {
     order.rows <- 1:nrow(X)
   }
-  if (is.null(order.cols) && (yt.plot.type != "dendrogram")) {
+  if (is.null(order.cols) && (!col.dendrogram)) {
     order.cols <- 1:ncol(X)
   }
 
 
   # if there is a dendrogram, order rows/cols by mean
-  if (yr.plot.type == "dendrogram") {
+  if (row.dendrogram) {
     order.rows <- clust.rows$order
   }
-  if (yt.plot.type == "dendrogram") {
+  if (col.dendrogram) {
     order.cols <- clust.cols$order
   }
 
@@ -710,7 +699,7 @@ superheat <- function(X,
   }
 
   # Generate the top and right plots
-  if (!is.null(yt) && (yt.plot.type != "dendrogram")) {
+  if (!is.null(yt) && (!col.dendrogram)) {
     # define all arguments of the top plot
     y <- yt
     y.obs.col <- yt.obs.col
@@ -737,12 +726,12 @@ superheat <- function(X,
     # for generate_add_on_plot
     plot.arg.list <- plot.arg.list[!is.na(names(plot.arg.list))]
     gg.top <- do.call(generate_add_on_plot, plot.arg.list)
-  } else if (yt.plot.type == "dendrogram") {
+  } else if (col.dendrogram) {
     suppressMessages(gg.top <- ggdendro::ggdendrogram(clust.cols) +
       ggplot2::scale_x_continuous(expand = c(1/(2 * ncol(X)), 1/(2 * ncol(X)))))
   }
 
-  if (!is.null(yr) && (yr.plot.type != "dendrogram")) {
+  if (!is.null(yr) && (!row.dendrogram)) {
     # define all arguments of the right plot
     y <- yr
     y.obs.col <- yr.obs.col
@@ -769,7 +758,7 @@ superheat <- function(X,
     # for generate_add_on_plot
     plot.arg.list <- plot.arg.list[!is.na(names(plot.arg.list))]
     gg.right <- do.call(generate_add_on_plot, plot.arg.list)
-  } else if (yr.plot.type == "dendrogram") {
+  } else if (row.dendrogram) {
     suppressMessages(gg.right <- ggdendro::ggdendrogram(clust.rows, rotate = T) +
       ggplot2::scale_x_continuous(expand = c(1/(2 * nrow(X)), 1/(2 * nrow(X)))))
   }
