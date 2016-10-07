@@ -599,13 +599,7 @@ superheat <- function(X,
 
 
 
-  # the default if clustering was not performed
-  if (!cluster.cols) {
-    membership.cols <- 1:ncol(X)
-  }
-  if (!cluster.rows) {
-    membership.rows <- 1:nrow(X)
-  }
+
 
   # if a specific row/col ordering is not provided,
   # define the ordering to be that given in the original matrix
@@ -625,6 +619,7 @@ superheat <- function(X,
     order.cols <- clust.cols$order
   }
 
+  
 
   # re-order the rows by cluster
   if (cluster.rows) {
@@ -666,9 +661,20 @@ superheat <- function(X,
       yt <- yt[order.df.cols$order.cols]
     }
   }
-  membership.rows <- membership.rows[order.df.rows$order.rows]
-  membership.cols <- membership.cols[order.df.cols$order.cols]
-
+  
+  
+  
+  # the default if clustering was not performed
+  if (!cluster.cols) {
+    membership.cols <- 1:ncol(X)
+  }
+  if (!cluster.rows) {
+    membership.rows <- 1:nrow(X)
+  } else {
+    membership.rows <- membership.rows[order.df.rows$order.rows]
+    membership.cols <- membership.cols[order.df.cols$order.cols]
+  }
+  
 
 
 
