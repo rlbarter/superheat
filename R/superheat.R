@@ -647,8 +647,7 @@ superheat <- function(X,
 
   # Reorder X, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
-  print(dim(X))
-  print(dim(X.text.col))
+  
   if (!is.null(X.text) && is.matrix(X.text)) {
     X.text <- X.text[order.df.rows$order.rows, order.df.cols$order.cols]  
   }
