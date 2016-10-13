@@ -647,6 +647,21 @@ superheat <- function(X,
 
   # Reorder X, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
+  print(dim(X))
+  print(dim(X.text.col))
+  if (!is.null(X.text) && is.matrix(X.text)) {
+    X.text <- X.text[order.df.rows$order.rows, order.df.cols$order.cols]  
+  }
+  if (!is.null(X.text.col) && is.matrix(X.text.col)) {
+    X.text.col <- X.text.col[order.df.rows$order.rows, order.df.cols$order.cols]  
+  }
+  if (!is.null(X.text.size) && is.matrix(X.text.size)) {
+    X.text.size <- X.text.size[order.df.rows$order.rows, order.df.cols$order.cols]  
+  }
+  if (!is.null(X.text.angle) && is.matrix(X.text.angle)) {
+    X.text.angle <- X.text.angle[order.df.rows$order.rows, order.df.cols$order.cols]  
+  }
+  
   if (!is.null(yr)) {
     # only rearrange within cluster if the right plot is for each
     # data point (rather than for each cluster)
