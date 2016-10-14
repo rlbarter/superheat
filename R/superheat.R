@@ -415,6 +415,7 @@ superheat <- function(X,
   do.call(stop_errors, stop.arg.list)
 
 
+  
 
 
   # if there is no yt or yr axis name provided, set the name to the name of

@@ -136,6 +136,7 @@ stop_errors <- function(X,
                         X.text = NULL,
                         X.text.size = NULL,
                         X.text.col = NULL,
+                        X.text.angle = NULL,
                         yt = NULL,
                         yr = NULL,
                         yt.plot.type = c("scatter", "bar"),
@@ -199,6 +200,51 @@ stop_errors <- function(X,
   if (!is.null(X.text) && !is.matrix(X.text)) {
     stop("'X.text' must be a matrix")
   }
+  
+  # make sure a single value or a matrix
+  if (!is.null(X.text.size) &&  
+      (length(X.text.size) != 1) && 
+      !is.matrix(X.text.size)) {
+    stop("'X.text.size' must be either a single value or a matrix")
+  }
+  if (!is.null(X.text.size) &&  
+      (length(X.text.size) != 1) && 
+      !is.matrix(X.text.size)) {
+    stop("'X.text.size' must be either a single value or a matrix")
+  }
+  if (!is.null(X.text.angle) &&  
+      (length(X.text.angle) != 1) && 
+      !is.matrix(X.text.angle)) {
+    stop("'X.text.angle' must be either a single value or a matrix")
+  }
+  
+  # if matrix, make sure the dimension matches
+  if (!is.null(X.text.size) &&  
+      is.matrix(X.text.size) &&
+      (ncol(X.text.size) != ncol(X.text))) {
+    stop(paste("'X.text.size' must be either a single value or a matrix",
+               "whose dimension matches 'X.text'"))
+  }
+  if (!is.null(X.text.col) &&  
+      is.matrix(X.text.col) &&
+      (ncol(X.text.col) != ncol(X.text))) {
+    stop(paste("'X.text.col' must be either a single value or a matrix",
+               "whose dimension matches 'X.text'"))
+  }
+  if (!is.null(X.text.angle) &&  
+      is.matrix(X.text.angle) &&
+      (ncol(X.text.angle) != ncol(X.text))) {
+    stop(paste("'X.text.angle' must be either a single value or a matrix",
+               "whose dimension matches 'X.text'"))
+  }
+  
+  
+  
+  if (!is.null(X.text.col) && 
+      (length(X.text.col) != 1) && 
+      !is.matrix(X.text.col)) {
+    stop("'X.text.col' must be either a single value or a matrix")
+  } 
 
   if (!is.null(left.heat.label)) {
     possible.methods <- c("variable", "cluster", "none")
