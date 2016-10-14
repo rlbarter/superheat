@@ -390,14 +390,14 @@ generate_text_heat <- function(X,
   # if clustering, but not smoothing, then need to have same number of
   # rows/cols as X
   if ((length(unique(membership.rows)) != nrow(X)) && # are clustering
-      (nrow(X.text) == nrow(X)) && 
+      (nrow(X.text) != nrow(X)) && 
       !smooth.heat) {
     stop(paste("X.text must have the same number of rows as",
                "X if heat.smooth = F"))
   }
 
   if ((length(unique(membership.cols)) != ncol(X)) &&
-      (ncol(X.text) == ncol(X)) &&
+      (ncol(X.text) != ncol(X)) &&
       !smooth.heat) {
     stop(paste("X.text must have the same number of columns as",
                "X if heat.smooth = F"))

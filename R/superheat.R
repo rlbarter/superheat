@@ -648,13 +648,19 @@ superheat <- function(X,
   # Reorder X, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
   
-  if (!is.null(X.text) && is.matrix(X.text)) {
+  if (!is.null(X.text) && is.matrix(X.text) &&
+      (nrow(X.text) == nrow(X)) &&
+      (ncol(X.text) == ncol(X))) {
     X.text <- X.text[order.df.rows$order.rows, order.df.cols$order.cols]  
   }
-  if (!is.null(X.text.col) && is.matrix(X.text.col)) {
+  if (!is.null(X.text.col) && is.matrix(X.text.col) &&
+      (nrow(X.text.col) == nrow(X)) &&
+      (ncol(X.text.col) == ncol(X))) {
     X.text.col <- X.text.col[order.df.rows$order.rows, order.df.cols$order.cols]  
   }
-  if (!is.null(X.text.size) && is.matrix(X.text.size)) {
+  if (!is.null(X.text.size) && is.matrix(X.text.size) &&
+      (nrow(X.text.size) == nrow(X)) &&
+      (ncol(X.text.size) == ncol(X))) {
     X.text.size <- X.text.size[order.df.rows$order.rows, order.df.cols$order.cols]  
   }
   if (!is.null(X.text.angle) && is.matrix(X.text.angle)) {

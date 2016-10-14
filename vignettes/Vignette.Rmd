@@ -111,12 +111,13 @@ It is easy to add text to each cluster (or variable) cell in the heatmap using t
 X.text <- matrix(c("Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Sepal", "Petal", "Petal", "Petal"), ncol = 3, byrow = T)
 
 X.text
+sample <- sample(1:nrow(iris), 20)
 
-superheat(X = iris[,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap matrix
-          X.text = X.text,
-            yr = iris[,"Petal.Length"], #plot Petal.Length to the right
+superheat(X = iris[sample,c("Sepal.Width","Sepal.Length","Petal.Width")], # heatmap matrix
+          X.text = as.matrix(iris[sample,c("Sepal.Width","Sepal.Length","Petal.Width")]),
+            yr = iris[sample,"Petal.Length"], #plot Petal.Length to the right
             yr.axis.name = "Petal.Length",
-            membership.rows = iris[,"Species"], # cluster the rows by species
+            membership.rows = iris[sample,"Species"], # cluster the rows by species
             yt = iris.coef[-1], # plot the model coefficients above
             yt.plot.type = "bar", # make the plot above a barplot
             yt.axis.name = "coefficient")
