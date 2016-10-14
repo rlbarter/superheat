@@ -142,7 +142,8 @@ generate_heat <- function(X,
     names(col.values) <- unique(as.vector(X.text.col))
 
     gg.heat <- gg.heat +
-      generate_text_heat(X.text,
+      generate_text_heat(X = X, 
+                         X.text = X.text,
                          X.text.size = X.text.size,
                          X.text.angle = X.text.angle,
                          X.text.col = X.text.col,
@@ -360,7 +361,8 @@ generate_smooth_heat <- function(X,
     col.values <- unique(as.vector(X.text.col))
     names(col.values) <- unique(as.vector(X.text.col))
 
-    gg.heat <- gg.heat + generate_text_heat(X.text,
+    gg.heat <- gg.heat + generate_text_heat(X = X,
+                                            X.text = X.text,
                                             X.text.size = X.text.size,
                                             X.text.angle = X.text.angle,
                                             X.text.col = X.text.col,
@@ -376,7 +378,8 @@ generate_smooth_heat <- function(X,
 
 
 
-generate_text_heat <- function(X.text,
+generate_text_heat <- function(X,
+                               X.text,
                                X.text.size = 5,
                                X.text.angle = 0,
                                X.text.col = "black",
