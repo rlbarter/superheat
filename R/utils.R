@@ -26,6 +26,13 @@ to_df <- function(X) {
 to_cluster_df <- function(X.text, smooth.heat,
                           membership.cols, membership.rows) {
   # X.text is a text matrix
+  
+  if (length(unique(membership.rows)) != nrow(X.text)) {
+    membership.rows <- 1:nrow(X.text)
+  }
+  if (length(unique(membership.cols)) != ncol(X.text)) {
+    membership.cols <- 1:ncol(X.text)
+  }
 
   # wil be used in conjunction with generate_text_heat
   if(!is.matrix(X.text)) {
@@ -36,6 +43,7 @@ to_cluster_df <- function(X.text, smooth.heat,
   # need to have xmin, xmax, ymin, ymax
   X.vec <- as.vector(X.text) # convert the matrix to a vector
 
+  
   # hacky way of dealing with repeated text entries
   duplicates <- X.vec[duplicated(X.vec)]
 
@@ -61,9 +69,11 @@ to_cluster_df <- function(X.text, smooth.heat,
                                      1:length(duplicated.text))
     }
   }
+  
 
   X.text <- matrix(X.vec, ncol = ncol(X.text))
 
+  
   # expand matrix into full matrix
   membership.rows.numeric <- as.numeric(factor(membership.rows,
                                                levels = unique(membership.rows)))

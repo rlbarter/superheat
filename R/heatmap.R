@@ -384,17 +384,39 @@ generate_text_heat <- function(X.text,
                                membership.rows = NULL,
                                membership.cols = NULL) {
 
-
-  if (!is.null(membership.rows) &&
-      (nrow(X.text) != length(unique(membership.rows))))
+  # if clustering, but not smoothing, then need to have same number of
+  # rows/cols as X
+  if ((length(unique(membership.rows)) != nrow(X)) && # are clustering
+      (nrow(X.text) == nrow(X)) && 
+      !smooth.heat) {
     stop(paste("X.text must have the same number of rows as",
-               "either row clusters or row variables"))
+               "X if heat.smooth = F"))
+  }
 
-  if (!is.null(membership.cols) &&
-      (ncol(X.text) != length(unique(membership.cols))))
-    stop(paste("X.text must have the same number of cols as",
-               "cols clusters or col variables"))
+  if ((length(unique(membership.cols)) != ncol(X)) &&
+      (ncol(X.text) == ncol(X)) &&
+      !smooth.heat) {
+    stop(paste("X.text must have the same number of columns as",
+               "X if heat.smooth = F"))
+  }
 
+  # if clustering, but smoothing, then need to have same number of
+  # rows/cols as row/col clusters
+  if ((length(unique(membership.rows)) != nrow(X)) && # are clustering
+      (nrow(X.text) != length(unique(membership.rows))) && 
+      smooth.heat) {
+    stop(paste("X.text must have the same number of rows as",
+               "row clusters if heat.smooth = T"))
+  }
+  
+  if ((length(unique(membership.cols)) != ncol(X)) &&
+      (ncol(X.text) != length(unique(membership.cols))) &&
+      smooth.heat) {
+    stop(paste("X.text must have the same number of columns as",
+               "column clusters if heat.smooth = T"))
+  }
+  
+  
   themes.arg.list <- c(as.list(environment()))
   themes.arg.list <- themes.arg.list[names(formals(themes))]
   themes.arg.list <- themes.arg.list[!is.na(names(themes.arg.list))]
@@ -412,20 +434,18 @@ generate_text_heat <- function(X.text,
     membership.cols <- 1:ncol(X.text)
   }
 
-  if ( (nrow(X.text) != length(unique(membership.rows))) )
-    stop("X.text must have the same number of rows as X")
-
-  if ( (ncol(X.text) != length(unique(membership.cols))) )
-    stop("X.text must have the same number of cols as X")
-
+  
+  
 
   X.order <- X.text
+  
   # convert the x-y correlation matrix to a long-form "tidy" data frame
   X.df <- to_cluster_df(X.order,
                         smooth.heat = smooth.heat,
                         membership.rows = membership.rows,
                         membership.cols = membership.cols)
 
+  
   X.df$size <- as.vector(X.text.size)
   X.df$angle <- as.vector(X.text.angle)
   X.df$col <- as.vector(X.text.col)
@@ -437,6 +457,7 @@ generate_text_heat <- function(X.text,
   size <- X.df$size
   angle <- X.df$angle
 
+  
   # make the plot
   gg.text <- ggplot2::geom_text(ggplot2::aes(x = x,
                                              y = y,
@@ -445,5 +466,6 @@ generate_text_heat <- function(X.text,
                                              angle = angle,
                                              col = col), data = X.df)
 
+  
   return(gg.text)
 }
