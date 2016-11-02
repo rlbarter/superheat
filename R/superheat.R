@@ -527,6 +527,16 @@ superheat <- function(X,
   if (pretty.order.rows) {
     hclust.rows <- hclust(dist(X, method = dist.method))
   }
+  
+  
+  # if there is a pretty.order.rows/cols, order rows/cols by hclust order
+  if (pretty.order.rows && is.null(order.rows)) {
+    order.rows <- hclust.rows$order
+  }
+  if (pretty.order.cols && is.null(order.cols)) {
+    order.cols <- hclust.cols$order
+  }
+  
 
   # if a specific row/col ordering is not provided,
   # define the ordering to be that given in the original matrix
@@ -537,14 +547,7 @@ superheat <- function(X,
     order.cols <- 1:ncol(X)
   }
 
-  # if there is a pretty.order.rows/cols, order rows/cols by hclust order
-  if (pretty.order.rows) {
-    order.rows <- hclust.rows$order
-  }
-  if (pretty.order.cols) {
-    order.cols <- hclust.cols$order
-  }
-
+ 
   # make a data frame order.df.rows/cols that contains the membership and order
   # of each row/columns.
   # if clustering was performed then re-order the rows by cluster
