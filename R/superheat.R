@@ -28,6 +28,10 @@
 #'          of the rows in X.
 #' @param membership.cols a vector specifying the cluster membership
 #'          of the columns in X.
+#' @param pretty.order.cols a logical specifying whether the rows should be reordered
+#'          based on hierarchical clustering. Default is TRUE.
+#' @param pretty.order.rows a logical specifying whether the cols should be reordered
+#'          based on hierarchical clustering. Default is TRUE.
 #' @param row.dendrogram a logical specifying whether a dendrogram should be
 #'          placed next to the rows. Can only be used when \code{yr} is not 
 #'          specified and clustering is not performed. 
@@ -91,7 +95,7 @@
 
 
 #' @param heat.col.scheme A character specifying the heatmap colour scheme.
-#'          The default is "red", and other options include "viridis", purple",
+#'          The default is "viridis", and other options include "red", purple",
 #'          "blue", "grey" and "green". If you wish to supply your own colour
 #'          scheme, use the \code{heat.pal} argument.
 #' @param heat.pal a vector of colour names specifying a manual heatmap colour
@@ -281,6 +285,8 @@ superheat <- function(X,
                       yr = NULL,
                       membership.rows = NULL, # membership for rows
                       membership.cols = NULL, # membership for cols
+                      pretty.order.rows = T,
+                      pretty.order.cols = T,
                       row.dendrogram = F,
                       col.dendrogram = F,
 
@@ -299,7 +305,7 @@ superheat <- function(X,
                       left.label = NULL,
                       bottom.label = NULL,
 
-                      heat.col.scheme = c("red", "viridis", "purple", "blue",
+                      heat.col.scheme = c("viridis", "red", "purple", "blue",
                                           "grey", "green"),
                       heat.pal = NULL,
                       heat.pal.values = NULL,
@@ -395,28 +401,14 @@ superheat <- function(X,
   heat.col.scheme <- match.arg(heat.col.scheme)
   dist.method <- match.arg(dist.method)
 
-  # if there are no column/row names, number them numerically
-  if (is.null(colnames(X))) {
-    colnames(X) <- 1:ncol(X)
-  }
-  if (is.null(rownames(X))) {
-    rownames(X) <- 1:nrow(X)
-  }
-
-  # should you standardize the matrix
-  # (each column will have mean 0 and variance 1)
-  if (scale) {
-    X <- scale(X)
-  }
+  # clean the matrix X
+  X <- clean_matrix(X, scale)
+  
   # run error check on arguments
   stop.arg.list <- c(as.list(environment()))
-  stop.arg.list <- stop.arg.list[names(formals(stop_errors))]
+  stop.arg.list <- stop.arg.list[names(formals(stopErrors))]
   stop.arg.list <- stop.arg.list[!is.na(names(stop.arg.list))]
-  do.call(stop_errors, stop.arg.list)
-
-
-  
-
+  do.call(stopErrors, stop.arg.list)
 
   # if there is no yt or yr axis name provided, set the name to the name of
   # the object provided by the yr/yt argument
@@ -426,7 +418,6 @@ superheat <- function(X,
   if (is.null(yt.axis.name)) {
     yt.axis.name <- eval(substitute(internala(yt)))
   }
-
   # if there is a column (row) membership vector or a number of clusters to
   # generate is provided, then set cluster.cols to TRUE
   if (!is.null(membership.cols) |
@@ -445,95 +436,36 @@ superheat <- function(X,
   # how many column clusters
   if (cluster.cols) {
     if (!is.null(n.clusters.cols)) {
-      n.col.clusters <- n.clusters.cols
+      effective.col.clusters <- n.clusters.cols
     } else if (!is.null(membership.cols)) {
-      n.col.clusters <- length(unique(membership.cols))
+      effective.col.clusters <- length(unique(membership.cols))
     }
   }
-
   # how many row clusters
   if (cluster.rows) {
     if (!is.null(n.clusters.rows)) {
-      n.row.clusters <- n.clusters.rows
+      effective.row.clusters <- n.clusters.rows
     } else if (!is.null(membership.rows)) {
-      n.row.clusters <- length(unique(membership.rows))
+      effective.row.clusters <- length(unique(membership.rows))
     }
   }
-  if ((!cluster.cols && !is.null(yt) && (length(yt) != ncol(X))) |
-      ((cluster.cols && !is.null(yt) && (length(yt) != n.col.clusters)) &&
-       (cluster.cols && !is.null(yt) && (length(yt) != ncol(X))))) {
-    stop(paste("'yt' must have length equal to either the number of columns",
-               "of 'X' or the number of column clusters of 'X'."))
-  }
-
-  if ((!cluster.rows && !is.null(yr) && (length(yr) != nrow(X))) |
-      ((cluster.rows && !is.null(yr) && (length(yr) != n.row.clusters)) &&
-       (cluster.rows && !is.null(yr) && (length(yr) != nrow(X))))) {
-    stop(paste("'yr' must have length equal to either the number of rows",
-               "of 'X' or the number of row clusters of 'X'."))
-  }
-
-  # shoot an error if a top plot is provided and is set to boxplot
-  # but the columns are not clustered. Reason being that boxplots need to
-  # aggregate data.
-  if (!is.null(yt) && !cluster.cols && (yt.plot.type == "boxplot")) {
-    stop("Cannot set yt.plot.type = 'boxplot' without clustering the columns.")
-  }
-  # shoot an error if a right plot is provided and is set to boxplot
-  # but the rows are not clustered. Reason being that boxplots need to
-  # aggregate data.
-  if (!is.null(yr) && !cluster.rows && (yr.plot.type == "boxplot")) {
-    stop("Cannot set yr.plot.type = 'boxplot' without clustering the rows.")
-  }
-
-
-  # spit out an error if someone tries to put in a dendrogram without
-  # doing hierarchical clustering
-  if (cluster.cols && col.dendrogram) {
-    stop("Cannot perform column clustering while placing a dendrogram")
-  }
-  if (cluster.rows && row.dendrogram) {
-    stop("Cannot perform row clustering while placing a dendrogram")
-  }
-
-  if (!is.null(yr) && row.dendrogram) {
-    stop("Cannot set 'yr' when placing a dendrogram")
-  }
-  if (!is.null(yt) && col.dendrogram) {
-    stop("Cannot set 'yt' when placing a dendrogram")
-  }
-
-
-
-  # if there are no row labels provided and cluster.rows is FALSE,
-  # then set the default label type to be "variable",
-  # otherwise set it to "TRUE"cluster"
-  if (is.null(left.label) && !cluster.rows) {
-    left.label <- "variable"
-  } else if (is.null(left.label) && cluster.rows) {
-    left.label <- "cluster"
-  }
-
-  # if there are no bottom labels provided and cluster.cols is FALSE,
-  # then set the default label type to be "variable",
-  # otherwise set it to "TRUE"cluster"
-  if (is.null(bottom.label) && cluster.cols) {
-    bottom.label <- "cluster"
-  } else if (is.null(bottom.label) && !cluster.cols) {
-    bottom.label <- "variable"
-  }
-
-  # remove variable labels if more than 50 rows/cols
-  if ((left.label == "variable") && !force.left.label) {
-    if (nrow(X) > 100) {
-      left.label <- "none"
-    }
-  }
-  if (bottom.label == "variable" && !force.bottom.label) {
-    if (ncol(X) > 100) {
-      bottom.label <- "none"
-    }
-  }
+  
+  # run error check on clustering mechanism
+  cluster.stop.arg.list <- c(as.list(environment()))
+  cluster.stop.arg.list <- cluster.stop.arg.list[names(formals(clusterStopErrors))]
+  cluster.stop.arg.list <- cluster.stop.arg.list[!is.na(names(cluster.stop.arg.list))]
+  do.call(clusterStopErrors, cluster.stop.arg.list)
+  
+  # set the type of label for each additional plot
+  label.type <- setLabelType(X,
+                             left.label, 
+                             cluster.rows, 
+                             bottom.label, 
+                             cluster.cols,
+                             force.left.label,
+                             force.bottom.label)
+  bottom.label <- label.type$bottom.label
+  left.label <- label.type$left.label
 
   # remove the heatmap grid lines if there are more than 50 cols/rows
   # do this only when there are variable labels or no labels
@@ -566,7 +498,7 @@ superheat <- function(X,
     clustering <- do.call(generate_cluster, cluster.arg.list)
 
     membership.rows <- clustering$membership
-    clust.rows <- clustering$clust
+    hclust.rows <- clustering$clust
   }
 
   # if cluster.cols is TRUE and no column membership is provided,
@@ -583,24 +515,18 @@ superheat <- function(X,
     clustering <- do.call(generate_cluster, cluster.arg.list)
 
     membership.cols <- clustering$membership
-    clust.cols <- clustering$clust
+    hclust.cols <- clustering$clust
   }
-
 
   # note that we must obtain the hierarchical clustering
   # after rearranging the order of the rows and columns
-  if (col.dendrogram) {
-    clust.cols <- hclust(dist(t(X), method = dist.method))
+  if (pretty.order.cols) {
+    hclust.cols <- hclust(dist(t(X), method = dist.method))
   }
 
-  if (row.dendrogram) {
-    clust.rows <- hclust(dist(X, method = dist.method))
+  if (pretty.order.rows) {
+    hclust.rows <- hclust(dist(X, method = dist.method))
   }
-
-
-
-
-
 
   # if a specific row/col ordering is not provided,
   # define the ordering to be that given in the original matrix
@@ -611,18 +537,17 @@ superheat <- function(X,
     order.cols <- 1:ncol(X)
   }
 
-
-  # if there is a dendrogram, order rows/cols by mean
-  if (row.dendrogram) {
-    order.rows <- clust.rows$order
+  # if there is a pretty.order.rows/cols, order rows/cols by hclust order
+  if (pretty.order.rows) {
+    order.rows <- hclust.rows$order
   }
-  if (col.dendrogram) {
-    order.cols <- clust.cols$order
+  if (pretty.order.cols) {
+    order.cols <- hclust.cols$order
   }
 
-  
-
-  # re-order the rows by cluster
+  # make a data frame order.df.rows/cols that contains the membership and order
+  # of each row/columns.
+  # if clustering was performed then re-order the rows by cluster
   if (cluster.rows) {
     order.df.rows <- data.frame(membership.rows = membership.rows[order.rows],
                                 order.rows = order.rows)
@@ -646,7 +571,7 @@ superheat <- function(X,
     order.df.cols <- data.frame(membership.cols = 1, order.cols = order.cols)
   }
 
-  # Reorder X, yr and yt based on the new ordering
+  # Reorder X matrices, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
   
   if (!is.null(X.text) && is.matrix(X.text) &&
@@ -683,8 +608,6 @@ superheat <- function(X,
     }
   }
   
-  
-  
   # the default if clustering was not performed
   if (!cluster.cols) {
     membership.cols <- 1:ncol(X)
@@ -695,16 +618,6 @@ superheat <- function(X,
     membership.rows <- membership.rows[order.df.rows$order.rows]
     membership.cols <- membership.cols[order.df.cols$order.cols]
   }
-  
-
-
-
-
-
-
-
-
-
 
   # Extract the arguments relevant to the heatmap function
   heat.arg.list <- c(as.list(environment()))
@@ -754,7 +667,7 @@ superheat <- function(X,
     plot.arg.list <- plot.arg.list[!is.na(names(plot.arg.list))]
     gg.top <- do.call(generate_add_on_plot, plot.arg.list)
   } else if (col.dendrogram) {
-    suppressMessages(gg.top <- ggdendro::ggdendrogram(clust.cols) +
+    suppressMessages(gg.top <- ggdendro::ggdendrogram(hclust.cols) +
       ggplot2::scale_x_continuous(expand = c(1/(2 * ncol(X)), 1/(2 * ncol(X)))))
   }
 
@@ -786,7 +699,7 @@ superheat <- function(X,
     plot.arg.list <- plot.arg.list[!is.na(names(plot.arg.list))]
     gg.right <- do.call(generate_add_on_plot, plot.arg.list)
   } else if (row.dendrogram) {
-    suppressMessages(gg.right <- ggdendro::ggdendrogram(clust.rows, rotate = T) +
+    suppressMessages(gg.right <- ggdendro::ggdendrogram(hclust.rows, rotate = T) +
       ggplot2::scale_x_continuous(expand = c(1/(2 * nrow(X)), 1/(2 * nrow(X)))))
   }
 
@@ -872,40 +785,33 @@ superheat <- function(X,
     gg.left <- do.call(generate_cluster_label, label.arg.list)
   }
 
-
   # Generate title
   if (!is.null(title)) {
     gg.title <- generate_title(title = title, title.size = title.size)
   }
 
-
+  # Generate row and column titles
   if (!is.null(column.title)) {
     gg.column.title <- generate_names(name = column.title,
                                      name.size = column.title.size,
                                      location = "bottom")
   }
-
   if (!is.null(row.title)) {
     gg.row.title <- generate_names(name = row.title,
                                   name.size = row.title.size,
                                   location = "left")
   }
 
-
-
   # Generate desired layout
   layout.arg.list <- c(as.list(environment()))
   layout.arg.list <- layout.arg.list[names(formals(generate_layout))]
   layout.arg.list <- layout.arg.list[!is.na(names(layout.arg.list))]
-
   layout <- do.call(generate_layout, layout.arg.list)
-
 
   # place grobs in layout
   grob.arg.list <- c(as.list(environment()))
   grob.arg.list <- grob.arg.list[names(formals(generate_grobs))]
   grob.arg.list <- grob.arg.list[!is.na(names(grob.arg.list))]
-
   grob.layout <- do.call(generate_grobs, grob.arg.list)
 
   if (print.plot) {
@@ -919,6 +825,4 @@ superheat <- function(X,
                     membership.rows = membership.rows)
 
   return(invisible(to.return))
-
-
 }

@@ -67,7 +67,7 @@ generate_heat <- function(X,
   # order rows and columns by orderings provided
   X.order <- X[order.y, order.x]
   # convert the matrix to a long-form "tidy" data frame
-  X.df <- to_df(X.order)
+  X.df <- matrixToDataFrame(X.order)
 
   # define the positions of the horizontal and
   # vertical grid lines based on the clusters
@@ -171,7 +171,7 @@ generate_smooth_heat <- function(X,
                                  membership.cols = NULL,
                                  order.x = NULL, # order of variables
                                  order.y = NULL, # order of observations
-                                 heat.col.scheme = c("red", "viridis", "purple",
+                                 heat.col.scheme = c("viridis", "red", "purple",
                                                      "blue", "grey", "green"),
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
@@ -240,12 +240,12 @@ generate_smooth_heat <- function(X,
   # need to order obs by same order as residuals residuals
   X.order <- X[order.y, order.x]
   # convert the x-y correlation matrix to a long-form "tidy" data frame
-  X.df <- to_df(X.order)
+  X.df <- matrixToDataFrame(X.order)
   # get an x-y matrix for row clusters
   rclust.mat <- matrix(rep(membership.rows,
                            times = ncol(X)),
                        byrow = F, ncol = ncol(X))
-  rclust.df <- to_df(rclust.mat)
+  rclust.df <- matrixToDataFrame(rclust.mat)
   rclust.df$x <- as.numeric(as.character(rclust.df$x))
   rclust.df$y <- as.numeric(as.character(rclust.df$y))
   names(rclust.df) <- c("rclust", "x", "y")
@@ -253,7 +253,7 @@ generate_smooth_heat <- function(X,
   cclust.mat <- matrix(rep(membership.cols,
                            times = nrow(X)),
                        byrow = T, nrow = nrow(X))
-  cclust.df <- to_df(cclust.mat)
+  cclust.df <- matrixToDataFrame(cclust.mat)
   cclust.df$x <- as.numeric(as.character(cclust.df$x))
   cclust.df$y <- as.numeric(as.character(cclust.df$y))
   names(cclust.df) <- c("cclust", "x", "y")
@@ -443,7 +443,7 @@ generate_text_heat <- function(X,
   X.order <- X.text
   
   # convert the x-y correlation matrix to a long-form "tidy" data frame
-  X.df <- to_cluster_df(X.order,
+  X.df <- getClusterDf(X.order,
                         smooth.heat = smooth.heat,
                         membership.rows = membership.rows,
                         membership.cols = membership.cols)

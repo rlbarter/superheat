@@ -5,7 +5,7 @@ internala <- function(variable) {
   return(name)
 }
 
-to_df <- function(X) {
+matrixToDataFrame <- function(X) {
   # convert a matrix to a data data frame with x-y coordinates
   if(!is.matrix(X)) {
     stop("X must be a matrix")
@@ -23,7 +23,7 @@ to_df <- function(X) {
   return(X.df)
 }
 
-to_cluster_df <- function(X.text, smooth.heat,
+getClusterDf <- function(X.text, smooth.heat,
                           membership.cols, membership.rows) {
   # X.text is a text matrix
   
@@ -132,29 +132,70 @@ to_cluster_df <- function(X.text, smooth.heat,
 
 
 
-stop_errors <- function(X,
+stopErrors <- function(X,
                         X.text = NULL,
-                        X.text.size = NULL,
-                        X.text.col = NULL,
-                        X.text.angle = NULL,
                         yt = NULL,
                         yr = NULL,
-                        yt.plot.type = c("scatter", "bar"),
-                        yr.plot.type = c("scatter", "bar"),
-                        scale = FALSE,
                         membership.rows = NULL, # membership for rows
                         membership.cols = NULL, # membership for cols
+                        pretty.order.rows = T,
+                        pretty.order.cols = T,
+                        row.dendrogram = F,
+                        col.dendrogram = F,
+                        
                         n.clusters.rows = NULL,
                         n.clusters.cols = NULL,
                         clustering.method = c("kmeans", "hierarchical"),
-                        cluster.box = TRUE,
-                        legend = TRUE,
+                        dist.method = c("euclidean", "maximum", "manhattan",
+                                        "canberra", "binary", "minkowski"),
+                        
                         order.cols = NULL,
                         order.rows = NULL,
-                        left.heat.label = NULL,
-                        bottom.heat.label = NULL,
+                        
+                        smooth.heat = FALSE,
+                        scale = FALSE,
+                        
+                        left.label = NULL,
+                        bottom.label = NULL,
+                        
+                        heat.col.scheme = c("viridis", "red", "purple", "blue",
+                                            "grey", "green"),
+                        heat.pal = NULL,
+                        heat.pal.values = NULL,
+                        heat.na.col = "grey50",
+                        
+                        X.text.size = 5,
+                        X.text.col = "black",
+                        X.text.angle = 0,
+                        
+                        yt.plot.type = c("scatter", "bar", "boxplot",
+                                         "scattersmooth", "smooth",
+                                         "scatterline", "line"),
+                        yr.plot.type = c("scatter", "bar", "boxplot",
+                                         "scattersmooth","smooth",
+                                         "scatterline", "line"),
+                        
+                        legend = TRUE,
+                        legend.height = 0.1,
+                        legend.width = 1.5,
+                        legend.text.size = 12,
+                        
+                        grid.hline = TRUE,
+                        grid.vline = TRUE,
+                        grid.hline.size = 0.5,
+                        grid.vline.size = 0.5,
+                        grid.hline.col = "black",
+                        grid.vline.col = "black",
+                        force.grid.hline = F,
+                        force.grid.vline = F,
+                        
+                        smoothing.method = c("loess", "lm"),
+                        smooth.se = TRUE,
+                        
                         yt.axis = T,
                         yr.axis = T,
+                        yt.num.ticks = 3,
+                        yr.num.ticks = 3,
                         yt.plot.size = 0.3,
                         yr.plot.size = 0.3,
                         yt.axis.name = NULL,
@@ -163,29 +204,48 @@ stop_errors <- function(X,
                         yt.axis.size = 10,
                         yr.axis.name.size = 10,
                         yt.axis.name.size = 10,
-                        bottom.text.size = 5,
-                        left.text.size = 5,
-                        bottom.text.angle = NULL,
-                        left.text.angle = NULL,
-                        bottom.label.size = 0.1,
-                        left.label.size = 0.1,
-                        heat.col.scheme = c("red", "viridis", "purple", "blue",
-                                            "grey", "green"),
-                        heat.pal = NULL,
-                        heat.pal.values = NULL,
-                        left.label.pal = NULL,
-                        bottom.label.pal = NULL,
+                        yr.axis.name.angle = NULL,
+                        yt.axis.name.angle = NULL,
+                        yt.obs.col = NULL,
+                        yr.obs.col = NULL,
+                        yt.cluster.col = NULL,
+                        yr.cluster.col = NULL,
+                        yt.bar.col = NULL,
+                        yr.bar.col = NULL,
+                        yt.point.size = 2,
+                        yt.point.alpha = 1,
+                        yr.point.size = 2,
+                        yr.point.alpha = 1,
+                        yr.line.size = NULL,
+                        yt.line.size = NULL,
+                        
+                        bottom.label.text.size = 5,
+                        left.label.text.size = 5,
+                        bottom.label.text.angle = NULL,
+                        left.label.text.angle = NULL,
+                        bottom.label.size = 0.2,
+                        left.label.size = 0.2,
+                        left.label.col = NULL,
+                        bottom.label.col = NULL,
                         left.label.text.col = NULL,
                         bottom.label.text.col = NULL,
-                        yt.col = NULL,
-                        yr.col = NULL,
-                        yt.point.size = 2,
-                        yr.point.size = 2,
-                        legend.size = 2,
+                        left.label.text.alignment = c("center", "left", "right"),
+                        bottom.label.text.alignment = c("center", "left",
+                                                        "right"),
+                        force.left.label = F,
+                        force.bottom.label = F,
+                        
+                        column.title = NULL,
+                        row.title = NULL,
+                        column.title.size = 5,
+                        row.title.size = 5,
+                        
                         padding = 1,
                         title = NULL,
                         title.size = 5,
-                        print.plot = TRUE) {
+                        
+                        left.heat.label = NULL,
+                        bottom.heat.label = NULL) {
 
   if (is.matrix(X) &&
       sum(!(apply(X, 2, class) %in% c("numeric", "integer")) > 0)) {
@@ -245,6 +305,18 @@ stop_errors <- function(X,
       !is.matrix(X.text.col)) {
     stop("'X.text.col' must be either a single value or a matrix")
   } 
+  
+  
+  
+  # cannot set dendrogram = TRUE if pretty.order = FALSE
+  if (row.dendrogram && !pretty.order.rows) {
+    stop("Cannot set 'row.dendrogram = TRUE' if 'pretty.order.rows = FALSE'")
+  }
+  
+  if (col.dendrogram && !pretty.order.cols) {
+    stop("Cannot set 'col.dendrogram = TRUE' if 'pretty.order.cols = FALSE'")
+  }
+  
 
   if (!is.null(left.heat.label)) {
     possible.methods <- c("variable", "cluster", "none")
@@ -342,4 +414,128 @@ stop_errors <- function(X,
   }
 
 
+}
+
+
+
+
+clusterStopErrors <- function(X,
+                              pretty.order.rows = T,
+                              pretty.order.cols = T,
+                              row.dendrogram = F,
+                              col.dendrogram = F,
+                              cluster.cols = NULL,
+                              cluster.rows = NULL,
+                              yt = NULL,
+                              yr = NULL,
+                              yt.plot.type = NULL,
+                              yr.plot.type = NULL,
+                              effective.col.clusters = NULL,
+                              effective.row.clusters = NULL) {
+  
+  
+  if ((!cluster.cols && !is.null(yt) && (length(yt) != ncol(X))) |
+      ((cluster.cols && !is.null(yt) && (length(yt) != effective.col.clusters)) &&
+       (cluster.cols && !is.null(yt) && (length(yt) != ncol(X))))) {
+    stop(paste("'yt' must have length equal to either the number of columns",
+               "of 'X' or the number of column clusters of 'X'."))
+  }
+  
+  if ((!cluster.rows && !is.null(yr) && (length(yr) != nrow(X))) |
+      ((cluster.rows && !is.null(yr) && (length(yr) != effective.row.clusters)) &&
+       (cluster.rows && !is.null(yr) && (length(yr) != nrow(X))))) {
+    stop(paste("'yr' must have length equal to either the number of rows",
+               "of 'X' or the number of row clusters of 'X'."))
+  }
+  
+  # shoot an error if a top plot is provided and is set to boxplot
+  # but the columns are not clustered. Reason being that boxplots need to
+  # aggregate data.
+  if (!is.null(yt) && !cluster.cols && (yt.plot.type == "boxplot")) {
+    stop("Cannot set yt.plot.type = 'boxplot' without clustering the columns.")
+  }
+  # shoot an error if a right plot is provided and is set to boxplot
+  # but the rows are not clustered. Reason being that boxplots need to
+  # aggregate data.
+  if (!is.null(yr) && !cluster.rows && (yr.plot.type == "boxplot")) {
+    stop("Cannot set yr.plot.type = 'boxplot' without clustering the rows.")
+  }
+  
+  
+  # spit out an error if someone tries to put in a dendrogram without
+  # doing hierarchical clustering
+  if (cluster.cols && col.dendrogram) {
+    stop("Cannot perform column clustering while placing a dendrogram")
+  }
+  if (cluster.rows && row.dendrogram) {
+    stop("Cannot perform row clustering while placing a dendrogram")
+  }
+  
+  if (!is.null(yr) && row.dendrogram) {
+    stop("Cannot set 'yr' when placing a dendrogram")
+  }
+  if (!is.null(yt) && col.dendrogram) {
+    stop("Cannot set 'yt' when placing a dendrogram")
+  }
+}
+
+clean_matrix <- function(X, scale) {
+  
+  # if there are no column/row names, number them numerically
+  if (is.null(colnames(X))) {
+    colnames(X) <- 1:ncol(X)
+  }
+  if (is.null(rownames(X))) {
+    rownames(X) <- 1:nrow(X)
+  }
+  
+  # should you standardize the matrix
+  # (each column will have mean 0 and variance 1)
+  if (scale) {
+    X <- scale(X)
+  }
+  
+  return(X)
+}
+  
+
+setLabelType <- function(X,
+                           left.label, 
+                           cluster.rows, 
+                           bottom.label, 
+                           cluster.cols,
+                           force.left.label,
+                           force.bottom.label) {
+  
+  # if there are no row labels provided and cluster.rows is FALSE,
+  # then set the default label type to be "variable",
+  # otherwise set it to "TRUE"cluster"
+  if (is.null(left.label) && !cluster.rows) {
+    left.label <- "variable"
+  } else if (is.null(left.label) && cluster.rows) {
+    left.label <- "cluster"
+  }
+  
+  # if there are no bottom labels provided and cluster.cols is FALSE,
+  # then set the default label type to be "variable",
+  # otherwise set it to "TRUE"cluster"
+  if (is.null(bottom.label) && cluster.cols) {
+    bottom.label <- "cluster"
+  } else if (is.null(bottom.label) && !cluster.cols) {
+    bottom.label <- "variable"
+  }
+  
+  # remove variable labels if more than 50 rows/cols
+  if ((left.label == "variable") && !force.left.label) {
+    if (nrow(X) > 100) {
+      left.label <- "none"
+    }
+  }
+  if (bottom.label == "variable" && !force.bottom.label) {
+    if (ncol(X) > 100) {
+      bottom.label <- "none"
+    }
+  }
+  
+  return(list(left.label = left.label, bottom.label = bottom.label))
 }
