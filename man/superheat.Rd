@@ -5,13 +5,14 @@
 \title{Generate supervised heatmaps.}
 \usage{
 superheat(X, X.text = NULL, yt = NULL, yr = NULL,
-  membership.rows = NULL, membership.cols = NULL, row.dendrogram = F,
-  col.dendrogram = F, n.clusters.rows = NULL, n.clusters.cols = NULL,
+  membership.rows = NULL, membership.cols = NULL, pretty.order.rows = T,
+  pretty.order.cols = T, row.dendrogram = F, col.dendrogram = F,
+  n.clusters.rows = NULL, n.clusters.cols = NULL,
   clustering.method = c("kmeans", "hierarchical"),
   dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
   "minkowski"), order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
   scale = FALSE, left.label = NULL, bottom.label = NULL,
-  heat.col.scheme = c("red", "viridis", "purple", "blue", "grey", "green"),
+  heat.col.scheme = c("viridis", "red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
   X.text.size = 5, X.text.col = "black", X.text.angle = 0,
   yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
@@ -62,6 +63,12 @@ of the rows in X.}
 
 \item{membership.cols}{a vector specifying the cluster membership
 of the columns in X.}
+
+\item{pretty.order.rows}{a logical specifying whether the cols should be reordered
+based on hierarchical clustering. Default is TRUE.}
+
+\item{pretty.order.cols}{a logical specifying whether the rows should be reordered
+based on hierarchical clustering. Default is TRUE.}
 
 \item{row.dendrogram}{a logical specifying whether a dendrogram should be
 placed next to the rows. Can only be used when \code{yr} is not 
@@ -123,7 +130,7 @@ provides the variable names). The final option, "none", removes the
 label all together.}
 
 \item{heat.col.scheme}{A character specifying the heatmap colour scheme.
-The default is "red", and other options include "viridis", purple",
+The default is "viridis", and other options include "red", purple",
 "blue", "grey" and "green". If you wish to supply your own colour
 scheme, use the \code{heat.pal} argument.}
 
