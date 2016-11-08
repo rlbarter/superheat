@@ -30,17 +30,18 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yt.axis.name.angle = NULL, yt.obs.col = NULL, yr.obs.col = NULL,
   yt.cluster.col = NULL, yr.cluster.col = NULL, yt.bar.col = NULL,
   yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
-  yr.point.size = 2, yr.point.alpha = 1, yr.line.size = NULL,
-  yt.line.size = NULL, bottom.label.text.size = 5,
-  left.label.text.size = 5, bottom.label.text.angle = NULL,
-  left.label.text.angle = NULL, bottom.label.size = 0.2,
-  left.label.size = 0.2, left.label.col = NULL, bottom.label.col = NULL,
-  left.label.text.col = NULL, bottom.label.text.col = NULL,
-  left.label.text.alignment = c("center", "left", "right"),
-  bottom.label.text.alignment = c("center", "left", "right"),
-  force.left.label = F, force.bottom.label = F, column.title = NULL,
-  row.title = NULL, column.title.size = 5, row.title.size = 5,
-  padding = 1, title = NULL, title.size = 5, print.plot = TRUE)
+  yr.point.size = 2, yr.point.alpha = 1, yr.line.col = NULL,
+  yt.line.col = NULL, yr.line.size = NULL, yt.line.size = NULL,
+  bottom.label.text.size = 5, left.label.text.size = 5,
+  bottom.label.text.angle = NULL, left.label.text.angle = NULL,
+  bottom.label.size = 0.2, left.label.size = 0.2, left.label.col = NULL,
+  bottom.label.col = NULL, left.label.text.col = NULL,
+  bottom.label.text.col = NULL, left.label.text.alignment = c("center",
+  "left", "right"), bottom.label.text.alignment = c("center", "left",
+  "right"), force.left.label = F, force.bottom.label = F,
+  column.title = NULL, row.title = NULL, column.title.size = 5,
+  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
+  print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix whose values are to be plotted in the heatmap.}
@@ -277,6 +278,12 @@ The default is 2.}
 \item{yr.point.alpha}{the transparency of the points in the \code{yr}
 scatterplot. The default is 1, which corresponds to no
 transparency.}
+
+\item{yr.line.col}{the color of the (smoothing) line in the \code{yr}
+plot.}
+
+\item{yt.line.col}{the color of the (smoothing) line in the \code{yt}
+plot.}
 
 \item{yr.line.size}{the thickness of the (smoothing) line in the \code{yr}
 plot.}

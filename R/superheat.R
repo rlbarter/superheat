@@ -178,6 +178,10 @@
 #'          plot.
 #' @param yr.line.size the thickness of the (smoothing) line in the \code{yr}
 #'          plot.
+#' @param yt.line.col the color of the (smoothing) line in the \code{yt}
+#'          plot.
+#' @param yr.line.col the color of the (smoothing) line in the \code{yr}
+#'          plot.
 #'
 #' @param yt.obs.col a vector specifying the colour of individual points in the
 #'          \code{yt} plot.
@@ -363,6 +367,8 @@ superheat <- function(X,
                       yt.point.alpha = 1,
                       yr.point.size = 2,
                       yr.point.alpha = 1,
+                      yr.line.col = NULL,
+                      yt.line.col = NULL,
                       yr.line.size = NULL,
                       yt.line.size = NULL,
 
@@ -649,6 +655,7 @@ superheat <- function(X,
     y.cluster.col <- yt.cluster.col
     y.bar.col <- yt.bar.col
     y.line.size <- yt.line.size
+    y.line.col <- yt.line.col
     membership <- membership.cols
     location <- "top"
     axis.name <- yt.axis.name
@@ -681,6 +688,7 @@ superheat <- function(X,
     y.cluster.col <- yr.cluster.col
     y.bar.col <- yr.bar.col
     y.line.size <- yr.line.size
+    y.line.col <- yr.line.col
     membership <- membership.rows
     location <- "right"
     axis.name <- yr.axis.name
