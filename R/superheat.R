@@ -469,7 +469,9 @@ superheat <- function(X,
                              bottom.label, 
                              cluster.cols,
                              force.left.label,
-                             force.bottom.label)
+                             force.bottom.label,
+                             yr.obs.col,
+                             yt.obs.col)
   bottom.label <- label.type$bottom.label
   left.label <- label.type$left.label
 
@@ -490,7 +492,15 @@ superheat <- function(X,
       grid.hline <- FALSE
     }
   }
-
+  
+  # remove variable labels if more than 50 rows/cols
+  
+  if ((nrow(X) > 100) && is.null(yr.obs.col)) {
+    yr.obs.col <- "grey31"
+  }
+  if ((ncol(X) > 100) && is.null(yt.obs.col)) {
+    yt.obs.col <- "grey31"
+  }
   # if cluster.rows is TRUE and no row membership is provided,
   # then perform clustering
   if (is.null(membership.rows) && cluster.rows) {

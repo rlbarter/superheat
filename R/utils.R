@@ -413,6 +413,7 @@ stopErrors <- function(X,
     stop("'order.rows' must be a vector containing the row indexes of 'X'.")
   }
 
+  
 
 }
 
@@ -477,6 +478,8 @@ clusterStopErrors <- function(X,
   if (!is.null(yt) && col.dendrogram) {
     stop("Cannot set 'yt' when placing a dendrogram")
   }
+  
+  
 }
 
 clean_matrix <- function(X, scale) {
@@ -500,12 +503,14 @@ clean_matrix <- function(X, scale) {
   
 
 setLabelType <- function(X,
-                           left.label, 
-                           cluster.rows, 
-                           bottom.label, 
-                           cluster.cols,
-                           force.left.label,
-                           force.bottom.label) {
+                         left.label, 
+                         cluster.rows, 
+                         bottom.label, 
+                         cluster.cols,
+                         force.left.label,
+                         force.bottom.label,
+                         yr.obs.col,
+                         yt.obs.col) {
   
   # if there are no row labels provided and cluster.rows is FALSE,
   # then set the default label type to be "variable",
@@ -536,6 +541,7 @@ setLabelType <- function(X,
       bottom.label <- "none"
     }
   }
+  
   
   return(list(left.label = left.label, bottom.label = bottom.label))
 }
