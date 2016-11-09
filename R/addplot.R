@@ -94,7 +94,8 @@ generate_add_on_plot <- function(X,
   # if y is not being provided for all observations
   # (then it must be for clusters)
   # We need to make sure each value is plotted in the center of the cluster
-  if (clustered.plot) {
+  if (clustered.plot && (length(y) != nrow(X))) {
+    
    midpoints <- clusteredPosition(y.df, membership)$midpoints
    # add position to y.df data frame
    y.df$x <- midpoints

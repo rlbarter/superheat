@@ -1,6 +1,8 @@
 clusteredPosition <- function(y.df, membership) {
-
-  y.df$membership <- factor(unique(membership))
+  if (length(unique(membership)) == length(membership)) {
+    y.df$membership <- factor(unique(membership))
+  }
+  
   # calculate the positions to be the center of each cluster
   # first identify each unique cluster and the number (size) of
   # data points in each cluster
@@ -138,7 +140,7 @@ addScatter <- function(gg.add, y.df, n.clusters, y.obs.col,
                                        y = y),
                           size = point.size,
                           alpha = point.alpha,
-                          col = rep(unique(y.obs.col), length = n.obs)) 
+                          col = rep(y.obs.col, length = n.obs)) 
   }
   return(gg.add)
 }
@@ -274,13 +276,11 @@ addBar <- function(gg.add, y.df, membership, clustered.plot,
     # Case 2: color specified for individual observations
     gg.add <- gg.add +
       ggplot2::geom_bar(ggplot2::aes(x = x,
-                                     y = y,
-                                     fill = factor(membership)),
+                                     y = y),
                         col = y.bar.col,
                         position = ggplot2::position_dodge(0),
                         stat = "identity",
-                        width = 1) +
-      ggplot2::scale_fill_manual(values = unique(y.obs.col))
+                        width = 1) 
   }
   
   # add a 0 intercept line for the barplots

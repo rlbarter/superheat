@@ -414,6 +414,35 @@ stopErrors <- function(X,
   }
 
   
+  if (!is.null(yr.obs.col) && (yr.plot.type == "line")) {
+    stop(paste("Cannot set `yr.obs.col` when `yr.plot.type == 'line'`.", 
+               "Use `yr.line.col` instead."))
+  }
+  if (!is.null(yt.obs.col) && (yt.plot.type == "line")) {
+    stop(paste("Cannot set `yt.obs.col` when `yt.plot.type == 'line'`.", 
+               "Use `yt.line.col` instead."))
+  }
+  if (!is.null(yt.obs.col) && (yt.plot.type == "smooth")) {
+    stop(paste("Cannot set `yt.obs.col` when `yt.plot.type == 'smooth'`.", 
+               "Use `yt.line.col` instead."))
+  }
+  if ((length(yt) != ncol(X)) && (yt.plot.type == "line")) {
+    stop(paste("`yt` must have same length as `ncol(X)` when",
+               "`yt.plot.type == 'line'`."))
+  }
+  if ((length(yr) != nrow(X)) && (yr.plot.type == "line")) {
+    stop(paste("`yr` must have same length as `nrow(X)` when",
+               "`yr.plot.type == 'line'`."))
+  }
+  if ((length(yt) != ncol(X)) && (yt.plot.type == "smooth")) {
+    stop(paste("`yt` must have same length as `ncol(X)` when",
+               "`yt.plot.type == 'smooth'`."))
+  }
+  if ((length(yr) != nrow(X)) && (yr.plot.type == "smooth")) {
+    stop(paste("`yr` must have same length as `nrow(X)` when",
+               "`yr.plot.type == 'smooth'`."))
+  }
+  
 
 }
 
