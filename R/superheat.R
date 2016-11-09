@@ -617,6 +617,7 @@ superheat <- function(X,
     # data point (rather than for each cluster)
     if (length(yr) == nrow(X)) {
       yr <- yr[order.df.rows$order.rows]
+      yr.obs.col <- yr.obs.col[order.df.rows$order.rows]
     }
   }
   if (!is.null(yt)) {
@@ -624,6 +625,7 @@ superheat <- function(X,
     # data point (rather than for each cluster)
     if (length(yt) == ncol(X)) {
       yt <- yt[order.df.cols$order.cols]
+      yt.obs.col <- yt.obs.col[order.df.cols$order.cols]
     }
   }
   
