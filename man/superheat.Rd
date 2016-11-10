@@ -5,8 +5,8 @@
 \title{Generate supervised heatmaps.}
 \usage{
 superheat(X, X.text = NULL, yt = NULL, yr = NULL,
-  membership.rows = NULL, membership.cols = NULL, pretty.order.rows = T,
-  pretty.order.cols = T, row.dendrogram = F, col.dendrogram = F,
+  membership.rows = NULL, membership.cols = NULL, pretty.order.rows = F,
+  pretty.order.cols = F, row.dendrogram = F, col.dendrogram = F,
   n.clusters.rows = NULL, n.clusters.cols = NULL,
   clustering.method = c("kmeans", "hierarchical"),
   dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
@@ -66,10 +66,10 @@ of the rows in X.}
 of the columns in X.}
 
 \item{pretty.order.rows}{a logical specifying whether the cols should be reordered
-based on hierarchical clustering. Default is TRUE.}
+based on hierarchical clustering. Default is FALSE.}
 
 \item{pretty.order.cols}{a logical specifying whether the rows should be reordered
-based on hierarchical clustering. Default is TRUE.}
+based on hierarchical clustering. Default is FALSE.}
 
 \item{row.dendrogram}{a logical specifying whether a dendrogram should be
 placed next to the rows. Can only be used when \code{yr} is not 
