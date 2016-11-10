@@ -408,6 +408,13 @@ superheat <- function(X,
     membership.cols <- droplevels(membership.cols)
   }
   
+  if (row.dendrogram) {
+    pretty.order.rows = TRUE
+  }
+  if (col.dendrogram) {
+    pretty.order.cols = TRUE
+  }
+  
   # match the arguments to those provided
   smoothing.method <- match.arg(smoothing.method)
   yt.plot.type <- match.arg(yt.plot.type)
@@ -570,6 +577,7 @@ superheat <- function(X,
   if (pretty.order.cols && is.null(order.cols)) {
     order.cols <- hclust.cols$order
   }
+  
   
 
   # if a specific row/col ordering is not provided,
