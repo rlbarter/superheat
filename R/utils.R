@@ -442,10 +442,12 @@ stopErrors <- function(X,
     stop(paste("`yr` must have same length as `nrow(X)` when",
                "`yr.plot.type == 'smooth'`."))
   }
-  if (!is.null(yr.obs.col) && (length(yr.obs.col) != length(yr))) {
+  if (!is.null(yr.obs.col) && 
+      ((length(yr.obs.col) != length(yr)) && (length(yr.obs.col) != 1))) {
     stop(paste("`yr.obs.col` must have same length as `yr`"))
   }
-  if (!is.null(yt.obs.col) && (length(yt.obs.col) != length(yt))) {
+  if (!is.null(yt.obs.col) && 
+      ((length(yt.obs.col) != length(yt)) && (length(yt.obs.col) != 1)))  {
     stop(paste("`yt.obs.col` must have same length as `yt`"))
   }
   

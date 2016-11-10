@@ -400,6 +400,14 @@ superheat <- function(X,
                       print.plot = TRUE) {
   # The primary superheat function for plotting super heatmaps.
 
+  # drop exess factor levels 
+  if (!is.null(membership.rows) && is.factor(membership.rows)) {
+    membership.rows <- droplevels(membership.rows)
+  }
+  if (!is.null(membership.cols) && is.factor(membership.cols)) {
+    membership.cols <- droplevels(membership.cols)
+  }
+  
   # match the arguments to those provided
   smoothing.method <- match.arg(smoothing.method)
   yt.plot.type <- match.arg(yt.plot.type)
@@ -493,14 +501,25 @@ superheat <- function(X,
     }
   }
   
-  # remove variable labels if more than 50 rows/cols
+  # remove alternating color in adjacent plots if no labels
+  if (!is.null(yr) && # provided a right-plot
+      (nrow(X) > 100) &&  # default no labels
+      !force.left.label && # nor forcing labels
+      is.null(yr.obs.col) &&  # no point color provided
+      (length(yr) == nrow(X)) && # right plot is at the individual-level
+      !cluster.rows) { # did not cluster rows
+    yr.obs.col <- rep("grey50", nrow(X))
+  }
+  if (!is.null(yt) && # provided a top-plot
+      (ncol(X) > 100) &&  # default no labels
+      !force.bottom.label && # nor forcing labels
+      is.null(yt.obs.col) &&  # no point color provided
+      (length(yt) == ncol(X)) && # top plot is at the individual-level
+      !cluster.cols) {  # did not cluster cols
+    yt.obs.col <- rep("grey50", ncol(X))
+  }
   
-  if ((nrow(X) > 100) && is.null(yr.obs.col)) {
-    yr.obs.col <- "grey31"
-  }
-  if ((ncol(X) > 100) && is.null(yt.obs.col)) {
-    yt.obs.col <- "grey31"
-  }
+  
   # if cluster.rows is TRUE and no row membership is provided,
   # then perform clustering
   if (is.null(membership.rows) && cluster.rows) {

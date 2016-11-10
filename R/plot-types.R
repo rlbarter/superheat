@@ -121,9 +121,12 @@ setLimits <- function(gg.add, y.df, membership, plot.type, clustered.plot, y) {
 
 
 
-addScatter <- function(gg.add, y.df, n.clusters, y.obs.col, 
+addScatter <- function(gg.add, y.df, n.clusters, y.obs.col, clustered.plot,
                        y.cluster.col, n.obs, point.size, point.alpha) {
-  if (is.null(y.obs.col)) {
+  
+  # normal situation: individual-level points & no clustering
+  if ((is.null(y.obs.col) && # did not proide a color vector
+        !identical(unique(y.obs.col), "grey50"))) { # color vector has not been set
     # add scatterplot onto gg.add
     gg.add <- gg.add +
       ggplot2::geom_point(ggplot2::aes(x = x,
@@ -133,7 +136,8 @@ addScatter <- function(gg.add, y.df, n.clusters, y.obs.col,
                           alpha = point.alpha) +
       ggplot2::scale_color_manual(values = rep(y.cluster.col, 
                                                length = n.clusters))
-  } else {
+  } else if (!clustered.plot && # clustered
+             !is.null(y.obs.col)) { # color vector specified
     # if colour is specified by y.obs.col, implement this colour option
     gg.add <- gg.add +
       ggplot2::geom_point(ggplot2::aes(x = x,
