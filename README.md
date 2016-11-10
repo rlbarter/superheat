@@ -2,7 +2,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
 
-*Superheat* is an R package for generating beautiful and customizable heatmaps. See the [vignette](https://cdn.rawgit.com/rlbarter/superheat/master/vignettes/Vignette.html) for usage.
+*Superheat* is an R package for generating beautiful and customizable heatmaps. See the [vignette](https://cdn.rawgit.com/rlbarter/superheat/master/vignettes/superheat-vignette/_book/index.html) for usage.
 
 If you find any bugs, have any feature requests or feedback, please submit an issue.
 
