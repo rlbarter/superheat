@@ -274,9 +274,11 @@ addBar <- function(gg.add, y.df, membership, clustered.plot,
   } else {
     # for the "bar" plot type, add a bar plot to the empty gg.add
     # Case 2: color specified for individual observations
+    
     gg.add <- gg.add +
       ggplot2::geom_bar(ggplot2::aes(x = x,
                                      y = y),
+                        fill = y.obs.col,
                         col = y.bar.col,
                         position = ggplot2::position_dodge(0),
                         stat = "identity",
