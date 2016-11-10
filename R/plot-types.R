@@ -212,12 +212,15 @@ addBoxplot <- function(gg.add, y.df, membership, n.obs,
   # and the entries are proprotional to the number of observations in
   # each cluster
   boxplot.width <- cluster.info$clust.boundary.df$increment
+  names(boxplot.width) <- unique(membership)
   # copy y.df in order to edit for the boxplots
   y.df.boxplot <- y.df
   # add a midpoints variable to y.df.boxplot
   # this specifies the location of each boxplot
   y.df.boxplot$midpoints <- factor(y.df.boxplot$membership)
   levels(y.df.boxplot$midpoints) <- midpoints
+  
+  
   # add the boxplots one cluster at a time onto the empty gg.add object
   gg.add <- gg.add +
     plyr::llply(unique(membership), function(i) {
