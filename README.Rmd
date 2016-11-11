@@ -9,14 +9,14 @@ If you find any bugs, have any feature requests or feedback, please submit an is
 
 To download and install the development version of the package, use `devtools`:
 
-``` r
+```{r}
 install.packages("devtools")
 devtools::install_github("rlbarter/superheat")
 ```
 
 Once you've installed the package, you can load the library in the standard way:
 
-``` r
+```{r}
 library(superheat)
 ```
 
@@ -24,6 +24,6 @@ library(superheat)
 
 Basic usage:
 
-``` r
+```{r}
 superheat(iris[,-5])
 ```
