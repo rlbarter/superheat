@@ -1,0 +1,5 @@
+"0","library(RTextTools)"
+"0","# The NYTimes dataset can be extracted from the RTextTools package"
+"0","data(NYTimes)"
+"0","# view the first 6 rows"
+"0","kable(head(NYTimes, 3))"

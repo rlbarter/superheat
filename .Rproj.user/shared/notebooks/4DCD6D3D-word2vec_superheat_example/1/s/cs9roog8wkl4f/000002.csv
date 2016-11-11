@@ -1,0 +1,6 @@
+"0","length(unique(tolower(rownames(GoogleNews.common))))
+"
+"1","[1]"
+"1"," 991"
+"1","
+"

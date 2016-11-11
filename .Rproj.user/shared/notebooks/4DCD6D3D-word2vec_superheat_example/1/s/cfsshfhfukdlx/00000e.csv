@@ -1,0 +1,9 @@
+"0","# convert to a dtm"
+"0","dtm <- DocumentTermMatrix(nyt.corpus)"
+"0","# calcualte the word counts"
+"0","freq <- colSums(as.matrix(dtm))   "
+"0","# view the 10 most frequent words"
+"0","kable(head(sort(freq, decreasing = T), 10))"
+"2","Error in kable_markdown(x = c(""new"", ""bush"", ""iraq"", ""war"", ""overview"",  : 
+  the table must have a header (column names)
+"

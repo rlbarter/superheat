@@ -1,0 +1,5 @@
+"0","library(tm)"
+"0","# Extract the title from each article entry"
+"0","nyt.headlines <- as.character(NYTimes$Title)"
+"0","# convert the headline titles to a tm corpus"
+"0","nyt.corpus <- Corpus(VectorSource(nyt.headlines))"

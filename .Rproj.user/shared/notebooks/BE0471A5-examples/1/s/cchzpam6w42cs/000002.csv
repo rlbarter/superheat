@@ -1,0 +1,22 @@
+"0","crimes <- fread(paste0(""https://archive.ics.uci.edu/ml/machine-learning-"",
+                    ""databases/00211/CommViolPredUnnormalizedData.txt""))
+"
+"2","  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0  "
+"2","  0     0      0      0 --:--:-- --:--:-- --:--:--     0"
+"2"," 26 1519"
+"2","k   26  400k    0     0   654k      0  0:00:02 --:--:--  0:00:02  654k"
+"2",""
+"2","100 1519k  100 1519k    0     0  2185k      0 --:--:-- --:--:-- --:--:-- 2182k
+"
+"0","crimes <- fread(paste0(""https://archive.ics.uci.edu/ml/machine-learning-"","
+"0","                    ""databases/00211/CommViolPredUnnormalizedData.txt""))"
+"2","  % Total    "
+"2","% Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0"
+"2","100 1"
+"2","519k  100 1519k    0     0  3934k      0 --:--:-- --:--:-- --:--:-- 3935k
+"
+"0","crimes <- as_tibble(crimes)"

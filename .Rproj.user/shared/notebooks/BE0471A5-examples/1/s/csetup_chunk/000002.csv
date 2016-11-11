@@ -1,0 +1,84 @@
+"0","library(data.table)
+"
+"2","data.table 1.9.6  For help type ?data.table or https://github.com/Rdatatable/data.table/wiki
+"
+"2","The fastest way to learn (by data.table authors): https://www.datacamp.com/courses/data-analysis-the-data-table-way
+"
+"2","
+Attaching package: ‘data.table’
+
+"
+"2","The following object is masked from ‘package:GenomicRanges’:
+
+    shift
+
+"
+"2","The following object is masked from ‘package:IRanges’:
+
+    shift
+
+"
+"0","library(data.table)"
+"0","library(tibble)"
+"0","library(dplyr)"
+"2","------------------------------------------------------------------------------------------------------
+"
+"2","data.table + dplyr code now lives in dtplyr.
+Please library(dtplyr)!
+"
+"2","------------------------------------------------------------------------------------------------------
+"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:data.table’:
+
+    between, last
+
+"
+"2","The following object is masked from ‘package:baySeq’:
+
+    groups
+
+"
+"2","The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+"
+"2","The following object is masked from ‘package:GenomeInfoDb’:
+
+    intersect
+
+"
+"2","The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, regroup, setdiff, slice, union
+
+"
+"2","The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+"
+"2","The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, union
+
+"
+"2","The following object is masked from ‘package:testthat’:
+
+    matches
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"

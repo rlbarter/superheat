@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\nlibrary(RColorBrewer)\nlibrary(superheat)\nlibrary(shinyjs)\n\n# iris data\nX  <- iris[, -5]\n\n\n\n# Define server logic required to draw a histogram\nshinyServer(function(input, output) {\n\n\n  rowMembershipInput <- reactive({\n    if (input$n.clusters.rows != \"none\")\n      return(kmeans(X, centers = input$n.clusters.rows)$cluster)\n    NULL\n  })\n\n  colMembershipInput <- reactive({\n    if (input$n.clusters.cols != \"none\")\n      return(kmeans(t(X), centers = input$n.clusters.cols)$cluster)\n    NULL\n  })\n\n  colorsInput <- reactive({\n    brewer.pal(input$n.col, input$brewer)\n  })\n\n  smoothInput <- reactive({\n    input$smooth.heat\n  })\n\n\n  output$superheat <- renderPlot({\n    superheat(X = X,\n              membership.rows = rowMembershipInput(),\n              membership.cols = colMembershipInput(),\n              heat.pal = colorsInput(),\n              smooth.heat = smoothInput())\n  })\n\n\n\n\n\n    # print the code\n    code <- reactive({\n      code <- sprintf(paste0(\n        \"superheat(X = iris[,-5], \\n\",\n        \"  heat.pal = \", \"brewer.pal(\", input$n.col, \",\", \"'\",input$brewer, \"')\"))\n\n      code <- paste0(code, \")\")\n    })\n\n})\n",
+    "created" : 1462308739342.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "887288881",
+    "id" : "130E2DB7",
+    "lastKnownWriteTime" : 1462309695,
+    "path" : "~/Google Drive/Berkeley PhD/Packages/Supervised Heatmaps/superheat_app/server.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

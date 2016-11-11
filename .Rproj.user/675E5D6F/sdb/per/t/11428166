@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "### Name: AnomalyScore\n### Title: Evaluating isolation trees\n### Aliases: AnomalyScore\n### Keywords: models\n\n### ** Examples\n\n\nlibrary(IsolationForest)\ndata(stackloss)\n# train a model of Isolation Forest\ntr<-IsolationTrees(stackloss,rFactor=0)\n#evaluate anomaly score\nas<-AnomalyScore(stackloss,tr)\n# show anomaly score\nas$outF\n\n\n\n\n",
+    "created" : 1474996496708.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "851440331",
+    "id" : "11428166",
+    "lastKnownWriteTime" : 1248217464,
+    "last_content_update" : 1248217464,
+    "path" : "~/Google Drive/Berkeley PhD/Research/Anomaly Detection/IsolationForest/R-ex/AnomalyScore.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

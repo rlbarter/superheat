@@ -1,0 +1,4 @@
+"0","GoogleNews.common <- GoogleNews[tolower(GoogleNews[,1]) %in% common.words,]
+"
+"2","
+"

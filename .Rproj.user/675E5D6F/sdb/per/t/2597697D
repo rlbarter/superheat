@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Install the package from R-Forge\n# install.packages(\"IsolationForest\", repos = \"http://R-Forge.R-project.org\")\n\nlibrary(viridis)\nlibrary(ggplot2)\nlibrary(IsolationForest)\n\n\ntr <- IsolationTrees(iris[,-5], ntree = 50)\n\nas <- AnomalyScore(iris[,-5], tr)\n\niris_as <- cbind(iris, path_length = as$pathLength)\n\nggplot(iris_as) +\n  geom_point(aes(x = Sepal.Length, y = Sepal.Width, col = path_length), size = 3) +\n  scale_color_viridis()\n\n",
+    "created" : 1474996505956.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3334442933",
+    "id" : "2597697D",
+    "lastKnownWriteTime" : 1474997373,
+    "last_content_update" : 1474997373549,
+    "path" : "~/Google Drive/Berkeley PhD/Research/Anomaly Detection/isolation_forest.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
