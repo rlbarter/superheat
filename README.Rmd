@@ -5,14 +5,7 @@ output: html_document
 # superheat: An R package for supervised heatmaps
 
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-fig.retina = 2,
-  fig.path = "README_figs/README-"
-)
-```
+
 
 [![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
 
@@ -38,7 +31,7 @@ library(superheat)
 
 Basic usage:
 
-```{r, fig.height = 9.5, fig.width = 8}
+```{r, fig.height = 9.5, fig.width = 8, fig.align = "center"}
 superheat(mtcars,
           # normalize variables
           scale = T,
@@ -55,3 +48,5 @@ superheat(mtcars,
           # increase size of left labels
           left.label.size = 0.45)
 ```
+
+![image1](README_figs/README-unnamed-chunk-4-1.png)
