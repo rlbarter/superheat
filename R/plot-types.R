@@ -35,11 +35,11 @@ setTicks <- function(plot.type, y.df, num.ticks) {
     # equally spaced positions from the min to the max value
     ticks <- seq(min(y.df$y, na.rm = T),
                  max(y.df$y, na.rm = T), length = num.ticks)
-  } else if ((plot.type == "bar") && (min(y.df$y, na.rm = T) > 0)) {
+  } else if ((plot.type == "bar") && (min(y.df$y, na.rm = T) >= 0)) {
     # for a bar plot, if the minimum value is positive,
     # then make sure that the axis starts at 0, rather than the minimum
     ticks <- seq(0, max(y.df$y, na.rm = T), length = num.ticks)
-  } else if ((plot.type == "bar") && (max(y.df$y, na.rm = T) < 0)) {
+  } else if ((plot.type == "bar") && (max(y.df$y, na.rm = T) <= 0)) {
     # for a bar plot, if the maximum value is negative,
     # then make sure that the axis ends at 0, rather than the maximum
     ticks <- seq(min(y.df$y, na.rm = T), 0, length = num.ticks)
@@ -50,7 +50,7 @@ setTicks <- function(plot.type, y.df, num.ticks) {
     # the axis should range from the min to the max
     ticks <- seq(min(y.df$y, na.rm = T), max(y.df$y, na.rm = T),
                  length = num.ticks)
-  }
+  } 
   return(ticks)
 }
 
