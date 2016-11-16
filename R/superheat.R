@@ -29,9 +29,9 @@
 #' @param membership.cols a vector specifying the cluster membership
 #'          of the columns in X.
 #' @param pretty.order.cols a logical specifying whether the rows should be reordered
-#'          based on hierarchical clustering. Default is FALSE. 
+#'          based on hierarchical clustering. Default is TRUE. 
 #' @param pretty.order.rows a logical specifying whether the cols should be reordered
-#'          based on hierarchical clustering. Default is FALSE.
+#'          based on hierarchical clustering. Default is TRUE.
 #' @param row.dendrogram a logical specifying whether a dendrogram should be
 #'          placed next to the rows. Can only be used when \code{yr} is not 
 #'          specified and clustering is not performed. 
@@ -289,8 +289,8 @@ superheat <- function(X,
                       yr = NULL,
                       membership.rows = NULL, # membership for rows
                       membership.cols = NULL, # membership for cols
-                      pretty.order.rows = F,
-                      pretty.order.cols = F,
+                      pretty.order.rows = T,
+                      pretty.order.cols = T,
                       row.dendrogram = F,
                       col.dendrogram = F,
 
