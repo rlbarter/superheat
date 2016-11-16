@@ -289,8 +289,8 @@ superheat <- function(X,
                       yr = NULL,
                       membership.rows = NULL, # membership for rows
                       membership.cols = NULL, # membership for cols
-                      pretty.order.rows = T,
-                      pretty.order.cols = T,
+                      pretty.order.rows = F,
+                      pretty.order.cols = F,
                       row.dendrogram = F,
                       col.dendrogram = F,
 
