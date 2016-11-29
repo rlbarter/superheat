@@ -66,10 +66,10 @@ of the rows in X.}
 of the columns in X.}
 
 \item{pretty.order.rows}{a logical specifying whether the cols should be reordered
-based on hierarchical clustering. Default is FALSE.}
+based on hierarchical clustering. Default is TRUE.}
 
 \item{pretty.order.cols}{a logical specifying whether the rows should be reordered
-based on hierarchical clustering. Default is FALSE.}
+based on hierarchical clustering. Default is TRUE.}
 
 \item{row.dendrogram}{a logical specifying whether a dendrogram should be
 placed next to the rows. Can only be used when \code{yr} is not 

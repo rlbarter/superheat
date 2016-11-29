@@ -101,8 +101,7 @@ generate_heat <- function(X,
   # make the plot
   gg.legend <- ggplot2::ggplot(X.df) +
     ggplot2::geom_raster(ggplot2::aes(x = x, y = y,
-                                      fill = value,
-                                      color = "black")) +
+                                      fill = value)) +
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
                                   colours = heat.pal,
                                   name = "",

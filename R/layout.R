@@ -49,7 +49,7 @@ generate_layout <- function(gg.heat,
       # for axis
       layout <- gtable::gtable_add_rows(layout, grid::unit(0.1, "null"))
       # for axis.name
-      layout <- gtable::gtable_add_rows(layout, grid::unit(0.1, "null"))
+      layout <- gtable::gtable_add_rows(layout, grid::unit(0.05, "null"))
     }
   }
 
@@ -76,7 +76,7 @@ generate_layout <- function(gg.heat,
     layout <- gtable::gtable_add_rows(layout,
                                       grid::unit(bottom.label.size,
                                                  "null"))
-  } else if ( (bottom.label.size > 0.2) && !is.null(gg.bottom) &&
+  } else if ( (bottom.label.size > 0.15) && !is.null(gg.bottom) &&
              !is.null(gg.right) && yr.axis) {
     # condition 2: there is an additional right-plot with an axis AND,
     #              the size of the bottom label is larger than 0.2
@@ -84,7 +84,7 @@ generate_layout <- function(gg.heat,
     # add a row at the bottom for the bottom label whose size is equal to the
     # amount of extra width after accounting for the axis rows
     layout <- gtable::gtable_add_rows(layout,
-                                      grid::unit(bottom.label.size - 0.2,
+                                      grid::unit(bottom.label.size - 0.15,
                                                  "null"))
   }
 
@@ -155,8 +155,8 @@ generate_layout <- function(gg.heat,
         (!is.null(gg.right) && bottom.label.size > 0.2) |
         (!is.null(gg.right) && yr.axis &&
          !is.null(gg.column.title) && is.null(gg.bottom))) {
-      layout <- gtable::gtable_add_rows(layout,
-                                        grid::unit(0.1, "null"))
+     # layout <- gtable::gtable_add_rows(layout,
+    #                                    grid::unit(0.1, "null"))
     }
 
     # the legend is always in the very bottom row
@@ -509,7 +509,7 @@ generate_grobs <- function(layout,
 
   # add padding:
   layout <- gtable::gtable_add_padding(layout, grid::unit(padding, "cm"))
-
+  # gtable::gtable_show_layout(layout)
 return(layout)
 
 

@@ -856,7 +856,7 @@ superheat <- function(X,
   layout.arg.list <- layout.arg.list[names(formals(generate_layout))]
   layout.arg.list <- layout.arg.list[!is.na(names(layout.arg.list))]
   layout <- do.call(generate_layout, layout.arg.list)
-
+  # gtable::gtable_show_layout(layout)
   # place grobs in layout
   grob.arg.list <- c(as.list(environment()))
   grob.arg.list <- grob.arg.list[names(formals(generate_grobs))]
