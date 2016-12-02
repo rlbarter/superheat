@@ -654,6 +654,13 @@ superheat <- function(X,
       yt.obs.col <- yt.obs.col[order.df.cols$order.cols]
     }
   }
+  # rearrange label colors if needed
+  if (!is.null(left.label.col)) {
+    left.label.col <- left.label.col[order.df.rows$order.rows]
+  }
+  if (!is.null(bottom.label.col)) {
+    bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+  }
   
   # the default if clustering was not performed
   if (!cluster.cols) {

@@ -75,18 +75,19 @@ generate_cluster_label <- function(membership,
   n.cluster <- length(cluster.size)
 
 
-  if (!is.null(label.col) && (length(label.col) != n.cluster)) {
-    label.col <- rep(label.col, length = n.cluster)
+  if (!is.null(label.col) && (sum(!is.na(label.col)) != n.cluster)) {
+    label.col <- rep(label.col[!is.na(label.col)], length = n.cluster)
   }
 
-  if (!is.null(label.text.col) && (length(label.text.col) != n.cluster)) {
-    label.text.col <- rep(label.text.col, length = n.cluster)
+  if (!is.null(label.text.col) && (sum(!is.na(label.text.col)) != n.cluster)) {
+    label.text.col <- rep(label.text.col[!is.na(label.text.col)], 
+                          length = n.cluster)
   }
 
 
 
   if (is.null(label.col)) {
-    label.col <- rep(c("Grey 71", "Grey 53"), length = n.cluster)
+    label.col <- rep(c("grey95", "grey80"), length = n.cluster)
   }
 
   if (is.null(label.text.col)) {
@@ -94,12 +95,14 @@ generate_cluster_label <- function(membership,
   }
 
 
-  label.text.col <- factor(label.text.col, levels = unique(label.text.col))
+  label.text.col <- factor(label.text.col[!is.na(label.text.col)], 
+                           levels = unique(label.text.col[!is.na(label.text.col)]))
   label.text.col <- droplevels(label.text.col)
   names(label.text.col) <- label.text.col
 
 
-  label.col <- factor(label.col, levels = unique(label.col))
+  label.col <- factor(label.col[!is.na(label.col)], 
+                      levels = unique(label.col[!is.na(label.col)]))
   label.col <- droplevels(label.col)
   names(label.col) <- label.col
 
@@ -259,17 +262,17 @@ generate_var_label <- function(names,
   theme_clust_labels <- theme$theme_clust_labels
 
 
-  if (!is.null(label.col) && (length(label.col) != length(names))) {
-    label.col <- rep(label.col, length = length(names))
+  if (!is.null(label.col) && (sum(!is.na(label.col)) != length(names))) {
+    label.col <- rep(label.col[!is.na(label.col)], length = length(names))
   }
 
-  if (!is.null(label.text.col) && (length(label.text.col) != length(names))) {
-    label.text.col <- rep(label.text.col, length = length(names))
+  if (!is.null(label.text.col) && (sum(!is.na(label.text.col)) != length(names))) {
+    label.text.col <- rep(label.text.col[!is.na(label.text.col)], length = length(names))
   }
 
 
   if (is.null(label.col)) {
-    label.col <- rep(c("Grey 71", "Grey 53"), length = length(names))
+    label.col <- rep(c("grey95", "grey80"), length = length(names))
   }
 
   if (is.null(label.text.col))
@@ -278,11 +281,13 @@ generate_var_label <- function(names,
 
 
 
-  label.text.col <- factor(label.text.col, levels = unique(label.text.col))
+  label.text.col <- factor(label.text.col[!is.na(label.text.col)], 
+                           levels = unique(label.text.col[!is.na(label.text.col)]))
   label.text.col <- droplevels(label.text.col)
   names(label.text.col) <- label.text.col
 
-  label.col <- factor(label.col, levels = unique(label.col))
+  label.col <- factor(label.col[!is.na(label.col)], 
+                      levels = unique(label.col[!is.na(label.col)]))
   label.col <- droplevels(label.col)
   names(label.col) <- label.col
 

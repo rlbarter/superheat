@@ -155,9 +155,6 @@ stopErrors <- function(X,
                         smooth.heat = FALSE,
                         scale = FALSE,
                         
-                        left.label = NULL,
-                        bottom.label = NULL,
-                        
                         heat.col.scheme = c("viridis", "red", "purple", "blue",
                                             "grey", "green"),
                         heat.pal = NULL,
@@ -219,6 +216,8 @@ stopErrors <- function(X,
                         yr.line.size = NULL,
                         yt.line.size = NULL,
                         
+                        bottom.label = NULL,
+                        left.label = NULL,
                         bottom.label.text.size = 5,
                         left.label.text.size = 5,
                         bottom.label.text.angle = NULL,
@@ -242,10 +241,7 @@ stopErrors <- function(X,
                         
                         padding = 1,
                         title = NULL,
-                        title.size = 5,
-                        
-                        left.heat.label = NULL,
-                        bottom.heat.label = NULL) {
+                        title.size = 5) {
 
   if (is.matrix(X) &&
       sum(!(apply(X, 2, class) %in% c("numeric", "integer")) > 0)) {
@@ -318,19 +314,19 @@ stopErrors <- function(X,
   }
   
 
-  if (!is.null(left.heat.label)) {
+  if (!is.null(left.label)) {
     possible.methods <- c("variable", "cluster", "none")
-    i.meth <- pmatch(left.heat.label, possible.methods)
+    i.meth <- pmatch(left.label, possible.methods)
     if (is.na(i.meth)) {
-      stop("invalid left.heat.label", paste("", left.heat.label))
+      stop("invalid left.label", paste("", left.label))
     }
   }
 
-  if (!is.null(bottom.heat.label)) {
+  if (!is.null(bottom.label)) {
     possible.methods <- c("variable", "cluster", "none")
-    i.meth <- pmatch(bottom.heat.label, possible.methods)
+    i.meth <- pmatch(bottom.label, possible.methods)
     if (is.na(i.meth)) {
-      stop("invalid bottom.heat.label", paste("", bottom.heat.label))
+      stop("invalid bottom.label", paste("", bottom.label))
     }
   }
 
@@ -341,19 +337,19 @@ stopErrors <- function(X,
     stop("invalid clustering method", paste("", clustering.method))
 
 
-  if (!is.null(left.heat.label) &&
-      (left.heat.label == "cluster") &&
+  if (!is.null(left.label) &&
+      (left.label == "cluster") &&
       is.null(membership.rows) &&
       is.null(n.clusters.rows)) {
-    stop(paste("Cannot have 'left.heat.label = 'cluster''",
+    stop(paste("Cannot have 'left.label = 'cluster''",
                "if we have not clustered the rows"))
   }
 
-  if (!is.null(bottom.heat.label) &&
-      (bottom.heat.label == "cluster") &&
+  if (!is.null(bottom.label) &&
+      (bottom.label == "cluster") &&
       is.null(membership.cols) &&
       is.null(n.clusters.cols)) {
-    stop(paste("Cannot have 'bottom.heat.label = 'cluster'' if we",
+    stop(paste("Cannot have 'bottom.label = 'cluster'' if we",
                "have not clustered the columns"))
   }
 
