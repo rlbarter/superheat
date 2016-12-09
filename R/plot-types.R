@@ -245,7 +245,7 @@ addBoxplot <- function(gg.add, y.df, membership, n.obs,
 addBar <- function(gg.add, y.df, membership, clustered.plot,
                    y.bar.col, y.cluster.col, n.clusters,
                    y.obs.col) {
-
+  
   cluster.info <- clusteredPosition(y.df, membership)
   # for the "bar" plot type, add a bar plot to the empty gg.add
   # Case 1: no color specified for individual observations

@@ -655,10 +655,10 @@ superheat <- function(X,
     }
   }
   # rearrange bar colors if needed
-  if (!is.null(yt.bar.col)) {
+  if (!is.null(yt.bar.col) && (length(yt.bar.col) == ncol(order.df.cols))) {
     yt.bar.col <- yt.bar.col[order.df.cols$order.cols]
   }
-  if (!is.null(yr.bar.col)) {
+  if (!is.null(yr.bar.col) && (length(yr.bar.col) == nrow(order.df.rows))) {
     yr.bar.col <- yr.bar.col[order.df.rows$order.rows]
   }
   # rearrange label colors if needed
