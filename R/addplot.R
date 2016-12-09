@@ -21,6 +21,7 @@ generate_add_on_plot <- function(X,
                                  y.line.col = NULL,
                                  smooth.se = TRUE) {
 
+  
   # is the plot for clusters or for individual data points?
   if (((location == "top") && (length(y) != ncol(X))) |
       ((location == "right") && (length(y) != nrow(X)))) {
@@ -32,6 +33,8 @@ generate_add_on_plot <- function(X,
   # detect arguments
   plot.type <- match.arg(plot.type)
 
+  
+  
   # specify default axis name angle
   if (location == "top" && is.null(axis.name.angle)) {
     axis.name.angle <- 90
