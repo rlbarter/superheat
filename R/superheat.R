@@ -108,6 +108,8 @@
 #'          \code{\link[ggplot2]{scale_colour_gradientn}} function. The default
 #'          values are the corresponding quantiles.
 #' @param heat.na.col the color for NA values in the heatmap.
+#' @param heat.lim a vector of length two consisting of the maximum and minimum 
+#'          value for the heatmap palette.
 
 
 #' @param X.text.size a single number or a matrix of numbers (whose dimension
@@ -314,6 +316,7 @@ superheat <- function(X,
                       heat.pal = NULL,
                       heat.pal.values = NULL,
                       heat.na.col = "grey50",
+                      heat.lim = NULL,
 
                       X.text.size = 5,
                       X.text.col = "black",

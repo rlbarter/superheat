@@ -13,6 +13,7 @@ generate_heat <- function(X,
                           heat.pal = NULL,
                           heat.pal.values = NULL,
                           heat.na.col = "grey50",
+                          heat.lim = NULL,
                           legend.height = 0.1,
                           legend.width = 1.5,
                           legend.text.size = 12,
@@ -79,9 +80,16 @@ generate_heat <- function(X,
   }
 
   # plot color limits:
-  max.col <- max(X.df$value, na.rm = T)
-  min.col <- min(X.df$value, na.rm = T)
+  if (is.null(heat.lim)) {
+    max.col <- max(X.df$value, na.rm = T)
+    min.col <- min(X.df$value, na.rm = T)
+  } else {
+    max.col = heat.lim[2]
+    min.col = heat.lim[1]
+  }
+  
   range.X <- seq(min.col, max.col, length = 100)
+  
   # specify location of breaks
   breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
 
@@ -106,7 +114,8 @@ generate_heat <- function(X,
                                   colours = heat.pal,
                                   name = "",
                                   breaks = breaks,
-                                  na.value = heat.na.col) +
+                                  na.value = heat.na.col,
+                                  limits = heat.lim) +
     ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
     ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
@@ -165,6 +174,7 @@ generate_smooth_heat <- function(X,
                                  X.text.size = 5,
                                  X.text.angle = 0,
                                  X.text.col = "black",
+                                 heat.lim = NULL,
                                  smooth.heat = TRUE,
                                  membership.rows = NULL,
                                  membership.cols = NULL,
@@ -302,10 +312,16 @@ generate_smooth_heat <- function(X,
   X.df <- dplyr::inner_join(X.df, rect_cranges, by = "cclust")
 
   # plot color limits:
-  max.col <- max(X.df$value, na.rm = T)
-  min.col <- min(X.df$value, na.rm = T)
+  if (is.null(heat.lim)) {
+    max.col <- max(X.df$value, na.rm = T)
+    min.col <- min(X.df$value, na.rm = T)
+  } else {
+    max.col = heat.lim[2]
+    min.col = heat.lim[1]
+  }
   range.X <- seq(min.col, max.col, length = 100)
   breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
+  print(breaks)
 
   # define variables to fix visible binding check -- bit of a hack
   xmax <- X.df$xmax
@@ -329,7 +345,8 @@ generate_smooth_heat <- function(X,
                                   colours = heat.pal,
                                   name = "",
                                   breaks = breaks,
-                                  na.value = heat.na.col) +
+                                  na.value = heat.na.col,
+                                  limits = heat.lim) +
     ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
     ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,

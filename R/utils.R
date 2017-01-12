@@ -136,6 +136,7 @@ stopErrors <- function(X,
                         X.text = NULL,
                         yt = NULL,
                         yr = NULL,
+                        heat.lim = NULL,
                         membership.rows = NULL, # membership for rows
                         membership.cols = NULL, # membership for cols
                         pretty.order.rows = T,
@@ -302,6 +303,18 @@ stopErrors <- function(X,
     stop("'X.text.col' must be either a single value or a matrix")
   } 
   
+  
+  if (!is.null(heat.lim)) {
+    if (!is.vector(heat.lim)) {
+      stop("`heat.lim` must be a vector.")
+    }
+    if (length(heat.lim) != 2) {
+      stop("`heat.lim` must be a vector of length 2.")
+    }
+    if (!is.numeric(heat.lim)) {
+      stop("`heat.lim` must contain numeric values.")
+    }
+  }
   
   
   # cannot set dendrogram = TRUE if pretty.order = FALSE
