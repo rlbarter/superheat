@@ -14,14 +14,15 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   scale = FALSE, left.label = NULL, bottom.label = NULL,
   heat.col.scheme = c("viridis", "red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
-  X.text.size = 5, X.text.col = "black", X.text.angle = 0,
-  yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), yr.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"), legend = TRUE,
-  legend.height = 0.1, legend.width = 1.5, legend.text.size = 12,
-  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
-  grid.vline.size = 0.5, grid.hline.col = "black",
-  grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
+  heat.lim = NULL, X.text.size = 5, X.text.col = "black",
+  X.text.angle = 0, yt.plot.type = c("scatter", "bar", "boxplot",
+  "scattersmooth", "smooth", "scatterline", "line"),
+  yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
+  "scatterline", "line"), legend = TRUE, legend.height = 0.1,
+  legend.width = 1.5, legend.text.size = 12, grid.hline = TRUE,
+  grid.vline = TRUE, grid.hline.size = 0.5, grid.vline.size = 0.5,
+  grid.hline.col = "black", grid.vline.col = "black",
+  force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
   yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
@@ -147,6 +148,9 @@ argument for the ggplot2
 values are the corresponding quantiles.}
 
 \item{heat.na.col}{the color for NA values in the heatmap.}
+
+\item{heat.lim}{a vector of length two consisting of the maximum and minimum 
+value for the heatmap palette.}
 
 \item{X.text.size}{a single number or a matrix of numbers (whose dimension
 matches that of \code{X.text}) that specifies the size of each text

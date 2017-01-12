@@ -212,7 +212,7 @@ addBoxplot <- function(gg.add, y.df, membership, n.obs,
   # the values of boxplot.width must add up to the number of clusters
   # and the entries are proprotional to the number of observations in
   # each cluster
-  boxplot.width <- cluster.info$clust.boundary.df$increment
+  boxplot.width <- 0.9 * cluster.info$clust.boundary.df$increment
   names(boxplot.width) <- unique(membership)
   # copy y.df in order to edit for the boxplots
   y.df.boxplot <- y.df
