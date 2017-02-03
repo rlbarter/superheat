@@ -125,6 +125,10 @@ setLimits <- function(gg.add, y.df, membership, plot.type, clustered.plot, y) {
 addScatter <- function(gg.add, y.df, n.clusters, y.obs.col, clustered.plot,
                        y.cluster.col, n.obs, point.size, point.alpha) {
 
+  # fix visible binding
+  y <- y.df$y
+  x <- y.df$x
+  membership <- y.df$membership
   # normal situation: individual-level points & no clustering
   if ((is.null(y.obs.col) && # did not proide a color vector
         !identical(unique(y.obs.col), "grey50"))) { # color vector has not been set
@@ -155,6 +159,10 @@ addScatter <- function(gg.add, y.df, n.clusters, y.obs.col, clustered.plot,
 addSmooth <- function(gg.add, y.df, membership, smoothing.method,
                       y.line.size, y.line.col,
                       smooth.se, y.cluster.col, n.clusters) {
+  # fix visible binding
+  y <- y.df$y
+  x <- y.df$x
+  
   if (length(unique(membership)) == length(membership)) {
     gg.add <- gg.add +
       ggplot2::stat_smooth(ggplot2::aes(x = x,
@@ -178,9 +186,11 @@ addSmooth <- function(gg.add, y.df, membership, smoothing.method,
 }
 
 
-addLine <- function(gg.add, membership, y.cluster.col,
+addLine <- function(gg.add, y.df, membership, y.cluster.col,
                     n.clusters, y.line.size, y.line.col) {
-
+  # fix visible binding
+  y <- y.df$y
+  x <- y.df$x
   # for the "line" plot type, add a smoothed line to the empty gg.add
   if (length(unique(membership)) == length(membership)) {
     gg.add <- gg.add +
@@ -221,6 +231,8 @@ addBoxplot <- function(gg.add, y.df, membership, n.obs,
   y.df.boxplot$midpoints <- factor(y.df.boxplot$membership)
   levels(y.df.boxplot$midpoints) <- midpoints
 
+  # fix visible binding warning
+  y <- y.df.boxplot$y 
 
   # add the boxplots one cluster at a time onto the empty gg.add object
   gg.add <- gg.add +
@@ -246,6 +258,7 @@ addBar <- function(gg.add, y.df, membership, clustered.plot,
                    y.bar.col, y.cluster.col, n.clusters,
                    y.obs.col) {
   
+  
   cluster.info <- clusteredPosition(y.df, membership)
   # for the "bar" plot type, add a bar plot to the empty gg.add
   # Case 1: no color specified for individual observations
@@ -255,6 +268,8 @@ addBar <- function(gg.add, y.df, membership, clustered.plot,
       y.df.bar$width <- cluster.info$clust.boundary.df$increment
       # fix visible binding note in check()
       width <- y.df.bar$width
+      x <- y.df.bar$x
+      y <- y.df.bar$y
 
       gg.add <- gg.add +
         ggplot2::geom_bar(ggplot2::aes(x = x,
