@@ -4,7 +4,7 @@ Title: A Graphical Tool for Exploring Complex Datasets Using Heatmaps
 Version: 0.1
 Authors@R: c(person("Rebecca", "Barter", email = "rebeccabarter@berkeley.edu",
   role = c("aut", "cre")), person("Bin", "Yu", email = "binyu@berkeley.edu", role = c("aut")))
-Description: A package which can be used to generate heatmaps to explore complex datasets, including big data and data with multiple data types.
+Description: A system for generating extendable and customizable heatmaps for exploring complex datasets, including big data and data with multiple data types.
 Depends:
     R (>= 3.1)
 License: CC0
@@ -22,4 +22,4 @@ Suggests:
     RColorBrewer,
     rmarkdown,
     testthat (>= 0.11.0),
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0
