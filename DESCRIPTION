@@ -1,7 +1,7 @@
 Package: superheat
 Type: Package
 Title: A Graphical Tool for Exploring Complex Datasets Using Heatmaps
-Version: 0.1
+Version: 0.1.0
 Authors@R: c(person("Rebecca", "Barter", email = "rebeccabarter@berkeley.edu",
   role = c("aut", "cre")), person("Bin", "Yu", email = "binyu@berkeley.edu", role = c("aut")))
 Description: A system for generating extendable and customizable heatmaps for exploring complex datasets, including big data and data with multiple data types.
