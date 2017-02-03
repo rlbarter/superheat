@@ -4,7 +4,9 @@
 #' Superheat is used to generate and customize heatmaps.
 #'        Scatterplots, boxplots, barplots, line plots and boxplots can
 #'        be plotted adjacent to the columns and rows of the heatmap,
-#'        adding an additional layer of information.
+#'        adding an additional layer of information. 
+#'        For usage, see the vignette at
+#'        \url{https://rlbarter.github.io/superheat/}.
 #'
 #'
 #' @param X a matrix whose values are to be plotted in the heatmap.
@@ -264,6 +266,9 @@
 #' @param title.size the size of the title. The default is 5.
 #' @param print.plot a logical specifying whether or not to output the plot.
 #'
+#' @references Barter and Yu (2017), Superheat: An R package for creating 
+#'        beautiful and extendable heatmaps for visualizing complex data, 
+#'        \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
 #'
 #' @return \code{plot} a plot with the properties specified by the above arguments.
 #' @return \code{membership.cols} the column cluster membership vector

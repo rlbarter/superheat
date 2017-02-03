@@ -373,7 +373,9 @@ The default is 1 cm.}
 Superheat is used to generate and customize heatmaps.
        Scatterplots, boxplots, barplots, line plots and boxplots can
        be plotted adjacent to the columns and rows of the heatmap,
-       adding an additional layer of information.
+       adding an additional layer of information. 
+       For usage, see the vignette at
+       \url{https://rlbarter.github.io/superheat/}.
 }
 \examples{
 # plot a heatmap of the numerical iris variables
@@ -384,5 +386,10 @@ sh <- superheat(X = iris[,-c(1, 5)],
                 yr.axis.name = "Sepal.Length",
                 membership.rows = iris$Species)
 sh$membership.rows
+}
+\references{
+Barter and Yu (2017), Superheat: An R package for creating 
+       beautiful and extendable heatmaps for visualizing complex data, 
+       \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
 }
 
