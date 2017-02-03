@@ -264,6 +264,7 @@ addBar <- function(gg.add, y.df, membership, clustered.plot,
   # Case 1: no color specified for individual observations
   if (is.null(y.obs.col)) {
     if (clustered.plot) {
+      
       y.df.bar <- y.df
       y.df.bar$width <- cluster.info$clust.boundary.df$increment
       # fix visible binding note in check()
