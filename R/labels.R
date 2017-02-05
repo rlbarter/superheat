@@ -1,27 +1,4 @@
 
-#' Generate clustered heatmap labels.
-#'
-#'
-#'
-#' @param membership a vector specifying the cluster membership.
-#' @param label.col a vector specifying cluster/variable label color palette.
-#' @param label.text.col a character or character vector specifying the
-#'          cluster/variable label text color.
-#' @param bottom.label.text.size the size of the bottom heatmap label text. The
-#'          default is 5.
-#' @param left.label.text.size the size of the left heatmap label text. The
-#'          default is 5.
-#' @param label.text.alignment the text alignment of the label text. The
-#'          default is "center". Alternate options are "left" and "right".
-#' @param location will these labels be on the bottom ("bottom") or on the left
-#'          ("left)?
-#' @param text.angle number of degrees to rotate the text on the left
-#'          cluster/variable labels.
-#' @return A ggplot2 object of heatmap labels.
-#' @importFrom magrittr "%>%"
-
-
-
 generate_cluster_label <- function(membership,
                                    location = c("bottom", "left"),
                                    label.col = NULL,
@@ -196,28 +173,6 @@ generate_cluster_label <- function(membership,
 
 
 
-
-
-#' Generate heatmap variable labels.
-#'
-#'
-#'
-#' @param names a vector specifying the label names.
-#' @param label.col a vector specifying the cluster/variable label color palette.
-#' @param label.text.col a character or character vector specifying the
-#'          cluster/variable label text color.
-#' @param bottom.label.text.size the size of the bottom heatmap label text. The
-#'          default is 5.
-#' @param left.label.text.size the size of the left heatmap label text. The
-#'          default is 5.
-#' @param label.text.alignment the text alignment of the label text. The
-#'          default is "center". Alternate options are "left" and "right".
-#' @param location will these labels be on the bottom ("bottom") or on the left
-#'          ("left)?
-#' @param text.angle number of degrees to rotate the text on the left
-#'          cluster/variable labels.
-#' @return A ggplot2 object of heatmap labels.
-#' @importFrom magrittr "%>%"
 
 
 generate_var_label <- function(names,
