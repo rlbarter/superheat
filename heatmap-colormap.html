@@ -110,6 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html"><i class="fa fa-check"></i><b>4</b> Heatmap colormap</a><ul>
 <li class="chapter" data-level="4.1" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#heatmap-palette"><i class="fa fa-check"></i><b>4.1</b> Heatmap Palette</a></li>
 <li class="chapter" data-level="4.2" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#color-transitions"><i class="fa fa-check"></i><b>4.2</b> Color transitions</a></li>
+<li class="chapter" data-level="4.3" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#color-limits"><i class="fa fa-check"></i><b>4.3</b> Color limits</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>5</b> Missing data</a><ul>
 <li class="chapter" data-level="5.1" data-path="missing-data.html"><a href="missing-data.html#color"><i class="fa fa-check"></i><b>5.1</b> Color</a></li>
@@ -177,6 +178,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12" data-path="legend.html"><a href="legend.html"><i class="fa fa-check"></i><b>12</b> Legend</a><ul>
 <li class="chapter" data-level="12.1" data-path="legend.html"><a href="legend.html#removing-the-legend"><i class="fa fa-check"></i><b>12.1</b> Removing the legend</a></li>
 <li class="chapter" data-level="12.2" data-path="legend.html"><a href="legend.html#size-3"><i class="fa fa-check"></i><b>12.2</b> Size</a></li>
+<li class="chapter" data-level="12.3" data-path="legend.html"><a href="legend.html#legend-breaks"><i class="fa fa-check"></i><b>12.3</b> Legend breaks</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="smoothing-in-high-dimensions.html"><a href="smoothing-in-high-dimensions.html"><i class="fa fa-check"></i><b>13</b> Smoothing in high dimensions</a></li>
 <li class="chapter" data-level="14" data-path="saving-superheatmaps.html"><a href="saving-superheatmaps.html"><i class="fa fa-check"></i><b>14</b> Saving superheatmaps</a></li>
@@ -242,6 +244,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="dt">heat.pal =</span> <span class="kw">c</span>(<span class="st">&quot;#b35806&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;#542788&quot;</span>),
           <span class="dt">heat.pal.values =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>))</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-transition-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="color-limits" class="section level2">
+<h2><span class="header-section-number">4.3</span> Color limits</h2>
+<p>It is possible to specify the minimum and maximum value for which you would like your colormap to be defined using the <code>heat.lim</code> argument. For example, if I would like to display only values from -1 to 2, then I would set <code>heat.lim = c(-1, 2)</code>. This means that</p>
+<ul>
+<li><p>each value outside this range will be presented as missing (i.e. a grey cell corresponding to <code>NA</code>), and</p></li>
+<li><p>the first color in the color range will correspond to the value -1 and the last color in the color range will correspond to the value 2.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
+          <span class="co"># change the size of the labels</span>
+          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
+          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
+          <span class="co"># scale the matrix columns</span>
+          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
+          <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>))</code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/color-range-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -283,7 +301,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["superheat-vignette.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
