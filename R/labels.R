@@ -1,4 +1,5 @@
 
+
 generate_cluster_label <- function(membership,
                                    location = c("bottom", "left"),
                                    label.col = NULL,

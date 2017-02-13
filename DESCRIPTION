@@ -22,4 +22,4 @@ Suggests:
     RColorBrewer,
     rmarkdown,
     testthat (>= 0.11.0),
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1

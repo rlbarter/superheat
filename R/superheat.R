@@ -1,14 +1,13 @@
 
 #' Generate supervised heatmaps.
-#'
+#' 
 #' Superheat is used to generate and customize heatmaps.
 #'        Scatterplots, boxplots, barplots, line plots and boxplots can
 #'        be plotted adjacent to the columns and rows of the heatmap,
 #'        adding an additional layer of information. 
 #'        For usage, see the vignette at
 #'        \url{https://rlbarter.github.io/superheat/}.
-#'
-#'
+#'        
 #' @param X a matrix whose values are to be plotted in the heatmap.
 #' @param X.text a matrix containing text entries to be plotted on
 #'          top of the heatmap cells. The number of rows/columns must match
@@ -52,8 +51,6 @@
 #'          specifies the order within the clusters. Note that this
 #'          vector must be a rearranged \code{1:nrow(X)} vector which
 #'          specifies the new location of each row.
-
-
 #' @param n.clusters.rows a number specifying the number of row clusters to
 #'          generate. The default is 0 (indicating no clustering of the rows).
 #'          This argument is ignored if \code{membership.rows} is provided.
@@ -70,17 +67,10 @@
 #'          This must be one of "euclidean", "maximum", "manhattan",
 #'          "canberra", "binary" or "minkowski".
 #'
-
-
-
-
-
 #' @param smooth.heat a logical specifying whether or not to smooth the colour
 #'          of the heatmap within clusters (by taking the median value).
 #' @param scale a logical specifying whether or not to center and scale the
 #'          columns of X.
-
-
 #' @param left.label a character specifying the type of the label provided to
 #'          the left of the heatmap. If clustering was performed on the rows,
 #'          then the default type is "cluster" (which provides the cluster
@@ -93,9 +83,6 @@
 #'          cluster names). Otherwise, the default is "variable" (which
 #'          provides the variable names). The final option, "none", removes the
 #'          label all together.
-
-
-
 #' @param heat.col.scheme A character specifying the heatmap colour scheme.
 #'          The default is "viridis", and other options include "red", purple",
 #'          "blue", "grey" and "green". If you wish to supply your own colour
@@ -112,8 +99,6 @@
 #' @param heat.na.col the color for NA values in the heatmap.
 #' @param heat.lim a vector of length two consisting of the maximum and minimum 
 #'          value for the heatmap palette.
-
-
 #' @param X.text.size a single number or a matrix of numbers (whose dimension
 #'          matches that of \code{X.text}) that specifies the size of each text
 #'          entry in \code{X.text}.
@@ -123,13 +108,7 @@
 #' @param X.text.col a single character string or a matrix of character strings
 #'          (whose dimension matches that of \code{X.text}) that specifies the
 #'          colours of each text entry in \code{X.text}.
-#'
-#'
-#'
-
-#'
 #' @param legend logical. If set to \code{FALSE}, then no legend is provided.
-
 #' @param grid.hline a logical specifying whether horizontal grid lines are
 #'          plotted in the heatmap.
 #' @param grid.vline a logical specifying whether vertical grid lines are
@@ -148,16 +127,12 @@
 #'          vertical grid lines to appear (relevant only when X has more
 #'          than 50 columns). Note that by default there are no vertical
 #'          grid lines when there are more than 50 columns.
-#'
 #' @param smoothing.method if \code{plot.type = "scattersmooth"} or
 #'          \code{"smooth"}, this argument specifies the smoothing method to
 #'          use. The default is "loess" for a curve. The alternative option is
 #'          "lm" for a line.
 #' @param smooth.se a logical specifying whether the smoothed \code{yt} and \code{yr}
 #'          curves have standard error curves.
-
-
-
 #' @param yt.axis a logical specifying the presence of an axis for the
 #'          \code{yt} plot.
 #' @param yr.axis a logical specifying the presence of an axis for the
@@ -186,7 +161,6 @@
 #'          plot.
 #' @param yr.line.col the color of the (smoothing) line in the \code{yr}
 #'          plot.
-#'
 #' @param yt.obs.col a vector specifying the colour of individual points in the
 #'          \code{yt} plot.
 #' @param yr.obs.col a vector specifying the colour of individual points in the
@@ -209,7 +183,6 @@
 #' @param yr.point.alpha the transparency of the points in the \code{yr}
 #'          scatterplot. The default is 1, which corresponds to no
 #'          transparency.
-#'
 #' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
 #' @param left.label.text.size the size of the left heatmap label text. The
@@ -226,7 +199,6 @@
 #'          default is "center". Alternate options are "left" and "right".
 #' @param left.label.text.alignment the text alignment of the label text. The
 #'          default is "center". Alternate options are "left" and "right".
-#'
 #' @param left.label.col a vector specifying the left cluster/variable label
 #'          colour palette.
 #' @param bottom.label.col a vector specifying the bottom cluster/variable
@@ -235,7 +207,6 @@
 #'          left cluster/variable label text colour.
 #' @param bottom.label.text.col a character or character vector specifying the
 #'          bottom cluster/variable label text colour.
-#'
 #' @param force.bottom.label a logical describing whether or not to force the
 #'          bottom labels to appear (relevant only when X has more than 50
 #'          columns). Note that by default there are no labels when there are
@@ -244,7 +215,6 @@
 #'          left labels to appear (relevant only when X has more than 50
 #'          rows). Note that by default there are no labels when there are
 #'          more than 50 rows.
-#'
 #' @param column.title a string specifying the overall column name (located
 #'          below the bottom.labels).
 #' @param row.title a string specifying the overall row name (located to the
@@ -253,19 +223,19 @@
 #'          default is 5.
 #' @param row.title.size a number specifying the size of the row name. The
 #'          default is 5.
-
 #' @param legend.height a number specifying the height of the legend. The default
 #'        is 0.1.
 #' @param legend.width a number specifying the width of the legend. The default
 #'        is 1.5.
 #' @param legend.text.size a number specifying the size of the numbers on the
 #'        legend axis. The default is 12.
+#' @param legend.breaks a vector specifying the legend breaks.
 #' @param padding the amount (in cm) of white space (padding) around the plot.
 #'          The default is 1 cm.
 #' @param title a character string specifying a main heading.
 #' @param title.size the size of the title. The default is 5.
 #' @param print.plot a logical specifying whether or not to output the plot.
-#'
+#' 
 #' @references Barter and Yu (2017), Superheat: An R package for creating 
 #'        beautiful and extendable heatmaps for visualizing complex data, 
 #'        \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
@@ -338,6 +308,7 @@ superheat <- function(X,
                       legend.height = 0.1,
                       legend.width = 1.5,
                       legend.text.size = 12,
+                      legend.breaks = NULL,
 
                       grid.hline = TRUE,
                       grid.vline = TRUE,

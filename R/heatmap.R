@@ -17,6 +17,7 @@ generate_heat <- function(X,
                           legend.height = 0.1,
                           legend.width = 1.5,
                           legend.text.size = 12,
+                          legend.breaks = NULL,
                           axis.size = 10,
                           label.size = 10,
                           grid.hline = TRUE,
@@ -90,8 +91,13 @@ generate_heat <- function(X,
   
   range.X <- seq(min.col, max.col, length = 100)
   
-  # specify location of breaks
-  breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
+  # specify location of legend breaks
+  if (is.null(legend.breaks)) {
+    breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
+  } else {
+    breaks <- legend.breaks
+  }
+  
 
   # define variables to fix visible binding check -- bit of a hack
   x <- X.df$x
@@ -188,6 +194,7 @@ generate_smooth_heat <- function(X,
                                  legend.width = 1.5,
                                  legend.height = 0.1,
                                  legend.text.size = 12,
+                                 legend.breaks = NULL,
                                  axis.size = 10,
                                  label.size = 10,
                                  grid.hline = TRUE,
@@ -320,8 +327,12 @@ generate_smooth_heat <- function(X,
     min.col = heat.lim[1]
   }
   range.X <- seq(min.col, max.col, length = 100)
-  breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
-  print(breaks)
+  # specify location of legend breaks
+  if (is.null(legend.breaks)) {
+    breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
+  } else {
+    breaks <- legend.breaks
+  }
 
   # define variables to fix visible binding check -- bit of a hack
   xmax <- X.df$xmax
