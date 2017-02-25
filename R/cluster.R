@@ -3,8 +3,15 @@ generate_cluster <- function(X,
                              clustering.method = c("kmeans", "hierarchical"),
                              dist.method = c("euclidean", "maximum", "manhattan",
                                              "canberra", "binary", "minkowski"),
+                             linkage.method = c("complete", "ward.D", 
+                                                "ward.D2", "single", 
+                                                "average", "mcquitty", 
+                                                "median", "centroid"),
                              ...) {
 
+  
+  dist.method <- match.arg(dist.method)
+  linkage.method <- match.arg(linkage.method)
   # calculate dissimilarity matrix
   if (is.null(dist.method)) {
     # identify numeric vars
@@ -36,11 +43,13 @@ generate_cluster <- function(X,
   }
 
   clustering.method <- match.arg(clustering.method)
+  
 
 
   # perform clustering and generate membership vector:
   if (clustering.method == "hierarchical") {
-      clust <- hclust(as.dist(dissim.mat))
+      clust <- hclust(as.dist(dissim.mat), 
+                      method = linkage.method)
       membership <- cutree(clust, k = n.clusters)
   } else if (clustering.method == "kmeans") {
       clust <- kmeans(as.dist(dissim.mat), centers = n.clusters)

@@ -10,18 +10,19 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   n.clusters.rows = NULL, n.clusters.cols = NULL,
   clustering.method = c("kmeans", "hierarchical"),
   dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
-  "minkowski"), order.cols = NULL, order.rows = NULL, smooth.heat = FALSE,
-  scale = FALSE, left.label = NULL, bottom.label = NULL,
-  heat.col.scheme = c("viridis", "red", "purple", "blue", "grey", "green"),
-  heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
-  heat.lim = NULL, X.text.size = 5, X.text.col = "black",
-  X.text.angle = 0, yt.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"),
-  yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), legend = TRUE, legend.height = 0.1,
-  legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
-  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
-  grid.vline.size = 0.5, grid.hline.col = "black",
+  "minkowski"), linkage.method = c("complete", "ward.D", "ward.D2", "single",
+  "average", "mcquitty", "median", "centroid"), order.cols = NULL,
+  order.rows = NULL, smooth.heat = FALSE, scale = FALSE,
+  left.label = NULL, bottom.label = NULL, heat.col.scheme = c("viridis",
+  "red", "purple", "blue", "grey", "green"), heat.pal = NULL,
+  heat.pal.values = NULL, heat.na.col = "grey50", heat.lim = NULL,
+  X.text.size = 5, X.text.col = "black", X.text.angle = 0,
+  yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
+  "scatterline", "line"), yr.plot.type = c("scatter", "bar", "boxplot",
+  "scattersmooth", "smooth", "scatterline", "line"), legend = TRUE,
+  legend.height = 0.1, legend.width = 1.5, legend.text.size = 12,
+  legend.breaks = NULL, grid.hline = TRUE, grid.vline = TRUE,
+  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
   grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
@@ -98,6 +99,11 @@ membership vector.}
 \item{dist.method}{the distance method to use for hierarchical clustering.
 This must be one of "euclidean", "maximum", "manhattan",
 "canberra", "binary" or "minkowski".}
+
+\item{linkage.method}{the linkage method to use for hierarchical clustering.
+This must be one of "ward.D", "ward.D2", "single", "complete", 
+"average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or 
+"centroid" (= UPGMC).}
 
 \item{order.cols}{a vector of specifying the ordering of the
 columns of \code{X}. If the columns are clustered, then this

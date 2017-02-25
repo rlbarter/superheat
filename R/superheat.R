@@ -66,6 +66,10 @@
 #' @param dist.method the distance method to use for hierarchical clustering.
 #'          This must be one of "euclidean", "maximum", "manhattan",
 #'          "canberra", "binary" or "minkowski".
+#' @param linkage.method the linkage method to use for hierarchical clustering.
+#'          This must be one of "ward.D", "ward.D2", "single", "complete", 
+#'          "average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or 
+#'          "centroid" (= UPGMC).
 #'
 #' @param smooth.heat a logical specifying whether or not to smooth the colour
 #'          of the heatmap within clusters (by taking the median value).
@@ -276,6 +280,10 @@ superheat <- function(X,
                       clustering.method = c("kmeans", "hierarchical"),
                       dist.method = c("euclidean", "maximum", "manhattan",
                                       "canberra", "binary", "minkowski"),
+                      linkage.method = c("complete", "ward.D", 
+                                         "ward.D2", "single", 
+                                          "average", "mcquitty", 
+                                          "median", "centroid"),
 
                       order.cols = NULL,
                       order.rows = NULL,
@@ -400,6 +408,7 @@ superheat <- function(X,
   yr.plot.type <- match.arg(yr.plot.type)
   heat.col.scheme <- match.arg(heat.col.scheme)
   dist.method <- match.arg(dist.method)
+  linkage.method <- match.arg(linkage.method)
 
   # clean the matrix X
   X <- clean_matrix(X, scale)
@@ -541,11 +550,13 @@ superheat <- function(X,
   # note that we must obtain the hierarchical clustering
   # after rearranging the order of the rows and columns
   if (pretty.order.cols) {
-    hclust.cols <- hclust(dist(t(X), method = dist.method))
+    hclust.cols <- hclust(dist(t(X), method = dist.method),
+                          method = linkage.method)
   }
 
   if (pretty.order.rows) {
-    hclust.rows <- hclust(dist(X, method = dist.method))
+    hclust.rows <- hclust(dist(X, method = dist.method),
+                          method = linkage.method)
   }
   
   
