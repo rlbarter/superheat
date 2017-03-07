@@ -153,6 +153,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.8" data-path="adjacent-plots.html"><a href="adjacent-plots.html#axis"><i class="fa fa-check"></i><b>8.8</b> Axis options</a><ul>
 <li class="chapter" data-level="8.8.1" data-path="adjacent-plots.html"><a href="adjacent-plots.html#name"><i class="fa fa-check"></i><b>8.8.1</b> Name</a></li>
 <li class="chapter" data-level="8.8.2" data-path="adjacent-plots.html"><a href="adjacent-plots.html#size-2"><i class="fa fa-check"></i><b>8.8.2</b> Size</a></li>
+<li class="chapter" data-level="8.8.3" data-path="adjacent-plots.html"><a href="adjacent-plots.html#limits"><i class="fa fa-check"></i><b>8.8.3</b> Limits</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="adjacent-plots.html"><a href="adjacent-plots.html#plot-size"><i class="fa fa-check"></i><b>8.9</b> Plot size</a></li>
 </ul></li>
@@ -213,7 +214,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="co"># add text matrix</span>
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.size =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="text-color" class="section level2">
 <h2><span class="header-section-number">9.1</span> Text color</h2>
 <p>You can change the colors of the text by providing a single number or a matrix of numbers to the argument <code>X.text.col</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
@@ -237,7 +238,7 @@ mtcars.col &lt;-<span class="st"> </span><span class="kw">matrix</span>(mtcars.c
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="font-size" class="section level2">
 <h2><span class="header-section-number">9.2</span> Font size</h2>
@@ -254,7 +255,7 @@ mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) 
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> mtcars.size)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="text-angle" class="section level2">
 <h2><span class="header-section-number">9.3</span> Text angle</h2>
@@ -270,7 +271,7 @@ mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) 
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> <span class="dv">4</span>,
           <span class="dt">X.text.angle =</span> <span class="dv">12</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -153,6 +153,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.8" data-path="adjacent-plots.html"><a href="adjacent-plots.html#axis"><i class="fa fa-check"></i><b>8.8</b> Axis options</a><ul>
 <li class="chapter" data-level="8.8.1" data-path="adjacent-plots.html"><a href="adjacent-plots.html#name"><i class="fa fa-check"></i><b>8.8.1</b> Name</a></li>
 <li class="chapter" data-level="8.8.2" data-path="adjacent-plots.html"><a href="adjacent-plots.html#size-2"><i class="fa fa-check"></i><b>8.8.2</b> Size</a></li>
+<li class="chapter" data-level="8.8.3" data-path="adjacent-plots.html"><a href="adjacent-plots.html#limits"><i class="fa fa-check"></i><b>8.8.3</b> Limits</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="adjacent-plots.html"><a href="adjacent-plots.html#plot-size"><i class="fa fa-check"></i><b>8.9</b> Plot size</a></li>
 </ul></li>
@@ -707,6 +708,29 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars %&gt;%<span class="st"> </s
           <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>)</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-31-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
+<div id="limits" class="section level3">
+<h3><span class="header-section-number">8.8.3</span> Limits</h3>
+<p>You can set the y-axis limits by using the <code>yr.lim</code> and <code>yt.lim</code> arguments. You must provide a vector of length 2 specifying the minimum and maximum values for the range respectively.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
+<span class="kw">superheat</span>(dplyr::<span class="kw">select</span>(mtcars, -mpg), 
+          <span class="co"># scale the variables/columns</span>
+          <span class="dt">scale =</span> T,
+          
+          <span class="co"># add mpg as a scatterplot next to the rows</span>
+          <span class="dt">yr =</span> mtcars$mpg,
+          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
+          <span class="dt">yr.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>),
+          
+          <span class="co"># add correlation between each variable and miles per gallon</span>
+          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[-<span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
+          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
+          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>,
+          <span class="dt">yt.lim =</span> <span class="kw">c</span>(-<span class="fl">1.5</span>, <span class="dv">1</span>),
+          
+          <span class="dt">left.label.size =</span> <span class="fl">0.5</span>,
+          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>)</code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-32-1.png" width="816" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="plot-size" class="section level2">
 <h2><span class="header-section-number">8.9</span> Plot size</h2>
@@ -733,7 +757,7 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars %&gt;%<span class="st"> </s
 
           <span class="dt">left.label.size =</span> <span class="fl">0.5</span>,
           <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-32-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-33-1.png" width="816" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
