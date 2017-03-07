@@ -34,16 +34,16 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
   yr.point.size = 2, yr.point.alpha = 1, yr.line.col = NULL,
   yt.line.col = NULL, yr.line.size = NULL, yt.line.size = NULL,
-  bottom.label.text.size = 5, left.label.text.size = 5,
-  bottom.label.text.angle = NULL, left.label.text.angle = NULL,
-  bottom.label.size = 0.2, left.label.size = 0.2, left.label.col = NULL,
-  bottom.label.col = NULL, left.label.text.col = NULL,
-  bottom.label.text.col = NULL, left.label.text.alignment = c("center",
-  "left", "right"), bottom.label.text.alignment = c("center", "left",
-  "right"), force.left.label = F, force.bottom.label = F,
-  column.title = NULL, row.title = NULL, column.title.size = 5,
-  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
-  print.plot = TRUE)
+  yr.lim = NULL, yt.lim = NULL, bottom.label.text.size = 5,
+  left.label.text.size = 5, bottom.label.text.angle = NULL,
+  left.label.text.angle = NULL, bottom.label.size = 0.2,
+  left.label.size = 0.2, left.label.col = NULL, bottom.label.col = NULL,
+  left.label.text.col = NULL, bottom.label.text.col = NULL,
+  left.label.text.alignment = c("center", "left", "right"),
+  bottom.label.text.alignment = c("center", "left", "right"),
+  force.left.label = F, force.bottom.label = F, column.title = NULL,
+  row.title = NULL, column.title.size = 5, row.title.size = 5,
+  padding = 1, title = NULL, title.size = 5, print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix whose values are to be plotted in the heatmap.}
@@ -302,6 +302,10 @@ plot.}
 
 \item{yt.line.size}{the thickness of the (smoothing) line in the \code{yt}
 plot.}
+
+\item{yr.lim}{a vector of length two describing the y-axis limits.}
+
+\item{yt.lim}{a vector of length two describing the y-axis limits.}
 
 \item{bottom.label.text.size}{the size of the bottom heatmap label text. The
 default is 5.}

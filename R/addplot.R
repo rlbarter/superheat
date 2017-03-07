@@ -19,6 +19,7 @@ generate_add_on_plot <- function(X,
                                  smoothing.method = c("loess", "lm"),
                                  y.line.size = NULL,
                                  y.line.col = NULL,
+                                 y.lim = NULL,
                                  smooth.se = TRUE) {
 
   
@@ -112,7 +113,7 @@ generate_add_on_plot <- function(X,
   # for all plots other than a bar plot:
   # (for a bar plot, rather than starting from the minimum value,
   #  we want to start from 0, etc)
-  ticks <- setTicks(plot.type, y.df, num.ticks) 
+  ticks <- setTicks(plot.type, y.df, num.ticks, y.lim) 
 
   # define number of clusters
   n.clusters <- length(unique(membership))
@@ -133,7 +134,8 @@ generate_add_on_plot <- function(X,
   gg.add <- gg.add +
     ggplot2::scale_y_continuous(breaks = pretty.breaks,
                                 name = paste(axis.name),
-                                expand = c(0.05, 0.05))
+                                expand = c(0.05, 0.05),
+                                limits = y.lim)
 
   # Case 1: scatterplots when the observations are not coloured by y.obs.col
   if (plot.type == "scatter") {

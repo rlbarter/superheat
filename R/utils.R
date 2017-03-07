@@ -216,6 +216,8 @@ stopErrors <- function(X,
                         yr.point.alpha = 1,
                         yr.line.size = NULL,
                         yt.line.size = NULL,
+                       yt.lim = NULL,
+                       yr.lim = NULL,
                         
                         bottom.label = NULL,
                         left.label = NULL,
@@ -460,6 +462,36 @@ stopErrors <- function(X,
     stop(paste("`yt.obs.col` must have same length as `yt`"))
   }
   
+  if (!is.null(yt.lim) && (length(yt.lim) != 2)) {
+    stop("`yt.lim` must be a vector of length 2")
+  }
+  
+  if (!is.null(yr.lim) && (length(yr.lim) != 2)) {
+    stop("`yr.lim` must be a vector of length 2")
+  }
+  
+  
+  if (!is.null(yr.lim) && yr.plot.type == "bar" && min(yr) > 0 &&
+      yr.lim[1] != 0) {
+    stop("`yr.lim` must start at 0 when `yr.plot.type` = 'bar'")
+  }
+  
+  if (!is.null(yt.lim) && yt.plot.type == "bar" && min(yt) > 0 &&
+      yt.lim[1] != 0) {
+    stop("`yt.lim` must start at 0 when `yt.plot.type` = 'bar'")
+  }
+  
+  
+  if (!is.null(yr.lim) && yr.plot.type == "bar" && max(yr) < 0 &&
+      yr.lim[2] != 0) {
+    stop("`yr.lim` must start at 0 when `yr.plot.type` = 'bar'")
+  }
+  
+  if (!is.null(yt.lim) && yt.plot.type == "bar" && max(yt) < 0 &&
+      yt.lim[2] != 0) {
+    stop("`yt.lim` must start at 0 when `yt.plot.type` = 'bar'")
+  }
+
 
 }
 

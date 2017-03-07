@@ -29,27 +29,50 @@ clusteredPosition <- function(y.df, membership) {
 
 }
 
-setTicks <- function(plot.type, y.df, num.ticks) {
+setTicks <- function(plot.type, y.df, num.ticks, y.lim) {
   if (plot.type %in% c("scatter", "boxplot", "scattersmooth",
                        "smooth", "line", "scatterline")) {
     # equally spaced positions from the min to the max value
-    ticks <- seq(min(y.df$y, na.rm = T),
-                 max(y.df$y, na.rm = T), length = num.ticks)
+    if (is.null(y.lim)) {
+      ticks <- seq(min(y.df$y, na.rm = T),
+                   max(y.df$y, na.rm = T), length = num.ticks)
+    } else {
+      ticks <- seq(y.lim[1],
+                   y.lim[2], length = num.ticks)
+    }
+    
+    
   } else if ((plot.type == "bar") && (min(y.df$y, na.rm = T) >= 0)) {
     # for a bar plot, if the minimum value is positive,
     # then make sure that the axis starts at 0, rather than the minimum
-    ticks <- seq(0, max(y.df$y, na.rm = T), length = num.ticks)
+    if (is.null(y.lim)) {
+      ticks <- seq(0, max(y.df$y, na.rm = T), length = num.ticks) 
+    } else {
+      ticks <- seq(y.lim[1], y.lim[2], length = num.ticks) 
+    }
+    
   } else if ((plot.type == "bar") && (max(y.df$y, na.rm = T) <= 0)) {
     # for a bar plot, if the maximum value is negative,
     # then make sure that the axis ends at 0, rather than the maximum
-    ticks <- seq(min(y.df$y, na.rm = T), 0, length = num.ticks)
+    if (is.null(y.lim)) {
+      ticks <- seq(min(y.df$y, na.rm = T), 0, length = num.ticks)
+    } else {
+      ticks <- seq(y.lim[1], y.lim[2], length = num.ticks)
+    }
+    
   } else if ((plot.type == "bar") &&
              (max(y.df$y, na.rm = T) > 0) &&
              (min(y.df$y, na.rm = T) < 0)) {
     # for a bar plot, there are both positive and negative values,
     # the axis should range from the min to the max
-    ticks <- seq(min(y.df$y, na.rm = T), max(y.df$y, na.rm = T),
-                 length = num.ticks)
+    if (is.null(y.lim)) {
+      ticks <- seq(min(y.df$y, na.rm = T), max(y.df$y, na.rm = T),
+                   length = num.ticks)
+    } else {
+      ticks <- seq(y.lim[1], y.lim[2],
+                   length = num.ticks)
+    }
+    
   }
 
   return(ticks)
@@ -96,7 +119,8 @@ basePlot <- function(location, plot.type, theme_top, theme_right, y.df) {
 
 
 
-setLimits <- function(gg.add, y.df, membership, plot.type, clustered.plot, y) {
+setLimits <- function(gg.add, y.df, membership, 
+                      plot.type, clustered.plot, y) {
   boundary <- clusteredPosition(y.df, membership)$boundary
 
   if (plot.type != "boxplot") {
@@ -117,6 +141,8 @@ setLimits <- function(gg.add, y.df, membership, plot.type, clustered.plot, y) {
                                     limits = c(0.5, length(y) + 0.5))
     }
   }
+  
+  
   return(gg.add)
 }
 

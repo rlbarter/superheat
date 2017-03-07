@@ -187,6 +187,8 @@
 #' @param yr.point.alpha the transparency of the points in the \code{yr}
 #'          scatterplot. The default is 1, which corresponds to no
 #'          transparency.
+#' @param yt.lim a vector of length two describing the y-axis limits.
+#' @param yr.lim a vector of length two describing the y-axis limits.
 #' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
 #' @param left.label.text.size the size of the left heatmap label text. The
@@ -358,6 +360,8 @@ superheat <- function(X,
                       yt.line.col = NULL,
                       yr.line.size = NULL,
                       yt.line.size = NULL,
+                      yr.lim = NULL,
+                      yt.lim = NULL,
 
                       bottom.label.text.size = 5,
                       left.label.text.size = 5,
@@ -705,6 +709,7 @@ superheat <- function(X,
     y.bar.col <- yt.bar.col
     y.line.size <- yt.line.size
     y.line.col <- yt.line.col
+    y.lim <- yt.lim
     membership <- membership.cols
     location <- "top"
     axis.name <- yt.axis.name
@@ -738,6 +743,7 @@ superheat <- function(X,
     y.bar.col <- yr.bar.col
     y.line.size <- yr.line.size
     y.line.col <- yr.line.col
+    y.lim <- yr.lim
     membership <- membership.rows
     location <- "right"
     axis.name <- yr.axis.name
