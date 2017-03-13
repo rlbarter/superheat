@@ -49,4 +49,4 @@ superheat(mtcars,
           left.label.size = 0.45)
 ```
 
-![image1](README_figs/README-unnamed-chunk-4-1.png)
+![image1](tools/README-unnamed-chunk-4-1.png)
