@@ -371,8 +371,8 @@ superheat <- function(X,
                       left.label.text.size = 5,
                       bottom.label.text.angle = NULL,
                       left.label.text.angle = NULL,
-                      bottom.label.size = 0.2,
-                      left.label.size = 0.2,
+                      bottom.label.size = NULL,
+                      left.label.size = NULL,
                       left.label.col = NULL,
                       bottom.label.col = NULL,
                       left.label.text.col = NULL,
@@ -784,6 +784,17 @@ superheat <- function(X,
     label.text.col <- bottom.label.text.col
     label.text.alignment <- bottom.label.text.alignment
     text.angle <- bottom.label.text.angle
+    
+    # automate label size
+    if (is.null(bottom.label.size)) {
+      # adjust for when the bottom text is 
+      if (!is.null(bottom.label.text.angle) && bottom.label.text.angle == 90) {
+        bottom.label.size <- max(stringr::str_length(names)) * 0.02 + 0.05
+      } else {
+        bottom.label.size <- 0.1
+      }
+    }
+    
 
     # generate the bottom label
     # identify variables defined in the environment
@@ -802,6 +813,16 @@ superheat <- function(X,
     label.text.col <- bottom.label.text.col
     label.text.alignment <- bottom.label.text.alignment
     text.angle <- bottom.label.text.angle
+    
+    # automate label size
+    if (is.null(bottom.label.size) && !is.null(membership)) {
+      # adjust for when the bottom text is 
+      if (!is.null(bottom.label.text.angle) && bottom.label.text.angle == 90) {
+        bottom.label.size <- max(stringr::str_length(membership)) * 0.02 + 0.05
+      } else {
+        bottom.label.size <- 0.1
+      }
+    }
 
     # generate the bottom label
     # identify variables defined in the environment
@@ -825,6 +846,11 @@ superheat <- function(X,
     label.text.col <- left.label.text.col
     label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
+    
+    # automate label size
+    if (is.null(left.label.size) && !is.null(names)) {
+      left.label.size <- max(stringr::str_length(names)) * 0.02 + 0.05
+    }
 
     # generate the left label
     # identify variables defined in the environment
@@ -843,6 +869,13 @@ superheat <- function(X,
     label.text.col <- left.label.text.col
     label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
+    
+    # automate label size
+    if (is.null(left.label.size) && !is.null(membership.rows)) {
+      left.label.size <- max(stringr::str_length(membership.rows)) * 0.02 + 0.05
+    }
+      
+  
 
     # generate the left label
     # identify variables defined in the environment
@@ -871,6 +904,8 @@ superheat <- function(X,
                                   name.size = row.title.size,
                                   location = "left")
   }
+  
+
 
   # Generate desired layout
   layout.arg.list <- c(as.list(environment()))

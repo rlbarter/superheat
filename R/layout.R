@@ -126,7 +126,7 @@ generate_layout <- function(gg.heat,
   if ( (!is.null(gg.column.title) && is.null(gg.right)) |
       (!is.null(gg.column.title) && !is.null(gg.right) && !yr.axis) |
       !is.null(gg.column.title) && !is.null(gg.right) && yr.axis &&
-      (bottom.label.size > 0.2) ){
+      (!is.null(gg.bottom) && bottom.label.size > 0.2) ){
     # if a column title is provided, add a row at the bottom provided that we
     # satisfy at least one of the following conditions:
     #   Condition 1: there is no right plot
@@ -152,7 +152,7 @@ generate_layout <- function(gg.heat,
     if (is.null(gg.column.title) |
         ((!is.null(gg.right) && yr.axis == F) &&
           is.null(gg.column.title)) |
-        (!is.null(gg.right) && bottom.label.size > 0.2) |
+        (!is.null(gg.right) && !is.null(gg.bottom) && bottom.label.size > 0.2) |
         (!is.null(gg.right) && yr.axis &&
          !is.null(gg.column.title) && is.null(gg.bottom))) {
      # layout <- gtable::gtable_add_rows(layout,
@@ -339,7 +339,7 @@ generate_grobs <- function(layout,
     # if there is a top plot with axis and axis label, and the size of the
     # left labels are not wider than the top plot axis, move the left
     # labels one column to the right
-    if ((left.label.size <= 0.2) && !is.null(gg.top) &&
+    if ((left.label.size <= 0.2) && !is.null(gg.left) && !is.null(gg.top) &&
         yt.axis && !is.null(yt.axis.name)) {
       l <- l + 1
     }
@@ -364,7 +364,7 @@ generate_grobs <- function(layout,
     # ensure that the left labels fill the entire space by
     # extending the right-side of the grob
     r <- l
-    if (left.label.size > 0.2 && !is.null(gg.top) && yt.axis) {
+    if (left.label.size > 0.2 && !is.null(gg.left) && !is.null(gg.top) && yt.axis) {
       r <- r + 2 # add 1 for the top plot axis itself and 1 for the axis title
     }
 
@@ -404,7 +404,8 @@ generate_grobs <- function(layout,
     # the axis, then ensure that the bottom label is equal to the specified
     # length
     b <- t
-    if (bottom.label.size > 0.2 && !is.null(gg.right) && yr.axis) {
+    if (!is.null(gg.bottom) && bottom.label.size > 0.2 && 
+        !is.null(gg.right) && yr.axis) {
       b <- t + 2
     }
 
