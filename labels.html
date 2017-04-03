@@ -216,82 +216,74 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="dt">bottom.label =</span> <span class="st">&quot;none&quot;</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Recall that if you have clustered your matrix and you want the <a href="clustering.html#generate-clust">labels to show the variable names</a>, you can set <code>left.label = &quot;variable&quot;</code> and <code>bottom.label = &quot;variable&quot;</code></p>
 </div>
 <div id="label-size" class="section level2">
 <h2><span class="header-section-number">10.2</span> Label size</h2>
-<p>We have already seen changing the size of the labels using <code>left.label.size</code> and <code>bottom.label.size</code>. Note that this changes the size of the label bar but does not <a href="labels.html#label-text-size">change the text size</a>.</p>
+<p>Although the label sizes are designed to be a little bit “smart”, the size of the labels can be changed using <code>left.label.size</code> and <code>bottom.label.size</code>. Note that this changes the size of the label bar but does not <a href="labels.html#label-text-size">change the text size</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
+          <span class="co"># change the size of the labels</span>
+          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
+          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
+          <span class="co"># scale the matrix columns</span>
+          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="label-color" class="section level2">
 <h2><span class="header-section-number">10.3</span> Label color</h2>
 <p>Changing the color of the labels can be done using the <code>left.label.col</code> and <code>bottom.label.col</code> arguments. You can provide a single color or you can provide a vector of colors (in which case this vector will be cycled through to fill the length of the labels.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># change the color of the labels</span>
-          <span class="dt">left.label.col =</span> <span class="st">&quot;white&quot;</span>,
-          <span class="dt">bottom.label.col =</span> <span class="kw">c</span>(<span class="st">&quot;#b3e2cd&quot;</span>,<span class="st">&quot;#fdcdac&quot;</span>,<span class="st">&quot;#e5d8bd&quot;</span>),
-          <span class="co"># scale the matrix columns</span>
-          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="label-text-size" class="section level2">
-<h2><span class="header-section-number">10.4</span> Text size</h2>
-<p>The size of the label text can be changed using the <code>left.label.text.size</code> and <code>bottom.label.text.size</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.6</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
-          <span class="co"># change the size of the label text</span>
-          <span class="dt">left.label.text.size =</span> <span class="dv">8</span>,
-          <span class="dt">bottom.label.text.size =</span> <span class="dv">6</span>,
-          <span class="co"># scale the matrix columns</span>
-          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-40-1.png" width="864" style="display: block; margin: auto;" /></p>
-</div>
-<div id="text-color-1" class="section level2">
-<h2><span class="header-section-number">10.5</span> Text color</h2>
-<p>Changing the color of the text can be achieved using the <code>left.label.text.col</code> and <code>bottom.label.text.col</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
-          <span class="co"># change the color of the label text</span>
           <span class="dt">left.label.col =</span> <span class="st">&quot;white&quot;</span>,
           <span class="dt">bottom.label.col =</span> <span class="kw">c</span>(<span class="st">&quot;#b3e2cd&quot;</span>,<span class="st">&quot;#fdcdac&quot;</span>,<span class="st">&quot;#e5d8bd&quot;</span>),
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
+<div id="label-text-size" class="section level2">
+<h2><span class="header-section-number">10.4</span> Text size</h2>
+<p>The size of the label text can be changed using the <code>left.label.text.size</code> and <code>bottom.label.text.size</code> arguments.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
+          <span class="co"># change the size of the label text</span>
+          <span class="dt">left.label.text.size =</span> <span class="dv">8</span>,
+          <span class="dt">bottom.label.text.size =</span> <span class="dv">6</span>,
+          <span class="co"># scale the matrix columns</span>
+          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-42-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="text-color-1" class="section level2">
+<h2><span class="header-section-number">10.5</span> Text color</h2>
+<p>Changing the color of the text can be achieved using the <code>left.label.text.col</code> and <code>bottom.label.text.col</code> arguments.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
+          <span class="co"># change the color of the label text</span>
+          <span class="dt">left.label.col =</span> <span class="st">&quot;white&quot;</span>,
+          <span class="dt">bottom.label.col =</span> <span class="kw">c</span>(<span class="st">&quot;#b3e2cd&quot;</span>,<span class="st">&quot;#fdcdac&quot;</span>,<span class="st">&quot;#e5d8bd&quot;</span>),
+          <span class="co"># scale the matrix columns</span>
+          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 <div id="text-angle-1" class="section level2">
 <h2><span class="header-section-number">10.6</span> Text angle</h2>
 <p>By default, the text has angle 0. Rotating the text by <span class="math inline">\(x\)</span> degrees can be achieved using <code>left.label.text.angle = x</code> or <code>bottom.label.text.angle = x</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># change the angle of the label text</span>
           <span class="dt">bottom.label.text.angle =</span> <span class="dv">90</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="text-alignment" class="section level2">
 <h2><span class="header-section-number">10.7</span> Text alignment</h2>
 <p>By default, the text is center-aligned. Changing to right-aligned or left-aligned can be achieved using the <code>left.label.text.alignment</code> and <code>bottom.label.text.alignment</code> arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># change the angle of the label text</span>
           <span class="dt">bottom.label.text.angle =</span> <span class="dv">90</span>,
           <span class="dt">left.label.text.alignment =</span> <span class="st">&quot;left&quot;</span>,
           <span class="dt">bottom.label.text.alignment =</span> <span class="st">&quot;right&quot;</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

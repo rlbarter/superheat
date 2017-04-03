@@ -215,9 +215,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>For example, if you’d like to use the <code>red</code> inbuilt color palette, you can set <code>heat.col.scheme = &quot;red&quot;</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># change the color</span>
@@ -225,9 +222,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="superheat-vignette_files/figure-html/red-color-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>If you’d like your color palette to go from brown to purple by travelling through white, then you can simply set <code>heat.pal = c(&quot;brown&quot;, &quot;white&quot;, &quot;purple&quot;)</code> as follows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># change the color (#b35806 = brown and #542788 = purple)</span>
@@ -239,9 +233,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Note that by default, the color transitions take place at the appropriate quantile based on the number of colors provided in the palette. For example, if you have 6 colors the color transitions will be at the 0th, 20th, 40th, 60th, 80th and 100th quantiles, where the 0th quantile corresponds to the minimum value and the 100th quantile corresponds to the maximum value. For skewed data, this means that most of the color transitions will occur towards one end of the scale.</p>
 <p>To force the transition to occur at a particular location, you need to use the <code>heat.pal.values</code> argument. This argument takes a vector whose length is the same as <code>heat.pal</code> and specifies the position (within the range from 0 to 1) of each color. For example <code>heat.pal.values = c(0, 0.5, 1)</code> forces the first color to be at the minimum value, the second color to be exactly at the midpoint of the range (note: this is distinct from the median) and the last color to be at the maximum value.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># change the color (#b35806 = brown and #542788 = purple)</span>
@@ -257,9 +248,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>the first color in the color range will correspond to the value -1 and the last color in the color range will correspond to the value 2.</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>))</code></pre></div>
@@ -268,9 +256,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">4.3.1</span> Extreme values</h3>
 <p>If you would prefer that values outside the <code>heat.lim</code> range be presented as the maximum/minimum color in the range (rather than as <code>NA</code>) then you can specify the argument <code>extreme.values.na = FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>),

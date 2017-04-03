@@ -208,15 +208,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 9</span> Adding text</h1>
 <p>It is easy to add text to each cell in the heatmap using the <code>X.text</code> argument. Below we simply plot the raw matrix over the top of the heatmap, but you could add any matrix of numbers or character strings.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># add text matrix</span>
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.size =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="text-color" class="section level2">
 <h2><span class="header-section-number">9.1</span> Text color</h2>
 <p>You can change the colors of the text by providing a single number or a matrix of numbers to the argument <code>X.text.col</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
@@ -231,16 +228,13 @@ mtcars.col &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span clas
 mtcars.col &lt;-<span class="st"> </span><span class="kw">matrix</span>(mtcars.col, <span class="dt">ncol =</span> <span class="kw">ncol</span>(mtcars))
 
 <span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># add text matrix</span>
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="font-size" class="section level2">
 <h2><span class="header-section-number">9.2</span> Font size</h2>
@@ -248,24 +242,18 @@ mtcars.col &lt;-<span class="st"> </span><span class="kw">matrix</span>(mtcars.c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the size to simply be proportional to the scaled value</span>
 mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) +<span class="st"> </span><span class="dv">2</span>
 <span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-               <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># add text matrix</span>
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> mtcars.size)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="text-angle" class="section level2">
 <h2><span class="header-section-number">9.3</span> Text angle</h2>
 <p>You can change the angle of the text by providing a single number (the number of degrees between 0 and 360) or a matrix of numbers to the argument <code>X.text.angle</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
-          <span class="co"># change the size of the labels</span>
-          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
-          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="co"># add text matrix</span>
@@ -273,7 +261,7 @@ mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) 
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> <span class="dv">4</span>,
           <span class="dt">X.text.angle =</span> <span class="dv">12</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
