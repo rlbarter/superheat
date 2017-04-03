@@ -110,7 +110,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html"><i class="fa fa-check"></i><b>4</b> Heatmap colormap</a><ul>
 <li class="chapter" data-level="4.1" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#heatmap-palette"><i class="fa fa-check"></i><b>4.1</b> Heatmap Palette</a></li>
 <li class="chapter" data-level="4.2" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#color-transitions"><i class="fa fa-check"></i><b>4.2</b> Color transitions</a></li>
-<li class="chapter" data-level="4.3" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#color-limits"><i class="fa fa-check"></i><b>4.3</b> Color limits</a></li>
+<li class="chapter" data-level="4.3" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#color-limits"><i class="fa fa-check"></i><b>4.3</b> Color limits</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="heatmap-colormap.html"><a href="heatmap-colormap.html#extreme-values"><i class="fa fa-check"></i><b>4.3.1</b> Extreme values</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>5</b> Missing data</a><ul>
 <li class="chapter" data-level="5.1" data-path="missing-data.html"><a href="missing-data.html#color"><i class="fa fa-check"></i><b>5.1</b> Color</a></li>
@@ -262,7 +264,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
           <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>))</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-range-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="extreme-values" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Extreme values</h3>
+<p>If you would prefer that values outside the <code>heat.lim</code> range be presented as the maximum/minimum color in the range (rather than as <code>NA</code>) then you can specify the argument <code>extreme.values.na = FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
+          <span class="co"># change the size of the labels</span>
+          <span class="dt">left.label.size =</span> <span class="fl">0.4</span>,
+          <span class="dt">bottom.label.size =</span> <span class="fl">0.1</span>,
+          <span class="co"># scale the matrix columns</span>
+          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
+          <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>),
+          <span class="dt">extreme.values.na =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/color-range-extreme-1.png" width="672" style="display: block; margin: auto;" /></p>
 
+</div>
 </div>
 </div>
             </section>
@@ -303,7 +318,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["superheat-vignette.pdf"],
 "toc": {
 "collapse": "subsection"
 }
