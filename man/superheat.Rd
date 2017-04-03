@@ -16,13 +16,14 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   left.label = NULL, bottom.label = NULL, heat.col.scheme = c("viridis",
   "red", "purple", "blue", "grey", "green"), heat.pal = NULL,
   heat.pal.values = NULL, heat.na.col = "grey50", heat.lim = NULL,
-  X.text.size = 5, X.text.col = "black", X.text.angle = 0,
-  yt.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
-  "scatterline", "line"), yr.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"), legend = TRUE,
-  legend.height = 0.1, legend.width = 1.5, legend.text.size = 12,
-  legend.breaks = NULL, grid.hline = TRUE, grid.vline = TRUE,
-  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
+  extreme.values.na = TRUE, X.text.size = 5, X.text.col = "black",
+  X.text.angle = 0, yt.plot.type = c("scatter", "bar", "boxplot",
+  "scattersmooth", "smooth", "scatterline", "line"),
+  yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
+  "scatterline", "line"), legend = TRUE, legend.height = 0.1,
+  legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
+  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
+  grid.vline.size = 0.5, grid.hline.col = "black",
   grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
@@ -53,13 +54,13 @@ top of the heatmap cells. The number of rows/columns must match
 either the number of rows/columns of \code{X} or the number of
 row/column clusters of \code{X}.}
 
-\item{yt}{a vector of values to plot above the heatmap (the "top plot").
-The length of \code{yt} must be equal to the number of columns
-of \code{X}.}
+\item{yt}{a data frame whose columns consist of values to plot above 
+the heatmap (the "top plot"). The length of \code{yt} must be 
+equal to the number of columns of \code{X}.}
 
-\item{yr}{a vector of values to plot to the right of the heatmap (the
-"right plot"). The length of \code{yr} must be equal to the
-number of rows of \code{X}.}
+\item{yr}{a data frame whose columns consist of values to plot to the 
+right of the heatmap (the "right plot"). The length of \code{yr} 
+must be equal to the number of rows of \code{X}.}
 
 \item{membership.rows}{a vector specifying the cluster membership
 of the rows in X.}
@@ -157,6 +158,10 @@ values are the corresponding quantiles.}
 
 \item{heat.lim}{a vector of length two consisting of the maximum and minimum 
 value for the heatmap palette.}
+
+\item{extreme.values.na}{a logical describing whether values outside the range
+of heat.lim are presented as missing (TRUE, default) or as the 
+max/min value of the range.}
 
 \item{X.text.size}{a single number or a matrix of numbers (whose dimension
 matches that of \code{X.text}) that specifies the size of each text

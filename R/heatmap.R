@@ -14,6 +14,7 @@ generate_heat <- function(X,
                           heat.pal.values = NULL,
                           heat.na.col = "grey50",
                           heat.lim = NULL,
+                          extreme.values.na = TRUE,
                           legend.height = 0.1,
                           legend.width = 1.5,
                           legend.text.size = 12,
@@ -85,8 +86,17 @@ generate_heat <- function(X,
     max.col <- max(X.df$value, na.rm = T)
     min.col <- min(X.df$value, na.rm = T)
   } else {
-    max.col = heat.lim[2]
-    min.col = heat.lim[1]
+    max.col <- heat.lim[2]
+    min.col <- heat.lim[1]
+    if (!extreme.values.na) {
+      # if extreme.values.na = FALSE then make values larger than the
+      # maximum range equal to the max color (rather than grey)
+      X.df$value[X.df$value > max.col] <- max.col
+      # if extreme.values.na = FALSE then make values smaller than the
+      # minimum range equal to the min color (rather than grey)
+      X.df$value[X.df$value < min.col] <- min.col
+    }
+    
   }
   
   range.X <- seq(min.col, max.col, length = 100)
@@ -181,6 +191,7 @@ generate_smooth_heat <- function(X,
                                  X.text.angle = 0,
                                  X.text.col = "black",
                                  heat.lim = NULL,
+                                 extreme.values.na = TRUE,
                                  smooth.heat = TRUE,
                                  membership.rows = NULL,
                                  membership.cols = NULL,
@@ -325,6 +336,14 @@ generate_smooth_heat <- function(X,
   } else {
     max.col = heat.lim[2]
     min.col = heat.lim[1]
+    if (!extreme.values.na) {
+      # if extreme.values.na = FALSE then make values larger than the
+      # maximum range equal to the max color (rather than grey)
+      X.df$value[X.df$value > max.col] <- max.col
+      # if extreme.values.na = FALSE then make values smaller than the
+      # minimum range equal to the min color (rather than grey)
+      X.df$value[X.df$value < min.col] <- min.col
+    }
   }
   range.X <- seq(min.col, max.col, length = 100)
   # specify location of legend breaks

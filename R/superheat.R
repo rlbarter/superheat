@@ -13,12 +13,12 @@
 #'          top of the heatmap cells. The number of rows/columns must match
 #'          either the number of rows/columns of \code{X} or the number of
 #'          row/column clusters of \code{X}.
-#' @param yt a vector of values to plot above the heatmap (the "top plot").
-#'          The length of \code{yt} must be equal to the number of columns
-#'          of \code{X}.
-#' @param yr a vector of values to plot to the right of the heatmap (the
-#'          "right plot"). The length of \code{yr} must be equal to the
-#'          number of rows of \code{X}.
+#' @param yt a data frame whose columns consist of values to plot above 
+#'          the heatmap (the "top plot"). The length of \code{yt} must be 
+#'          equal to the number of columns of \code{X}.
+#' @param yr a data frame whose columns consist of values to plot to the 
+#'          right of the heatmap (the "right plot"). The length of \code{yr} 
+#'          must be equal to the number of rows of \code{X}.
 #' @param yt.plot.type a character specifying the \code{yt} plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
 #'          "smooth", "boxplot", "scatterline" and "line".
@@ -103,6 +103,9 @@
 #' @param heat.na.col the color for NA values in the heatmap.
 #' @param heat.lim a vector of length two consisting of the maximum and minimum 
 #'          value for the heatmap palette.
+#' @param extreme.values.na a logical describing whether values outside the range
+#'          of heat.lim are presented as missing (TRUE, default) or as the 
+#'          max/min value of the range.
 #' @param X.text.size a single number or a matrix of numbers (whose dimension
 #'          matches that of \code{X.text}) that specifies the size of each text
 #'          entry in \code{X.text}.
@@ -302,6 +305,7 @@ superheat <- function(X,
                       heat.pal.values = NULL,
                       heat.na.col = "grey50",
                       heat.lim = NULL,
+                      extreme.values.na = TRUE,
 
                       X.text.size = 5,
                       X.text.col = "black",
