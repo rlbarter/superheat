@@ -306,6 +306,7 @@ superheat <- function(X,
 
                       left.label = NULL,
                       bottom.label = NULL,
+                      label.legend.pos = "right",
                       left.label.type = NULL,
                       bottom.label.type = NULL,
 
@@ -905,8 +906,10 @@ superheat <- function(X,
     label.col <- left.label.col
     
     # default label size
-    if (is.null(left.label.size)) {
+    if (is.null(left.label.size) & inherits(left.label, "list")) {
       left.label.size <- 0.1 * length(left.label)
+    } else {
+      left.label.size <- 0.1
     }
     
     # generate the left label
@@ -993,6 +996,7 @@ superheat <- function(X,
     grid::grid.draw(grob.layout)
     
   }
+  #gtable::gtable_show_layout(grob.layout)
 
   to.return <- list(layout = layout,
                     plot = grob.layout,

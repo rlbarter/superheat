@@ -94,14 +94,17 @@ generate_layout <- function(gg.heat,
   # place left label
   if ( (!is.null(gg.left) && !yt.axis && !is.null(gg.top)) |
       (!is.null(gg.left) && is.null(gg.top)) ) {
+    
     # condition 1: there is no additional top plot OR,
     #              there is an additional top plot but no top axis
     # add a column to the left for the left labels
+    
     layout <- gtable::gtable_add_cols(layout,
                                       grid::unit(left.label.size,
-                                                 "null"), 0)
+                                                 "null"), pos = 0)
   } else if ( (left.label.size > 0.2) && !is.null(gg.left) &&
              !is.null(gg.top) && yt.axis) {
+    
     # condition 2: there is an additional top-plot with an axis AND
     #              the size of the top label is larger than 0.2
     #              (0.2 is the size of the axis)
@@ -145,6 +148,7 @@ generate_layout <- function(gg.heat,
   if (!is.null(gg.legend)) {
     # Add legend padding if requested
     if (!is.null(legend.vspace)) {
+      
       layout <- gtable::gtable_add_rows(layout, grid::unit(legend.vspace, "null"))
     }
 
@@ -181,6 +185,7 @@ generate_layout <- function(gg.heat,
   
   # add a padding column before the legends
   if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)) {
+    
     layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null")) 
   }
 
@@ -246,12 +251,7 @@ generate_grobs <- function(layout,
       l <- l - 1
     }
     
-    
-
-    
-    
     # place the legend in its final position
-    plot(gg.legend)
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
                                                             pattern = "guide-box",
@@ -414,6 +414,7 @@ generate_grobs <- function(layout,
     }
 
     # place the label grob in the specified location
+    
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.left),
                                                             pattern = "panel", trim = TRUE, fixed = TRUE),
@@ -604,9 +605,9 @@ generate_grobs <- function(layout,
       t <- t + 1
     }
     
+    
     # plot each legend 
     for (i in 1:length(gg.left.legend)) {
-      plot(gg.left.legend[[i]])
       layout <- gtable::gtable_add_grob(layout,
                                         gtable::gtable_filter(ggplot2::ggplotGrob(gg.left.legend[[i]]),
                                                               pattern = "guide-box",
