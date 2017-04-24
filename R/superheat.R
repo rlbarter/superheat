@@ -901,11 +901,16 @@ superheat <- function(X,
     location <- "left"
     label.col <- left.label.col
     
+    # default label size
+    if (is.null(left.label.size)) {
+      left.label.size <- 0.1 * length(left.label)
+    }
+    
     # generate the left label
     # identify variables defined in the environment
     label.arg.list <- c(as.list(environment()))
     # identify the possible arguments for generate_var_label
-    label.arg.list <- label.arg.list[names(formals(generate_cluster_label))]
+    label.arg.list <- label.arg.list[names(formals(generate_multi_label))]
     # filter the variables in the environment to those that are arguments
     # for generate_var_label
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
@@ -918,11 +923,17 @@ superheat <- function(X,
     location <- "bottom"
     label.col <- bottom.label.col
     
+    # default label size
+    if (is.null(bottom.label.size)) {
+      bottom.label.size <- 0.1 * length(bottom.label)
+    }
+    
+    
     # generate the bottom label
     # identify variables defined in the environment
     label.arg.list <- c(as.list(environment()))
     # identify the possible arguments for generate_var_label
-    label.arg.list <- label.arg.list[names(formals(generate_cluster_label))]
+    label.arg.list <- label.arg.list[names(formals(generate_multi_label))]
     # filter the variables in the environment to those that are arguments
     # for generate_var_label
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
