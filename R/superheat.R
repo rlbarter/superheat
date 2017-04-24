@@ -238,6 +238,8 @@
 #'          default is 5.
 #' @param row.title.size a number specifying the size of the row name. The
 #'          default is 5.
+#' @param legend.vspace a number specifying amount of additional space between 
+#'          heatmap and legend.
 #' @param legend.height a number specifying the height of the legend. The default
 #'        is 0.1.
 #' @param legend.width a number specifying the width of the legend. The default
@@ -331,6 +333,7 @@ superheat <- function(X,
                       legend.width = 1.5,
                       legend.text.size = 12,
                       legend.breaks = NULL,
+                      legend.vspace = NULL,
 
                       grid.hline = TRUE,
                       grid.vline = TRUE,

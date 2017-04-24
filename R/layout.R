@@ -20,7 +20,8 @@ generate_layout <- function(gg.heat,
                             title.size = 5,
                             bottom.label.size = 0.1,
                             left.label.size = 0.1,
-                            legend.height = 0.2) {
+                            legend.height = 0.2,
+                            legend.vspace) {
 
   # Generate the gtable object whose cells correspond to the heatmap
   # and additional elements such as the top and right plot, and labels.
@@ -140,23 +141,9 @@ generate_layout <- function(gg.heat,
 
   # location for legend
   if (!is.null(gg.legend)) {
-    # We always want the legend to be either two rows below the bottom of
-    # the heatmap (if no bottom labels), or two rows below the bottom labels
-    # Add a blank row for the following conditions:
-    #   - there is a column name
-    #   - there is a right plot but there are no right-plot axes AND
-    #     there is no column name,
-    #   - there is a right plot, with and axis, but the bottom labels
-    #     are larger than 0.2
-    #   - if there a right plot with axis AND column name AND no bottom labels
-    if (is.null(gg.column.title) |
-        ((!is.null(gg.right) && yr.axis == F) &&
-          is.null(gg.column.title)) |
-        (!is.null(gg.right) && !is.null(gg.bottom) && bottom.label.size > 0.2) |
-        (!is.null(gg.right) && yr.axis &&
-         !is.null(gg.column.title) && is.null(gg.bottom))) {
-     # layout <- gtable::gtable_add_rows(layout,
-    #                                    grid::unit(0.1, "null"))
+    # Add legend padding if requested
+    if (!is.null(legend.vspace)) {
+      layout <- gtable::gtable_add_rows(layout, grid::unit(legend.vspace, "null"))
     }
 
     # the legend is always in the very bottom row
@@ -165,6 +152,8 @@ generate_layout <- function(gg.heat,
     if (!(is.null(gg.bottom) && !is.null(gg.right) && yr.axis)) {
       layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
     }
+    
+    
   }
 
   # add title
@@ -222,6 +211,8 @@ generate_grobs <- function(layout,
       l <- l - 1
     }
 
+    
+    
     # place the legend in its final position
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
