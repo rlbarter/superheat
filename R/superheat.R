@@ -987,9 +987,11 @@ superheat <- function(X,
   grob.arg.list <- grob.arg.list[!is.na(names(grob.arg.list))]
   grob.layout <- do.call(generate_grobs, grob.arg.list)
 
+  
   if (print.plot) {
     grid::grid.newpage()
     grid::grid.draw(grob.layout)
+    
   }
 
   to.return <- list(layout = layout,

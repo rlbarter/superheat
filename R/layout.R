@@ -168,15 +168,20 @@ generate_layout <- function(gg.heat,
   # add left label legends
   if (!is.null(gg.left.legend)) {
     for(i in 1:length(gg.left.legend)) {
-      layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null")) 
+      layout <- gtable::gtable_add_cols(layout, grid::unit(0.2, "null")) 
     }
   }
   
   # add bottom label legends
   if (!is.null(gg.bottom.legend)) {
     for(i in 1:length(gg.bottom.legend)) {
-      layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null")) 
+      layout <- gtable::gtable_add_cols(layout, grid::unit(0.2, "null")) 
     }
+  }
+  
+  # add a padding column before the legends
+  if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)) {
+    layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null")) 
   }
 
   return(layout)
@@ -229,11 +234,16 @@ generate_grobs <- function(layout,
     if (!is.null(gg.right)) {
       l <- l - 1
     }
+    # if there are label legends, move to the left
     if (!is.null(gg.left.legend)) {
       l <- l - length(gg.left.legend)
     }
     if (!is.null(gg.bottom.legend)) {
       l <- l - length(gg.bottom.legend)
+    }
+    # if there is either label legend, move left for padding
+    if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
+      l <- l - 1
     }
     
     
@@ -267,6 +277,18 @@ generate_grobs <- function(layout,
     if (!is.null(gg.title)) {
       t <- t + 1
     }
+    # move to the left of the legends
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
+    }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - length(gg.bottom.legend)
+    }
+    # if there is either label legend, move left for padding
+    if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
+      l <- l - 1
+    }
+    
     # place the right plot in the specified position
     # if it is a dendrogram, get the denrogram
 
@@ -310,6 +332,10 @@ generate_grobs <- function(layout,
     }
     # if there is a right plot, move the top plot one column left
     if (!is.null(gg.right)) {
+      l <- l - 1
+    }
+    # if there is either label legend, move left for padding
+    if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
       l <- l - 1
     }
     # place the top plot in the specified position
@@ -435,6 +461,15 @@ generate_grobs <- function(layout,
     if (!is.null(gg.bottom.legend)) {
       l <- l - length(gg.bottom.legend)
     }
+    # if there is either label legend, move left for padding
+    if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
+      l <- l - 1
+    }
+    
+    # overflow from plot axis
+    if (!is.null(gg.right) & yr.axis & (length(gg.bottom.legend) > 1)) {
+      b <- t + (length(gg.bottom.legend) - 1)
+    }
 
     # place the grob in the appropriate position
     layout <- gtable::gtable_add_grob(layout,
@@ -456,6 +491,17 @@ generate_grobs <- function(layout,
     l <- ncol(layout)
     # if there is a right plot, move the title one column to the left
     if (!is.null(gg.right)) {
+      l <- l - 1
+    }
+    # make way for all fo the label legends
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
+    }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - length(gg.bottom.legend)
+    }
+    # if there is either label legend, move left for padding
+    if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
       l <- l - 1
     }
 
@@ -526,6 +572,17 @@ generate_grobs <- function(layout,
     if (!is.null(gg.right)) {
       l <- l - 1
     }
+    # make way for all fo the label legends
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
+    }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - length(gg.bottom.legend)
+    }
+    # if there is either label legend, move left for padding
+    if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
+      l <- l - 1
+    }
 
     # place the column title in the appropriate place
     layout <- gtable::gtable_add_grob(layout,
@@ -538,7 +595,7 @@ generate_grobs <- function(layout,
   
   # add legend for left labels
   if (!is.null(gg.left.legend)) {
-    l <- ncol(layout) - length(gg.left.legend)
+    l <- ncol(layout) - length(gg.left.legend) - length(gg.bottom.legend)
     t <- 1
     if (!is.null(gg.top)) {
       t <- t + 1 
@@ -569,14 +626,15 @@ generate_grobs <- function(layout,
     if (!is.null(gg.title)) {
       t <- t + 1
     }
+    
     for (i in 1:length(gg.bottom.legend)) {
       
       layout <- gtable::gtable_add_grob(layout,
                                         gtable::gtable_filter(ggplot2::ggplotGrob(gg.bottom.legend[[i]]),
                                                               pattern = "guide-box",
                                                               trim = TRUE, fixed = TRUE),
-                                        t = t, l = l + 1)
-      l <- l + 1
+                                        t = t, l = l + 1, b = b)
+      
     }
     
   }

@@ -370,7 +370,9 @@ generate_multi_label <- function(left.label,
     
     # identify break positions for each label
     variables.df <- lapply(1:length(left.label), function(j) {
+      
       colors <- factor(left.label[[j]])
+      
       levels(colors) <- label.col[[j]]
       df <- data.frame(variable = left.label[[j]],
                  col = colors,
