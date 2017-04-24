@@ -323,9 +323,151 @@ generate_var_label <- function(names,
 
     return(gg.bottom)
   }
-
-
 }
+
+
+
+
+
+generate_multi_label <- function(left.label,
+                                 bottom.label,
+                               location = c("bottom", "left"),
+                               label.col = NULL) {
+  location <- match.arg(location)
+
+
+  # define themes
+  themes.arg.list <- c(as.list(environment()))
+  themes.arg.list <- themes.arg.list[names(formals(themes))]
+  themes.arg.list <- themes.arg.list[!is.na(names(themes.arg.list))]
+  
+  # define the theme for the labels
+  theme <- do.call(themes, themes.arg.list)
+  theme_clust_labels <- theme$theme_clust_labels
+
+  if (location == "left") {
+    
+    # if there are no label names then add them
+    if (is.null(names(left.label))) {
+      names(left.label) <- paste0("Label", 1:length(left.label))
+    }
+    # convert left label list to a data frame
+    left.label <- as.data.frame(left.label)
+    # if there are no colors provided define the defaulr
+    if (is.null(label.col)) {
+      # identify how many unique colors we need
+      n.colors <- sapply(left.label, function(x) length(unique(x)))
+      # get the R color brewer palette
+      label.col <- RColorBrewer::brewer.pal(sum(n.colors), "Set2")
+      # convert into a list of colors
+      label.col <- split(label.col, 
+                         unlist(sapply(1:length(left.label), 
+                                       function(i) {
+                                         rep(names(left.label[i]), each = n.colors[i])
+                                       })
+                                ))}
+
+    
+    # identify break positions for each label
+    variables.df <- lapply(1:length(left.label), function(j) {
+      colors <- factor(left.label[[j]])
+      levels(colors) <- label.col[[j]]
+      df <- data.frame(variable = left.label[[j]],
+                 col = colors,
+                 n = 1,
+                 label = j)
+      df$id <- 1:nrow(df)
+      df <- df %>%
+        dplyr::mutate(increment = (n / sum(df$n)) * 1)
+      breaks <- c(1, 1 + cumsum(df$increment))
+      df$breaks <- breaks[ -(nrow(df) + 1) ]
+      return(df)
+    })
+                           
+    # convert to ggplot-friendly long-form
+    left.label.melt <- do.call(rbind, variables.df)
+    
+    gg.left <- ggplot2::ggplot(left.label.melt,
+                    ggplot2::aes(xmin = label,
+                                 xmax = label + 1,
+                                 ymin = breaks,
+                                 ymax = breaks + increment,
+                                 fill = col)) +
+      ggplot2::geom_rect() +
+      theme_clust_labels +
+      ggplot2::scale_fill_manual(values = as.character(unlist(label.col))) +
+      ggplot2::scale_y_continuous(expand = c(0, 0)) +
+      ggplot2::scale_x_continuous(expand = c(0, 0))
+    
+    return(gg.left)
+  }  
+  
+  
+  
+  if (location == "bottom") {
+    
+    # if there are no label names then add them
+    if (is.null(names(bottom.label))) {
+      names(bottom.label) <- paste0("Label", 1:length(bottom.label))
+    }
+    # convert bottom label list to a data frame
+    bottom.label <- as.data.frame(bottom.label)
+    # if there are no colors provided define the defaulr
+    if (is.null(label.col)) {
+      # identify how many unique colors we need
+      n.colors <- sapply(bottom.label, function(x) length(unique(x)))
+      # get the R color brewer palette
+      label.col <- RColorBrewer::brewer.pal(sum(n.colors), "Set2")
+      # convert into a list of colors
+      label.col <- split(label.col, 
+                         unlist(sapply(1:length(bottom.label), 
+                                       function(i) {
+                                         rep(names(bottom.label[i]), each = n.colors[i])
+                                       })
+                         ))}
+    
+    
+    # identify break positions for each label
+    variables.df <- lapply(1:length(bottom.label), function(j) {
+      colors <- factor(bottom.label[[j]])
+      levels(colors) <- label.col[[j]]
+      df <- data.frame(variable = bottom.label[[j]],
+                       col = colors,
+                       n = 1,
+                       label = j)
+      df$id <- 1:nrow(df)
+      df <- df %>%
+        dplyr::mutate(increment = (n / sum(df$n)) * 1)
+      breaks <- c(1, 1 + cumsum(df$increment))
+      df$breaks <- breaks[ -(nrow(df) + 1) ]
+      return(df)
+    })
+    
+    # convert to ggplot-friendly long-form
+    bottom.label.melt <- do.call(rbind, variables.df)
+    
+    gg.bottom <- ggplot2::ggplot(bottom.label.melt,
+                    ggplot2::aes(ymin = label,
+                                 ymax = label + 1,
+                                 xmin = breaks,
+                                 xmax = breaks + increment,
+                                 fill = col)) +
+      ggplot2::geom_rect() +
+      theme_clust_labels +
+      ggplot2::scale_fill_manual(values = as.character(unlist(label.col))) +
+      ggplot2::scale_y_continuous(expand = c(0, 0)) +
+      ggplot2::scale_x_continuous(expand = c(0, 0))
+    
+    return(gg.bottom)
+  }  
+  
+    
+}
+  
+  
+
+
+
 
 
 generate_title <- function(title = NULL,
@@ -375,3 +517,19 @@ generate_names <- function(name = NULL,
   return(gg.name)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

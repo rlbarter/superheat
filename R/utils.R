@@ -219,8 +219,8 @@ stopErrors <- function(X,
                        yt.lim = NULL,
                        yr.lim = NULL,
                         
-                        bottom.label = NULL,
-                        left.label = NULL,
+                        bottom.label.type = NULL,
+                        left.label.type = NULL,
                         bottom.label.text.size = 5,
                         left.label.text.size = 5,
                         bottom.label.text.angle = NULL,
@@ -329,19 +329,19 @@ stopErrors <- function(X,
   }
   
 
-  if (!is.null(left.label)) {
+  if (!is.null(left.label.type)) {
     possible.methods <- c("variable", "cluster", "none")
-    i.meth <- pmatch(left.label, possible.methods)
+    i.meth <- pmatch(left.label.type, possible.methods)
     if (is.na(i.meth)) {
-      stop("invalid left.label", paste("", left.label))
+      stop("invalid left.label.type", paste("", left.label.type))
     }
   }
 
-  if (!is.null(bottom.label)) {
+  if (!is.null(bottom.label.type)) {
     possible.methods <- c("variable", "cluster", "none")
-    i.meth <- pmatch(bottom.label, possible.methods)
+    i.meth <- pmatch(bottom.label.type, possible.methods)
     if (is.na(i.meth)) {
-      stop("invalid bottom.label", paste("", bottom.label))
+      stop("invalid bottom.label.type", paste("", bottom.label.type))
     }
   }
 
@@ -352,19 +352,19 @@ stopErrors <- function(X,
     stop("invalid clustering method", paste("", clustering.method))
 
 
-  if (!is.null(left.label) &&
-      (left.label == "cluster") &&
+  if (!is.null(left.label.type) &&
+      (left.label.type == "cluster") &&
       is.null(membership.rows) &&
       is.null(n.clusters.rows)) {
-    stop(paste("Cannot have 'left.label = 'cluster''",
+    stop(paste("Cannot have 'left.label.type = 'cluster''",
                "if we have not clustered the rows"))
   }
 
-  if (!is.null(bottom.label) &&
-      (bottom.label == "cluster") &&
+  if (!is.null(bottom.label.type) &&
+      (bottom.label.type == "cluster") &&
       is.null(membership.cols) &&
       is.null(n.clusters.cols)) {
-    stop(paste("Cannot have 'bottom.label = 'cluster'' if we",
+    stop(paste("Cannot have 'bottom.label.type = 'cluster'' if we",
                "have not clustered the columns"))
   }
 
@@ -581,9 +581,9 @@ clean_matrix <- function(X, scale) {
   
 
 setLabelType <- function(X,
-                         left.label, 
+                         left.label.type, 
                          cluster.rows, 
-                         bottom.label, 
+                         bottom.label.type, 
                          cluster.cols,
                          force.left.label,
                          force.bottom.label,
@@ -593,33 +593,33 @@ setLabelType <- function(X,
   # if there are no row labels provided and cluster.rows is FALSE,
   # then set the default label type to be "variable",
   # otherwise set it to "TRUE"cluster"
-  if (is.null(left.label) && !cluster.rows) {
-    left.label <- "variable"
-  } else if (is.null(left.label) && cluster.rows) {
-    left.label <- "cluster"
+  if (is.null(left.label.type) && !cluster.rows) {
+    left.label.type <- "variable"
+  } else if (is.null(left.label.type) && cluster.rows) {
+    left.label.type <- "cluster"
   }
   
   # if there are no bottom labels provided and cluster.cols is FALSE,
   # then set the default label type to be "variable",
   # otherwise set it to "TRUE"cluster"
-  if (is.null(bottom.label) && cluster.cols) {
-    bottom.label <- "cluster"
-  } else if (is.null(bottom.label) && !cluster.cols) {
-    bottom.label <- "variable"
+  if (is.null(bottom.label.type) && cluster.cols) {
+    bottom.label.type <- "cluster"
+  } else if (is.null(bottom.label.type) && !cluster.cols) {
+    bottom.label.type <- "variable"
   }
   
   # remove variable labels if more than 50 rows/cols
-  if ((left.label == "variable") && !force.left.label) {
+  if ((left.label.type == "variable") && !force.left.label) {
     if (nrow(X) > 100) {
-      left.label <- "none"
+      left.label.type <- "none"
     }
   }
-  if (bottom.label == "variable" && !force.bottom.label) {
+  if (bottom.label.type == "variable" && !force.bottom.label) {
     if (ncol(X) > 100) {
-      bottom.label <- "none"
+      bottom.label.type <- "none"
     }
   }
   
   
-  return(list(left.label = left.label, bottom.label = bottom.label))
+  return(list(left.label.type = left.label.type, bottom.label.type = bottom.label.type))
 }

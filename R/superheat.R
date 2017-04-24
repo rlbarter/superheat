@@ -75,13 +75,19 @@
 #'          of the heatmap within clusters (by taking the median value).
 #' @param scale a logical specifying whether or not to center and scale the
 #'          columns of X.
-#' @param left.label a character specifying the type of the label provided to
+#' @param left.label a list of left label character vectors. This argument
+#'          overrides the default left label names (rownames of matrix or 
+#'          cluster names).
+#' @param bottom.label a list of bottom label character vectors. This argument
+#'          overrides the default bottom label names (rownames of matrix or 
+#'          cluster names).
+#' @param left.label.type a character specifying the type of the label provided to
 #'          the left of the heatmap. If clustering was performed on the rows,
 #'          then the default type is "cluster" (which provides the cluster
 #'          names). Otherwise, the default is "variable" (which provides the
 #'          variable names). The final option, "none", removes the left labels
 #'          all together.
-#' @param bottom.label a character specifying the type of the label provided
+#' @param bottom.label.type a character specifying the type of the label provided
 #'          to the left of the heatmap. If clustering was performed on the
 #'          columns, then the default type is "cluster" (which provides the
 #'          cluster names). Otherwise, the default is "variable" (which
@@ -298,6 +304,8 @@ superheat <- function(X,
 
                       left.label = NULL,
                       bottom.label = NULL,
+                      left.label.type = NULL,
+                      bottom.label.type = NULL,
 
                       heat.col.scheme = c("viridis", "red", "purple", "blue",
                                           "grey", "green"),
@@ -475,16 +483,16 @@ superheat <- function(X,
   
   # set the type of label for each additional plot
   label.type <- setLabelType(X,
-                             left.label, 
+                             left.label.type, 
                              cluster.rows, 
-                             bottom.label, 
+                             bottom.label.type, 
                              cluster.cols,
                              force.left.label,
                              force.bottom.label,
                              yr.obs.col,
                              yt.obs.col)
-  bottom.label <- label.type$bottom.label
-  left.label <- label.type$left.label
+  bottom.label.type <- label.type$bottom.label.type
+  left.label.type <- label.type$left.label.type
 
   # remove the heatmap grid lines if there are more than 50 cols/rows
   # do this only when there are variable labels or no labels
@@ -492,13 +500,13 @@ superheat <- function(X,
   #  rows/columns but we are grouping by cluster. In this case the grid
   #  lines correspond to the clusters rather than the variables)
   if (!cluster.cols &
-      ((bottom.label == "variable") | (bottom.label == "none"))) {
+      ((bottom.label.type == "variable") | (bottom.label.type == "none"))) {
     if ((ncol(X) > 50) && !force.grid.vline) {
        grid.vline <- FALSE
     }
   }
   if (!cluster.rows &
-      ((left.label == "variable") | (left.label == "none"))) {
+      ((left.label.type == "variable") | (left.label.type == "none"))) {
     if ((nrow(X) > 50) && !force.grid.hline) {
       grid.hline <- FALSE
     }
@@ -776,7 +784,7 @@ superheat <- function(X,
   # Generate the bottom heatmap labels. There are two types:
   # variable: each individual column has its own label
   # cluster: all columns within a cluster are given a combined cluster name
-  if (bottom.label == "variable") {
+  if (bottom.label.type == "variable" & is.null(bottom.label)) {
     # define the arguments for generating the bottom "variable" label
     names <- colnames(X)
     location <- "bottom"
@@ -805,7 +813,7 @@ superheat <- function(X,
     # for generate_var_label
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
     gg.bottom <- do.call(generate_var_label, label.arg.list)
-  } else if (bottom.label == "cluster") {
+  } else if (bottom.label.type == "cluster" & is.null(bottom.label)) {
     # define the arguments for generating the bottom "cluster" label
     location <- "bottom"
     membership <- membership.cols
@@ -838,7 +846,7 @@ superheat <- function(X,
   # Generate the left heatmap labels. There are two types:
   # variable: each individual column has its own label
   # cluster: all columns within a cluster are given a combined cluster name
-  if (left.label == "variable") {
+  if (left.label.type == "variable" & is.null(left.label)) {
     # define the arguments for generating the left "variable" label
     names <- rownames(X)
     location <- "left"
@@ -861,7 +869,7 @@ superheat <- function(X,
     # for generate_var_label
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
     gg.left <- do.call(generate_var_label, label.arg.list)
-  } else if (left.label == "cluster") {
+  } else if (left.label.type == "cluster" & is.null(left.label)) {
     # define the arguments for generating the left "cluster" label
     location <- "left"
     membership <- membership.rows
@@ -874,9 +882,7 @@ superheat <- function(X,
     if (is.null(left.label.size) && !is.null(membership.rows)) {
       left.label.size <- max(stringr::str_length(membership.rows)) * 0.02 + 0.05
     }
-      
-  
-
+    
     # generate the left label
     # identify variables defined in the environment
     label.arg.list <- c(as.list(environment()))
@@ -887,6 +893,42 @@ superheat <- function(X,
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
     gg.left <- do.call(generate_cluster_label, label.arg.list)
   }
+  
+  
+  # if provided manual left labels, generate them
+  if (!is.null(left.label)) {
+    names <- left.label
+    location <- "left"
+    label.col <- left.label.col
+    
+    # generate the left label
+    # identify variables defined in the environment
+    label.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_var_label
+    label.arg.list <- label.arg.list[names(formals(generate_cluster_label))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_var_label
+    label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
+    gg.left <- do.call(generate_multi_label, label.arg.list)
+  }
+  
+  
+  if (!is.null(bottom.label)) {
+    names <- bottom.label
+    location <- "bottom"
+    label.col <- bottom.label.col
+    
+    # generate the bottom label
+    # identify variables defined in the environment
+    label.arg.list <- c(as.list(environment()))
+    # identify the possible arguments for generate_var_label
+    label.arg.list <- label.arg.list[names(formals(generate_cluster_label))]
+    # filter the variables in the environment to those that are arguments
+    # for generate_var_label
+    label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
+    gg.bottom <- do.call(generate_multi_label, label.arg.list)
+  }
+  
 
   # Generate title
   if (!is.null(title)) {
