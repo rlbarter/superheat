@@ -5,6 +5,8 @@ generate_layout <- function(gg.heat,
                             gg.bottom = NULL,
                             gg.left = NULL,
                             gg.legend = NULL,
+                            gg.bottom.legend = NULL,
+                            gg.left.legend = NULL,
                             gg.title = NULL,
                             gg.row.title = NULL,
                             gg.column.title = NULL,
@@ -161,6 +163,21 @@ generate_layout <- function(gg.heat,
     # the title is always in the topmost row
     layout <- gtable::gtable_add_rows(layout, grid::unit(0.2, "null"), pos = 0)
   }
+  
+  
+  # add left label legends
+  if (!is.null(gg.left.legend)) {
+    for(i in 1:length(gg.left.legend)) {
+      layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null")) 
+    }
+  }
+  
+  # add bottom label legends
+  if (!is.null(gg.bottom.legend)) {
+    for(i in 1:length(gg.bottom.legend)) {
+      layout <- gtable::gtable_add_cols(layout, grid::unit(0.1, "null")) 
+    }
+  }
 
   return(layout)
 }
@@ -172,6 +189,8 @@ generate_grobs <- function(layout,
                            gg.bottom = NULL,
                            gg.left = NULL,
                            gg.legend = NULL,
+                           gg.left.legend = NULL,
+                           gg.bottom.legend = NULL,
                            gg.title = NULL,
                            gg.row.title = NULL,
                            gg.column.title = NULL,
@@ -210,10 +229,19 @@ generate_grobs <- function(layout,
     if (!is.null(gg.right)) {
       l <- l - 1
     }
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
+    }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - length(gg.bottom.legend)
+    }
+    
+    
 
     
     
     # place the legend in its final position
+    plot(gg.legend)
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
                                                             pattern = "guide-box",
@@ -399,6 +427,14 @@ generate_grobs <- function(layout,
         !is.null(gg.right) && yr.axis) {
       b <- t + 2
     }
+    
+    # make way for all fo the label legends
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
+    }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - length(gg.bottom.legend)
+    }
 
     # place the grob in the appropriate position
     layout <- gtable::gtable_add_grob(layout,
@@ -499,6 +535,52 @@ generate_grobs <- function(layout,
                                       t = t, l = l)
   }
 
+  
+  # add legend for left labels
+  if (!is.null(gg.left.legend)) {
+    l <- ncol(layout) - length(gg.left.legend)
+    t <- 1
+    if (!is.null(gg.top)) {
+      t <- t + 1 
+    }
+    if (!is.null(gg.title)) {
+      t <- t + 1
+    }
+    
+    # plot each legend 
+    for (i in 1:length(gg.left.legend)) {
+      plot(gg.left.legend[[i]])
+      layout <- gtable::gtable_add_grob(layout,
+                                        gtable::gtable_filter(ggplot2::ggplotGrob(gg.left.legend[[i]]),
+                                                              pattern = "guide-box",
+                                                              trim = TRUE, fixed = TRUE),
+                                        t = t, l = l + 1)
+      l <- l + 1
+    }
+    
+  }
+  
+  if (!is.null(gg.bottom.legend)) {
+    l <- ncol(layout)  - length(gg.bottom.legend)
+    t <- 1
+    if (!is.null(gg.top)) {
+      t <- t + 1 
+    }
+    if (!is.null(gg.title)) {
+      t <- t + 1
+    }
+    for (i in 1:length(gg.bottom.legend)) {
+      
+      layout <- gtable::gtable_add_grob(layout,
+                                        gtable::gtable_filter(ggplot2::ggplotGrob(gg.bottom.legend[[i]]),
+                                                              pattern = "guide-box",
+                                                              trim = TRUE, fixed = TRUE),
+                                        t = t, l = l + 1)
+      l <- l + 1
+    }
+    
+  }
+  
   # add padding:
   layout <- gtable::gtable_add_padding(layout, grid::unit(padding, "cm"))
   # gtable::gtable_show_layout(layout)

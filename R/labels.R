@@ -394,12 +394,16 @@ generate_multi_label <- function(left.label,
                                  ymax = breaks + increment,
                                  fill = col)) +
       ggplot2::geom_rect() +
-      theme_clust_labels +
+      theme_multilabel_labels +
       ggplot2::scale_fill_manual(values = as.character(unlist(label.col))) +
       ggplot2::scale_y_continuous(expand = c(0, 0)) +
       ggplot2::scale_x_continuous(expand = c(0, 0))
     
-    return(gg.left)
+    
+    gg.left.legend <- generate_multilabel_legend(label.col)
+    
+    return(list(gg.left = gg.left,
+                gg.left.legend = gg.left.legend))
   }  
   
   
@@ -453,18 +457,37 @@ generate_multi_label <- function(left.label,
                                  xmax = breaks + increment,
                                  fill = col)) +
       ggplot2::geom_rect() +
-      theme_clust_labels +
+      theme_multilabel_labels +
       ggplot2::scale_fill_manual(values = as.character(unlist(label.col))) +
       ggplot2::scale_y_continuous(expand = c(0, 0)) +
       ggplot2::scale_x_continuous(expand = c(0, 0))
     
-    return(gg.bottom)
+    gg.bottom.legend <- generate_multilabel_legend(label.col)
+    
+    return(list(gg.bottom = gg.bottom,
+                gg.bottom.legend = gg.bottom.legend))
   }  
   
     
 }
   
   
+
+generate_multilabel_legend <- function(label.col) {
+  # make a dummy plot using the colors specified for the labels
+  legend.list <- lapply(label.col, function(col) {
+    tmp <- data.frame(x = 1:length(unique(col)),
+                      col = col)
+    g <- ggplot2::ggplot(tmp) + 
+      ggplot2::geom_rect(aes(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, 
+                             fill = col)) +
+      scale_fill_manual(values = col) +
+      theme(legend.justification = "top")
+    # extract the legend from the dummy plots
+    g
+  })
+  return(legend.list)
+}
 
 
 

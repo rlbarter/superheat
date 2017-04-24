@@ -623,3 +623,15 @@ setLabelType <- function(X,
   
   return(list(left.label.type = left.label.type, bottom.label.type = bottom.label.type))
 }
+
+
+
+
+
+getLegend <- function(a.gplot) {
+  # source: "http://stackoverflow.com/questions/12539348/ggplot-separate-legend-and-plot"
+  tmp <- ggplot2::ggplot_gtable(ggplot2::ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)
+}

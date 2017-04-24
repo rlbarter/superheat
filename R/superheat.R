@@ -918,6 +918,12 @@ superheat <- function(X,
     # for generate_var_label
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
     gg.left <- do.call(generate_multi_label, label.arg.list)
+    
+    # extract plot and legend
+    gg.left.legend <- gg.left$gg.left.legend
+    gg.left <- gg.left$gg.left
+    
+    
   }
   
   
@@ -941,6 +947,12 @@ superheat <- function(X,
     # for generate_var_label
     label.arg.list <- label.arg.list[!is.na(names(label.arg.list))]
     gg.bottom <- do.call(generate_multi_label, label.arg.list)
+    
+    # extract plot and legend
+    gg.bottom.legend <- gg.bottom$gg.bottom.legend
+    gg.bottom <- gg.bottom$gg.bottom
+    
+    
   }
   
 

@@ -70,12 +70,31 @@ themes <- function(legend.size = 2,
   theme_clust_labels$axis.title.x <- ggplot2::element_blank()
   theme_clust_labels$axis.title.y <- ggplot2::element_blank()
 
+  
+  
+  
+  theme_multilabel_labels <- ggplot2::theme_bw()
+  theme_multilabel_labels$line <- ggplot2::element_blank()
+  theme_multilabel_labels$rect <- ggplot2::element_blank()
+  theme_multilabel_labels$strip.text <- ggplot2::element_blank()
+  theme_multilabel_labels$axis.text <- ggplot2::element_blank()
+  theme_multilabel_labels$plot.title <- ggplot2::element_blank()
+  theme_multilabel_labels$axis.title <- ggplot2::element_blank()
+  theme_multilabel_labels$plot.margin <- structure(c(0, 0, 0, 0),
+                                              unit = "lines",
+                                              valid.unit = 3L,
+                                              class = "unit")
+  theme_multilabel_labels$axis.ticks <- ggplot2::element_blank()
+  theme_multilabel_labels$axis.title.x <- ggplot2::element_blank()
+  theme_multilabel_labels$axis.title.y <- ggplot2::element_blank()
+  
 
 
   return(list(theme_top = theme_top,
               theme_right = theme_right,
               theme_bottom = theme_bottom,
               theme_left = theme_left,
+              theme_multilabel_labels = theme_multilabel_labels,
               theme_clust_labels = theme_clust_labels,
               theme_heatmap = theme_heatmap))
 }
