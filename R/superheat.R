@@ -85,14 +85,16 @@
 #'          left label variables to be placed above the legend.
 #' @param bottom.label.name a character vector specifying the name of the bottom
 #'          bottom label variables to be placed above the legend.
-#' @param left.label.type a character specifying the type of the label provided to
+#' @param left.label.type if no left label is provided, this argument corresponds
+#'          specifies the type of the label provided to
 #'          the left of the heatmap. If clustering was performed on the rows,
 #'          then the default type is "cluster" (which provides the cluster
 #'          names). Otherwise, the default is "variable" (which provides the
 #'          variable names). The final option, "none", removes the left labels
 #'          all together.
-#' @param bottom.label.type a character specifying the type of the label provided
-#'          to the left of the heatmap. If clustering was performed on the
+#' @param bottom.label.type if no left label is provided, this argument corresponds
+#'          specifies the type of the label provided to the left of the heatmap. 
+#'          If clustering was performed on the
 #'          columns, then the default type is "cluster" (which provides the
 #'          cluster names). Otherwise, the default is "variable" (which
 #'          provides the variable names). The final option, "none", removes the
@@ -315,7 +317,6 @@ superheat <- function(X,
                       bottom.label = NULL,
                       left.label.name = NULL,
                       bottom.label.name = NULL,
-                      label.legend.pos = "right",
                       left.label.type = NULL,
                       bottom.label.type = NULL,
 
@@ -974,8 +975,10 @@ superheat <- function(X,
     label.col <- bottom.label.col
     
     # default label size
-    if (is.null(bottom.label.size)) {
+    if (is.null(bottom.label.size) & inherits(bottom.label, "list")) {
       bottom.label.size <- 0.1 * length(bottom.label)
+    } else {
+      bottom.label.size <- 0.1
     }
     
     

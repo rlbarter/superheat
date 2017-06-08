@@ -440,7 +440,13 @@ generate_multi_label <- function(left.label,
       # identify how many unique colors we need
       n.colors <- sapply(bottom.label, function(x) length(unique(x)))
       # get the R color brewer palette
-      label.col <- RColorBrewer::brewer.pal(sum(n.colors), "Set2")
+      suppressWarnings(
+        label.col <- RColorBrewer::brewer.pal(sum(n.colors), "Set2")
+      )
+      # if there are only two colors, take the first two
+      if (sum(n.colors) < 3) {
+        label.col <- label.col[1:sum(n.colors)]
+      }
       # convert into a list of colors
       label.col <- split(label.col, 
                          unlist(sapply(1:length(bottom.label), 
@@ -502,12 +508,12 @@ generate_multilabel_legend <- function(label, label.col, label.name) {
     tmp <- data.frame(x = 1:length(unique(label.col[[i]])),
                       col = label.col[[i]])
     g <- ggplot2::ggplot(tmp) + 
-      ggplot2::geom_rect(aes(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, 
+      ggplot2::geom_rect(ggplot2::aes(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, 
                              fill = col)) +
-      scale_fill_manual(name = label.name[[i]],
+      ggplot2::scale_fill_manual(name = label.name[[i]],
                         values = as.character(unlist(label.col[[i]])), 
                         labels = as.character(unique(unlist(label[[i]])))) +
-      theme(legend.justification = "top")
+      ggplot2::theme(legend.justification = "top")
     # extract the legend from the dummy plots
     g
   })

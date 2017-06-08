@@ -86,3 +86,120 @@ test_that("no warning when clustering and coloring bottom label text", {
             bottom.label.text.col = c("red", "blue"))
 })
 
+
+
+
+test_that("colored row labels and legend", {
+  superheat(X, 
+            left.label = c(rep("a", 6), rep("b", 2)))
+})
+
+test_that("colored row labels and legend", {
+  superheat(X, 
+            left.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3))))
+})
+
+test_that("colored row labels and legend with heatmap legend on right", {
+  superheat(X, 
+            left.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3))),
+            legend.position = "right")
+})
+
+
+test_that("colored row labels and legend with right plot", {
+  superheat(X, 
+            left.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3))),
+            legend.position = "right",
+            yr = 1:8)
+})
+
+
+test_that("colored row labels and legend with top plot", {
+  superheat(X, 
+            left.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3)),
+                              c(rep("e", 1), rep("f", 2), rep("g", 5))),
+            legend.position = "right",
+            yt = 1:3)
+})
+
+
+
+test_that("colored row labels and legend with top and right plot", {
+  superheat(X, 
+            left.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3)),
+                              c(rep("e", 1), rep("f", 2), rep("g", 5))),
+            legend.position = "right",
+            yt = 1:3,
+            yr = 1:8)
+})
+
+
+
+
+
+
+
+
+test_that("colored col labels and legend", {
+  superheat(t(X), 
+            bottom.label = c(rep("a", 6), rep("b", 2)))
+})
+
+test_that("colored col labels and legend", {
+  superheat(t(X), 
+            bottom.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3))))
+})
+
+test_that("colored column labels and legend with heatmap legend on right", {
+  superheat(t(X), 
+            bottom.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3))),
+            legend.position = "right")
+})
+
+
+test_that("colored column labels and legend with right plot", {
+  superheat(t(X), 
+            bottom.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3))),
+            legend.position = "right",
+            yr = 1:3)
+})
+
+
+test_that("colored col labels and legend with top plot", {
+  superheat(t(X), 
+            bottom.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3)),
+                              c(rep("e", 1), rep("f", 2), rep("g", 5))),
+            legend.position = "right",
+            yt = 1:8)
+})
+
+
+
+test_that("colored col labels and legend with top and right plot", {
+  superheat(t(X), 
+            bottom.label = list(c(rep("a", 6), rep("b", 2)),
+                              c(rep("c", 5), rep("d", 3)),
+                              c(rep("e", 1), rep("f", 2), rep("g", 5))),
+            legend.position = "right",
+            yr = 1:3,
+            yt = 1:8)
+})
+
+
+
+test_that("colored col and row labels", {
+  superheat(X, 
+            bottom.label = list(c(rep("a", 6), rep("b", 2)),
+                                c(rep("c", 5), rep("d", 3)),
+                                c(rep("e", 1), rep("f", 2), rep("g", 5))),
+            left.label = list(c("a", "b", "c"), c("a", "bb", "bb")))
+})

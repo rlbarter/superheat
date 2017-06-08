@@ -278,7 +278,7 @@ generate_grobs <- function(layout,
       l <- l - length(gg.left.legend)
     }
     if (!is.null(gg.bottom.legend)) {
-      l <- l - lengthgg.bottom.legend
+      l <- l - length(gg.bottom.legend)
     }
     
     
@@ -316,6 +316,9 @@ generate_grobs <- function(layout,
     }
     # if there is either label legend, move left for padding
     if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
+      l <- l - 1
+    }
+    if (legend.position == "right") {
       l <- l - 1
     }
     
@@ -366,6 +369,15 @@ generate_grobs <- function(layout,
     }
     # if there is either label legend, move left for padding
     if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
+      l <- l - 1
+    }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - length(gg.bottom.legend)
+    }
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
+    }
+    if (legend.position == "right") {
       l <- l - 1
     }
     # place the top plot in the specified position
@@ -503,6 +515,7 @@ generate_grobs <- function(layout,
     # overflow from plot axis
     if (!is.null(gg.right) & yr.axis & (length(gg.bottom.legend) > 1)) {
       b <- t + (length(gg.bottom.legend) - 1)
+      
     }
 
     # place the grob in the appropriate position
