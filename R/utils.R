@@ -221,6 +221,8 @@ stopErrors <- function(X,
                        yt.lim = NULL,
                        yr.lim = NULL,
                         
+                       left.label = NULL,
+                       bottom.label = NULL,
                         bottom.label.type = NULL,
                         left.label.type = NULL,
                         bottom.label.text.size = 5,
@@ -330,7 +332,37 @@ stopErrors <- function(X,
     stop("Cannot set 'col.dendrogram = TRUE' if 'pretty.order.cols = FALSE'")
   }
   
-
+  
+  # ensure that (if vector) left.label has length equal to nrow(X)
+  # or that (if list) all entries have length equal to nrow(X)
+  if (!is.null(left.label) & inherits(left.label, "vector") & 
+      length(left.label) != nrow(X)) {
+    stop("`left.label` must be of length equal to nrow(X)")
+  } else if (!is.null(left.label) & inherits(left.label, "list")) {
+    if (length(unique(sapply(left.label, length))) != 1) {
+      stop("Each entry of `left.label` must be of length equal to nrow(X)")
+    } else if (unique(sapply(left.label, length)) != nrow(X)) {
+      stop("Each entry of `left.label` must be of length equal to nrow(X)")
+    }
+  }
+  
+  # ensure that (if vector) bottom.label has length equal to ncol(X)
+  # or that (if list) all entries have length equal to ncol(X)
+  if (!is.null(bottom.label) & inherits(bottom.label, "vector") & 
+      length(bottom.label) != ncol(X)) {
+    stop("`bottom.label` must be of length equal to ncol(X)")
+  } else if (!is.null(bottom.label) & inherits(bottom.label, "list")) {
+    if (length(unique(sapply(bottom.label, length))) != 1) {
+      stop("Each entry of `bottom.label` must be of length equal to ncol(X)")
+    } else if (unique(sapply(bottom.label, length)) != ncol(X)) {
+      stop("Each entry of `bottom.label` must be of length equal to ncol(X)")
+    }
+  }
+      
+      
+      
+      
+      
   if (!is.null(left.label.type)) {
     possible.methods <- c("variable", "cluster", "none")
     i.meth <- pmatch(left.label.type, possible.methods)
