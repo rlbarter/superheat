@@ -1,12 +1,18 @@
 
 themes <- function(legend.size = 2,
                    axis.size = 10,
-                   axis.name.size = 10) {
+                   axis.name.size = 10,
+                   legend.position = c("bottom", "right")) {
+  
+  legend.position = match.arg(legend.position)
+  
 
   ### themes
   # heatmap
   theme_heatmap <- ggplot2::theme()
-  theme_heatmap$legend.direction <- "horizontal"
+  if (legend.position == "bottom") {
+    theme_heatmap$legend.direction <- "horizontal"
+  } 
   theme_heatmap$legend.key.width <- grid::unit(legend.size, "line")
   theme_heatmap$axis.ticks = ggplot2::element_blank()
   theme_heatmap$axis.text.x = ggplot2::element_blank()

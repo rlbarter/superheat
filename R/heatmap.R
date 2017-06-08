@@ -15,6 +15,8 @@ generate_heat <- function(X,
                           heat.na.col = "grey50",
                           heat.lim = NULL,
                           extreme.values.na = TRUE,
+                          legend.position,
+                          legend.title = NULL,
                           legend.height = 0.1,
                           legend.width = 1.5,
                           legend.text.size = 12,
@@ -27,6 +29,8 @@ generate_heat <- function(X,
                           grid.vline.size = 0.5,
                           grid.hline.col = "black",
                           grid.vline.col = "black") {
+  
+  
 
   # obtain arguments
   heat.col.scheme <- match.arg(heat.col.scheme)
@@ -128,7 +132,7 @@ generate_heat <- function(X,
                                       fill = value)) +
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
                                   colours = heat.pal,
-                                  name = "",
+                                  name = legend.title,
                                   breaks = breaks,
                                   na.value = heat.na.col,
                                   limits = heat.lim) +
@@ -138,7 +142,7 @@ generate_heat <- function(X,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
     theme_heatmap
-
+plot(gg.legend)
   # add grid lines if desired
   if (grid.vline) {
     for (i in 1:length(clines)) {
@@ -202,6 +206,8 @@ generate_smooth_heat <- function(X,
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
                                  heat.na.col = "grey50",
+                                 legend.position,
+                                 legend.title = NULL,
                                  legend.width = 1.5,
                                  legend.height = 0.1,
                                  legend.text.size = 12,
@@ -373,7 +379,7 @@ generate_smooth_heat <- function(X,
                                       fill = value)) +
     ggplot2::scale_fill_gradientn(values = heat.pal.values,
                                   colours = heat.pal,
-                                  name = "",
+                                  name = legend.title,
                                   breaks = breaks,
                                   na.value = heat.na.col,
                                   limits = heat.lim) +

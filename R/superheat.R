@@ -497,6 +497,13 @@ superheat <- function(X,
   cluster.stop.arg.list <- cluster.stop.arg.list[!is.na(names(cluster.stop.arg.list))]
   do.call(clusterStopErrors, cluster.stop.arg.list)
   
+  # redefine the default legend height and width if the position of the 
+  # legend is to the right of the heatmap
+  if (legend.position == "right") {
+    legend.height <- 1.5
+    legend.width <- 0.2
+  }
+  
   # set the type of label for each additional plot
   label.type <- setLabelType(X,
                              left.label.type, 

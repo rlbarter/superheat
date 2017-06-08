@@ -22,7 +22,9 @@ generate_layout <- function(gg.heat,
                             title.size = 5,
                             bottom.label.size = 0.1,
                             left.label.size = 0.1,
-                            legend.height = 0.2,
+                            legend.position,
+                            legend.height,
+                            legend.width,
                             legend.vspace) {
 
   # Generate the gtable object whose cells correspond to the heatmap
@@ -145,7 +147,7 @@ generate_layout <- function(gg.heat,
   }
 
   # location for legend
-  if (!is.null(gg.legend)) {
+  if (!is.null(gg.legend) & legend.position == "bottom") {
     # Add legend padding if requested
     if (!is.null(legend.vspace)) {
       
@@ -159,10 +161,10 @@ generate_layout <- function(gg.heat,
       
       layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
     }
-    
-    
-    
-    
+  
+  } else if (!is.null(gg.legend) & legend.position == "right") {
+    # if the legend is positioned vertically to the right, then add a column instead
+    layout <- gtable::gtable_add_cols(layout, grid::unit(legend.width, "null"))
   }
 
   # add title
@@ -215,7 +217,8 @@ generate_grobs <- function(layout,
                            yr.axis.name = T,
                            padding = 1,
                            bottom.label.size = 0.1,
-                           left.label.size = 0.1) {
+                           left.label.size = 0.1,
+                           legend.position) {
 
   # if there is a row dendrogram, make sure that gg.right is not null
   if (row.dendrogram) {
@@ -234,7 +237,7 @@ generate_grobs <- function(layout,
   #   - top plot axis
   #   - left labels
   #   - row title
-  if (!is.null(gg.legend)) {
+  if (!is.null(gg.legend) & legend.position == "bottom") {
     # begin by placing the legend in the bottom row and in the right-most column
     t <- nrow(layout)
     l <- ncol(layout)
@@ -255,6 +258,22 @@ generate_grobs <- function(layout,
     }
     
     # place the legend in its final position
+    layout <- gtable::gtable_add_grob(layout,
+                                      gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
+                                                            pattern = "guide-box",
+                                                            trim = TRUE, fixed = TRUE),
+                                      t = t, l = l)
+  } else if (!is.null(gg.legend) & legend.position == "right") {
+    # if the legend is placed at the right add it in the right-most column
+  
+    l <- ncol(layout)
+    t <- 1
+    if (!is.null(gg.top)) {
+      t <- t + 1 
+    }
+    if (!is.null(gg.title)) {
+      t <- t + 1
+    }
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
                                                             pattern = "guide-box",
@@ -609,6 +628,7 @@ generate_grobs <- function(layout,
     }
     
     
+    
     # plot each legend 
     for (i in 1:length(gg.left.legend)) {
       
@@ -647,7 +667,7 @@ generate_grobs <- function(layout,
   # add padding:
   layout <- gtable::gtable_add_padding(layout, grid::unit(padding, "cm"))
   # gtable::gtable_show_layout(layout)
-return(layout)
+  return(layout)
 
 
 }
