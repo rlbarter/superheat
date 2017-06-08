@@ -156,8 +156,11 @@ generate_layout <- function(gg.heat,
     # the only time we do not need to add a row for it is when there are no
     # bottom labels and there is a right plot and axis
     if (!(is.null(gg.bottom) && !is.null(gg.right) && yr.axis)) {
+      
       layout <- gtable::gtable_add_rows(layout, grid::unit(legend.height, "null"))
     }
+    
+    
     
     
   }
@@ -455,7 +458,7 @@ generate_grobs <- function(layout,
       b <- t + 2
     }
     
-    # make way for all fo the label legends
+    # make way for all of the label legends
     if (!is.null(gg.left.legend)) {
       l <- l - length(gg.left.legend)
     }
@@ -608,6 +611,7 @@ generate_grobs <- function(layout,
     
     # plot each legend 
     for (i in 1:length(gg.left.legend)) {
+      
       layout <- gtable::gtable_add_grob(layout,
                                         gtable::gtable_filter(ggplot2::ggplotGrob(gg.left.legend[[i]]),
                                                               pattern = "guide-box",
@@ -634,7 +638,7 @@ generate_grobs <- function(layout,
                                         gtable::gtable_filter(ggplot2::ggplotGrob(gg.bottom.legend[[i]]),
                                                               pattern = "guide-box",
                                                               trim = TRUE, fixed = TRUE),
-                                        t = t, l = l + 1, b = b)
+                                        t = t, l = l + i, b = b)
       
     }
     

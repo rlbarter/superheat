@@ -174,6 +174,8 @@ stopErrors <- function(X,
                                          "scatterline", "line"),
                         
                         legend = TRUE,
+                        legend.vspace = NULL,
+                        legend.position = c("bottom", "right"),
                         legend.height = 0.1,
                         legend.width = 1.5,
                         legend.text.size = 12,
@@ -492,6 +494,11 @@ stopErrors <- function(X,
     stop("`yt.lim` must start at 0 when `yt.plot.type` = 'bar'")
   }
 
+  if (!is.null(legend.vspace) & legend.position != "bottom") {
+    stop("Can only supply `legend.vspace` when `legend.position = 'bottom'`")
+  }
+  
+  
 
 }
 

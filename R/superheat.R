@@ -81,6 +81,10 @@
 #' @param bottom.label a list of bottom label character vectors. This argument
 #'          overrides the default bottom label names (rownames of matrix or 
 #'          cluster names).
+#' @param left.label.name a character vector specifying the name of the left
+#'          left label variables to be placed above the legend.
+#' @param bottom.label.name a character vector specifying the name of the bottom
+#'          bottom label variables to be placed above the legend.
 #' @param left.label.type a character specifying the type of the label provided to
 #'          the left of the heatmap. If clustering was performed on the rows,
 #'          then the default type is "cluster" (which provides the cluster
@@ -122,6 +126,9 @@
 #'          (whose dimension matches that of \code{X.text}) that specifies the
 #'          colours of each text entry in \code{X.text}.
 #' @param legend logical. If set to \code{FALSE}, then no legend is provided.
+#' @param legend.title a character specifying a title for the heatmap legend
+#' @param legend.position a character ("bottom" or "right") specifying the 
+#'          location of the heatmap legend.
 #' @param grid.hline a logical specifying whether horizontal grid lines are
 #'          plotted in the heatmap.
 #' @param grid.vline a logical specifying whether vertical grid lines are
@@ -239,7 +246,7 @@
 #' @param row.title.size a number specifying the size of the row name. The
 #'          default is 5.
 #' @param legend.vspace a number specifying amount of additional space between 
-#'          heatmap and legend.
+#'          heatmap and legend if placed at the bottom (default).
 #' @param legend.height a number specifying the height of the legend. The default
 #'        is 0.1.
 #' @param legend.width a number specifying the width of the legend. The default
@@ -306,6 +313,8 @@ superheat <- function(X,
 
                       left.label = NULL,
                       bottom.label = NULL,
+                      left.label.name = NULL,
+                      bottom.label.name = NULL,
                       label.legend.pos = "right",
                       left.label.type = NULL,
                       bottom.label.type = NULL,
@@ -330,6 +339,8 @@ superheat <- function(X,
                                        "scatterline", "line"),
 
                       legend = TRUE,
+                      legend.title = NULL,
+                      legend.position = c("bottom", "right"),
                       legend.height = 0.1,
                       legend.width = 1.5,
                       legend.text.size = 12,
@@ -429,6 +440,7 @@ superheat <- function(X,
   heat.col.scheme <- match.arg(heat.col.scheme)
   dist.method <- match.arg(dist.method)
   linkage.method <- match.arg(linkage.method)
+  legend.position <- match.arg(legend.position)
 
   # clean the matrix X
   X <- clean_matrix(X, scale)
@@ -498,6 +510,25 @@ superheat <- function(X,
   bottom.label.type <- label.type$bottom.label.type
   left.label.type <- label.type$left.label.type
 
+  # if there is no left.label.name, define it to be the imput for left.label
+  if (is.null(left.label.name) & !is.null(left.label) & 
+      inherits(left.label, "vector")) {
+    left.label.name <- eval(substitute(internala(left.label)))
+  } else if (is.null(left.label.name) & !is.null(left.label) & 
+             inherits(left.label, "list") & length(left.label) > 1) {
+    # if a list of labels, then obtain the list entry names
+    left.label.name <- names(left.label)
+  }
+  # if there is no bottom.label.name, define it to be the imput for bottom.label
+  if (is.null(bottom.label.name) & !is.null(bottom.label) &
+      inherits(bottom.label, "vector")) {
+    bottom.label.name <- eval(substitute(internala(bottom.label)))
+  } else if (is.null(bottom.label.name) & !is.null(bottom.label) & 
+               inherits(bottom.label, "list") & length(bottom.label) > 1) {
+    # if a list of labels, then obtain the list entry names
+    bottom.label.name <- names(bottom.label)
+  }
+  
   # remove the heatmap grid lines if there are more than 50 cols/rows
   # do this only when there are variable labels or no labels
   # (but we want there to be grid lines when there are more than 50

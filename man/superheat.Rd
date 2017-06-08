@@ -13,17 +13,18 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   "minkowski"), linkage.method = c("complete", "ward.D", "ward.D2", "single",
   "average", "mcquitty", "median", "centroid"), order.cols = NULL,
   order.rows = NULL, smooth.heat = FALSE, scale = FALSE,
-  left.label = NULL, bottom.label = NULL, heat.col.scheme = c("viridis",
-  "red", "purple", "blue", "grey", "green"), heat.pal = NULL,
-  heat.pal.values = NULL, heat.na.col = "grey50", heat.lim = NULL,
-  extreme.values.na = TRUE, X.text.size = 5, X.text.col = "black",
-  X.text.angle = 0, yt.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"),
+  left.label = NULL, bottom.label = NULL, label.legend.pos = "right",
+  left.label.type = NULL, bottom.label.type = NULL,
+  heat.col.scheme = c("viridis", "red", "purple", "blue", "grey", "green"),
+  heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
+  heat.lim = NULL, extreme.values.na = TRUE, X.text.size = 5,
+  X.text.col = "black", X.text.angle = 0, yt.plot.type = c("scatter",
+  "bar", "boxplot", "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
   "scatterline", "line"), legend = TRUE, legend.height = 0.1,
   legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
-  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
-  grid.vline.size = 0.5, grid.hline.col = "black",
+  legend.vspace = NULL, grid.hline = TRUE, grid.vline = TRUE,
+  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
   grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
@@ -124,14 +125,22 @@ of the heatmap within clusters (by taking the median value).}
 \item{scale}{a logical specifying whether or not to center and scale the
 columns of X.}
 
-\item{left.label}{a character specifying the type of the label provided to
+\item{left.label}{a list of left label character vectors. This argument
+overrides the default left label names (rownames of matrix or 
+cluster names).}
+
+\item{bottom.label}{a list of bottom label character vectors. This argument
+overrides the default bottom label names (rownames of matrix or 
+cluster names).}
+
+\item{left.label.type}{a character specifying the type of the label provided to
 the left of the heatmap. If clustering was performed on the rows,
 then the default type is "cluster" (which provides the cluster
 names). Otherwise, the default is "variable" (which provides the
 variable names). The final option, "none", removes the left labels
 all together.}
 
-\item{bottom.label}{a character specifying the type of the label provided
+\item{bottom.label.type}{a character specifying the type of the label provided
 to the left of the heatmap. If clustering was performed on the
 columns, then the default type is "cluster" (which provides the
 cluster names). Otherwise, the default is "variable" (which
@@ -195,6 +204,9 @@ is 1.5.}
 legend axis. The default is 12.}
 
 \item{legend.breaks}{a vector specifying the legend breaks.}
+
+\item{legend.vspace}{a number specifying amount of additional space between 
+heatmap and legend.}
 
 \item{grid.hline}{a logical specifying whether horizontal grid lines are
 plotted in the heatmap.}

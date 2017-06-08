@@ -331,6 +331,8 @@ generate_var_label <- function(names,
 
 generate_multi_label <- function(left.label,
                                  bottom.label,
+                                 left.label.name,
+                                 bottom.label.name,
                                location = c("bottom", "left"),
                                label.col = NULL) {
   location <- match.arg(location)
@@ -344,6 +346,7 @@ generate_multi_label <- function(left.label,
   # define the theme for the labels
   theme <- do.call(themes, themes.arg.list)
   theme_clust_labels <- theme$theme_clust_labels
+  theme_multilabel_labels <- theme$theme_multilabel_labels
 
   if (location == "left") {
     
@@ -358,7 +361,13 @@ generate_multi_label <- function(left.label,
       # identify how many unique colors we need
       n.colors <- sapply(left.label, function(x) length(unique(x)))
       # get the R color brewer palette
-      label.col <- RColorBrewer::brewer.pal(sum(n.colors), "Set2")
+      suppressWarnings(
+        label.col <- RColorBrewer::brewer.pal(sum(n.colors), "Set2")
+      )
+      # if there are only two colors, take the first two
+      if (sum(n.colors) < 3) {
+        label.col <- label.col[1:sum(n.colors)]
+      }
       # convert into a list of colors
       label.col <- split(label.col, 
                          unlist(sapply(1:length(left.label), 
@@ -370,25 +379,28 @@ generate_multi_label <- function(left.label,
     
     # identify break positions for each label
     variables.df <- lapply(1:length(left.label), function(j) {
-      
+      # define a color for each label
       colors <- factor(left.label[[j]])
-      
       levels(colors) <- label.col[[j]]
+      # put variables, colors and the label number in a data frame
       df <- data.frame(variable = left.label[[j]],
                  col = colors,
                  n = 1,
                  label = j)
+      # add an ID column
       df$id <- 1:nrow(df)
+      # define the size of the bar based on the number of obs
       df <- df %>%
         dplyr::mutate(increment = (n / sum(df$n)) * 1)
+      # define the position of the breaks
       breaks <- c(1, 1 + cumsum(df$increment))
       df$breaks <- breaks[ -(nrow(df) + 1) ]
       return(df)
     })
-                           
+                       
     # convert to ggplot-friendly long-form
     left.label.melt <- do.call(rbind, variables.df)
-    
+    # plot the left labels
     gg.left <- ggplot2::ggplot(left.label.melt,
                     ggplot2::aes(xmin = label,
                                  xmax = label + 1,
@@ -397,12 +409,17 @@ generate_multi_label <- function(left.label,
                                  fill = col)) +
       ggplot2::geom_rect() +
       theme_multilabel_labels +
-      ggplot2::scale_fill_manual(values = as.character(unlist(label.col))) +
+      ggplot2::scale_fill_manual(name = left.label.name,
+                                 values = as.character(unlist(label.col)), 
+                                 labels = as.character(unique(unlist(left.label)))) +
       ggplot2::scale_y_continuous(expand = c(0, 0)) +
-      ggplot2::scale_x_continuous(expand = c(0, 0))
+      ggplot2::scale_x_continuous(expand = c(0, 0)) 
+      
     
     
-    gg.left.legend <- generate_multilabel_legend(label.col)
+    gg.left.legend <- generate_multilabel_legend(left.label, 
+                                                 label.col, 
+                                                 left.label.name)
     
     return(list(gg.left = gg.left,
                 gg.left.legend = gg.left.legend))
@@ -464,7 +481,9 @@ generate_multi_label <- function(left.label,
       ggplot2::scale_y_continuous(expand = c(0, 0)) +
       ggplot2::scale_x_continuous(expand = c(0, 0))
     
-    gg.bottom.legend <- generate_multilabel_legend(label.col)
+    gg.bottom.legend <- generate_multilabel_legend(bottom.label, 
+                                                   label.col, 
+                                                   bottom.label.name)
     
     return(list(gg.bottom = gg.bottom,
                 gg.bottom.legend = gg.bottom.legend))
@@ -475,15 +494,19 @@ generate_multi_label <- function(left.label,
   
   
 
-generate_multilabel_legend <- function(label.col) {
+generate_multilabel_legend <- function(label, label.col, label.name) {
   # make a dummy plot using the colors specified for the labels
-  legend.list <- lapply(label.col, function(col) {
-    tmp <- data.frame(x = 1:length(unique(col)),
-                      col = col)
+  # loop through the list of labels
+  legend.list <- lapply(1:length(label.col), function(i) {
+    
+    tmp <- data.frame(x = 1:length(unique(label.col[[i]])),
+                      col = label.col[[i]])
     g <- ggplot2::ggplot(tmp) + 
       ggplot2::geom_rect(aes(xmin = x, xmax = x + 1, ymin = 0, ymax = 1, 
                              fill = col)) +
-      scale_fill_manual(values = col) +
+      scale_fill_manual(name = label.name[[i]],
+                        values = as.character(unlist(label.col[[i]])), 
+                        labels = as.character(unique(unlist(label[[i]])))) +
       theme(legend.justification = "top")
     # extract the legend from the dummy plots
     g
