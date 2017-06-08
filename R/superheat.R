@@ -501,7 +501,7 @@ superheat <- function(X,
   # legend is to the right of the heatmap
   if (legend.position == "right") {
     legend.height <- 1.5
-    legend.width <- 0.2
+    legend.width <- 0.1
   }
   
   # set the type of label for each additional plot

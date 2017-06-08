@@ -142,7 +142,7 @@ generate_heat <- function(X,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
     theme_heatmap
-plot(gg.legend)
+
   # add grid lines if desired
   if (grid.vline) {
     for (i in 1:length(clines)) {

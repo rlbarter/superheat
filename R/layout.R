@@ -273,7 +273,15 @@ generate_grobs <- function(layout,
     }
     if (!is.null(gg.title)) {
       t <- t + 1
+    } 
+    if (!is.null(gg.left.legend)) {
+      l <- l - length(gg.left.legend)
     }
+    if (!is.null(gg.bottom.legend)) {
+      l <- l - lengthgg.bottom.legend
+    }
+    
+    
     layout <- gtable::gtable_add_grob(layout,
                                       gtable::gtable_filter(ggplot2::ggplotGrob(gg.legend),
                                                             pattern = "guide-box",
@@ -483,6 +491,9 @@ generate_grobs <- function(layout,
     }
     if (!is.null(gg.bottom.legend)) {
       l <- l - length(gg.bottom.legend)
+    }
+    if (legend.position == "right") {
+      l <- l - 1
     }
     # if there is either label legend, move left for padding
     if (!is.null(gg.bottom.legend) | !is.null(gg.left.legend)){
