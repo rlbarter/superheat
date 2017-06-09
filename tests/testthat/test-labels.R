@@ -197,7 +197,7 @@ test_that("colored col labels and legend with top and right plot", {
 
 
 test_that("colored col and row labels", {
-  superheat(X, 
+  superheat(t(X), 
             bottom.label = list(c(rep("a", 6), rep("b", 2)),
                                 c(rep("c", 5), rep("d", 3)),
                                 c(rep("e", 1), rep("f", 2), rep("g", 5))),

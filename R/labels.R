@@ -356,6 +356,7 @@ generate_multi_label <- function(left.label,
     }
     # convert left label list to a data frame
     left.label <- as.data.frame(left.label)
+    
     # if there are no colors provided define the defaulr
     if (is.null(label.col)) {
       # identify how many unique colors we need
@@ -374,7 +375,9 @@ generate_multi_label <- function(left.label,
                                        function(i) {
                                          rep(names(left.label[i]), each = n.colors[i])
                                        })
-                                ))}
+                         ))
+    }
+    
 
     
     # identify break positions for each label
@@ -453,7 +456,8 @@ generate_multi_label <- function(left.label,
                                        function(i) {
                                          rep(names(bottom.label[i]), each = n.colors[i])
                                        })
-                         ))}
+                         ))
+      }
     
     
     # identify break positions for each label

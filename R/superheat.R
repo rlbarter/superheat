@@ -711,12 +711,15 @@ superheat <- function(X,
     yr.bar.col <- yr.bar.col[order.df.rows$order.rows]
   }
   # rearrange label colors if needed
-  if (!is.null(left.label.col)) {
-    left.label.col <- left.label.col[order.df.rows$order.rows]
+  # if a 
+  if (!is.null(left.label.col) & is.null(left.label)) {
+      left.label.col <- left.label.col[order.df.rows$order.rows]
   }
-  if (!is.null(bottom.label.col)) {
-    bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+  if (!is.null(bottom.label.col) & is.null(bottom.label)) {
+    bottom.label.col <- bottom.label.col[order.df.rows$order.rows]
   }
+  
+  
   # rearrange label text colors if needed
   if (!is.null(left.label.text.col)) {
     left.label.text.col <- left.label.text.col[order.df.rows$order.rows]
