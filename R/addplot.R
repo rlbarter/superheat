@@ -134,7 +134,7 @@ generate_add_on_plot <- function(X,
   gg.add <- gg.add +
     ggplot2::scale_y_continuous(breaks = pretty.breaks,
                                 name = paste(axis.name),
-                                expand = c(0.05, 0.05),
+                                #expand = c(0.05, 0.05),
                                 limits = y.lim)
 
   # Case 1: scatterplots when the observations are not coloured by y.obs.col
