@@ -104,12 +104,18 @@ generate_cluster_label <- function(membership,
     selected.clusters.df$cluster.names <- cluster.names
     }
 
+
+  
+  
   # define variables to fix visible binding check -- bit of a hack
   n <- selected.clusters.df$n
   cluster <- selected.clusters.df$cluster
   increment <- selected.clusters.df$increment
 
   if (location == "left") {
+    # add right padding on cluster names if the label is right-justified
+    selected.clusters.df$cluster.names.aligned <- paste0(cluster.names, " ")
+    
     label.col <- as.character(label.col)
     names(label.col) <- label.col
     gg.left <- ggplot2::ggplot(selected.clusters.df,
@@ -123,7 +129,7 @@ generate_cluster_label <- function(membership,
       ggplot2::scale_fill_manual(values = as.character(label.col)) +
       ggplot2::geom_text(ggplot2::aes(x = pos,
                                       y = breaks + increment / 2,
-                                      label = cluster.names),
+                                      label = cluster.names.aligned),
                          hjust = alignment,
                          vjust = "centre",
                          size = left.label.text.size,
@@ -272,6 +278,9 @@ generate_var_label <- function(names,
   increment <- variables.df$increment
 
   if (location == "left") {
+    # add right padding on variable if the label is right-justified
+    variables.df$variable.aligned <- paste0(variable, " ")
+    
     label.col <- as.character(label.col)
     names(label.col) <- label.col
     gg.left <- ggplot2::ggplot(variables.df,
@@ -285,7 +294,7 @@ generate_var_label <- function(names,
       ggplot2::scale_fill_manual(values = label.col) +
       ggplot2::geom_text(ggplot2::aes(x = pos,
                                       y = breaks + increment / 2,
-                                      label = variable),
+                                      label = variable.aligned),
                          hjust = alignment,
                          vjust = "centre",
                          size = left.label.text.size,
