@@ -362,45 +362,42 @@ stopErrors <- function(X,
       
   # if left.label is a list, left.label.col must also be a list 
   # the number of elements in each entry must equal the number 
-  # of unique groups in left.label
+  # of rows in X
   if (!is.null(left.label) & inherits(left.label, "vector")) {
-    if (!is.null(left.label.col) & length(left.label.col) != length(unique(left.label))) {
-      stop("`left.label.col` must be of length `unique(left.label)`.")
+    if (!is.null(left.label.col) & length(left.label.col) != nrow(X)) {
+      stop("`left.label.col` must be of length `nrow(X)`.")
     }
   } else if (!is.null(left.label) & inherits(left.label, "list")) {
     if (!is.null(left.label.col) & !inherits(left.label.col, "list")) {
       # if left.label.col is not a list:
-      stop(paste("`left.label.col` must be a list whose entries are equal in length to",
-                 "the unique entries of left.label"))
-    } else if (!is.null(left.label.col) & 
-               !identical(as.vector(sapply(left.label.col, length)), 
-                          as.vector(sapply(left.label, function(x) length(unique(x)))))) {
-      stop(paste("`left.label.col` must be a list whose entries are equal in length to",
-                 "the unique entries of left.label"))
+      stop(paste("`left.label.col` must be a list whose entries are of length `nrow(X)`"))
+    } else if (!is.null(left.label.col) & inherits(left.label.col, "list")) {
+      if(unique(sapply(left.label.col, length)) != nrow(X)) {
+        stop(paste("`left.label.col` must be a list whose entries are of length `nrow(X)`"))
+    }
     }
   }
-      
+   
+  
+  
   
   # if bottom.label is a list, bottom.label.col must also be a list 
   # the number of elements in each entry must equal the number 
-  # of unique groups in bottom.label
+  # of rows in X
   if (!is.null(bottom.label) & inherits(bottom.label, "vector")) {
-    if (!is.null(bottom.label.col) & length(bottom.label.col) != length(unique(bottom.label))) {
-      stop("`bottom.label.col` must be of length `unique(bottom.label)`.")
+    if (!is.null(bottom.label.col) & length(bottom.label.col) != ncol(X)) {
+      stop("`bottom.label.col` must be of length `ncol(X)`.")
     }
   } else if (!is.null(bottom.label) & inherits(bottom.label, "list")) {
     if (!is.null(bottom.label.col) & !inherits(bottom.label.col, "list")) {
       # if bottom.label.col is not a list:
-      stop(paste("`bottom.label.col` must be a list whose entries are equal in length to",
-                 "the unique entries of bottom.label"))
-    } else if (!is.null(bottom.label.col) & 
-               !identical(as.vector(sapply(bottom.label.col, length)), 
-                          as.vector(sapply(bottom.label, function(x) length(unique(x)))))) {
-      stop(paste("`bottom.label.col` must be a list whose entries are equal in length to",
-                 "the unique entries of bottom.label"))
+      stop(paste("`bottom.label.col` must be a list whose entries are of length `ncol(X)`"))
+    } else if (!is.null(bottom.label.col) & inherits(bottom.label.col, "list")) {
+      if(unique(sapply(bottom.label.col, length)) != ncol(X)) {
+        stop(paste("`left.label.col` must be a list whose entries are of length `ncol(X)`"))
+      }
     }
-  } 
-  
+  }   
   
   
   if (!is.null(left.label.type)) {

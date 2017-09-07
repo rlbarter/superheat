@@ -712,13 +712,19 @@ superheat <- function(X,
   }
   # rearrange label colors if needed
   # if a 
-  if (!is.null(left.label.col) & is.null(left.label)) {
+  if (!is.null(left.label.col) & !inherits(left.label, "list")) {
       left.label.col <- left.label.col[order.df.rows$order.rows]
-  }
-  if (!is.null(bottom.label.col) & is.null(bottom.label)) {
-    bottom.label.col <- bottom.label.col[order.df.rows$order.rows]
+  } else if (!is.null(left.label.col) & inherits(left.label, "list")) {
+      left.label.col <- lapply(left.label.col, 
+                               function(x) x[order.df.rows$order.rows])
   }
   
+  if (!is.null(bottom.label.col) & !inherits(bottom.label, "list")) {
+    bottom.label.col <- bottom.label.col[order.df.rows$order.rows]
+  } else if (!is.null(bottom.label.col) & inherits(bottom.label, "list")) {
+    bottom.label.col <- lapply(bottom.label.col, 
+                             function(x) x[order.df.rows$order.rows])
+  }
   
   # rearrange label text colors if needed
   if (!is.null(left.label.text.col)) {
