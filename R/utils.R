@@ -416,11 +416,11 @@ stopErrors <- function(X,
   }
 
 
-  if (!is.null(order.cols) && (!identical(sort(order.cols), 1:ncol(X)))) {
+  if (!is.null(order.cols) && (!identical(as.numeric(sort(order.cols)), as.numeric(1:ncol(X))))) {
     stop("'order.cols' must be a vector containing the column indexes of 'X'.")
   }
 
-  if (!is.null(order.rows) && (!identical(sort(order.rows), 1:nrow(X)))) {
+  if (!is.null(order.rows) && (!identical(as.numeric(sort(order.rows)), as.numeric(1:nrow(X))))) {
     stop("'order.rows' must be a vector containing the row indexes of 'X'.")
   }
 
