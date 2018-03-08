@@ -43,7 +43,8 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   left.label.text.alignment = NULL, bottom.label.text.alignment = NULL,
   force.left.label = F, force.bottom.label = F, column.title = NULL,
   row.title = NULL, column.title.size = 5, row.title.size = 5,
-  padding = 1, title = NULL, title.size = 5, print.plot = TRUE)
+  padding = 1, title = NULL, title.size = 5, title.alignment = NULL,
+  print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix whose values are to be plotted in the heatmap.}
@@ -375,6 +376,9 @@ The default is 1 cm.}
 \item{title}{a character string specifying a main heading.}
 
 \item{title.size}{the size of the title. The default is 5.}
+
+\item{title.alignment}{the alignment of the title. The default is "center".
+Options are "left", "right", "center".}
 
 \item{print.plot}{a logical specifying whether or not to output the plot.}
 }
