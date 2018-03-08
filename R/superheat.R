@@ -1,23 +1,23 @@
 
 #' Generate supervised heatmaps.
-#' 
+#'
 #' Superheat is used to generate and customize heatmaps.
 #'        Scatterplots, boxplots, barplots, line plots and boxplots can
 #'        be plotted adjacent to the columns and rows of the heatmap,
-#'        adding an additional layer of information. 
+#'        adding an additional layer of information.
 #'        For usage, see the vignette at
 #'        \url{https://rlbarter.github.io/superheat/}.
-#'        
+#'
 #' @param X a matrix whose values are to be plotted in the heatmap.
 #' @param X.text a matrix containing text entries to be plotted on
 #'          top of the heatmap cells. The number of rows/columns must match
 #'          either the number of rows/columns of \code{X} or the number of
 #'          row/column clusters of \code{X}.
-#' @param yt a data frame whose columns consist of values to plot above 
-#'          the heatmap (the "top plot"). The length of \code{yt} must be 
+#' @param yt a data frame whose columns consist of values to plot above
+#'          the heatmap (the "top plot"). The length of \code{yt} must be
 #'          equal to the number of columns of \code{X}.
-#' @param yr a data frame whose columns consist of values to plot to the 
-#'          right of the heatmap (the "right plot"). The length of \code{yr} 
+#' @param yr a data frame whose columns consist of values to plot to the
+#'          right of the heatmap (the "right plot"). The length of \code{yr}
 #'          must be equal to the number of rows of \code{X}.
 #' @param yt.plot.type a character specifying the \code{yt} plot type. The default is
 #'          "scatter", and other options include "bar", "scattersmooth",
@@ -30,15 +30,15 @@
 #' @param membership.cols a vector specifying the cluster membership
 #'          of the columns in X.
 #' @param pretty.order.cols a logical specifying whether the rows should be reordered
-#'          based on hierarchical clustering. Default is TRUE. 
+#'          based on hierarchical clustering. Default is TRUE.
 #' @param pretty.order.rows a logical specifying whether the cols should be reordered
 #'          based on hierarchical clustering. Default is TRUE.
 #' @param row.dendrogram a logical specifying whether a dendrogram should be
-#'          placed next to the rows. Can only be used when \code{yr} is not 
-#'          specified and clustering is not performed. 
+#'          placed next to the rows. Can only be used when \code{yr} is not
+#'          specified and clustering is not performed.
 #' @param col.dendrogram a logical specifying whether a dendrogram should be
-#'          placed next to the columns. Can only be used when \code{yt} is not 
-#'          specified and clustering is not performed. 
+#'          placed next to the columns. Can only be used when \code{yt} is not
+#'          specified and clustering is not performed.
 
 
 #' @param order.cols a vector of specifying the ordering of the
@@ -67,8 +67,8 @@
 #'          This must be one of "euclidean", "maximum", "manhattan",
 #'          "canberra", "binary" or "minkowski".
 #' @param linkage.method the linkage method to use for hierarchical clustering.
-#'          This must be one of "ward.D", "ward.D2", "single", "complete", 
-#'          "average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or 
+#'          This must be one of "ward.D", "ward.D2", "single", "complete",
+#'          "average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or
 #'          "centroid" (= UPGMC).
 #'
 #' @param smooth.heat a logical specifying whether or not to smooth the colour
@@ -101,10 +101,10 @@
 #'          \code{\link[ggplot2]{scale_colour_gradientn}} function. The default
 #'          values are the corresponding quantiles.
 #' @param heat.na.col the color for NA values in the heatmap.
-#' @param heat.lim a vector of length two consisting of the maximum and minimum 
+#' @param heat.lim a vector of length two consisting of the maximum and minimum
 #'          value for the heatmap palette.
 #' @param extreme.values.na a logical describing whether values outside the range
-#'          of heat.lim are presented as missing (TRUE, default) or as the 
+#'          of heat.lim are presented as missing (TRUE, default) or as the
 #'          max/min value of the range.
 #' @param X.text.size a single number or a matrix of numbers (whose dimension
 #'          matches that of \code{X.text}) that specifies the size of each text
@@ -244,9 +244,9 @@
 #' @param title a character string specifying a main heading.
 #' @param title.size the size of the title. The default is 5.
 #' @param print.plot a logical specifying whether or not to output the plot.
-#' 
-#' @references Barter and Yu (2017), Superheat: An R package for creating 
-#'        beautiful and extendable heatmaps for visualizing complex data, 
+#'
+#' @references Barter and Yu (2017), Superheat: An R package for creating
+#'        beautiful and extendable heatmaps for visualizing complex data,
 #'        \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
 #'
 #' @return \code{plot} a plot with the properties specified by the above arguments.
@@ -285,9 +285,9 @@ superheat <- function(X,
                       clustering.method = c("kmeans", "hierarchical"),
                       dist.method = c("euclidean", "maximum", "manhattan",
                                       "canberra", "binary", "minkowski"),
-                      linkage.method = c("complete", "ward.D", 
-                                         "ward.D2", "single", 
-                                          "average", "mcquitty", 
+                      linkage.method = c("complete", "ward.D",
+                                         "ward.D2", "single",
+                                          "average", "mcquitty",
                                           "median", "centroid"),
 
                       order.cols = NULL,
@@ -377,9 +377,8 @@ superheat <- function(X,
                       bottom.label.col = NULL,
                       left.label.text.col = NULL,
                       bottom.label.text.col = NULL,
-                      left.label.text.alignment = c("center", "left", "right"),
-                      bottom.label.text.alignment = c("center", "left",
-                                                      "right"),
+                      left.label.text.alignment = NULL,
+                      bottom.label.text.alignment = NULL,
                       force.left.label = F,
                       force.bottom.label = F,
 
@@ -395,21 +394,21 @@ superheat <- function(X,
                       print.plot = TRUE) {
   # The primary superheat function for plotting super heatmaps.
 
-  # drop exess factor levels 
+  # drop exess factor levels
   if (!is.null(membership.rows) && is.factor(membership.rows)) {
     membership.rows <- droplevels(membership.rows)
   }
   if (!is.null(membership.cols) && is.factor(membership.cols)) {
     membership.cols <- droplevels(membership.cols)
   }
-  
+
   if (row.dendrogram) {
     pretty.order.rows = TRUE
   }
   if (col.dendrogram) {
     pretty.order.cols = TRUE
   }
-  
+
   # match the arguments to those provided
   smoothing.method <- match.arg(smoothing.method)
   yt.plot.type <- match.arg(yt.plot.type)
@@ -420,7 +419,7 @@ superheat <- function(X,
 
   # clean the matrix X
   X <- clean_matrix(X, scale)
-  
+
   # run error check on arguments
   stop.arg.list <- c(as.list(environment()))
   stop.arg.list <- stop.arg.list[names(formals(stopErrors))]
@@ -466,18 +465,18 @@ superheat <- function(X,
       effective.row.clusters <- length(unique(membership.rows))
     }
   }
-  
+
   # run error check on clustering mechanism
   cluster.stop.arg.list <- c(as.list(environment()))
   cluster.stop.arg.list <- cluster.stop.arg.list[names(formals(clusterStopErrors))]
   cluster.stop.arg.list <- cluster.stop.arg.list[!is.na(names(cluster.stop.arg.list))]
   do.call(clusterStopErrors, cluster.stop.arg.list)
-  
+
   # set the type of label for each additional plot
   label.type <- setLabelType(X,
-                             left.label, 
-                             cluster.rows, 
-                             bottom.label, 
+                             left.label,
+                             cluster.rows,
+                             bottom.label,
                              cluster.cols,
                              force.left.label,
                              force.bottom.label,
@@ -503,7 +502,7 @@ superheat <- function(X,
       grid.hline <- FALSE
     }
   }
-  
+
   # remove alternating color in adjacent plots if no labels
   if (!is.null(yr) && # provided a right-plot
       (nrow(X) > 100) &&  # default no labels
@@ -520,8 +519,8 @@ superheat <- function(X,
       !cluster.cols) {  # did not cluster cols
     yt.obs.col <- rep("grey50", ncol(X))
   }
-  
-  
+
+
   # if cluster.rows is TRUE and no row membership is provided,
   # then perform clustering
   if (is.null(membership.rows) && cluster.rows) {
@@ -566,8 +565,8 @@ superheat <- function(X,
     hclust.rows <- hclust(dist(X, method = dist.method),
                           method = linkage.method)
   }
-  
-  
+
+
   # if there is a pretty.order.rows/cols, order rows/cols by hclust order
   if (pretty.order.rows && is.null(order.rows)) {
     order.rows <- hclust.rows$order
@@ -575,8 +574,8 @@ superheat <- function(X,
   if (pretty.order.cols && is.null(order.cols)) {
     order.cols <- hclust.cols$order
   }
-  
-  
+
+
 
   # if a specific row/col ordering is not provided,
   # define the ordering to be that given in the original matrix
@@ -587,7 +586,7 @@ superheat <- function(X,
     order.cols <- 1:ncol(X)
   }
 
- 
+
   # make a data frame order.df.rows/cols that contains the membership and order
   # of each row/columns.
   # if clustering was performed then re-order the rows by cluster
@@ -616,26 +615,26 @@ superheat <- function(X,
 
   # Reorder X matrices, yr and yt based on the new ordering
   X <- X[order.df.rows$order.rows, order.df.cols$order.cols]
-  
+
   if (!is.null(X.text) && is.matrix(X.text) &&
       (nrow(X.text) == nrow(X)) &&
       (ncol(X.text) == ncol(X))) {
-    X.text <- X.text[order.df.rows$order.rows, order.df.cols$order.cols]  
+    X.text <- X.text[order.df.rows$order.rows, order.df.cols$order.cols]
   }
   if (!is.null(X.text.col) && is.matrix(X.text.col) &&
       (nrow(X.text.col) == nrow(X)) &&
       (ncol(X.text.col) == ncol(X))) {
-    X.text.col <- X.text.col[order.df.rows$order.rows, order.df.cols$order.cols]  
+    X.text.col <- X.text.col[order.df.rows$order.rows, order.df.cols$order.cols]
   }
   if (!is.null(X.text.size) && is.matrix(X.text.size) &&
       (nrow(X.text.size) == nrow(X)) &&
       (ncol(X.text.size) == ncol(X))) {
-    X.text.size <- X.text.size[order.df.rows$order.rows, order.df.cols$order.cols]  
+    X.text.size <- X.text.size[order.df.rows$order.rows, order.df.cols$order.cols]
   }
   if (!is.null(X.text.angle) && is.matrix(X.text.angle)) {
-    X.text.angle <- X.text.angle[order.df.rows$order.rows, order.df.cols$order.cols]  
+    X.text.angle <- X.text.angle[order.df.rows$order.rows, order.df.cols$order.cols]
   }
-  
+
   if (!is.null(yr)) {
     # only rearrange within cluster if the right plot is for each
     # data point (rather than for each cluster)
@@ -673,7 +672,7 @@ superheat <- function(X,
   if (!is.null(bottom.label.text.col)) {
     bottom.label.text.col <- bottom.label.text.col[order.df.cols$order.cols]
   }
-  
+
   # the default if clustering was not performed
   if (!cluster.cols) {
     membership.cols <- 1:ncol(X)
@@ -784,17 +783,25 @@ superheat <- function(X,
     label.text.col <- bottom.label.text.col
     label.text.alignment <- bottom.label.text.alignment
     text.angle <- bottom.label.text.angle
-    
+
     # automate label size
     if (is.null(bottom.label.size)) {
-      # adjust for when the bottom text is 
+      # adjust for when the bottom text is
       if (!is.null(bottom.label.text.angle) && bottom.label.text.angle == 90) {
         bottom.label.size <- max(stringr::str_length(names)) * 0.02 + 0.05
+        # if rotating the bottom labels, also enforce right-alignment
+        if (is.null(bottom.label.text.alignment)) {
+          label.text.alignment <- "right"
+        }
       } else {
         bottom.label.size <- 0.1
+
+        if (is.null(bottom.label.text.alignment)) {
+          label.text.alignment <- "center"
+        }
       }
     }
-    
+
 
     # generate the bottom label
     # identify variables defined in the environment
@@ -813,16 +820,28 @@ superheat <- function(X,
     label.text.col <- bottom.label.text.col
     label.text.alignment <- bottom.label.text.alignment
     text.angle <- bottom.label.text.angle
-    
+
     # automate label size
     if (is.null(bottom.label.size) && !is.null(membership)) {
-      # adjust for when the bottom text is 
+      # adjust for when the bottom text is
       if (!is.null(bottom.label.text.angle) && bottom.label.text.angle == 90) {
         bottom.label.size <- max(stringr::str_length(membership)) * 0.02 + 0.05
+
+        # automate label justification when labels are rotated
+        if (is.null(bottom.label.text.alignment)) {
+          label.text.alignment <- "right"
+        }
+
       } else {
         bottom.label.size <- 0.1
+
+        if (is.null(bottom.label.text.alignment)) {
+          label.text.alignment <- "center"
+        }
       }
     }
+
+
 
     # generate the bottom label
     # identify variables defined in the environment
@@ -846,10 +865,15 @@ superheat <- function(X,
     label.text.col <- left.label.text.col
     label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
-    
+
     # automate label size
     if (is.null(left.label.size) && !is.null(names)) {
       left.label.size <- max(stringr::str_length(names)) * 0.02 + 0.05
+    }
+
+    # automate label justification
+    if (is.null(left.label.text.alignment)) {
+      label.text.alignment <- "right"
     }
 
     # generate the left label
@@ -869,13 +893,18 @@ superheat <- function(X,
     label.text.col <- left.label.text.col
     label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
-    
+
     # automate label size
     if (is.null(left.label.size) && !is.null(membership.rows)) {
       left.label.size <- max(stringr::str_length(membership.rows)) * 0.02 + 0.05
     }
-      
-  
+
+    # automate label justification
+    if (is.null(left.label.text.alignment)) {
+      label.text.alignment <- "right"
+    }
+
+
 
     # generate the left label
     # identify variables defined in the environment
@@ -904,7 +933,7 @@ superheat <- function(X,
                                   name.size = row.title.size,
                                   location = "left")
   }
-  
+
 
 
   # Generate desired layout

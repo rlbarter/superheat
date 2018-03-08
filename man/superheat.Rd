@@ -40,8 +40,7 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   left.label.text.angle = NULL, bottom.label.size = NULL,
   left.label.size = NULL, left.label.col = NULL, bottom.label.col = NULL,
   left.label.text.col = NULL, bottom.label.text.col = NULL,
-  left.label.text.alignment = c("center", "left", "right"),
-  bottom.label.text.alignment = c("center", "left", "right"),
+  left.label.text.alignment = NULL, bottom.label.text.alignment = NULL,
   force.left.label = F, force.bottom.label = F, column.title = NULL,
   row.title = NULL, column.title.size = 5, row.title.size = 5,
   padding = 1, title = NULL, title.size = 5, print.plot = TRUE)
@@ -54,12 +53,12 @@ top of the heatmap cells. The number of rows/columns must match
 either the number of rows/columns of \code{X} or the number of
 row/column clusters of \code{X}.}
 
-\item{yt}{a data frame whose columns consist of values to plot above 
-the heatmap (the "top plot"). The length of \code{yt} must be 
+\item{yt}{a data frame whose columns consist of values to plot above
+the heatmap (the "top plot"). The length of \code{yt} must be
 equal to the number of columns of \code{X}.}
 
-\item{yr}{a data frame whose columns consist of values to plot to the 
-right of the heatmap (the "right plot"). The length of \code{yr} 
+\item{yr}{a data frame whose columns consist of values to plot to the
+right of the heatmap (the "right plot"). The length of \code{yr}
 must be equal to the number of rows of \code{X}.}
 
 \item{membership.rows}{a vector specifying the cluster membership
@@ -75,11 +74,11 @@ based on hierarchical clustering. Default is TRUE.}
 based on hierarchical clustering. Default is TRUE.}
 
 \item{row.dendrogram}{a logical specifying whether a dendrogram should be
-placed next to the rows. Can only be used when \code{yr} is not 
+placed next to the rows. Can only be used when \code{yr} is not
 specified and clustering is not performed.}
 
 \item{col.dendrogram}{a logical specifying whether a dendrogram should be
-placed next to the columns. Can only be used when \code{yt} is not 
+placed next to the columns. Can only be used when \code{yt} is not
 specified and clustering is not performed.}
 
 \item{n.clusters.rows}{a number specifying the number of row clusters to
@@ -102,8 +101,8 @@ This must be one of "euclidean", "maximum", "manhattan",
 "canberra", "binary" or "minkowski".}
 
 \item{linkage.method}{the linkage method to use for hierarchical clustering.
-This must be one of "ward.D", "ward.D2", "single", "complete", 
-"average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or 
+This must be one of "ward.D", "ward.D2", "single", "complete",
+"average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or
 "centroid" (= UPGMC).}
 
 \item{order.cols}{a vector of specifying the ordering of the
@@ -156,11 +155,11 @@ values are the corresponding quantiles.}
 
 \item{heat.na.col}{the color for NA values in the heatmap.}
 
-\item{heat.lim}{a vector of length two consisting of the maximum and minimum 
+\item{heat.lim}{a vector of length two consisting of the maximum and minimum
 value for the heatmap palette.}
 
 \item{extreme.values.na}{a logical describing whether values outside the range
-of heat.lim are presented as missing (TRUE, default) or as the 
+of heat.lim are presented as missing (TRUE, default) or as the
 max/min value of the range.}
 
 \item{X.text.size}{a single number or a matrix of numbers (whose dimension
@@ -390,7 +389,7 @@ The default is 1 cm.}
 Superheat is used to generate and customize heatmaps.
        Scatterplots, boxplots, barplots, line plots and boxplots can
        be plotted adjacent to the columns and rows of the heatmap,
-       adding an additional layer of information. 
+       adding an additional layer of information.
        For usage, see the vignette at
        \url{https://rlbarter.github.io/superheat/}.
 }
@@ -405,7 +404,7 @@ sh <- superheat(X = iris[,-c(1, 5)],
 sh$membership.rows
 }
 \references{
-Barter and Yu (2017), Superheat: An R package for creating 
-       beautiful and extendable heatmaps for visualizing complex data, 
+Barter and Yu (2017), Superheat: An R package for creating
+       beautiful and extendable heatmaps for visualizing complex data,
        \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
 }
