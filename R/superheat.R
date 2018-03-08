@@ -243,6 +243,8 @@
 #'          The default is 1 cm.
 #' @param title a character string specifying a main heading.
 #' @param title.size the size of the title. The default is 5.
+#' @param title.alignment the alignment of the title. The default is "center".
+#'          Options are "left", "right", "center".
 #' @param print.plot a logical specifying whether or not to output the plot.
 #'
 #' @references Barter and Yu (2017), Superheat: An R package for creating
@@ -390,6 +392,7 @@ superheat <- function(X,
                       padding = 1,
                       title = NULL,
                       title.size = 5,
+                      title.alignment = NULL,
 
                       print.plot = TRUE) {
   # The primary superheat function for plotting super heatmaps.
@@ -407,6 +410,11 @@ superheat <- function(X,
   }
   if (col.dendrogram) {
     pretty.order.cols = TRUE
+  }
+
+  # set default title alignment
+  if (is.null(title.alignment)) {
+    title.alignment <- "left"
   }
 
   # match the arguments to those provided
@@ -465,6 +473,8 @@ superheat <- function(X,
       effective.row.clusters <- length(unique(membership.rows))
     }
   }
+
+
 
   # run error check on clustering mechanism
   cluster.stop.arg.list <- c(as.list(environment()))
@@ -919,7 +929,9 @@ superheat <- function(X,
 
   # Generate title
   if (!is.null(title)) {
-    gg.title <- generate_title(title = title, title.size = title.size)
+    gg.title <- generate_title(title = title,
+                               title.size = title.size,
+                               title.alignment = title.alignment)
   }
 
   # Generate row and column titles

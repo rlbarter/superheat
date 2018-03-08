@@ -366,9 +366,24 @@ generate_var_label <- function(names,
 
 
 generate_title <- function(title = NULL,
-                           title.size = 5) {
+                           title.size = 5,
+                           title.alignment = NULL) {
   theme <- themes()
   theme_clust_labels <- theme$theme_clust_labels
+
+  # set ggplot2 parameters for alignment
+  if (title.alignment == "left") {
+    alignment <- 0
+    pos <- 0
+  }
+  if (title.alignment == "center") {
+    alignment <- "center"
+    pos <- 0.5
+  }
+  if (title.alignment == "right") {
+    alignment <- 1
+    pos <- 1
+  }
 
 
   df <- data.frame(x = 0, y = 0, title = title)
@@ -376,9 +391,10 @@ generate_title <- function(title = NULL,
   x <- df$x
   y <- df$y
   gg.title <- ggplot2::ggplot(df) +
-    ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = title),
-                       size = title.size) +
-    theme_clust_labels
+    ggplot2::geom_text(ggplot2::aes(x = pos, y = y, label = title),
+                       size = title.size, hjust = alignment) +
+    theme_clust_labels +
+    ggplot2::scale_x_continuous(limits = c(0, 1), expand = c(0, 0))
 
 
   return(gg.title)

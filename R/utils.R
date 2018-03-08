@@ -243,7 +243,8 @@ stopErrors <- function(X,
 
                         padding = 1,
                         title = NULL,
-                        title.size = 5) {
+                        title.size = 5,
+                        title.alignment = NULL) {
 
   if (is.matrix(X) &&
       sum(!(apply(X, 2, class) %in% c("numeric", "integer")) > 0)) {
@@ -501,6 +502,11 @@ stopErrors <- function(X,
     stop("`bottom.label.text.alignment` must be one of 'left', 'right', 'center'")
   }}
 
+  if (!is.null(title.alignment)) {
+    if (!(title.alignment %in% c("left", "right", "center"))) {
+      stop("`title.alignment` must be one of 'left', 'right', 'center'")
+    }
+  }
 
 }
 
