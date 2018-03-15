@@ -388,6 +388,8 @@ Options are "left", "right", "center".}
 \code{membership.cols} the column cluster membership vector
 
 \code{membership.rows} the row cluster membership vector
+
+\code{heat.pal.values} the heat.pal.values vector used
 }
 \description{
 Superheat is used to generate and customize heatmaps.

@@ -96,18 +96,18 @@ generate_heat <- function(X,
       # minimum range equal to the min color (rather than grey)
       X.df$value[X.df$value < min.col] <- min.col
     }
-    
+
   }
-  
+
   range.X <- seq(min.col, max.col, length = 100)
-  
+
   # specify location of legend breaks
   if (is.null(legend.breaks)) {
     breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
   } else {
     breaks <- legend.breaks
   }
-  
+
 
   # define variables to fix visible binding check -- bit of a hack
   x <- X.df$x
@@ -166,7 +166,7 @@ generate_heat <- function(X,
     names(col.values) <- unique(as.vector(X.text.col))
 
     gg.heat <- gg.heat +
-      generate_text_heat(X = X, 
+      generate_text_heat(X = X,
                          X.text = X.text,
                          X.text.size = X.text.size,
                          X.text.angle = X.text.angle,
@@ -178,7 +178,8 @@ generate_heat <- function(X,
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
   }
 
-  return(list(gg.heat = gg.heat, gg.legend = gg.legend))
+  return(list(gg.heat = gg.heat, gg.legend = gg.legend,
+              heat.pal.values = heat.pal.values))
 }
 
 
@@ -419,7 +420,8 @@ generate_smooth_heat <- function(X,
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
   }
 
-  return(list(gg.heat = gg.heat, gg.legend = gg.legend))
+  return(list(gg.heat = gg.heat, gg.legend = gg.legend,
+              heat.pal.values = heat.pal.values))
 }
 
 
@@ -436,7 +438,7 @@ generate_text_heat <- function(X,
   # if clustering, but not smoothing, then need to have same number of
   # rows/cols as X
   if ((length(unique(membership.rows)) != nrow(X)) && # are clustering
-      (nrow(X.text) != nrow(X)) && 
+      (nrow(X.text) != nrow(X)) &&
       !smooth.heat) {
     stop(paste("X.text must have the same number of rows as",
                "X if heat.smooth = F"))
@@ -452,20 +454,20 @@ generate_text_heat <- function(X,
   # if clustering, but smoothing, then need to have same number of
   # rows/cols as row/col clusters
   if ((length(unique(membership.rows)) != nrow(X)) && # are clustering
-      (nrow(X.text) != length(unique(membership.rows))) && 
+      (nrow(X.text) != length(unique(membership.rows))) &&
       smooth.heat) {
     stop(paste("X.text must have the same number of rows as",
                "row clusters if heat.smooth = T"))
   }
-  
+
   if ((length(unique(membership.cols)) != ncol(X)) &&
       (ncol(X.text) != length(unique(membership.cols))) &&
       smooth.heat) {
     stop(paste("X.text must have the same number of columns as",
                "column clusters if heat.smooth = T"))
   }
-  
-  
+
+
   themes.arg.list <- c(as.list(environment()))
   themes.arg.list <- themes.arg.list[names(formals(themes))]
   themes.arg.list <- themes.arg.list[!is.na(names(themes.arg.list))]
@@ -483,18 +485,18 @@ generate_text_heat <- function(X,
     membership.cols <- 1:ncol(X.text)
   }
 
-  
-  
+
+
 
   X.order <- X.text
-  
+
   # convert the x-y correlation matrix to a long-form "tidy" data frame
   X.df <- getClusterDf(X.order,
                         smooth.heat = smooth.heat,
                         membership.rows = membership.rows,
                         membership.cols = membership.cols)
 
-  
+
   X.df$size <- as.vector(X.text.size)
   X.df$angle <- as.vector(X.text.angle)
   X.df$col <- as.vector(X.text.col)
@@ -506,7 +508,7 @@ generate_text_heat <- function(X,
   size <- X.df$size
   angle <- X.df$angle
 
-  
+
   # make the plot
   gg.text <- ggplot2::geom_text(ggplot2::aes(x = x,
                                              y = y,
@@ -515,6 +517,6 @@ generate_text_heat <- function(X,
                                              angle = angle,
                                              col = col), data = X.df)
 
-  
+
   return(gg.text)
 }

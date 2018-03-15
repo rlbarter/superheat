@@ -254,6 +254,7 @@
 #' @return \code{plot} a plot with the properties specified by the above arguments.
 #' @return \code{membership.cols} the column cluster membership vector
 #' @return \code{membership.rows} the row cluster membership vector
+#' @return \code{heat.pal.values} the heat.pal.values vector used
 #' @examples
 #' # plot a heatmap of the numerical iris variables
 #' # cluster by species and plot Sepal.Length on the right
@@ -968,7 +969,8 @@ superheat <- function(X,
   to.return <- list(layout = layout,
                     plot = grob.layout,
                     membership.cols = membership.cols,
-                    membership.rows = membership.rows)
+                    membership.rows = membership.rows,
+                    heat.pal.values = heat$heat.pal.values)
 
   return(invisible(to.return))
 }

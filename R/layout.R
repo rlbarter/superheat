@@ -404,7 +404,7 @@ generate_grobs <- function(layout,
     # the axis, then ensure that the bottom label is equal to the specified
     # length
     b <- t
-    if (!is.null(gg.bottom) && bottom.label.size > 0.2 && 
+    if (!is.null(gg.bottom) && bottom.label.size > 0.2 &&
         !is.null(gg.right) && yr.axis) {
       b <- t + 2
     }
@@ -510,6 +510,7 @@ generate_grobs <- function(layout,
 
   # add padding:
   layout <- gtable::gtable_add_padding(layout, grid::unit(padding, "cm"))
+  # uncomment below to view layout
   # gtable::gtable_show_layout(layout)
 return(layout)
 
