@@ -505,7 +505,7 @@ generate_grobs <- function(layout,
   # add padding:
   layout <- gtable::gtable_add_padding(layout, grid::unit(padding, "cm"))
   # uncomment below to view layout
-   gtable::gtable_show_layout(layout)
+  # gtable::gtable_show_layout(layout)
 return(layout)
 
 
