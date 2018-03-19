@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Superheat Vignette</title>
   <meta name="description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps.">
-  <meta name="generator" content="bookdown 0.3.8 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="ordering-rows-and-columns.html">
 <link rel="next" href="missing-data.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -182,7 +181,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12" data-path="legend.html"><a href="legend.html"><i class="fa fa-check"></i><b>12</b> Legend</a><ul>
 <li class="chapter" data-level="12.1" data-path="legend.html"><a href="legend.html#removing-the-legend"><i class="fa fa-check"></i><b>12.1</b> Removing the legend</a></li>
 <li class="chapter" data-level="12.2" data-path="legend.html"><a href="legend.html#size-3"><i class="fa fa-check"></i><b>12.2</b> Size</a></li>
-<li class="chapter" data-level="12.3" data-path="legend.html"><a href="legend.html#legend-breaks"><i class="fa fa-check"></i><b>12.3</b> Legend breaks</a></li>
+<li class="chapter" data-level="12.3" data-path="legend.html"><a href="legend.html#vertical-spacing"><i class="fa fa-check"></i><b>12.3</b> Vertical spacing</a></li>
+<li class="chapter" data-level="12.4" data-path="legend.html"><a href="legend.html#legend-breaks"><i class="fa fa-check"></i><b>12.4</b> Legend breaks</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="smoothing-in-high-dimensions.html"><a href="smoothing-in-high-dimensions.html"><i class="fa fa-check"></i><b>13</b> Smoothing in high dimensions</a></li>
 <li class="chapter" data-level="14" data-path="saving-superheatmaps.html"><a href="saving-superheatmaps.html"><i class="fa fa-check"></i><b>14</b> Saving superheatmaps</a></li>
@@ -250,7 +250,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>))</code></pre></div>
+          <span class="dt">heat.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>))</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-range-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="extreme-values" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Extreme values</h3>
@@ -258,7 +258,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          <span class="dt">heat.lim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">2</span>),
+          <span class="dt">heat.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>),
           <span class="dt">extreme.values.na =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-range-extreme-1.png" width="672" style="display: block; margin: auto;" /></p>
 
@@ -282,17 +282,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -316,9 +317,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

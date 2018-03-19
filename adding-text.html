@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Superheat Vignette</title>
   <meta name="description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps.">
-  <meta name="generator" content="bookdown 0.3.8 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="adjacent-plots.html">
 <link rel="next" href="labels.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -182,7 +181,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12" data-path="legend.html"><a href="legend.html"><i class="fa fa-check"></i><b>12</b> Legend</a><ul>
 <li class="chapter" data-level="12.1" data-path="legend.html"><a href="legend.html#removing-the-legend"><i class="fa fa-check"></i><b>12.1</b> Removing the legend</a></li>
 <li class="chapter" data-level="12.2" data-path="legend.html"><a href="legend.html#size-3"><i class="fa fa-check"></i><b>12.2</b> Size</a></li>
-<li class="chapter" data-level="12.3" data-path="legend.html"><a href="legend.html#legend-breaks"><i class="fa fa-check"></i><b>12.3</b> Legend breaks</a></li>
+<li class="chapter" data-level="12.3" data-path="legend.html"><a href="legend.html#vertical-spacing"><i class="fa fa-check"></i><b>12.3</b> Vertical spacing</a></li>
+<li class="chapter" data-level="12.4" data-path="legend.html"><a href="legend.html#legend-breaks"><i class="fa fa-check"></i><b>12.4</b> Legend breaks</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="smoothing-in-high-dimensions.html"><a href="smoothing-in-high-dimensions.html"><i class="fa fa-check"></i><b>13</b> Smoothing in high dimensions</a></li>
 <li class="chapter" data-level="14" data-path="saving-superheatmaps.html"><a href="saving-superheatmaps.html"><i class="fa fa-check"></i><b>14</b> Saving superheatmaps</a></li>
@@ -213,13 +213,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <span class="co"># add text matrix</span>
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.size =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="text-color" class="section level2">
 <h2><span class="header-section-number">9.1</span> Text color</h2>
 <p>You can change the colors of the text by providing a single number or a matrix of numbers to the argument <code>X.text.col</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set the text colors </span>
 <span class="co"># identify all scaled values that fall below -0.3</span>
-mtcars.col &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) &lt;<span class="st"> </span>-<span class="fl">0.3</span>
+mtcars.col &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="fl">0.3</span>
 <span class="co"># set all values that satisfy the condition to &quot;white&quot;</span>
 mtcars.col &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;white&quot;</span>, mtcars.col)
 <span class="co"># set all values that do not satisfy the condition to &quot;black&quot;</span>
@@ -234,13 +234,13 @@ mtcars.col &lt;-<span class="st"> </span><span class="kw">matrix</span>(mtcars.c
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> <span class="dv">4</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="font-size" class="section level2">
 <h2><span class="header-section-number">9.2</span> Font size</h2>
 <p>You can change size of the text by providing a single number or a matrix of numbers to the argument <code>X.text.size</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the size to simply be proportional to the scaled value</span>
-mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) +<span class="st"> </span><span class="dv">2</span>
+mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) <span class="op">+</span><span class="st"> </span><span class="dv">2</span>
 <span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span>
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
@@ -248,7 +248,7 @@ mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) 
           <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> mtcars.size)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="text-angle" class="section level2">
 <h2><span class="header-section-number">9.3</span> Text angle</h2>
@@ -261,7 +261,7 @@ mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) 
           <span class="dt">X.text.col =</span> mtcars.col,
           <span class="dt">X.text.size =</span> <span class="dv">4</span>,
           <span class="dt">X.text.angle =</span> <span class="dv">12</span>)</code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -282,17 +282,18 @@ mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) 
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -316,9 +317,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
