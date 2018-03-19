@@ -20,7 +20,8 @@ generate_layout <- function(gg.heat,
                             title.size = 5,
                             bottom.label.size = 0.1,
                             left.label.size = 0.1,
-                            legend.height = 0.2) {
+                            legend.height = 0.2,
+                            legend.vspace = 0.1) {
 
   # Generate the gtable object whose cells correspond to the heatmap
   # and additional elements such as the top and right plot, and labels.
@@ -149,15 +150,8 @@ generate_layout <- function(gg.heat,
     #   - there is a right plot, with and axis, but the bottom labels
     #     are larger than 0.2
     #   - if there a right plot with axis AND column name AND no bottom labels
-    if (is.null(gg.column.title) |
-        ((!is.null(gg.right) && yr.axis == F) &&
-          is.null(gg.column.title)) |
-        (!is.null(gg.right) && !is.null(gg.bottom) && bottom.label.size > 0.2) |
-        (!is.null(gg.right) && yr.axis &&
-         !is.null(gg.column.title) && is.null(gg.bottom))) {
-     # layout <- gtable::gtable_add_rows(layout,
-    #                                    grid::unit(0.1, "null"))
-    }
+    layout <- gtable::gtable_add_rows(layout, grid::unit(legend.vspace, "null"))
+
 
     # the legend is always in the very bottom row
     # the only time we do not need to add a row for it is when there are no
@@ -511,7 +505,7 @@ generate_grobs <- function(layout,
   # add padding:
   layout <- gtable::gtable_add_padding(layout, grid::unit(padding, "cm"))
   # uncomment below to view layout
-  # gtable::gtable_show_layout(layout)
+   gtable::gtable_show_layout(layout)
 return(layout)
 
 

@@ -233,12 +233,14 @@
 #' @param row.title.size a number specifying the size of the row name. The
 #'          default is 5.
 #' @param legend.height a number specifying the height of the legend. The default
-#'        is 0.1.
+#'          is 0.1.
 #' @param legend.width a number specifying the width of the legend. The default
-#'        is 1.5.
+#'          is 1.5.
 #' @param legend.text.size a number specifying the size of the numbers on the
-#'        legend axis. The default is 12.
+#'          legend axis. The default is 12.
 #' @param legend.breaks a vector specifying the legend breaks.
+#' @param legend.vspace a number specifying the vertical gap between the
+#'          heatmap and the legend
 #' @param padding the amount (in cm) of white space (padding) around the plot.
 #'          The default is 1 cm.
 #' @param title a character string specifying a main heading.
@@ -326,6 +328,7 @@ superheat <- function(X,
                       legend.width = 1.5,
                       legend.text.size = 12,
                       legend.breaks = NULL,
+                      legend.vspace = 0.1,
 
                       grid.hline = TRUE,
                       grid.vline = TRUE,

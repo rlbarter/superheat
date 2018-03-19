@@ -22,8 +22,8 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
   "scatterline", "line"), legend = TRUE, legend.height = 0.1,
   legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
-  grid.hline = TRUE, grid.vline = TRUE, grid.hline.size = 0.5,
-  grid.vline.size = 0.5, grid.hline.col = "black",
+  legend.vspace = 0.1, grid.hline = TRUE, grid.vline = TRUE,
+  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
   grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
@@ -195,6 +195,9 @@ is 1.5.}
 legend axis. The default is 12.}
 
 \item{legend.breaks}{a vector specifying the legend breaks.}
+
+\item{legend.vspace}{a number specifying the vertical gap between the
+heatmap and the legend}
 
 \item{grid.hline}{a logical specifying whether horizontal grid lines are
 plotted in the heatmap.}
