@@ -256,6 +256,8 @@
 #' @return \code{plot} a plot with the properties specified by the above arguments.
 #' @return \code{membership.cols} the column cluster membership vector
 #' @return \code{membership.rows} the row cluster membership vector
+#' @return \code{order.rows} the order of the rows in the heatmap
+#' @return \code{order.cols} the order of the columns in the heatmap
 #' @return \code{heat.pal.values} the heat.pal.values vector used
 #' @examples
 #' # plot a heatmap of the numerical iris variables
@@ -973,6 +975,8 @@ superheat <- function(X,
                     plot = grob.layout,
                     membership.cols = membership.cols,
                     membership.rows = membership.rows,
+                    order.rows = order.rows,
+                    order.cols = order.cols,
                     heat.pal.values = heat$heat.pal.values)
 
   return(invisible(to.return))

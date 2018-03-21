@@ -392,6 +392,10 @@ Options are "left", "right", "center".}
 
 \code{membership.rows} the row cluster membership vector
 
+\code{order.rows} the order of the rows in the heatmap
+
+\code{order.cols} the order of the columns in the heatmap
+
 \code{heat.pal.values} the heat.pal.values vector used
 }
 \description{
