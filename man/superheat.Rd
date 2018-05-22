@@ -417,7 +417,8 @@ sh <- superheat(X = iris[,-c(1, 5)],
 sh$membership.rows
 }
 \references{
-Barter and Yu (2017), Superheat: An R package for creating
+Barter and Yu (2018), Superheat: An R package for creating
        beautiful and extendable heatmaps for visualizing complex data,
-       \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
+       \url{https://www.tandfonline.com/doi/full/10.1080/10618600.2018.1473780},
+       Journal of Computational and Graphical Statistics
 }
