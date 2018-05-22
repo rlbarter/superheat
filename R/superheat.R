@@ -249,9 +249,10 @@
 #'          Options are "left", "right", "center".
 #' @param print.plot a logical specifying whether or not to output the plot.
 #'
-#' @references Barter and Yu (2017), Superheat: An R package for creating
+#' @references Barter and Yu (2018), Superheat: An R package for creating
 #'        beautiful and extendable heatmaps for visualizing complex data,
-#'        \url{https://arxiv.org/abs/1512.01524}, arXiv:1512.01524v2 [stat.AP]
+#'        \url{https://www.tandfonline.com/doi/full/10.1080/10618600.2018.1473780},
+#'        Journal of Computational and Graphical Statistics
 #'
 #' @return \code{plot} a plot with the properties specified by the above arguments.
 #' @return \code{membership.cols} the column cluster membership vector
@@ -794,6 +795,7 @@ superheat <- function(X,
   if (bottom.label == "variable") {
     # define the arguments for generating the bottom "variable" label
     names <- colnames(X)
+    names[is.na(names)] <- ""
     location <- "bottom"
     label.col <- bottom.label.col
     label.text.col <- bottom.label.text.col
@@ -876,15 +878,18 @@ superheat <- function(X,
   if (left.label == "variable") {
     # define the arguments for generating the left "variable" label
     names <- rownames(X)
+    names[is.na(names)] <- ""
     location <- "left"
     label.col <- left.label.col
     label.text.col <- left.label.text.col
     label.text.alignment <- left.label.text.alignment
     text.angle <- left.label.text.angle
 
+
     # automate label size
     if (is.null(left.label.size) && !is.null(names)) {
       left.label.size <- max(stringr::str_length(names)) * 0.02 + 0.05
+
     }
 
     # automate label justification

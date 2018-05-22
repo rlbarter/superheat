@@ -26,7 +26,6 @@ generate_layout <- function(gg.heat,
   # Generate the gtable object whose cells correspond to the heatmap
   # and additional elements such as the top and right plot, and labels.
 
-
   # if there are dendrograms, remove the axes
   if (row.dendrogram) {
     yr.axis <- F
