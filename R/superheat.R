@@ -253,6 +253,7 @@
 #' @param title.alignment the alignment of the title. The default is "center".
 #'          Options are "left", "right", "center".
 #' @param print.plot a logical specifying whether or not to output the plot.
+
 #' @references Barter and Yu (2018), Superheat: An R package for creating
 #'        beautiful and extendable heatmaps for visualizing complex data,
 #'        \url{https://www.tandfonline.com/doi/full/10.1080/10618600.2018.1473780},
