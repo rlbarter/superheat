@@ -12,13 +12,13 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   dist.method = c("euclidean", "maximum", "manhattan", "canberra", "binary",
   "minkowski"), linkage.method = c("complete", "ward.D", "ward.D2", "single",
   "average", "mcquitty", "median", "centroid"), order.cols = NULL,
-  order.rows = NULL, smooth.heat = FALSE, scale = FALSE,
-  left.label = NULL, bottom.label = NULL, heat.col.scheme = c("viridis",
-  "red", "purple", "blue", "grey", "green"), heat.pal = NULL,
-  heat.pal.values = NULL, heat.na.col = "grey50", heat.lim = NULL,
-  extreme.values.na = TRUE, X.text.size = 5, X.text.col = "black",
-  X.text.angle = 0, yt.plot.type = c("scatter", "bar", "boxplot",
-  "scattersmooth", "smooth", "scatterline", "line"),
+  order.rows = NULL, smooth.heat = FALSE, smooth.heat.type = "median",
+  scale = FALSE, left.label = NULL, bottom.label = NULL,
+  heat.col.scheme = c("viridis", "red", "purple", "blue", "grey", "green"),
+  heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
+  heat.lim = NULL, extreme.values.na = TRUE, X.text.size = 5,
+  X.text.col = "black", X.text.angle = 0, yt.plot.type = c("scatter",
+  "bar", "boxplot", "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
   "scatterline", "line"), legend = TRUE, legend.height = 0.1,
   legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
@@ -119,7 +119,11 @@ vector must be a rearranged \code{1:nrow(X)} vector which
 specifies the new location of each row.}
 
 \item{smooth.heat}{a logical specifying whether or not to smooth the colour
-of the heatmap within clusters (by taking the median value).}
+of the heatmap within clusters (by taking the median/mean value
+defined by smooth.heat.type).}
+
+\item{smooth.heat.type}{the type of smoothing used within clusters. This
+must be one of "median","mean".}
 
 \item{scale}{a logical specifying whether or not to center and scale the
 columns of X.}

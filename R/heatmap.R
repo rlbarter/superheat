@@ -1,5 +1,6 @@
 generate_heat <- function(X,
                           smooth.heat = FALSE,
+                          smooth.heat.type = "median", # default to median
                           X.text = NULL,
                           X.text.size = 5,
                           X.text.angle = 0,
@@ -194,6 +195,7 @@ generate_smooth_heat <- function(X,
                                  heat.lim = NULL,
                                  extreme.values.na = TRUE,
                                  smooth.heat = TRUE,
+                                 smooth.heat.type = "median",
                                  membership.rows = NULL,
                                  membership.cols = NULL,
                                  order.x = NULL, # order of variables
@@ -304,10 +306,15 @@ generate_smooth_heat <- function(X,
 
 
   # average within cluster boxes:
-  X.smooth.df <- X.smooth.df %>% dplyr::group_by(cclust, rclust) %>%
-    dplyr::summarize(value = median(value, na.rm = T))
-  X.smooth.df <- dplyr::ungroup(X.smooth.df)
-
+  if(smooth.heat.type=="median"){
+    X.smooth.df <- X.smooth.df %>% dplyr::group_by(cclust, rclust) %>%
+      dplyr::summarize(value = median(value, na.rm = T))
+    X.smooth.df <- dplyr::ungroup(X.smooth.df)
+  }else if(smooth.heat.type=="mean"){
+    X.smooth.df <- X.smooth.df %>% dplyr::group_by(cclust, rclust) %>%
+      dplyr::summarize(value = mean(value, na.rm = T))
+    X.smooth.df <- dplyr::ungroup(X.smooth.df)
+  }
 
   # obtain ranges of the rectangles for the smoothed heatmap
   ymin <- rlines[-length(rlines)]
