@@ -72,7 +72,10 @@
 #'          "centroid" (= UPGMC).
 #'
 #' @param smooth.heat a logical specifying whether or not to smooth the colour
-#'          of the heatmap within clusters (by taking the median value).
+#'          of the heatmap within clusters (by taking the median/mean value
+#'          defined by smooth.heat.type).
+#' @param smooth.heat.type the type of smoothing used within clusters. This
+#'          must be one of "median","mean".
 #' @param scale a logical specifying whether or not to center and scale the
 #'          columns of X.
 #' @param left.label a character specifying the type of the label provided to
@@ -302,6 +305,7 @@ superheat <- function(X,
                       order.rows = NULL,
 
                       smooth.heat = FALSE,
+                      smooth.heat.type = "median",
                       scale = FALSE,
 
                       left.label = NULL,
