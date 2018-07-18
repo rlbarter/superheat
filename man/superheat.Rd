@@ -17,8 +17,9 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   heat.col.scheme = c("viridis", "red", "purple", "blue", "grey", "green"),
   heat.pal = NULL, heat.pal.values = NULL, heat.na.col = "grey50",
   heat.lim = NULL, extreme.values.na = TRUE, X.text.size = 5,
-  X.text.col = "black", X.text.angle = 0, yt.plot.type = c("scatter",
-  "bar", "boxplot", "scattersmooth", "smooth", "scatterline", "line"),
+  X.text.col = "black", X.text.angle = 0, x.axis.reverse = F,
+  y.axis.reverse = F, yt.plot.type = c("scatter", "bar", "boxplot",
+  "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
   "scatterline", "line"), legend = TRUE, legend.height = 0.1,
   legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
@@ -178,6 +179,10 @@ colours of each text entry in \code{X.text}.}
 \item{X.text.angle}{a single number or a matrix of numbers (whose dimension
 matches that of \code{X.text}) that specifies the angle of each text
 entry in \code{X.text}.}
+
+\item{x.axis.reverse}{reverse x axis.}
+
+\item{y.axis.reverse}{reverse y axis (0 on top right corner).}
 
 \item{yt.plot.type}{a character specifying the \code{yt} plot type. The default is
 "scatter", and other options include "bar", "scattersmooth",

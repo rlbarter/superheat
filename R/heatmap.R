@@ -5,6 +5,10 @@ generate_heat <- function(X,
                           X.text.size = 5,
                           X.text.angle = 0,
                           X.text.col = "black",
+
+                          x.axis.reverse = F,
+                          y.axis.reverse = F,
+
                           membership.rows = NULL,
                           membership.cols = NULL,
                           order.x = NULL, # order of variables
@@ -109,7 +113,6 @@ generate_heat <- function(X,
     breaks <- legend.breaks
   }
 
-
   # define variables to fix visible binding check -- bit of a hack
   x <- X.df$x
   y <- X.df$y
@@ -133,12 +136,25 @@ generate_heat <- function(X,
                                   breaks = breaks,
                                   na.value = heat.na.col,
                                   limits = heat.lim) +
-    ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
-    ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
     theme_heatmap
+
+  #### Origin flip ####
+  if (x.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_x_continuous(name = "", expand = c(0, 0))
+  }
+
+  if (y.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+  }
 
   # add grid lines if desired
   if (grid.vline) {
@@ -177,6 +193,13 @@ generate_heat <- function(X,
                          membership.cols = membership.cols) +
       ggplot2::scale_colour_manual(values = col.values) +
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
+
+      if (x.axis.reverse) {
+        gg.heat <- gg.heat + ggplot2::scale_x_reverse()
+      }
+      if (y.axis.reverse) {
+        gg.heat <- gg.heat + ggplot2::scale_y_reverse()
+      }
   }
 
   return(list(gg.heat = gg.heat, gg.legend = gg.legend,
@@ -523,7 +546,6 @@ generate_text_heat <- function(X,
                                              size = as.numeric(size),
                                              angle = angle,
                                              col = col), data = X.df)
-
 
   return(gg.text)
 }

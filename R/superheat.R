@@ -118,6 +118,8 @@
 #' @param X.text.col a single character string or a matrix of character strings
 #'          (whose dimension matches that of \code{X.text}) that specifies the
 #'          colours of each text entry in \code{X.text}.
+#' @param x.axis.reverse reverse x axis.
+#' @param y.axis.reverse reverse y axis (0 on top right corner).
 #' @param legend logical. If set to \code{FALSE}, then no legend is provided.
 #' @param grid.hline a logical specifying whether horizontal grid lines are
 #'          plotted in the heatmap.
@@ -251,7 +253,6 @@
 #' @param title.alignment the alignment of the title. The default is "center".
 #'          Options are "left", "right", "center".
 #' @param print.plot a logical specifying whether or not to output the plot.
-#'
 #' @references Barter and Yu (2018), Superheat: An R package for creating
 #'        beautiful and extendable heatmaps for visualizing complex data,
 #'        \url{https://www.tandfonline.com/doi/full/10.1080/10618600.2018.1473780},
@@ -322,6 +323,9 @@ superheat <- function(X,
                       X.text.size = 5,
                       X.text.col = "black",
                       X.text.angle = 0,
+
+                      x.axis.reverse = F,
+                      y.axis.reverse = F,
 
                       yt.plot.type = c("scatter", "bar", "boxplot",
                                        "scattersmooth", "smooth",
