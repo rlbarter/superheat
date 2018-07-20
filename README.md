@@ -16,7 +16,7 @@ output: html_document
 
 Normal Display of Matrix   |  Reversed Y-axis
 :-------------------------:|:-------------------------:
-!![mat](tools/matrix.png) |  ![remat](tools/ReverseY_Matrix.png)
+!![mat](tools/Matrix.png) |  ![remat](tools/ReverseY_Matrix.png)
 
 
 [![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
