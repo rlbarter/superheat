@@ -42,10 +42,10 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   left.label.size = NULL, left.label.col = NULL, bottom.label.col = NULL,
   left.label.text.col = NULL, bottom.label.text.col = NULL,
   left.label.text.alignment = NULL, bottom.label.text.alignment = NULL,
-  force.left.label = F, force.bottom.label = F, label.col.sort = T,
-  column.title = NULL, row.title = NULL, column.title.size = 5,
-  row.title.size = 5, padding = 1, title = NULL, title.size = 5,
-  title.alignment = NULL, print.plot = TRUE)
+  force.left.label = F, force.bottom.label = F, column.title = NULL,
+  row.title = NULL, column.title.size = 5, row.title.size = 5,
+  padding = 1, title = NULL, title.size = 5, title.alignment = NULL,
+  print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix whose values are to be plotted in the heatmap.}
@@ -369,8 +369,6 @@ more than 50 rows.}
 bottom labels to appear (relevant only when X has more than 50
 columns). Note that by default there are no labels when there are
 more than 50 columns.}
-
-\item{label.col.sort}{sort label fill and text color. Default is TRUE.}
 
 \item{column.title}{a string specifying the overall column name (located
 below the bottom.labels).}
