@@ -6,6 +6,7 @@ output: html_document
 # Testing some additional features 
 7/20/2018 - farmic
 - Added option (label.col.sort) to avoid sorting label color (Default is T, which would follow the normal sorting behavior in superheat).
+
 7/18/2018 - farmic
 - Added an option (smooth.heat.type) to allow using mean or median to smooth the cells when using smooth.heat. 
 - Added x.axis.reverse and y.axis.reverse to flip the heat-map and label's orientation. Have not tested with yr/yt options yet. 
