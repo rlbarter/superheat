@@ -14,9 +14,9 @@ output: html_document
 * Issue: Wanted to smooth clusters with mean instead of median.
   * Added an option (smooth.heat.type) to allow using mean or median to smooth the cells when using smooth.heat. 
 
-Normal Display of Matrix   |  Reversed Y-axis
+Normal Display of Matrix by membership   |  Reversed Y-axis
 :-------------------------:|:-------------------------:
-!![mat](tools/Matrix.png) |  ![remat](tools/ReverseY_Matrix.png)
+![mat](tools/Matrix.png) |  ![remat](tools/ReverseY_Matrix.png)
 
 
 [![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
