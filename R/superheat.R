@@ -688,12 +688,12 @@ superheat <- function(X,
   }
   # rearrange label colors if needed
   if (!is.null(left.label.col)) {
-    if (label.col.sort){
+    if (left.label == "variable"){
       left.label.col <- left.label.col[order.df.rows$order.rows]
     }
   }
   if (!is.null(bottom.label.col)) {
-    if (label.col.sort){
+    if (left.label == "variable"){
       bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
     }
   }
