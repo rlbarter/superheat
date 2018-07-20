@@ -229,7 +229,7 @@
 #'          left labels to appear (relevant only when X has more than 50
 #'          rows). Note that by default there are no labels when there are
 #'          more than 50 rows.
-#' @param label.col.sort sort label fill and text color (default is T).
+#' @param label.col.sort sort label fill and text color. Default is TRUE.
 #' @param column.title a string specifying the overall column name (located
 #'          below the bottom.labels).
 #' @param row.title a string specifying the overall row name (located to the
