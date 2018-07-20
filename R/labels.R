@@ -340,7 +340,6 @@ generate_var_label <- function(names,
                          size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
-      #ggplot2::scale_y_continuous(expand = c(0, 0)) +
       ggplot2::scale_x_continuous(expand = c(0, 0))
 
     if (y.axis.reverse) {
@@ -379,9 +378,8 @@ generate_var_label <- function(names,
                          vjust = "centre",
                          size = bottom.label.text.size,
                          col = label.text.col,
-                         angle = text.angle) # +
-      # ggplot2::scale_x_continuous(expand = c(0, 0)) +
-      # ggplot2::scale_y_continuous(expand = c(0, 0))
+                         angle = text.angle)
+
     if (x.axis.reverse) {
       gg.bottom <- gg.bottom + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
     } else {

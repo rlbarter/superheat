@@ -229,6 +229,7 @@
 #'          left labels to appear (relevant only when X has more than 50
 #'          rows). Note that by default there are no labels when there are
 #'          more than 50 rows.
+#' @param label.col.sort sort label fill and text color (default is T).
 #' @param column.title a string specifying the overall column name (located
 #'          below the bottom.labels).
 #' @param row.title a string specifying the overall row name (located to the
@@ -399,6 +400,7 @@ superheat <- function(X,
                       bottom.label.text.alignment = NULL,
                       force.left.label = F,
                       force.bottom.label = F,
+                      label.col.sort = T,
 
                       column.title = NULL,
                       row.title = NULL,
@@ -686,17 +688,25 @@ superheat <- function(X,
   }
   # rearrange label colors if needed
   if (!is.null(left.label.col)) {
-    left.label.col <- left.label.col[order.df.rows$order.rows]
+    if (label.col.sort){
+      left.label.col <- left.label.col[order.df.rows$order.rows]
+    }
   }
   if (!is.null(bottom.label.col)) {
-    bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+    if (label.col.sort){
+      bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+    }
   }
   # rearrange label text colors if needed
   if (!is.null(left.label.text.col)) {
+    if (label.col.sort){
     left.label.text.col <- left.label.text.col[order.df.rows$order.rows]
+    }
   }
   if (!is.null(bottom.label.text.col)) {
+    if (label.col.sort){
     bottom.label.text.col <- bottom.label.text.col[order.df.cols$order.cols]
+    }
   }
 
   # the default if clustering was not performed
