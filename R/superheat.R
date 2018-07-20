@@ -686,17 +686,25 @@ superheat <- function(X,
   }
   # rearrange label colors if needed
   if (!is.null(left.label.col)) {
-    left.label.col <- left.label.col[order.df.rows$order.rows]
+    if (left.label == "variable"){
+      left.label.col <- left.label.col[order.df.rows$order.rows]
+    }
   }
   if (!is.null(bottom.label.col)) {
-    bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+    if (left.label == "variable"){
+      bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+    }
   }
   # rearrange label text colors if needed
   if (!is.null(left.label.text.col)) {
+    if (left.label == "variable"){
     left.label.text.col <- left.label.text.col[order.df.rows$order.rows]
+    }
   }
   if (!is.null(bottom.label.text.col)) {
+    if (left.label == "variable"){
     bottom.label.text.col <- bottom.label.text.col[order.df.cols$order.cols]
+    }
   }
 
   # the default if clustering was not performed
