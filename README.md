@@ -4,7 +4,10 @@ output: html_document
 
 # superheat: An R package for supervised heatmaps
 # Testing some additional features 
-- 7/18/2018 - farmic
+7/20/2018 - farmic
+- sort label color only occurs when label is for "variable" and not cluster. 
+
+7/18/2018 - farmic
 - Added an option (smooth.heat.type) to allow using mean or median to smooth the cells when using smooth.heat. 
 - Added x.axis.reverse and y.axis.reverse to flip the heat-map and label's orientation. Have not tested with yr/yt options yet. 
 
