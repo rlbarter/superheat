@@ -5,12 +5,18 @@ output: html_document
 # superheat: An R package for supervised heatmaps
 # Testing some additional features 
 7/20/2018 - farmic
-- sort label color only occurs when label is for "variable" and not cluster. 
+* Issue: label color (left.label.col, bottom.label.col) was getting sorted by the row-order when it is meant for the membership/cluster. 
+  * Added if-statement to only sort label color  when label is for "variable". 
 
 7/18/2018 - farmic
-- Added an option (smooth.heat.type) to allow using mean or median to smooth the cells when using smooth.heat. 
-- Added x.axis.reverse and y.axis.reverse to flip the heat-map and label's orientation. Have not tested with yr/yt options yet. 
+* Issue: Wanted to display matrix with origin (0,0) on the top left corner, with ascending integer going downward on the y-axis. 
+  * Added x.axis.reverse and y.axis.reverse to flip the heat-map and label's orientation. Have not tested with yr/yt options yet. 
+* Issue: Wanted to smooth clusters with mean instead of median.
+  * Added an option (smooth.heat.type) to allow using mean or median to smooth the cells when using smooth.heat. 
 
+Normal Display of Matrix   |  Reversed Y-axis
+:-------------------------:|:-------------------------:
+!![mat](tools/matrix.png) |  ![remat](tools/ReverseY_Matrix.png)
 
 
 [![Travis-CI Build Status](https://travis-ci.org/rlbarter/superheat.svg?branch=master)](https://travis-ci.org/rlbarter/superheat)
