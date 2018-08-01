@@ -3,6 +3,17 @@
 
 <head>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-90929425-3');
+  </script>
+
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Superheat Vignette</title>
@@ -11,16 +22,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-  
-  
+
+
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-  
+
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-  
+
 
 <meta name="author" content="Rebecca Barter">
 
@@ -29,8 +40,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  
-  
+
+
 <link rel="prev" href="titles.html">
 <link rel="next" href="adding-text.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -226,10 +237,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">8.1</span> Scatterplots</h2>
 <p>The following example adds the miles per gallon (<code>mpg</code>) variable as a scatterplot next to the rows, and then orders the rows by the <code>mpg</code> variable. The <code>yr</code> argument takes a vector to plot next to the rows, while the <code>yt</code> argument takes a vector to plot next to the columns.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>)</code></pre></div>
@@ -238,10 +249,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">8.1.1</span> Size</h3>
 <p>You can change the size of the scatterplot points using the <code>yr.point.size</code> or <code>yt.point.size</code> arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -257,10 +268,10 @@ point.col &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class=
 point.col[<span class="dv">5</span>] &lt;-<span class="st"> &quot;red&quot;</span>
 
 <span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -274,14 +285,14 @@ point.col[<span class="dv">5</span>] &lt;-<span class="st"> &quot;red&quot;</spa
 <p>If we cluster the cars into three groups based on the number of gears, then we can provide a <code>yr</code> whose length is either equal to <code>nrow(X)</code> or is equal to the number of clusters (<code>length(membership.rows)</code>), which in this case is equal to 3.</p>
 <p><strong>If <code>yr</code> has length equal to <code>nrow(X)</code></strong> then we can specify the point colors using <code>yr.obs.col</code> as above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -290,14 +301,14 @@ point.col[<span class="dv">5</span>] &lt;-<span class="st"> &quot;red&quot;</spa
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-16-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p><strong>Setting the color for each cluster</strong> can be achieved using the <code>yr.cluster.col</code>/<code>yt.cluster.col</code> arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -314,14 +325,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <span class="st">  </span>unlist
 
 <span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mpg.per.cluster,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -334,10 +345,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h2><span class="header-section-number">8.2</span> Line plot</h2>
 <p>The line plot is a nice way of depicting a trend. Instead of plotting each data unit as a point connects the points via a continuous line. In the example below, we are plotting the miles per gallon as a line plot, and simultaneously ordering the rows by miles per gallon.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a line plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -349,10 +360,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.2.1</span> Size</h3>
 <p>The <code>yr.line.size</code>/<code>yt.line.size</code> arguments determine the thickness of the line plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a line plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -367,10 +378,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.2.2</span> Color</h3>
 <p>The color can be changed using the <code>yr.line.col</code>/<code>yt.line.col</code> arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a line plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -387,14 +398,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.2.3</span> Clustering</h3>
 <p>When clustering, the line will be grouped by cluster and the cluster-wise color can be set using <code>yr.clust.col</code>/<code>yt.clust.col</code> (rather than <code>yr.line.col</code> etc). Note that you cannot have aggregated line plots at the cluster level, implying that <code>yr</code> and <code>yt</code> must have the same length as <code>nrow(X)</code> and <code>ncol(X)</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-          
+
           <span class="co"># add mpg as a line plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -415,10 +426,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.3.1</span> Loess curve</h3>
 <p>In the example below we produce a loess smoothed curve for miles per gallon versus number of cylinders (<code>order.rows = order(mtcars$cyl)</code>). The standard error shading can be removed by specifying <code>smooth.se = FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a smoothed line plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -435,10 +446,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <p>A linear regression of miles per gallon versus number of cylinders (<code>order.rows = order(mtcars$cyl)</code>) is specified similarly with the additional argument <code>smoothing.method = &quot;lm&quot;</code>.</p>
 <p>Again, the standard error shading can be removed by specifying <code>smooth.se = FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a smoothed line plot  next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -456,10 +467,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h2><span class="header-section-number">8.4</span> Scatterplot with connecting line plot</h2>
 <p>The scatterline plot combines the <a href="adjacent-plots.html#line">line plot</a> and the <a href="#scatter">scatter plot</a>. The arguments that can be used separately for the line plot and the scatterplot can be used for the scatterline plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatter line plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -476,10 +487,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h2><span class="header-section-number">8.5</span> Scatterplot with smoothed line</h2>
 <p>The scattersmooth plot combines the functionality of the <a href="#scatter">scatter plot</a> with the <a href="adjacent-plots.html#smooth">smoothed curve</a>. The aesthetic arguments that apply for the scatterplot and the smoothed curve apply for the scattersmooth plot too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatter smoothed plot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -495,10 +506,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h2><span class="header-section-number">8.6</span> Barplot</h2>
 <p>Barplots are a particularly nice way of presenting and comparing values of a variable. Adding a barplot next to the columns and/or rows can be achieved by setting <code>yr.plot.type = &quot;bar&quot;</code> or <code>yt.plot.type = &quot;bar&quot;</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a barplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -508,10 +519,10 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.6.1</span> Color</h3>
 <p>The bar fill color can be set using the standard <code>yr.obs.col</code>/<code>yt.obs.col</code> arguments. The outline of each bar can be set using the <code>yr.bar.col</code>/<code>yr.bar.col</code> arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a barplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -532,14 +543,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <span class="st">  </span>unlist
 
 <span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-                    
+
           <span class="co"># add mpg per cluster as a barplot</span>
           <span class="dt">yr =</span> mpg.per.cluster,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -561,14 +572,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <span class="st">  </span>unlist
 
 <span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-                    
+
           <span class="co"># add mpg per cluster as a boxplot</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -585,14 +596,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <span class="st">  </span>unlist
 
 <span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># cluster the rows</span>
           <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
           <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-                    
+
           <span class="co"># add mpg per cluster as a boxplot</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
@@ -607,14 +618,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.8.1</span> Name</h3>
 <p>The axis name can be specified using <code>yr.axis.name</code>/<code>yt.axis.name</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          
+
           <span class="co"># add correlation between each variable and miles per gallon</span>
           <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
           <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
@@ -625,14 +636,14 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.8.2</span> Size</h3>
 <p>The size of the axis name can be set using <code>yr.axis.name.size</code>/<code>yt.axis.name.size</code>, while the size of the axis numbers can be set using <code>yr.axis.size</code>/<code>yt.axis.size</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          
+
           <span class="co"># add correlation between each variable and miles per gallon</span>
           <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
           <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
@@ -645,15 +656,15 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h3><span class="header-section-number">8.8.3</span> Limits</h3>
 <p>You can set the y-axis limits by using the <code>yr.lim</code> and <code>yt.lim</code> arguments. You must provide a vector of length 2 specifying the minimum and maximum values for the range respectively.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
           <span class="dt">yr.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>),
-          
+
           <span class="co"># add correlation between each variable and miles per gallon</span>
           <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
           <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
@@ -666,17 +677,17 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <h2><span class="header-section-number">8.9</span> Plot size</h2>
 <p>The size of the entire adjacent plot can be determined using the <code>yr.plot.size</code>/<code>yr.plot.size</code> arguments.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), 
+<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
           <span class="co"># scale the variables/columns</span>
           <span class="dt">scale =</span> T,
-          
+
           <span class="co"># add mpg as a scatterplot next to the rows</span>
           <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
           <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
           <span class="dt">yr.axis.size =</span> <span class="dv">14</span>,
           <span class="dt">yr.axis.name.size =</span> <span class="dv">14</span>,
           <span class="dt">yr.plot.size =</span> <span class="fl">0.8</span>,
-          
+
           <span class="co"># add correlation between each variable and miles per gallon</span>
           <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
           <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,

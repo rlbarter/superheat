@@ -3,6 +3,17 @@
 
 <head>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-90929425-3');
+  </script>
+
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Superheat Vignette</title>
@@ -11,16 +22,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-  
-  
+
+
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-  
+
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-  
+
 
 <meta name="author" content="Rebecca Barter">
 
@@ -29,8 +40,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  
-  
+
+
 <link rel="prev" href="legend.html">
 <link rel="next" href="saving-superheatmaps.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -214,14 +225,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">superheat</span>(mtcars,
           <span class="co"># scale the matrix columns</span>
           <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          
+
           <span class="co"># cluster by gears</span>
           <span class="dt">membership.rows =</span> gears,
-          
+
           <span class="co"># place each variable in its own cluster</span>
           <span class="dt">membership.cols =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mtcars),
           <span class="dt">bottom.label =</span> <span class="st">&quot;variable&quot;</span>,
-          
+
           <span class="co"># smooth the heatmap within clusters</span>
           <span class="dt">smooth.heat =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/smoothing-1.png" width="768" style="display: block; margin: auto;" /></p>
