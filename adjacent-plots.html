@@ -2,17 +2,15 @@
 <html >
 
 <head>
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-90929425-3');
-  </script>
-
+  gtag('config', 'UA-90929425-3');
+</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,41 +58,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -236,186 +262,187 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="scatterplot" class="section level2">
 <h2><span class="header-section-number">8.1</span> Scatterplots</h2>
 <p>The following example adds the miles per gallon (<code>mpg</code>) variable as a scatterplot next to the rows, and then orders the rows by the <code>mpg</code> variable. The <code>yr</code> argument takes a vector to plot next to the rows, while the <code>yt</code> argument takes a vector to plot next to the columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-13-1.png" width="816" style="display: block; margin: auto;" /></p>
 <div id="size" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> Size</h3>
 <p>You can change the size of the scatterplot points using the <code>yr.point.size</code> or <code>yt.point.size</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-14-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="color-1" class="section level3">
 <h3><span class="header-section-number">8.1.2</span> Color</h3>
 <p>Changing the color of the points in the scatterplot can be achieved using the <code>yr.obs.col</code> and <code>yt.obs.col</code> arguments, which are designed for specifying the color of individual data points.</p>
 <p>For example, in the plot below, we are setting the fifth data point to be red, while the rest are grey. Note that the “fifth” data point corresponds to the fifth data point in the original matrix <span class="math inline">\(X\)</span>, rather than the re-ordered matrix (recall that the default order corresponds to a hierarchical clustering. To remove this ordering, specify <code>pretty.order.rows = FALSE</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set a color vector</span>
-point.col &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;wheat3&quot;</span>, <span class="kw">nrow</span>(mtcars))
-point.col[<span class="dv">5</span>] &lt;-<span class="st"> &quot;red&quot;</span>
-
-<span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="co"># change the color of the points</span>
-          <span class="dt">yr.obs.col =</span> point.col,
-          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># set a color vector</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">point.col &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;wheat3&quot;</span>, <span class="kw">nrow</span>(mtcars))</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">point.col[<span class="dv">5</span>] &lt;-<span class="st"> &quot;red&quot;</span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb26-9" data-line-number="9">          </a>
+<a class="sourceLine" id="cb26-10" data-line-number="10">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb26-11" data-line-number="11">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb26-12" data-line-number="12">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb26-13" data-line-number="13">          <span class="co"># change the color of the points</span></a>
+<a class="sourceLine" id="cb26-14" data-line-number="14">          <span class="dt">yr.obs.col =</span> point.col,</a>
+<a class="sourceLine" id="cb26-15" data-line-number="15">          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-15-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="clustering-1" class="section level3">
 <h3><span class="header-section-number">8.1.3</span> Clustering</h3>
 <p>If we cluster the cars into three groups based on the number of gears, then we can provide a <code>yr</code> whose length is either equal to <code>nrow(X)</code> or is equal to the number of clusters (<code>length(membership.rows)</code>), which in this case is equal to 3.</p>
 <p><strong>If <code>yr</code> has length equal to <code>nrow(X)</code></strong> then we can specify the point colors using <code>yr.obs.col</code> as above.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;paleturquoise4&quot;</span>, <span class="kw">nrow</span>(mtcars)),
-          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), </a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb27-8" data-line-number="8">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb27-9" data-line-number="9">          </a>
+<a class="sourceLine" id="cb27-10" data-line-number="10">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb27-11" data-line-number="11">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb27-12" data-line-number="12">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb27-13" data-line-number="13">          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;paleturquoise4&quot;</span>, <span class="kw">nrow</span>(mtcars)),</a>
+<a class="sourceLine" id="cb27-14" data-line-number="14">          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-16-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p><strong>Setting the color for each cluster</strong> can be achieved using the <code>yr.cluster.col</code>/<code>yt.cluster.col</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;turquoise4&quot;</span>, <span class="st">&quot;plum4&quot;</span>, <span class="st">&quot;springgreen4&quot;</span>),
-          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), </a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb28-9" data-line-number="9">          </a>
+<a class="sourceLine" id="cb28-10" data-line-number="10">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb28-11" data-line-number="11">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb28-12" data-line-number="12">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb28-13" data-line-number="13">          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;turquoise4&quot;</span>, <span class="st">&quot;plum4&quot;</span>, <span class="st">&quot;springgreen4&quot;</span>),</a>
+<a class="sourceLine" id="cb28-14" data-line-number="14">          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-17-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p><strong>If <code>yr</code> has length equal to the number of clusters</strong> (which in this case would correspond to a vector of length three), then the three points are placed next to each cluster and <code>yr.cluster.col</code>/<code>yt.cluster.col</code> should be used to define the color for the points at the cluster-level.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># average the miles per gallon in each gear cluster</span>
-<span class="kw">library</span>(dplyr)
-mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span>
-<span class="st">  </span>unlist
-
-<span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mpg.per.cluster,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>),
-          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># average the miles per gallon in each gear cluster</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.1</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="st">  </span>unlist</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), </a>
+<a class="sourceLine" id="cb31-9" data-line-number="9">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb31-11" data-line-number="11">          </a>
+<a class="sourceLine" id="cb31-12" data-line-number="12">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb31-13" data-line-number="13">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb31-14" data-line-number="14">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb31-15" data-line-number="15">          </a>
+<a class="sourceLine" id="cb31-16" data-line-number="16">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb31-17" data-line-number="17">          <span class="dt">yr =</span> mpg.per.cluster,</a>
+<a class="sourceLine" id="cb31-18" data-line-number="18">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb31-19" data-line-number="19">          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>),</a>
+<a class="sourceLine" id="cb31-20" data-line-number="20">          <span class="dt">yr.point.size =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-18-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="line" class="section level2">
 <h2><span class="header-section-number">8.2</span> Line plot</h2>
 <p>The line plot is a nice way of depicting a trend. Instead of plotting each data unit as a point connects the points via a continuous line. In the example below, we are plotting the miles per gallon as a line plot, and simultaneously ordering the rows by miles per gallon.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a line plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">          <span class="co"># add mpg as a line plot next to the rows</span></a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,</a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb32-11" data-line-number="11">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-19-1.png" width="816" style="display: block; margin: auto;" /></p>
 <div id="size-1" class="section level3">
 <h3><span class="header-section-number">8.2.1</span> Size</h3>
 <p>The <code>yr.line.size</code>/<code>yt.line.size</code> arguments determine the thickness of the line plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a line plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,
-          <span class="co"># change the line thickness</span>
-          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">          <span class="co"># add mpg as a line plot next to the rows</span></a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb33-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb33-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,</a>
+<a class="sourceLine" id="cb33-10" data-line-number="10">          <span class="co"># change the line thickness</span></a>
+<a class="sourceLine" id="cb33-11" data-line-number="11">          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb33-12" data-line-number="12">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb33-13" data-line-number="13">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-20-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="color-2" class="section level3">
 <h3><span class="header-section-number">8.2.2</span> Color</h3>
 <p>The color can be changed using the <code>yr.line.col</code>/<code>yt.line.col</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a line plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,
-          <span class="co"># change the line thickness</span>
-          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,
-          <span class="co"># change the line color</span>
-          <span class="dt">yr.line.col =</span> <span class="st">&quot;springgreen4&quot;</span>,
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">          <span class="co"># add mpg as a line plot next to the rows</span></a>
+<a class="sourceLine" id="cb34-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb34-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb34-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,</a>
+<a class="sourceLine" id="cb34-10" data-line-number="10">          <span class="co"># change the line thickness</span></a>
+<a class="sourceLine" id="cb34-11" data-line-number="11">          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb34-12" data-line-number="12">          <span class="co"># change the line color</span></a>
+<a class="sourceLine" id="cb34-13" data-line-number="13">          <span class="dt">yr.line.col =</span> <span class="st">&quot;springgreen4&quot;</span>,</a>
+<a class="sourceLine" id="cb34-14" data-line-number="14">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb34-15" data-line-number="15">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-21-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="clustering-2" class="section level3">
 <h3><span class="header-section-number">8.2.3</span> Clustering</h3>
 <p>When clustering, the line will be grouped by cluster and the cluster-wise color can be set using <code>yr.clust.col</code>/<code>yt.clust.col</code> (rather than <code>yr.line.col</code> etc). Note that you cannot have aggregated line plots at the cluster level, implying that <code>yr</code> and <code>yt</code> must have the same length as <code>nrow(X)</code> and <code>ncol(X)</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg as a line plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,
-          <span class="co"># change the line thickness</span>
-          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,
-          <span class="co"># change the line color</span>
-          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;plum4&quot;</span>, <span class="st">&quot;paleturquoise4&quot;</span>, <span class="st">&quot;salmon3&quot;</span>),
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9">          </a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">          <span class="co"># add mpg as a line plot next to the rows</span></a>
+<a class="sourceLine" id="cb35-11" data-line-number="11">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb35-12" data-line-number="12">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;line&quot;</span>,</a>
+<a class="sourceLine" id="cb35-14" data-line-number="14">          <span class="co"># change the line thickness</span></a>
+<a class="sourceLine" id="cb35-15" data-line-number="15">          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb35-16" data-line-number="16">          <span class="co"># change the line color</span></a>
+<a class="sourceLine" id="cb35-17" data-line-number="17">          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;plum4&quot;</span>, <span class="st">&quot;paleturquoise4&quot;</span>, <span class="st">&quot;salmon3&quot;</span>),</a>
+<a class="sourceLine" id="cb35-18" data-line-number="18">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb35-19" data-line-number="19">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-22-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -425,190 +452,190 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <div id="loess-curve" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> Loess curve</h3>
 <p>In the example below we produce a loess smoothed curve for miles per gallon versus number of cylinders (<code>order.rows = order(mtcars$cyl)</code>). The standard error shading can be removed by specifying <code>smooth.se = FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a smoothed line plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;smooth&quot;</span>,
-          <span class="co"># change the line thickness and color</span>
-          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,
-          <span class="dt">yr.line.col =</span> <span class="st">&quot;red4&quot;</span>,
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">          <span class="co"># add mpg as a smoothed line plot next to the rows</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;smooth&quot;</span>,</a>
+<a class="sourceLine" id="cb36-10" data-line-number="10">          <span class="co"># change the line thickness and color</span></a>
+<a class="sourceLine" id="cb36-11" data-line-number="11">          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb36-12" data-line-number="12">          <span class="dt">yr.line.col =</span> <span class="st">&quot;red4&quot;</span>,</a>
+<a class="sourceLine" id="cb36-13" data-line-number="13">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb36-14" data-line-number="14">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-23-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="linear-regression-line" class="section level3">
 <h3><span class="header-section-number">8.3.2</span> Linear regression line</h3>
 <p>A linear regression of miles per gallon versus number of cylinders (<code>order.rows = order(mtcars$cyl)</code>) is specified similarly with the additional argument <code>smoothing.method = &quot;lm&quot;</code>.</p>
 <p>Again, the standard error shading can be removed by specifying <code>smooth.se = FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a smoothed line plot  next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;smooth&quot;</span>,
-          <span class="dt">smoothing.method =</span> <span class="st">&quot;lm&quot;</span>,
-          <span class="co"># change the line thickness and color</span>
-          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,
-          <span class="dt">yr.line.col =</span> <span class="st">&quot;plum4&quot;</span>,
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">          <span class="co"># add mpg as a smoothed line plot  next to the rows</span></a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb37-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb37-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;smooth&quot;</span>,</a>
+<a class="sourceLine" id="cb37-10" data-line-number="10">          <span class="dt">smoothing.method =</span> <span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb37-11" data-line-number="11">          <span class="co"># change the line thickness and color</span></a>
+<a class="sourceLine" id="cb37-12" data-line-number="12">          <span class="dt">yr.line.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb37-13" data-line-number="13">          <span class="dt">yr.line.col =</span> <span class="st">&quot;plum4&quot;</span>,</a>
+<a class="sourceLine" id="cb37-14" data-line-number="14">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb37-15" data-line-number="15">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-24-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="scatterline" class="section level2">
 <h2><span class="header-section-number">8.4</span> Scatterplot with connecting line plot</h2>
 <p>The scatterline plot combines the <a href="adjacent-plots.html#line">line plot</a> and the <a href="#scatter">scatter plot</a>. The arguments that can be used separately for the line plot and the scatterplot can be used for the scatterline plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatter line plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;scatterline&quot;</span>,
-          <span class="co"># change the line color</span>
-          <span class="dt">yr.line.col =</span> <span class="st">&quot;tomato3&quot;</span>,
-          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;orange&quot;</span>, <span class="kw">nrow</span>(mtcars)),
-          <span class="dt">yr.point.size =</span> <span class="dv">4</span>,
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">          <span class="co"># add mpg as a scatter line plot next to the rows</span></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb38-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb38-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;scatterline&quot;</span>,</a>
+<a class="sourceLine" id="cb38-10" data-line-number="10">          <span class="co"># change the line color</span></a>
+<a class="sourceLine" id="cb38-11" data-line-number="11">          <span class="dt">yr.line.col =</span> <span class="st">&quot;tomato3&quot;</span>,</a>
+<a class="sourceLine" id="cb38-12" data-line-number="12">          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;orange&quot;</span>, <span class="kw">nrow</span>(mtcars)),</a>
+<a class="sourceLine" id="cb38-13" data-line-number="13">          <span class="dt">yr.point.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb38-14" data-line-number="14">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb38-15" data-line-number="15">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-25-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="scattersmooth" class="section level2">
 <h2><span class="header-section-number">8.5</span> Scatterplot with smoothed line</h2>
 <p>The scattersmooth plot combines the functionality of the <a href="#scatter">scatter plot</a> with the <a href="adjacent-plots.html#smooth">smoothed curve</a>. The aesthetic arguments that apply for the scatterplot and the smoothed curve apply for the scattersmooth plot too.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatter smoothed plot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;scattersmooth&quot;</span>,
-          <span class="co"># change the line color</span>
-          <span class="dt">yr.line.col =</span> <span class="st">&quot;tomato3&quot;</span>,
-          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;orange&quot;</span>, <span class="kw">nrow</span>(mtcars)),
-          <span class="co"># order the rows by mpg</span>
-          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb39-6" data-line-number="6">          <span class="co"># add mpg as a scatter smoothed plot next to the rows</span></a>
+<a class="sourceLine" id="cb39-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb39-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;scattersmooth&quot;</span>,</a>
+<a class="sourceLine" id="cb39-10" data-line-number="10">          <span class="co"># change the line color</span></a>
+<a class="sourceLine" id="cb39-11" data-line-number="11">          <span class="dt">yr.line.col =</span> <span class="st">&quot;tomato3&quot;</span>,</a>
+<a class="sourceLine" id="cb39-12" data-line-number="12">          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;orange&quot;</span>, <span class="kw">nrow</span>(mtcars)),</a>
+<a class="sourceLine" id="cb39-13" data-line-number="13">          <span class="co"># order the rows by mpg</span></a>
+<a class="sourceLine" id="cb39-14" data-line-number="14">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>cyl))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-26-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="bar" class="section level2">
 <h2><span class="header-section-number">8.6</span> Barplot</h2>
 <p>Barplots are a particularly nice way of presenting and comparing values of a variable. Adding a barplot next to the columns and/or rows can be achieved by setting <code>yr.plot.type = &quot;bar&quot;</code> or <code>yt.plot.type = &quot;bar&quot;</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a barplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;bar&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">          <span class="co"># add mpg as a barplot next to the rows</span></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb40-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb40-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;bar&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-27-1.png" width="816" style="display: block; margin: auto;" /></p>
 <div id="color-3" class="section level3">
 <h3><span class="header-section-number">8.6.1</span> Color</h3>
 <p>The bar fill color can be set using the standard <code>yr.obs.col</code>/<code>yt.obs.col</code> arguments. The outline of each bar can be set using the <code>yr.bar.col</code>/<code>yr.bar.col</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a barplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
-          <span class="co"># set bar colors</span>
-          <span class="dt">yr.bar.col =</span> <span class="st">&quot;black&quot;</span>,
-          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;beige&quot;</span>, <span class="kw">nrow</span>(mtcars)))</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">          <span class="co"># add mpg as a barplot next to the rows</span></a>
+<a class="sourceLine" id="cb41-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb41-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb41-9" data-line-number="9">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb41-10" data-line-number="10">          <span class="co"># set bar colors</span></a>
+<a class="sourceLine" id="cb41-11" data-line-number="11">          <span class="dt">yr.bar.col =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb41-12" data-line-number="12">          <span class="dt">yr.obs.col =</span> <span class="kw">rep</span>(<span class="st">&quot;beige&quot;</span>, <span class="kw">nrow</span>(mtcars)))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-28-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="clustering-3" class="section level3">
 <h3><span class="header-section-number">8.6.2</span> Clustering</h3>
 <p>Bar plots can present values aggregated across clusters. In this situation, as with the other plots, the fill color of the bars is set using the <code>yr.cluster.col</code>/<code>yt.cluster.col</code> arguments (instead of the <code>yr.obs.col</code>/<code>yt.obs.col</code> arguments for the unclustered heatmap).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span>
-<span class="st">  </span>unlist
-
-<span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg per cluster as a barplot</span>
-          <span class="dt">yr =</span> mpg.per.cluster,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
-          <span class="co"># set bar colors</span>
-          <span class="dt">yr.bar.col =</span> <span class="st">&quot;black&quot;</span>,
-          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;beige&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;beige&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="st">  </span>unlist</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb42-8" data-line-number="8"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb42-9" data-line-number="9"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), </a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb42-11" data-line-number="11">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb42-12" data-line-number="12">          </a>
+<a class="sourceLine" id="cb42-13" data-line-number="13">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb42-14" data-line-number="14">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb42-15" data-line-number="15">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb42-16" data-line-number="16">                    </a>
+<a class="sourceLine" id="cb42-17" data-line-number="17">          <span class="co"># add mpg per cluster as a barplot</span></a>
+<a class="sourceLine" id="cb42-18" data-line-number="18">          <span class="dt">yr =</span> mpg.per.cluster,</a>
+<a class="sourceLine" id="cb42-19" data-line-number="19">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb42-20" data-line-number="20">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb42-21" data-line-number="21">          <span class="co"># set bar colors</span></a>
+<a class="sourceLine" id="cb42-22" data-line-number="22">          <span class="dt">yr.bar.col =</span> <span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb42-23" data-line-number="23">          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;beige&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;beige&quot;</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-29-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="boxplot" class="section level2">
 <h2><span class="header-section-number">8.7</span> Boxplot</h2>
 <p>Boxplots are a bit different to the other plot types presented above. In particular, they can only be used on clustered matrices. The reason for this is that a boxplot must consist of many data points.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span>
-<span class="st">  </span>unlist
-
-<span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg per cluster as a boxplot</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;boxplot&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb43-6" data-line-number="6"><span class="st">  </span>unlist</a>
+<a class="sourceLine" id="cb43-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb43-8" data-line-number="8"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb43-9" data-line-number="9"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), </a>
+<a class="sourceLine" id="cb43-10" data-line-number="10">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb43-11" data-line-number="11">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb43-12" data-line-number="12">          </a>
+<a class="sourceLine" id="cb43-13" data-line-number="13">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb43-14" data-line-number="14">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb43-15" data-line-number="15">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb43-16" data-line-number="16">                    </a>
+<a class="sourceLine" id="cb43-17" data-line-number="17">          <span class="co"># add mpg per cluster as a boxplot</span></a>
+<a class="sourceLine" id="cb43-18" data-line-number="18">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb43-19" data-line-number="19">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb43-20" data-line-number="20">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;boxplot&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-30-1.png" width="816" style="display: block; margin: auto;" /></p>
 <div id="color-4" class="section level3">
 <h3><span class="header-section-number">8.7.1</span> Color</h3>
 <p>Setting the color can be achieved using the <code>yr.cluster.col</code>/<code>yt.cluster.col</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span>
-<span class="st">  </span>unlist
-
-<span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># cluster the rows</span>
-          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),
-          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,
-
-          <span class="co"># add mpg per cluster as a boxplot</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.plot.type =</span> <span class="st">&quot;boxplot&quot;</span>,
-          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;beige&quot;</span>, <span class="st">&quot;slategray1&quot;</span>, <span class="st">&quot;beige&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(gear) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mpg.avg =</span> <span class="kw">mean</span>(mpg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(mpg.avg) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="st">  </span>unlist</a>
+<a class="sourceLine" id="cb44-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb44-8" data-line-number="8"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb44-9" data-line-number="9"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg, <span class="op">-</span>gear), </a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb44-12" data-line-number="12">          </a>
+<a class="sourceLine" id="cb44-13" data-line-number="13">          <span class="co"># cluster the rows</span></a>
+<a class="sourceLine" id="cb44-14" data-line-number="14">          <span class="dt">membership.rows =</span> <span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>),</a>
+<a class="sourceLine" id="cb44-15" data-line-number="15">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb44-16" data-line-number="16">                    </a>
+<a class="sourceLine" id="cb44-17" data-line-number="17">          <span class="co"># add mpg per cluster as a boxplot</span></a>
+<a class="sourceLine" id="cb44-18" data-line-number="18">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb44-19" data-line-number="19">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb44-20" data-line-number="20">          <span class="dt">yr.plot.type =</span> <span class="st">&quot;boxplot&quot;</span>,</a>
+<a class="sourceLine" id="cb44-21" data-line-number="21">          <span class="dt">yr.cluster.col =</span> <span class="kw">c</span>(<span class="st">&quot;beige&quot;</span>, <span class="st">&quot;slategray1&quot;</span>, <span class="st">&quot;beige&quot;</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-31-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -617,84 +644,84 @@ mpg.per.cluster &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 <div id="name" class="section level3">
 <h3><span class="header-section-number">8.8.1</span> Name</h3>
 <p>The axis name can be specified using <code>yr.axis.name</code>/<code>yt.axis.name</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-
-          <span class="co"># add correlation between each variable and miles per gallon</span>
-          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
-          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
-          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb45-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb45-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb45-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb45-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb45-9" data-line-number="9">          </a>
+<a class="sourceLine" id="cb45-10" data-line-number="10">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb45-11" data-line-number="11">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb45-12" data-line-number="12">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb45-13" data-line-number="13">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-32-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="size-2" class="section level3">
 <h3><span class="header-section-number">8.8.2</span> Size</h3>
 <p>The size of the axis name can be set using <code>yr.axis.name.size</code>/<code>yt.axis.name.size</code>, while the size of the axis numbers can be set using <code>yr.axis.size</code>/<code>yt.axis.size</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-
-          <span class="co"># add correlation between each variable and miles per gallon</span>
-          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
-          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
-          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>,
-          <span class="dt">yt.axis.size =</span> <span class="dv">14</span>,
-          <span class="dt">yt.axis.name.size =</span> <span class="dv">14</span>)</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">          </a>
+<a class="sourceLine" id="cb46-10" data-line-number="10">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb46-11" data-line-number="11">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb46-14" data-line-number="14">          <span class="dt">yt.axis.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">          <span class="dt">yt.axis.name.size =</span> <span class="dv">14</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-33-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="limits" class="section level3">
 <h3><span class="header-section-number">8.8.3</span> Limits</h3>
 <p>You can set the y-axis limits by using the <code>yr.lim</code> and <code>yt.lim</code> arguments. You must provide a vector of length 2 specifying the minimum and maximum values for the range respectively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>),
-
-          <span class="co"># add correlation between each variable and miles per gallon</span>
-          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
-          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
-          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>,
-          <span class="dt">yt.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">          <span class="dt">yr.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>),</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">          </a>
+<a class="sourceLine" id="cb47-11" data-line-number="11">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb47-13" data-line-number="13">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb47-14" data-line-number="14">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">          <span class="dt">yt.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-34-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="plot-size" class="section level2">
 <h2><span class="header-section-number">8.9</span> Plot size</h2>
 <p>The size of the entire adjacent plot can be determined using the <code>yr.plot.size</code>/<code>yr.plot.size</code> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a super heatmap</span>
-<span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg),
-          <span class="co"># scale the variables/columns</span>
-          <span class="dt">scale =</span> T,
-
-          <span class="co"># add mpg as a scatterplot next to the rows</span>
-          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,
-          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,
-          <span class="dt">yr.axis.size =</span> <span class="dv">14</span>,
-          <span class="dt">yr.axis.name.size =</span> <span class="dv">14</span>,
-          <span class="dt">yr.plot.size =</span> <span class="fl">0.8</span>,
-
-          <span class="co"># add correlation between each variable and miles per gallon</span>
-          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],
-          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,
-          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation with mpg&quot;</span>,
-          <span class="dt">yt.axis.size =</span> <span class="dv">14</span>,
-          <span class="dt">yt.axis.name.size =</span> <span class="dv">14</span>,
-          <span class="dt">yt.plot.size =</span> <span class="fl">0.7</span>)</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">          <span class="dt">yr.axis.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb48-10" data-line-number="10">          <span class="dt">yr.axis.name.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb48-11" data-line-number="11">          <span class="dt">yr.plot.size =</span> <span class="fl">0.8</span>,</a>
+<a class="sourceLine" id="cb48-12" data-line-number="12">          </a>
+<a class="sourceLine" id="cb48-13" data-line-number="13">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb48-14" data-line-number="14">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb48-15" data-line-number="15">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb48-16" data-line-number="16">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation with mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb48-17" data-line-number="17">          <span class="dt">yt.axis.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb48-18" data-line-number="18">          <span class="dt">yt.axis.name.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb48-19" data-line-number="19">          <span class="dt">yt.plot.size =</span> <span class="fl">0.7</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="816" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -738,7 +765,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["superheat-vignette.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
@@ -751,7 +778,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

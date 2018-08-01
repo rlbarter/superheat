@@ -2,17 +2,15 @@
 <html >
 
 <head>
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-90929425-3');
-  </script>
-
+  gtag('config', 'UA-90929425-3');
+</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,41 +58,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -221,47 +247,47 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="dendrogram" class="section level2">
 <h2><span class="header-section-number">6.1</span> Dendrogram</h2>
 <p>It is natural to supply a dendrogram that highlights the hierarchical clustering of the columns and/or rows using the <code>col.dendrogram</code> and <code>row.dendrogram</code> arguments. Note that if you want to implement the row or column ordering implied by the dendrogram, but to remove the dendrogram itself, you can use the <a href="ordering-rows-and-columns.html#h-order"><code>pretty.order.rows</code></a> and <a href="ordering-rows-and-columns.html#h-order"><code>pretty.order.cols</code></a> arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">superheat</span>(mtcars,
-          <span class="co"># scale the matrix columns</span>
-          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          <span class="co"># add row dendrogram</span>
-          <span class="dt">row.dendrogram =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">          <span class="co"># add row dendrogram</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">          <span class="dt">row.dendrogram =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/dendrogram-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="generate-clust" class="section level2">
 <h2><span class="header-section-number">6.2</span> Generating clusters</h2>
 <p>Grouping the rows and/or columns into a pre-specified number of clusters is a nice way to highlight structure and simplify visualization. For example, we can group the rows into three groupings by specifying <code>n.clusters.rows = 3</code>. The underling clustering algorithm is <code>kmeans()</code>, but you can use hierarchical clustering by specifying <code>clustering.method = 'hierarchical'</code>.</p>
 <p>In order to get the same clustering every time you must set the seed or <a href="clustering.html#membership-vector">provide your own clustering membership vector</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)
-<span class="kw">superheat</span>(mtcars,
-          <span class="co"># scale the matrix columns</span>
-          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          <span class="co"># generate three column clusters</span>
-          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">          <span class="co"># generate three column clusters</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/clusters-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>By default, when clustering the corresponding labels are grouped into the cluster name (typically 1, 2, 3, … etc). If you would like to force the labels to be the original variable names, you can specify <code>left.label = 'variable'</code> or <code>bottom.label = 'variable</code>, depending on whether it is the left or bottom labels, respectively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)
-<span class="kw">superheat</span>(mtcars,
-          <span class="co"># scale the matrix columns</span>
-          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          <span class="co"># generate three column clusters</span>
-          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,
-          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">          <span class="co"># generate three column clusters</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/clusters-var-labels-1.png" width="768" style="display: block; margin: auto;" /></p>
 <div id="extracting-the-clusters" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Extracting the clusters</h3>
 <p>If you would like to be able to extract the clusters generated by the <code>superheat()</code> function, then you need to first save the superheat object as a variable. From this variable, you can access the clusters that are stored in the <code>membership.rows</code> and <code>membership.cols</code> entries.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)
-superheatmap &lt;-<span class="st"> </span><span class="kw">superheat</span>(mtcars,
-                          <span class="co"># scale the matrix columns</span>
-                          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-                          <span class="co"># generate three column clusters</span>
-                          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,
-                          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>,
-                          <span class="dt">print.plot =</span> F)
-
-<span class="co"># extract the clusters</span>
-superheatmap<span class="op">$</span>membership.rows</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">superheatmap &lt;-<span class="st"> </span><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">                          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">                          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">                          <span class="co"># generate three column clusters</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">                          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">                          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>,</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">                          <span class="dt">print.plot =</span> F)</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co"># extract the clusters</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">superheatmap<span class="op">$</span>membership.rows</a></code></pre></div>
 <pre><code>##   Hornet Sportabout          Duster 360          Merc 450SE
 ##                   1                   1                   1
 ##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood
@@ -289,14 +315,14 @@ superheatmap<span class="op">$</span>membership.rows</code></pre></div>
 <div id="membership-vector" class="section level2">
 <h2><span class="header-section-number">6.3</span> User-supplied clusters</h2>
 <p>The best way to conduct clustering on your matrix is to provide a pre-specified membership vector using the <code>membership.rows</code>/<code>membership.cols</code> argument. Suppose, for our mtcars example, we wanted to group by number of gears.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gears &lt;-<span class="st"> </span><span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>)
-
-<span class="kw">set.seed</span>(<span class="dv">2016113</span>)
-<span class="kw">superheat</span>(mtcars,
-          <span class="co"># scale the matrix columns</span>
-          <span class="dt">scale =</span> <span class="ot">TRUE</span>,
-          <span class="co"># cluster by gears</span>
-          <span class="dt">membership.rows =</span> gears)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">gears &lt;-<span class="st"> </span><span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">          <span class="co"># cluster by gears</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">          <span class="dt">membership.rows =</span> gears)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/membership-vector-1.png" width="768" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -340,7 +366,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["superheat-vignette.pdf"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
@@ -353,7 +379,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
