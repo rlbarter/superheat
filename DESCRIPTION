@@ -18,6 +18,7 @@ Imports:
     scales (>= 0.3.0),
     stringr (>= 1.2.0),
     ggdendro,
+    forcats,
 Suggests:
     knitr (>= 1.11),
     RColorBrewer,
