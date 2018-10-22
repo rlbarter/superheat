@@ -238,7 +238,9 @@
 #'          is 1.5.
 #' @param legend.text.size a number specifying the size of the numbers on the
 #'          legend axis. The default is 12.
-#' @param legend.breaks a vector specifying the legend breaks.
+#' @param legend.num.ticks a vector specifying the desired number of legend breaks
+#'          (superheat may or may not actually give this number of breaks).
+#' @param legend.breaks a vector specifying the actual legend breaks.
 #' @param legend.vspace a number specifying the vertical gap between the
 #'          heatmap and the legend
 #' @param padding the amount (in cm) of white space (padding) around the plot.
@@ -330,6 +332,7 @@ superheat <- function(X,
                       legend.height = 0.1,
                       legend.width = 1.5,
                       legend.text.size = 12,
+                      legend.num.ticks = 4,
                       legend.breaks = NULL,
                       legend.vspace = 0.1,
 
