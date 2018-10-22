@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html >
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
+<head>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -37,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="basic-usage.html">
 <link rel="next" href="heatmap-colormap.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -59,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -72,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -246,25 +236,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="h-order" class="section level2">
 <h2><span class="header-section-number">3.1</span> Using hierarchical clustering to order the rows/columns</h2>
 <p>You can set the ordering of the rows/columns based on a “pretty” hierarchical clustering by specifying <code>pretty.order.rows = TRUE</code> and <code>pretty.order.cols = TRUE</code>. Errors may arise when the matrix has missing values.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># generate the plot:</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">          <span class="co"># retain original order of rows/cols</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">          <span class="dt">pretty.order.rows =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">          <span class="dt">pretty.order.cols =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># generate the plot:</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">          <span class="co"># retain original order of rows/cols</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">          <span class="dt">pretty.order.rows =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">          <span class="dt">pretty.order.cols =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="specifying-the-ordering-of-the-columns-or-rows" class="section level2">
 <h2><span class="header-section-number">3.2</span> Specifying the ordering of the columns or rows</h2>
 <p>If, instead, you would like to specify a custom ordering of the rows and columns, you can simply provide the order vector to the <code>order.rows</code> and <code>order.cols</code> arguments. In the example below, we order the rows by the <code>mpg</code> variable from the original matrix. Note that we could order by any vector i.e. we are not restricted to ordering by a column or row in our matrix.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># generate the plot:</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">          <span class="co"># order the rows by miles per gallon</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg),</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># generate the plot:</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">          <span class="co"># order the rows by miles per gallon</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">          <span class="dt">order.rows =</span> <span class="kw">order</span>(mtcars<span class="op">$</span>mpg),</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

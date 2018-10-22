@@ -2,15 +2,6 @@
 <html >
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -38,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="labels.html">
 <link rel="next" href="legend.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -60,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -73,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -247,54 +236,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="removing-the-grid" class="section level2">
 <h2><span class="header-section-number">11.1</span> Removing the grid</h2>
 <p>Removing the grid lines is achieved by setting <code>grid.hline = FALSE</code> and <code>grid.vline = FALSE</code>.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb60-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb60-5" data-line-number="5">          <span class="co"># remove the grid</span></a>
-<a class="sourceLine" id="cb60-6" data-line-number="6">          <span class="dt">grid.hline =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb60-7" data-line-number="7">          <span class="dt">grid.vline =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb57-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb57-5" data-line-number="5">          <span class="co"># remove the grid</span></a>
+<a class="sourceLine" id="cb57-6" data-line-number="6">          <span class="dt">grid.hline =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb57-7" data-line-number="7">          <span class="dt">grid.vline =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/grid-remove-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="grid-color" class="section level2">
 <h2><span class="header-section-number">11.2</span> Grid color</h2>
 <p>One particularly nice setting is to make the grid lines white. Changing the color can be done using <code>grid.hline.col</code> and <code>grid.vline.col</code>.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb61-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb61-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb61-5" data-line-number="5">          <span class="co"># change the grid color</span></a>
-<a class="sourceLine" id="cb61-6" data-line-number="6">          <span class="dt">grid.hline.col =</span> <span class="st">&quot;white&quot;</span>,</a>
-<a class="sourceLine" id="cb61-7" data-line-number="7">          <span class="dt">grid.vline.col =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb58-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb58-5" data-line-number="5">          <span class="co"># change the grid color</span></a>
+<a class="sourceLine" id="cb58-6" data-line-number="6">          <span class="dt">grid.hline.col =</span> <span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb58-7" data-line-number="7">          <span class="dt">grid.vline.col =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/grid-color-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="grid-size" class="section level2">
 <h2><span class="header-section-number">11.3</span> Grid size</h2>
 <p>The grid lines can be made thicker or thinner using the <code>grid.hline.size</code> and <code>grid.vline.size</code> arguments.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb62-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb62-5" data-line-number="5">          <span class="co"># change the grid size</span></a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">          <span class="dt">grid.hline.col =</span> <span class="st">&quot;white&quot;</span>,</a>
-<a class="sourceLine" id="cb62-7" data-line-number="7">          <span class="dt">grid.vline.col =</span> <span class="st">&quot;white&quot;</span>,</a>
-<a class="sourceLine" id="cb62-8" data-line-number="8">          <span class="dt">grid.hline.size =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb62-9" data-line-number="9">          <span class="dt">grid.vline.size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb59-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb59-5" data-line-number="5">          <span class="co"># change the grid size</span></a>
+<a class="sourceLine" id="cb59-6" data-line-number="6">          <span class="dt">grid.hline.col =</span> <span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb59-7" data-line-number="7">          <span class="dt">grid.vline.col =</span> <span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb59-8" data-line-number="8">          <span class="dt">grid.hline.size =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb59-9" data-line-number="9">          <span class="dt">grid.vline.size =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/grid-size-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="clustered-grid" class="section level2">
 <h2><span class="header-section-number">11.4</span> Clustered grid</h2>
 <p>When clustering the heatmap, the grid lines are placed around the clusters rather than the individual rows and columns. Specifically, this helps present the clusters when forcing the left and bottom labels to be the variable names.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb63-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb63-5" data-line-number="5">          </a>
-<a class="sourceLine" id="cb63-6" data-line-number="6">          <span class="co"># cluster the heatmap</span></a>
-<a class="sourceLine" id="cb63-7" data-line-number="7">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb63-8" data-line-number="8">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
-<a class="sourceLine" id="cb63-9" data-line-number="9">          <span class="dt">n.clusters.cols =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb63-10" data-line-number="10">          <span class="dt">bottom.label =</span> <span class="st">&quot;variable&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb60-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb60-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb60-6" data-line-number="6">          <span class="co"># cluster the heatmap</span></a>
+<a class="sourceLine" id="cb60-7" data-line-number="7">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb60-8" data-line-number="8">          <span class="dt">left.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb60-9" data-line-number="9">          <span class="dt">n.clusters.cols =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb60-10" data-line-number="10">          <span class="dt">bottom.label =</span> <span class="st">&quot;variable&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/grid-cluster-1.png" width="768" style="display: block; margin: auto;" /></p>
 
 </div>

@@ -2,15 +2,6 @@
 <html >
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -38,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="ordering-rows-and-columns.html">
 <link rel="next" href="missing-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -60,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -73,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -251,30 +240,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>heat.col.scheme</code>: if you’d like to select a color palette from the set of inbuilt choices.</p></li>
 </ul>
 <p>For example, if you’d like to use the <code>red</code> inbuilt color palette, you can set <code>heat.col.scheme = &quot;red&quot;</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">          <span class="co"># change the color</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">          <span class="dt">heat.col.scheme =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/red-color-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>If you’d like your color palette to go from brown to purple by travelling through white, then you can simply set <code>heat.pal = c(&quot;brown&quot;, &quot;white&quot;, &quot;purple&quot;)</code> as follows</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">          <span class="co"># change the color</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">          <span class="dt">heat.col.scheme =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/red-color-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>If you’d like your color palette to go from brown to purple by travelling through white, then you can simply set <code>heat.pal = c(&quot;brown&quot;, &quot;white&quot;, &quot;purple&quot;)</code> as follows</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">          <span class="co"># change the color (#b35806 = brown and #542788 = purple)</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">          <span class="dt">heat.pal =</span> <span class="kw">c</span>(<span class="st">&quot;#b35806&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;#542788&quot;</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb8-4" data-line-number="4">          <span class="co"># change the color (#b35806 = brown and #542788 = purple)</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">          <span class="dt">heat.pal =</span> <span class="kw">c</span>(<span class="st">&quot;#b35806&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;#542788&quot;</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="color-transitions" class="section level2">
 <h2><span class="header-section-number">4.2</span> Color transitions</h2>
 <p>Note that by default, the color transitions take place at the appropriate quantile based on the number of colors provided in the palette. For example, if you have 6 colors the color transitions will be at the 0th, 20th, 40th, 60th, 80th and 100th quantiles, where the 0th quantile corresponds to the minimum value and the 100th quantile corresponds to the maximum value. For skewed data, this means that most of the color transitions will occur towards one end of the scale.</p>
 <p>To force the transition to occur at a particular location, you need to use the <code>heat.pal.values</code> argument. This argument takes a vector whose length is the same as <code>heat.pal</code> and specifies the position (within the range from 0 to 1) of each color. For example <code>heat.pal.values = c(0, 0.5, 1)</code> forces the first color to be at the minimum value, the second color to be exactly at the midpoint of the range (note: this is distinct from the median) and the last color to be at the maximum value.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">          <span class="co"># change the color (#b35806 = brown and #542788 = purple)</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">          <span class="dt">heat.pal =</span> <span class="kw">c</span>(<span class="st">&quot;#b35806&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;#542788&quot;</span>),</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">          <span class="dt">heat.pal.values =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">          <span class="co"># change the color (#b35806 = brown and #542788 = purple)</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">          <span class="dt">heat.pal =</span> <span class="kw">c</span>(<span class="st">&quot;#b35806&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;#542788&quot;</span>),</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">          <span class="dt">heat.pal.values =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-transition-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="color-limits" class="section level2">
@@ -284,19 +273,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>each value outside this range will be presented as missing (i.e. a grey cell corresponding to <code>NA</code>), and</p></li>
 <li><p>the first color in the color range will correspond to the value -1 and the last color in the color range will correspond to the value 2.</p></li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">          <span class="dt">heat.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">          <span class="dt">heat.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-range-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="extreme-values" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Extreme values</h3>
 <p>If you would prefer that values outside the <code>heat.lim</code> range be presented as the maximum/minimum color in the range (rather than as <code>NA</code>) then you can specify the argument <code>extreme.values.na = FALSE</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">          <span class="dt">heat.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">          <span class="dt">extreme.values.na =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">          <span class="dt">heat.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">          <span class="dt">extreme.values.na =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/color-range-extreme-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>

@@ -2,15 +2,6 @@
 <html >
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -38,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="adjacent-plots.html">
 <link rel="next" href="labels.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -60,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -73,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -244,61 +233,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="adding-text" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Adding text</h1>
 <p>It is easy to add text to each cell in the heatmap using the <code>X.text</code> argument. Below we simply plot the raw matrix over the top of the heatmap, but you could add any matrix of numbers or character strings.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">          <span class="co"># add text matrix</span></a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">          <span class="dt">X.text.size =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="text-color" class="section level2">
+<h2><span class="header-section-number">9.1</span> Text color</h2>
+<p>You can change the colors of the text by providing a single number or a matrix of numbers to the argument <code>X.text.col</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># set the text colors </span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="co"># identify all scaled values that fall below -0.3</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">mtcars.col &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.3</span></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="co"># set all values that satisfy the condition to &quot;white&quot;</span></a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">mtcars.col &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;white&quot;</span>, mtcars.col)</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6"><span class="co"># set all values that do not satisfy the condition to &quot;black&quot;</span></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">mtcars.col &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;black&quot;</span>, mtcars.col)</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8"><span class="co"># convert to matrix</span></a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">mtcars.col &lt;-<span class="st"> </span><span class="kw">matrix</span>(mtcars.col, <span class="dt">ncol =</span> <span class="kw">ncol</span>(mtcars))</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb47-11" data-line-number="11"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb47-13" data-line-number="13">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb47-14" data-line-number="14">          <span class="co"># add text matrix</span></a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb47-16" data-line-number="16">          <span class="dt">X.text.col =</span> mtcars.col,</a>
+<a class="sourceLine" id="cb47-17" data-line-number="17">          <span class="dt">X.text.size =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="font-size" class="section level2">
+<h2><span class="header-section-number">9.2</span> Font size</h2>
+<p>You can change size of the text by providing a single number or a matrix of numbers to the argument <code>X.text.size</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># Set the size to simply be proportional to the scaled value</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">          <span class="co"># add text matrix</span></a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">          <span class="dt">X.text.col =</span> mtcars.col,</a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">          <span class="dt">X.text.size =</span> mtcars.size)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="text-angle" class="section level2">
+<h2><span class="header-section-number">9.3</span> Text angle</h2>
+<p>You can change the angle of the text by providing a single number (the number of degrees between 0 and 360) or a matrix of numbers to the argument <code>X.text.angle</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
 <a class="sourceLine" id="cb49-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
 <a class="sourceLine" id="cb49-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb49-4" data-line-number="4">          <span class="co"># add text matrix</span></a>
 <a class="sourceLine" id="cb49-5" data-line-number="5">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb49-6" data-line-number="6">          <span class="dt">X.text.size =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div id="text-color" class="section level2">
-<h2><span class="header-section-number">9.1</span> Text color</h2>
-<p>You can change the colors of the text by providing a single number or a matrix of numbers to the argument <code>X.text.col</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># set the text colors </span></a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="co"># identify all scaled values that fall below -0.3</span></a>
-<a class="sourceLine" id="cb50-3" data-line-number="3">mtcars.col &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.3</span></a>
-<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="co"># set all values that satisfy the condition to &quot;white&quot;</span></a>
-<a class="sourceLine" id="cb50-5" data-line-number="5">mtcars.col &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;white&quot;</span>, mtcars.col)</a>
-<a class="sourceLine" id="cb50-6" data-line-number="6"><span class="co"># set all values that do not satisfy the condition to &quot;black&quot;</span></a>
-<a class="sourceLine" id="cb50-7" data-line-number="7">mtcars.col &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;black&quot;</span>, mtcars.col)</a>
-<a class="sourceLine" id="cb50-8" data-line-number="8"><span class="co"># convert to matrix</span></a>
-<a class="sourceLine" id="cb50-9" data-line-number="9">mtcars.col &lt;-<span class="st"> </span><span class="kw">matrix</span>(mtcars.col, <span class="dt">ncol =</span> <span class="kw">ncol</span>(mtcars))</a>
-<a class="sourceLine" id="cb50-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb50-11" data-line-number="11"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
-<a class="sourceLine" id="cb50-12" data-line-number="12">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb50-13" data-line-number="13">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb50-14" data-line-number="14">          <span class="co"># add text matrix</span></a>
-<a class="sourceLine" id="cb50-15" data-line-number="15">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb50-16" data-line-number="16">          <span class="dt">X.text.col =</span> mtcars.col,</a>
-<a class="sourceLine" id="cb50-17" data-line-number="17">          <span class="dt">X.text.size =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="font-size" class="section level2">
-<h2><span class="header-section-number">9.2</span> Font size</h2>
-<p>You can change size of the text by providing a single number or a matrix of numbers to the argument <code>X.text.size</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># Set the size to simply be proportional to the scaled value</span></a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">mtcars.size &lt;-<span class="st"> </span><span class="kw">scale</span>(mtcars) <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
-<a class="sourceLine" id="cb51-4" data-line-number="4">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb51-5" data-line-number="5">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb51-6" data-line-number="6">          <span class="co"># add text matrix</span></a>
-<a class="sourceLine" id="cb51-7" data-line-number="7">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb51-8" data-line-number="8">          <span class="dt">X.text.col =</span> mtcars.col,</a>
-<a class="sourceLine" id="cb51-9" data-line-number="9">          <span class="dt">X.text.size =</span> mtcars.size)</a></code></pre></div>
+<a class="sourceLine" id="cb49-6" data-line-number="6">          <span class="dt">X.text.col =</span> mtcars.col,</a>
+<a class="sourceLine" id="cb49-7" data-line-number="7">          <span class="dt">X.text.size =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">          <span class="dt">X.text.angle =</span> <span class="dv">12</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="text-angle" class="section level2">
-<h2><span class="header-section-number">9.3</span> Text angle</h2>
-<p>You can change the angle of the text by providing a single number (the number of degrees between 0 and 360) or a matrix of numbers to the argument <code>X.text.angle</code>. If providing a matrix, the dimension must be identical to that of the X matrix provided.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="co"># heatmap matrix</span></a>
-<a class="sourceLine" id="cb52-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb52-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb52-4" data-line-number="4">          <span class="co"># add text matrix</span></a>
-<a class="sourceLine" id="cb52-5" data-line-number="5">          <span class="dt">X.text =</span> <span class="kw">round</span>(<span class="kw">as.matrix</span>(mtcars), <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb52-6" data-line-number="6">          <span class="dt">X.text.col =</span> mtcars.col,</a>
-<a class="sourceLine" id="cb52-7" data-line-number="7">          <span class="dt">X.text.size =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb52-8" data-line-number="8">          <span class="dt">X.text.angle =</span> <span class="dv">12</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

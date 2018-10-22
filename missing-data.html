@@ -2,15 +2,6 @@
 <html >
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -38,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="heatmap-colormap.html">
 <link rel="next" href="clustering.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -60,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -73,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -244,26 +233,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="missing-data" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Missing data</h1>
 <p>Superheat deals with missing values gracefully by filling them in with a color of your choice (the default is grey).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(superheat)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co"># replace some values with missing values</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">mtcars.missing &lt;-<span class="st"> </span>mtcars</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">mtcars.missing[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mtcars), <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">               <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mtcars), <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw">superheat</span>(mtcars.missing,</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">          <span class="co"># scale the matrix</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">          <span class="dt">scale =</span> T)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">library</span>(superheat)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># replace some values with missing values</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">mtcars.missing &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">mtcars.missing[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mtcars), <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">               <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mtcars), <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="kw">superheat</span>(mtcars.missing,</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">          <span class="co"># scale the matrix</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">          <span class="dt">scale =</span> T)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="color" class="section level2">
 <h2><span class="header-section-number">5.1</span> Color</h2>
 <p>You can set the color of missing values by setting <code>heat.na.col</code> to a color of your choice.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">superheat</span>(mtcars.missing,</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">          <span class="co"># scale the matrix</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">          <span class="dt">scale =</span> T,</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">          </a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">          <span class="co"># change color of missing values</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">          <span class="dt">heat.na.col =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">superheat</span>(mtcars.missing,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">          <span class="co"># scale the matrix</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">          </a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">          <span class="co"># change color of missing values</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">          <span class="dt">heat.na.col =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -3,16 +3,6 @@
 
 <head>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Superheat Vignette</title>
@@ -21,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -39,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="clustering.html">
 <link rel="next" href="adjacent-plots.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -61,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -74,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -248,35 +236,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="plot-title" class="section level2">
 <h2><span class="header-section-number">7.1</span> Plot title</h2>
 <p>Plot titles are very important for presenting your visualizations. You can set the plot title by <code>title</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">          <span class="co"># plot title</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">          <span class="dt">title =</span> <span class="st">&quot;Superheat for mtcars&quot;</span>,</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">          <span class="dt">title.size =</span> <span class="dv">8</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-9-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p>Note that the default plot title is left-aligned. This can be changed using the <code>title.alignment</code> argument whose options are <code>left</code>, <code>center</code>, and <code>right</code>.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
 <a class="sourceLine" id="cb21-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb21-4" data-line-number="4">          <span class="co"># plot title</span></a>
 <a class="sourceLine" id="cb21-5" data-line-number="5">          <span class="dt">title =</span> <span class="st">&quot;Superheat for mtcars&quot;</span>,</a>
-<a class="sourceLine" id="cb21-6" data-line-number="6">          <span class="dt">title.size =</span> <span class="dv">8</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb21-6" data-line-number="6">          <span class="dt">title.alignment =</span> <span class="st">&quot;center&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-10-1.png" width="816" style="display: block; margin: auto;" /></p>
-<p>Note that the default plot title is left-aligned. This can be changed using the <code>title.alignment</code> argument whose options are <code>left</code>, <code>center</code>, and <code>right</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">          <span class="co"># plot title</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">          <span class="dt">title =</span> <span class="st">&quot;Superheat for mtcars&quot;</span>,</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">          <span class="dt">title.alignment =</span> <span class="st">&quot;center&quot;</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-11-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <div id="row-and-column-titles" class="section level2">
 <h2><span class="header-section-number">7.2</span> Row and column titles</h2>
 <p>Adding titles to the columns and rows is easy too. Simply supply the desired row and column titles for the <code>row.title</code> and <code>column.title</code> arguments</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">          <span class="co"># row title</span></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">          <span class="dt">row.title =</span> <span class="st">&quot;Cars&quot;</span>,</a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">          <span class="dt">row.title.size =</span> <span class="dv">6</span>,</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">          <span class="co"># col title</span></a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">          <span class="dt">column.title =</span> <span class="st">&quot;Variables&quot;</span>,</a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">          <span class="dt">column.title.size =</span> <span class="dv">6</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-12-1.png" width="816" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">          <span class="co"># row title</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">          <span class="dt">row.title =</span> <span class="st">&quot;Cars&quot;</span>,</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">          <span class="dt">row.title.size =</span> <span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">          <span class="co"># col title</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">          <span class="dt">column.title =</span> <span class="st">&quot;Variables&quot;</span>,</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9">          <span class="dt">column.title.size =</span> <span class="dv">6</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-11-1.png" width="816" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

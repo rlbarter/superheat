@@ -2,15 +2,6 @@
 <html >
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -38,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="missing-data.html">
 <link rel="next" href="titles.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -60,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -73,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -247,82 +236,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dendrogram" class="section level2">
 <h2><span class="header-section-number">6.1</span> Dendrogram</h2>
 <p>It is natural to supply a dendrogram that highlights the hierarchical clustering of the columns and/or rows using the <code>col.dendrogram</code> and <code>row.dendrogram</code> arguments. Note that if you want to implement the row or column ordering implied by the dendrogram, but to remove the dendrogram itself, you can use the <a href="ordering-rows-and-columns.html#h-order"><code>pretty.order.rows</code></a> and <a href="ordering-rows-and-columns.html#h-order"><code>pretty.order.cols</code></a> arguments.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">          <span class="co"># add row dendrogram</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">          <span class="dt">row.dendrogram =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">          <span class="co"># add row dendrogram</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">          <span class="dt">row.dendrogram =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/dendrogram-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="generate-clust" class="section level2">
 <h2><span class="header-section-number">6.2</span> Generating clusters</h2>
 <p>Grouping the rows and/or columns into a pre-specified number of clusters is a nice way to highlight structure and simplify visualization. For example, we can group the rows into three groupings by specifying <code>n.clusters.rows = 3</code>. The underling clustering algorithm is <code>kmeans()</code>, but you can use hierarchical clustering by specifying <code>clustering.method = 'hierarchical'</code>.</p>
 <p>In order to get the same clustering every time you must set the seed or <a href="clustering.html#membership-vector">provide your own clustering membership vector</a>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">          <span class="co"># generate three column clusters</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/clusters-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>By default, when clustering the corresponding labels are grouped into the cluster name (typically 1, 2, 3, … etc). If you would like to force the labels to be the original variable names, you can specify <code>left.label = 'variable'</code> or <code>bottom.label = 'variable</code>, depending on whether it is the left or bottom labels, respectively.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb16-5" data-line-number="5">          <span class="co"># generate three column clusters</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/clusters-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>By default, when clustering the corresponding labels are grouped into the cluster name (typically 1, 2, 3, … etc). If you would like to force the labels to be the original variable names, you can specify <code>left.label = 'variable'</code> or <code>bottom.label = 'variable</code>, depending on whether it is the left or bottom labels, respectively.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">          <span class="co"># generate three column clusters</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb16-6" data-line-number="6">          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/clusters-var-labels-1.png" width="768" style="display: block; margin: auto;" /></p>
 <div id="extracting-the-clusters" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Extracting the clusters</h3>
 <p>If you would like to be able to extract the clusters generated by the <code>superheat()</code> function, then you need to first save the superheat object as a variable. From this variable, you can access the clusters that are stored in the <code>membership.rows</code> and <code>membership.cols</code> entries.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">superheatmap &lt;-<span class="st"> </span><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">                          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">                          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">                          <span class="co"># generate three column clusters</span></a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">                          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">                          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>,</a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">                          <span class="dt">print.plot =</span> F)</a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co"># extract the clusters</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">superheatmap<span class="op">$</span>membership.rows</a></code></pre></div>
-<pre><code>##   Hornet Sportabout          Duster 360          Merc 450SE
-##                   1                   1                   1
-##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood
-##                   1                   1                   1
-## Lincoln Continental   Chrysler Imperial    Dodge Challenger
-##                   1                   1                   1
-##         AMC Javelin          Camaro Z28    Pontiac Firebird
-##                   1                   1                   1
-##      Ford Pantera L       Maserati Bora           Mazda RX4
-##                   1                   1                   2
-##       Mazda RX4 Wag      Hornet 4 Drive             Valiant
-##                   2                   2                   2
-##           Merc 240D            Merc 230            Merc 280
-##                   2                   2                   2
-##           Merc 280C       Toyota Corona        Ferrari Dino
-##                   2                   2                   2
-##          Datsun 710            Fiat 128         Honda Civic
-##                   3                   3                   3
-##      Toyota Corolla           Fiat X1-9       Porsche 914-2
-##                   3                   3                   3
-##        Lotus Europa          Volvo 142E
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">superheatmap &lt;-<span class="st"> </span><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">                          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">                          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">                          <span class="co"># generate three column clusters</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">                          <span class="dt">n.clusters.rows =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">                          <span class="dt">left.label =</span> <span class="st">&#39;variable&#39;</span>,</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">                          <span class="dt">print.plot =</span> F)</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co"># extract the clusters</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11">superheatmap<span class="op">$</span>membership.rows</a></code></pre></div>
+<pre><code>##   Hornet Sportabout          Duster 360          Merc 450SE 
+##                   1                   1                   1 
+##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood 
+##                   1                   1                   1 
+## Lincoln Continental   Chrysler Imperial    Dodge Challenger 
+##                   1                   1                   1 
+##         AMC Javelin          Camaro Z28    Pontiac Firebird 
+##                   1                   1                   1 
+##      Ford Pantera L       Maserati Bora           Mazda RX4 
+##                   1                   1                   2 
+##       Mazda RX4 Wag      Hornet 4 Drive             Valiant 
+##                   2                   2                   2 
+##           Merc 240D            Merc 230            Merc 280 
+##                   2                   2                   2 
+##           Merc 280C       Toyota Corona        Ferrari Dino 
+##                   2                   2                   2 
+##          Datsun 710            Fiat 128         Honda Civic 
+##                   3                   3                   3 
+##      Toyota Corolla           Fiat X1-9       Porsche 914-2 
+##                   3                   3                   3 
+##        Lotus Europa          Volvo 142E 
 ##                   3                   3</code></pre>
 </div>
 </div>
 <div id="membership-vector" class="section level2">
 <h2><span class="header-section-number">6.3</span> User-supplied clusters</h2>
 <p>The best way to conduct clustering on your matrix is to provide a pre-specified membership vector using the <code>membership.rows</code>/<code>membership.cols</code> argument. Suppose, for our mtcars example, we wanted to group by number of gears.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">gears &lt;-<span class="st"> </span><span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>)</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">          <span class="co"># cluster by gears</span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">          <span class="dt">membership.rows =</span> gears)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">gears &lt;-<span class="st"> </span><span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">          <span class="co"># cluster by gears</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">          <span class="dt">membership.rows =</span> gears)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/membership-vector-1.png" width="768" style="display: block; margin: auto;" /></p>
 
 </div>

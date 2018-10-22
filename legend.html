@@ -2,15 +2,6 @@
 <html >
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-90929425-3');
-</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +11,16 @@
 
   <meta property="og:title" content="Superheat Vignette" />
   <meta property="og:type" content="book" />
-
-
+  
+  
   <meta property="og:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
   <meta name="github-repo" content="rlbarter/superheat" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Superheat Vignette" />
-
+  
   <meta name="twitter:description" content="This is the vignette for the superheat R package for making beautiful and customizable heatmaps." />
-
+  
 
 <meta name="author" content="Rebecca Barter">
 
@@ -38,8 +29,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
+  
+  
 <link rel="prev" href="grid-aesthetics.html">
 <link rel="next" href="smoothing-in-high-dimensions.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -60,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -73,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -246,48 +235,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="removing-the-legend" class="section level2">
 <h2><span class="header-section-number">12.1</span> Removing the legend</h2>
 <p>Removing the legend entirely can be achieved by setting <code>legend = FALSE</code>.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb64-4" data-line-number="4">          </a>
-<a class="sourceLine" id="cb64-5" data-line-number="5">          <span class="co"># remove the legend</span></a>
-<a class="sourceLine" id="cb64-6" data-line-number="6">          <span class="dt">legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb61-4" data-line-number="4">          </a>
+<a class="sourceLine" id="cb61-5" data-line-number="5">          <span class="co"># remove the legend</span></a>
+<a class="sourceLine" id="cb61-6" data-line-number="6">          <span class="dt">legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="size-3" class="section level2">
 <h2><span class="header-section-number">12.2</span> Size</h2>
 <p>Changing the size of the legend can be achieved by setting <code>legend.height</code> and <code>legend.width</code>. The size of the text can be set using <code>legend.text.size</code>.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb65-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb65-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4">          </a>
-<a class="sourceLine" id="cb65-5" data-line-number="5">          <span class="co"># make the legend bigger</span></a>
-<a class="sourceLine" id="cb65-6" data-line-number="6">          <span class="dt">legend.height =</span> <span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb65-7" data-line-number="7">          <span class="dt">legend.width =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb65-8" data-line-number="8">          <span class="dt">legend.text.size =</span> <span class="dv">20</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb62-4" data-line-number="4">          </a>
+<a class="sourceLine" id="cb62-5" data-line-number="5">          <span class="co"># make the legend bigger</span></a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">          <span class="dt">legend.height =</span> <span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb62-7" data-line-number="7">          <span class="dt">legend.width =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb62-8" data-line-number="8">          <span class="dt">legend.text.size =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="vertical-spacing" class="section level2">
 <h2><span class="header-section-number">12.3</span> Vertical spacing</h2>
 <p>You can increase or decrease the vertical space between the heatmap and the legend using the <code>legeng.vspace</code> argument. The default is set to 0.1.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb66-4" data-line-number="4">          </a>
-<a class="sourceLine" id="cb66-5" data-line-number="5">          <span class="co"># increase the space between the heatmap and legend</span></a>
-<a class="sourceLine" id="cb66-6" data-line-number="6">          <span class="dt">legend.vspace =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">          </a>
+<a class="sourceLine" id="cb63-5" data-line-number="5">          <span class="co"># increase the space between the heatmap and legend</span></a>
+<a class="sourceLine" id="cb63-6" data-line-number="6">          <span class="dt">legend.vspace =</span> <span class="fl">0.4</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="legend-breaks" class="section level2">
 <h2><span class="header-section-number">12.4</span> Legend breaks</h2>
-<p>Sometimes it is nice to customize the legend even further. The <code>legend.breaks</code> argument can be used to specify the legend break values (i.e. where the numbers and ticks appear). This argument does not mess with the actual color range or presentation.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb67-4" data-line-number="4">          </a>
-<a class="sourceLine" id="cb67-5" data-line-number="5">          <span class="co"># specify the legend breaks</span></a>
-<a class="sourceLine" id="cb67-6" data-line-number="6">          <span class="dt">legend.breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>))</a></code></pre></div>
-<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Sometimes it is nice to customize the legend even further. Superheat tries to provide pretty legend breaks, but sometimes fails to do so. You can specify the desired number of breaks presented in the legend using the <code>legend.num.ticks</code> argument. Unfortunately, if the underlying <code>pretty()</code> function that decides the legend breaks does not think your number is a good choice, it will veto your suggestion and do whatever it wants instead.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4">          </a>
+<a class="sourceLine" id="cb64-5" data-line-number="5">          <span class="co"># specify the number of legend breaks</span></a>
+<a class="sourceLine" id="cb64-6" data-line-number="6">          <span class="dt">legend.num.ticks =</span> <span class="dv">10</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/legend-ticks-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Alternatively, the <code>legend.breaks</code> argument can be used to manually specify the legend break values (i.e. where the numbers and ticks appear). This argument does not mess with the actual color range or presentation.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb65-4" data-line-number="4">          </a>
+<a class="sourceLine" id="cb65-5" data-line-number="5">          <span class="co"># manually specify the legend breaks</span></a>
+<a class="sourceLine" id="cb65-6" data-line-number="6">          <span class="dt">legend.breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>))</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
