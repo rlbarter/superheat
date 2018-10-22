@@ -208,6 +208,7 @@ generate_smooth_heat <- function(X,
                                  legend.width = 1.5,
                                  legend.height = 0.1,
                                  legend.text.size = 12,
+                                 legend.num.ticks = 4,
                                  legend.breaks = NULL,
                                  axis.size = 10,
                                  label.size = 10,
@@ -351,7 +352,8 @@ generate_smooth_heat <- function(X,
   range.X <- seq(min.col, max.col, length = 100)
   # specify location of legend breaks
   if (is.null(legend.breaks)) {
-    breaks <- signif(as.vector(quantile(range.X, na.rm = T)), 1)
+    # make the breaks nicely spread
+    breaks <- pretty(range.X, n = legend.num.ticks)
   } else {
     breaks <- legend.breaks
   }
