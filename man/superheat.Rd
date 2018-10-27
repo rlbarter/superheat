@@ -22,10 +22,11 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   "scattersmooth", "smooth", "scatterline", "line"),
   yr.plot.type = c("scatter", "bar", "boxplot", "scattersmooth", "smooth",
   "scatterline", "line"), legend = TRUE, legend.height = 0.1,
-  legend.width = 1.5, legend.text.size = 12, legend.breaks = NULL,
-  legend.vspace = 0.1, grid.hline = TRUE, grid.vline = TRUE,
-  grid.hline.size = 0.5, grid.vline.size = 0.5, grid.hline.col = "black",
-  grid.vline.col = "black", force.grid.hline = F, force.grid.vline = F,
+  legend.width = 1.5, legend.text.size = 12, legend.num.ticks = 4,
+  legend.breaks = NULL, legend.vspace = 0.1, grid.hline = TRUE,
+  grid.vline = TRUE, grid.hline.size = 0.5, grid.vline.size = 0.5,
+  grid.hline.col = "black", grid.vline.col = "black",
+  force.grid.hline = F, force.grid.vline = F,
   smoothing.method = c("loess", "lm"), smooth.se = TRUE, yt.axis = T,
   yr.axis = T, yt.num.ticks = 3, yr.num.ticks = 3, yt.plot.size = 0.3,
   yr.plot.size = 0.3, yt.axis.name = NULL, yr.axis.name = NULL,
@@ -70,10 +71,10 @@ of the rows in X.}
 of the columns in X.}
 
 \item{pretty.order.rows}{a logical specifying whether the cols should be reordered
-based on hierarchical clustering. Default is TRUE.}
+based on hierarchical clustering. Default is FALSE.}
 
 \item{pretty.order.cols}{a logical specifying whether the rows should be reordered
-based on hierarchical clustering. Default is TRUE.}
+based on hierarchical clustering. Default is FALSE.}
 
 \item{row.dendrogram}{a logical specifying whether a dendrogram should be
 placed next to the rows. Can only be used when \code{yr} is not
@@ -203,7 +204,10 @@ is 1.5.}
 \item{legend.text.size}{a number specifying the size of the numbers on the
 legend axis. The default is 12.}
 
-\item{legend.breaks}{a vector specifying the legend breaks.}
+\item{legend.num.ticks}{a vector specifying the desired number of legend breaks
+(superheat may or may not actually give this number of breaks).}
+
+\item{legend.breaks}{a vector specifying the actual legend breaks.}
 
 \item{legend.vspace}{a number specifying the vertical gap between the
 heatmap and the legend}

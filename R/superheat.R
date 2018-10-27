@@ -30,9 +30,9 @@
 #' @param membership.cols a vector specifying the cluster membership
 #'          of the columns in X.
 #' @param pretty.order.cols a logical specifying whether the rows should be reordered
-#'          based on hierarchical clustering. Default is TRUE.
+#'          based on hierarchical clustering. Default is FALSE.
 #' @param pretty.order.rows a logical specifying whether the cols should be reordered
-#'          based on hierarchical clustering. Default is TRUE.
+#'          based on hierarchical clustering. Default is FALSE.
 #' @param row.dendrogram a logical specifying whether a dendrogram should be
 #'          placed next to the rows. Can only be used when \code{yr} is not
 #'          specified and clustering is not performed.
@@ -243,7 +243,9 @@
 #'          is 1.5.
 #' @param legend.text.size a number specifying the size of the numbers on the
 #'          legend axis. The default is 12.
-#' @param legend.breaks a vector specifying the legend breaks.
+#' @param legend.num.ticks a vector specifying the desired number of legend breaks
+#'          (superheat may or may not actually give this number of breaks).
+#' @param legend.breaks a vector specifying the actual legend breaks.
 #' @param legend.vspace a number specifying the vertical gap between the
 #'          heatmap and the legend
 #' @param padding the amount (in cm) of white space (padding) around the plot.
@@ -339,6 +341,7 @@ superheat <- function(X,
                       legend.height = 0.1,
                       legend.width = 1.5,
                       legend.text.size = 12,
+                      legend.num.ticks = 4,
                       legend.breaks = NULL,
                       legend.vspace = 0.1,
 
@@ -414,11 +417,15 @@ superheat <- function(X,
   # The primary superheat function for plotting super heatmaps.
 
   # drop exess factor levels
-  if (!is.null(membership.rows) && is.factor(membership.rows)) {
+  if (!is.null(membership.rows)) {
+    membership.rows <- as.factor(membership.rows)
     membership.rows <- droplevels(membership.rows)
+    membership.rows <- forcats::fct_inorder(membership.rows)
   }
-  if (!is.null(membership.cols) && is.factor(membership.cols)) {
+  if (!is.null(membership.cols)) {
+    membership.cols <- as.factor(membership.cols)
     membership.cols <- droplevels(membership.cols)
+    membership.cols <- forcats::fct_inorder(membership.cols)
   }
 
   if (row.dendrogram) {
