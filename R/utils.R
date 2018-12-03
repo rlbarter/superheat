@@ -216,8 +216,12 @@ stopErrors <- function(X,
                         yr.point.alpha = 1,
                         yr.line.size = NULL,
                         yt.line.size = NULL,
-                       yt.lim = NULL,
-                       yr.lim = NULL,
+                        yt.lim = NULL,
+                        yr.lim = NULL,
+                       yt.breaks = NULL,
+                       yr.breaks = NULL,
+                       yt.break.labels = NULL,
+                       yr.break.labels = NULL,
 
                         bottom.label = NULL,
                         left.label = NULL,
@@ -490,6 +494,24 @@ stopErrors <- function(X,
   if (!is.null(yt.lim) && yt.plot.type == "bar" && max(yt) < 0 &&
       yt.lim[2] != 0) {
     stop("`yt.lim` must start at 0 when `yt.plot.type` = 'bar'")
+  }
+
+  if (!is.null(yt.breaks) & !is.null(yt.break.labels) &
+      (length(yt.breaks) != length(yt.break.labels))) {
+    stop("`yt.breaks` and `yt.break.labels` must have the same length")
+  }
+
+  if (!is.null(yr.breaks) & !is.null(yr.break.labels) &
+      (length(yr.breaks) != length(yr.break.labels))) {
+    stop("`yr.breaks` and `yr.break.labels` must have the same length")
+  }
+
+  if (!is.null(yt.breaks) & !is.numeric(yt.breaks)) {
+    stop("`yt.breaks` must be numeric")
+  }
+
+  if (!is.null(yr.breaks) & !is.numeric(yr.breaks)) {
+    stop("`yr.breaks` must be numeric")
   }
 
   if (!is.null(left.label.text.alignment)) {

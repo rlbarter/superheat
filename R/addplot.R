@@ -20,9 +20,11 @@ generate_add_on_plot <- function(X,
                                  y.line.size = NULL,
                                  y.line.col = NULL,
                                  y.lim = NULL,
+                                 y.breaks = NULL,
+                                 y.break.labels = NULL,
                                  smooth.se = TRUE) {
 
-  
+
   # is the plot for clusters or for individual data points?
   if (((location == "top") && (length(y) != ncol(X))) |
       ((location == "right") && (length(y) != nrow(X)))) {
@@ -30,12 +32,12 @@ generate_add_on_plot <- function(X,
   } else {
     clustered.plot <- F
   }
-  
+
   # detect arguments
   plot.type <- match.arg(plot.type)
 
-  
-  
+
+
   # specify default axis name angle
   if (location == "top" && is.null(axis.name.angle)) {
     axis.name.angle <- 90
@@ -90,7 +92,7 @@ generate_add_on_plot <- function(X,
   } else {
     y.df$membership <- factor(membership)
   }
-  
+
   if (!is.null(y.obs.col)) {
     y.df$col <- y.obs.col
   }
@@ -99,21 +101,21 @@ generate_add_on_plot <- function(X,
   # (then it must be for clusters)
   # We need to make sure each value is plotted in the center of the cluster
   if (clustered.plot && (length(y) != nrow(X))) {
-    
+
    midpoints <- clusteredPosition(y.df, membership)$midpoints
    # add position to y.df data frame
    y.df$x <- midpoints
   }
-  
+
   # fix visible binding note
   x <- y.df$x
   y <- y.df$y
-  
+
   # define the location of the ticks for the axis
   # for all plots other than a bar plot:
   # (for a bar plot, rather than starting from the minimum value,
   #  we want to start from 0, etc)
-  ticks <- setTicks(plot.type, y.df, num.ticks, y.lim) 
+  ticks <- setTicks(plot.type, y.df, num.ticks, y.lim)
 
   # define number of clusters
   n.clusters <- length(unique(membership))
@@ -121,21 +123,39 @@ generate_add_on_plot <- function(X,
 
   # define the base of the plot
   gg.add <- basePlot(location, plot.type, theme_top, theme_right, y.df)
-  
+
   # make sure the additional plots are the correct distance from the edges
   limits.arg.list <- c(as.list(environment()))
   limits.arg.list <- limits.arg.list[names(formals(setLimits))]
   limits.arg.list <- limits.arg.list[!is.na(names(limits.arg.list))]
   gg.add <- do.call(setLimits, limits.arg.list)
-  
+
   # define pretty breaks
-  pretty.breaks <- scales::pretty_breaks(n = num.ticks, min.n = 3)(ticks)[-1]
-  # clean up the axis breaks and name
-  gg.add <- gg.add +
-    ggplot2::scale_y_continuous(breaks = pretty.breaks,
-                                name = paste(axis.name),
-                                #expand = c(0.05, 0.05),
-                                limits = y.lim)
+  if (is.null(y.breaks)) {
+    pretty.breaks <- scales::pretty_breaks(n = num.ticks, min.n = 3)(ticks)[-1]
+    # clean up the axis breaks and name
+    gg.add <- gg.add +
+      ggplot2::scale_y_continuous(breaks = pretty.breaks,
+                                  name = paste(axis.name),
+                                  #expand = c(0.05, 0.05),
+                                  limits = y.lim)
+  } else {
+    if (!is.null(y.break.labels)) {
+      gg.add <- gg.add +
+        ggplot2::scale_y_continuous(breaks = y.breaks,
+                                    name = paste(axis.name),
+                                    #expand = c(0.05, 0.05),
+                                    limits = y.lim,
+                                    labels = y.break.labels)
+    } else {
+      gg.add <- gg.add +
+        ggplot2::scale_y_continuous(breaks = y.breaks,
+                                    name = paste(axis.name),
+                                    #expand = c(0.05, 0.05),
+                                    limits = y.lim)
+    }
+
+  }
 
   # Case 1: scatterplots when the observations are not coloured by y.obs.col
   if (plot.type == "scatter") {
@@ -186,7 +206,7 @@ generate_add_on_plot <- function(X,
     box.arg.list <- box.arg.list[!is.na(names(box.arg.list))]
     gg.add <- do.call(addBoxplot, box.arg.list)
   }
-  
+
   # rotate axis name
   gg.add <- gg.add +
     ggplot2::theme(axis.title.y =
