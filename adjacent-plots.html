@@ -3,17 +3,15 @@
 
 <head>
 
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-90929425-3');
-  </script>
-
+  gtag('config', 'UA-90929425-3');
+</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -193,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.1" data-path="adjacent-plots.html"><a href="adjacent-plots.html#name"><i class="fa fa-check"></i><b>8.8.1</b> Name</a></li>
 <li class="chapter" data-level="8.8.2" data-path="adjacent-plots.html"><a href="adjacent-plots.html#size-2"><i class="fa fa-check"></i><b>8.8.2</b> Size</a></li>
 <li class="chapter" data-level="8.8.3" data-path="adjacent-plots.html"><a href="adjacent-plots.html#limits"><i class="fa fa-check"></i><b>8.8.3</b> Limits</a></li>
+<li class="chapter" data-level="8.8.4" data-path="adjacent-plots.html"><a href="adjacent-plots.html#tick-break-positions"><i class="fa fa-check"></i><b>8.8.4</b> Tick break positions</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="adjacent-plots.html"><a href="adjacent-plots.html#plot-size"><i class="fa fa-check"></i><b>8.9</b> Plot size</a></li>
 </ul></li>
@@ -699,10 +698,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb44-15" data-line-number="15">          <span class="dt">yt.lim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-33-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
-</div>
-<div id="plot-size" class="section level2">
-<h2><span class="header-section-number">8.9</span> Plot size</h2>
-<p>The size of the entire adjacent plot can be determined using the <code>yr.plot.size</code>/<code>yr.plot.size</code> arguments.</p>
+<div id="tick-break-positions" class="section level3">
+<h3><span class="header-section-number">8.8.4</span> Tick break positions</h3>
+<p>You can manually set the y-axis tick positions using the <code>yr.breaks</code> and <code>yt.breaks</code> arguments.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
 <a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
 <a class="sourceLine" id="cb45-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
@@ -711,18 +709,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb45-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
 <a class="sourceLine" id="cb45-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
 <a class="sourceLine" id="cb45-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
-<a class="sourceLine" id="cb45-9" data-line-number="9">          <span class="dt">yr.axis.size =</span> <span class="dv">14</span>,</a>
-<a class="sourceLine" id="cb45-10" data-line-number="10">          <span class="dt">yr.axis.name.size =</span> <span class="dv">14</span>,</a>
-<a class="sourceLine" id="cb45-11" data-line-number="11">          <span class="dt">yr.plot.size =</span> <span class="fl">0.8</span>,</a>
-<a class="sourceLine" id="cb45-12" data-line-number="12">          </a>
-<a class="sourceLine" id="cb45-13" data-line-number="13">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
-<a class="sourceLine" id="cb45-14" data-line-number="14">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
-<a class="sourceLine" id="cb45-15" data-line-number="15">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
-<a class="sourceLine" id="cb45-16" data-line-number="16">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation with mpg&quot;</span>,</a>
-<a class="sourceLine" id="cb45-17" data-line-number="17">          <span class="dt">yt.axis.size =</span> <span class="dv">14</span>,</a>
-<a class="sourceLine" id="cb45-18" data-line-number="18">          <span class="dt">yt.axis.name.size =</span> <span class="dv">14</span>,</a>
-<a class="sourceLine" id="cb45-19" data-line-number="19">          <span class="dt">yt.plot.size =</span> <span class="fl">0.7</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb45-9" data-line-number="9">          <span class="dt">yr.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>),</a>
+<a class="sourceLine" id="cb45-10" data-line-number="10">          <span class="dt">yr.breaks =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">40</span>),        </a>
+<a class="sourceLine" id="cb45-11" data-line-number="11">          </a>
+<a class="sourceLine" id="cb45-12" data-line-number="12">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb45-13" data-line-number="13">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb45-14" data-line-number="14">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb45-15" data-line-number="15">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>)</a></code></pre></div>
 <p><img src="superheat-vignette_files/figure-html/unnamed-chunk-34-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p>You can also change the labels of the y-axis ticks using the <code>yr.break.labels</code> and <code>yt.break.labels</code> arguments.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">          <span class="dt">yr.lim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">60</span>),</a>
+<a class="sourceLine" id="cb46-10" data-line-number="10">          <span class="dt">yr.breaks =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb46-11" data-line-number="11">          <span class="dt">yr.break.labels =</span> <span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;high&quot;</span>),</a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">          </a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb46-14" data-line-number="14">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb46-16" data-line-number="16">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation</span><span class="ch">\n</span><span class="st">with mpg&quot;</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-35-1.png" width="816" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="plot-size" class="section level2">
+<h2><span class="header-section-number">8.9</span> Plot size</h2>
+<p>The size of the entire adjacent plot can be determined using the <code>yr.plot.size</code>/<code>yr.plot.size</code> arguments.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># plot a super heatmap</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">superheat</span>(dplyr<span class="op">::</span><span class="kw">select</span>(mtcars, <span class="op">-</span>mpg), </a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">          <span class="co"># scale the variables/columns</span></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">          <span class="dt">scale =</span> T,</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">          </a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">          <span class="co"># add mpg as a scatterplot next to the rows</span></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">          <span class="dt">yr =</span> mtcars<span class="op">$</span>mpg,</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">          <span class="dt">yr.axis.name =</span> <span class="st">&quot;miles per gallon&quot;</span>,</a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">          <span class="dt">yr.axis.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">          <span class="dt">yr.axis.name.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb47-11" data-line-number="11">          <span class="dt">yr.plot.size =</span> <span class="fl">0.8</span>,</a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">          </a>
+<a class="sourceLine" id="cb47-13" data-line-number="13">          <span class="co"># add correlation between each variable and miles per gallon</span></a>
+<a class="sourceLine" id="cb47-14" data-line-number="14">          <span class="dt">yt =</span> <span class="kw">cor</span>(mtcars)[<span class="op">-</span><span class="dv">1</span>,<span class="st">&quot;mpg&quot;</span>],</a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">          <span class="dt">yt.plot.type =</span> <span class="st">&quot;bar&quot;</span>,</a>
+<a class="sourceLine" id="cb47-16" data-line-number="16">          <span class="dt">yt.axis.name =</span> <span class="st">&quot;Correlation with mpg&quot;</span>,</a>
+<a class="sourceLine" id="cb47-17" data-line-number="17">          <span class="dt">yt.axis.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb47-18" data-line-number="18">          <span class="dt">yt.axis.name.size =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb47-19" data-line-number="19">          <span class="dt">yt.plot.size =</span> <span class="fl">0.7</span>)</a></code></pre></div>
+<p><img src="superheat-vignette_files/figure-html/unnamed-chunk-36-1.png" width="816" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -4,15 +4,14 @@
 <head>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-90929425-3');
-  </script>
-
+  gtag('config', 'UA-90929425-3');
+</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -192,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.1" data-path="adjacent-plots.html"><a href="adjacent-plots.html#name"><i class="fa fa-check"></i><b>8.8.1</b> Name</a></li>
 <li class="chapter" data-level="8.8.2" data-path="adjacent-plots.html"><a href="adjacent-plots.html#size-2"><i class="fa fa-check"></i><b>8.8.2</b> Size</a></li>
 <li class="chapter" data-level="8.8.3" data-path="adjacent-plots.html"><a href="adjacent-plots.html#limits"><i class="fa fa-check"></i><b>8.8.3</b> Limits</a></li>
+<li class="chapter" data-level="8.8.4" data-path="adjacent-plots.html"><a href="adjacent-plots.html#tick-break-positions"><i class="fa fa-check"></i><b>8.8.4</b> Tick break positions</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="adjacent-plots.html"><a href="adjacent-plots.html#plot-size"><i class="fa fa-check"></i><b>8.9</b> Plot size</a></li>
 </ul></li>
@@ -245,22 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 13</span> Smoothing in high dimensions</h1>
 <p>In situations where you are plotting a very large matrix, often the heatmap becomes obscured by noise due to the sheer amount of information being presented relative to the number of pixels available.</p>
 <p>To address this common issue, we have allowed for smoothing by summarizing values within a cluster by the median value. This can be achieved using the <code>smooth.heat</code> argument.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">gears &lt;-<span class="st"> </span><span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>)</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
-<a class="sourceLine" id="cb66-4" data-line-number="4"><span class="kw">superheat</span>(mtcars,</a>
-<a class="sourceLine" id="cb66-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
-<a class="sourceLine" id="cb66-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb66-7" data-line-number="7">          </a>
-<a class="sourceLine" id="cb66-8" data-line-number="8">          <span class="co"># cluster by gears</span></a>
-<a class="sourceLine" id="cb66-9" data-line-number="9">          <span class="dt">membership.rows =</span> gears,</a>
-<a class="sourceLine" id="cb66-10" data-line-number="10">          </a>
-<a class="sourceLine" id="cb66-11" data-line-number="11">          <span class="co"># place each variable in its own cluster</span></a>
-<a class="sourceLine" id="cb66-12" data-line-number="12">          <span class="dt">membership.cols =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mtcars),</a>
-<a class="sourceLine" id="cb66-13" data-line-number="13">          <span class="dt">bottom.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
-<a class="sourceLine" id="cb66-14" data-line-number="14">          </a>
-<a class="sourceLine" id="cb66-15" data-line-number="15">          <span class="co"># smooth the heatmap within clusters</span></a>
-<a class="sourceLine" id="cb66-16" data-line-number="16">          <span class="dt">smooth.heat =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">gears &lt;-<span class="st"> </span><span class="kw">paste</span>(mtcars<span class="op">$</span>gear, <span class="st">&quot;gears&quot;</span>)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">2016113</span>)</a>
+<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="kw">superheat</span>(mtcars,</a>
+<a class="sourceLine" id="cb68-5" data-line-number="5">          <span class="co"># scale the matrix columns</span></a>
+<a class="sourceLine" id="cb68-6" data-line-number="6">          <span class="dt">scale =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb68-7" data-line-number="7">          </a>
+<a class="sourceLine" id="cb68-8" data-line-number="8">          <span class="co"># cluster by gears</span></a>
+<a class="sourceLine" id="cb68-9" data-line-number="9">          <span class="dt">membership.rows =</span> gears,</a>
+<a class="sourceLine" id="cb68-10" data-line-number="10">          </a>
+<a class="sourceLine" id="cb68-11" data-line-number="11">          <span class="co"># place each variable in its own cluster</span></a>
+<a class="sourceLine" id="cb68-12" data-line-number="12">          <span class="dt">membership.cols =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mtcars),</a>
+<a class="sourceLine" id="cb68-13" data-line-number="13">          <span class="dt">bottom.label =</span> <span class="st">&quot;variable&quot;</span>,</a>
+<a class="sourceLine" id="cb68-14" data-line-number="14">          </a>
+<a class="sourceLine" id="cb68-15" data-line-number="15">          <span class="co"># smooth the heatmap within clusters</span></a>
+<a class="sourceLine" id="cb68-16" data-line-number="16">          <span class="dt">smooth.heat =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## Warning: Column `rclust` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre><code>## Warning: Column `cclust` joining factors with different levels, coercing to
+## character vector</code></pre>
 <p><img src="superheat-vignette_files/figure-html/smoothing-1.png" width="768" style="display: block; margin: auto;" /></p>
 
 </div>

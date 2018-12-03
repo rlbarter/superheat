@@ -4,15 +4,14 @@
 <head>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90929425-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-90929425-3');
-  </script>
-
+  gtag('config', 'UA-90929425-3');
+</script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -192,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.1" data-path="adjacent-plots.html"><a href="adjacent-plots.html#name"><i class="fa fa-check"></i><b>8.8.1</b> Name</a></li>
 <li class="chapter" data-level="8.8.2" data-path="adjacent-plots.html"><a href="adjacent-plots.html#size-2"><i class="fa fa-check"></i><b>8.8.2</b> Size</a></li>
 <li class="chapter" data-level="8.8.3" data-path="adjacent-plots.html"><a href="adjacent-plots.html#limits"><i class="fa fa-check"></i><b>8.8.3</b> Limits</a></li>
+<li class="chapter" data-level="8.8.4" data-path="adjacent-plots.html"><a href="adjacent-plots.html#tick-break-positions"><i class="fa fa-check"></i><b>8.8.4</b> Tick break positions</a></li>
 </ul></li>
 <li class="chapter" data-level="8.9" data-path="adjacent-plots.html"><a href="adjacent-plots.html#plot-size"><i class="fa fa-check"></i><b>8.9</b> Plot size</a></li>
 </ul></li>
@@ -244,9 +244,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="saving-superheatmaps" class="section level1">
 <h1><span class="header-section-number">Chapter 14</span> Saving superheatmaps</h1>
 <p>The best format for saving superheat images is as a .png file. To do this in R, the easiest way is to use the <code>png()</code> function (remember to call <code>dev.off()</code> when you’re done!)</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">png</span>(<span class="st">&quot;superheat.png&quot;</span>, <span class="dt">height =</span> <span class="dv">900</span>, <span class="dt">width =</span> <span class="dv">800</span>)</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="dt">scale =</span> T)</a>
-<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="kw">dev.off</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">png</span>(<span class="st">&quot;superheat.png&quot;</span>, <span class="dt">height =</span> <span class="dv">900</span>, <span class="dt">width =</span> <span class="dv">800</span>)</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">superheat</span>(<span class="dt">X =</span> mtcars, <span class="dt">scale =</span> T)</a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="kw">dev.off</span>()</a></code></pre></div>
 
 </div>
             </section>
