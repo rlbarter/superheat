@@ -31,7 +31,7 @@ To download and install the development version of the package, use `devtools`:
 
 ```{r, eval = FALSE}
 install.packages("devtools")
-devtools::install_github("rlbarter/superheat")
+devtools::install_github("mychan24/superheat")
 ```
 
 Once you've installed the package, you can load the library in the standard way:
