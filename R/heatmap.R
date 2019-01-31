@@ -227,6 +227,10 @@ generate_smooth_heat <- function(X,
                                  order.y = NULL, # order of observations
                                  heat.col.scheme = c("viridis", "red", "purple",
                                                      "blue", "grey", "green"),
+
+                                 x.axis.reverse = F, ## myc
+                                 y.axis.reverse = F, ## myc
+
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
                                  heat.na.col = "grey50",
@@ -418,6 +422,19 @@ generate_smooth_heat <- function(X,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
     theme_heatmap
+
+  #### Origin flip #### myc
+  if (x.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_x_continuous(name = "", expand = c(0, 0))
+  }
+
+  if (y.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+  }
 
   if (grid.vline) {
     for (i in 1:length(clines)) {
