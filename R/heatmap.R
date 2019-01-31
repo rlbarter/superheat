@@ -471,6 +471,13 @@ generate_smooth_heat <- function(X,
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
   }
 
+  if (x.axis.reverse) { ## myc
+    gg.heat <- gg.heat + ggplot2::scale_x_reverse()
+  }
+  if (y.axis.reverse) {
+    gg.heat <- gg.heat + ggplot2::scale_y_reverse()
+  }
+
   return(list(gg.heat = gg.heat, gg.legend = gg.legend,
               heat.pal.values = heat.pal.values))
 }
