@@ -416,8 +416,8 @@ generate_smooth_heat <- function(X,
                                   breaks = breaks,
                                   na.value = heat.na.col,
                                   limits = heat.lim) +
-    ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
-    ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
