@@ -426,12 +426,14 @@ superheat <- function(X,
   # The primary superheat function for plotting super heatmaps.
 
   # drop exess factor levels
-  if (!is.null(membership.rows)) {
+  # if (!is.null(membership.rows)) { - myc 20190205
+  if (!is.null(membership.rows) && is.factor(membership.rows)) { # - myc  20190205
     membership.rows <- as.factor(membership.rows)
     membership.rows <- droplevels(membership.rows)
     membership.rows <- forcats::fct_inorder(membership.rows)
   }
-  if (!is.null(membership.cols)) {
+  # if (!is.null(membership.cols)) { - myc 20190205
+  if (!is.null(membership.cols) && is.factor(membership.cols)) { # - myc 20190205
     membership.cols <- as.factor(membership.cols)
     membership.cols <- droplevels(membership.cols)
     membership.cols <- forcats::fct_inorder(membership.cols)
