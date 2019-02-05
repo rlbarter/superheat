@@ -37,16 +37,17 @@ superheat(X, X.text = NULL, yt = NULL, yr = NULL,
   yr.bar.col = NULL, yt.point.size = 2, yt.point.alpha = 1,
   yr.point.size = 2, yr.point.alpha = 1, yr.line.col = NULL,
   yt.line.col = NULL, yr.line.size = NULL, yt.line.size = NULL,
-  yr.lim = NULL, yt.lim = NULL, bottom.label.text.size = 5,
-  left.label.text.size = 5, bottom.label.text.angle = NULL,
-  left.label.text.angle = NULL, bottom.label.size = NULL,
-  left.label.size = NULL, left.label.col = NULL, bottom.label.col = NULL,
-  left.label.text.col = NULL, bottom.label.text.col = NULL,
-  left.label.text.alignment = NULL, bottom.label.text.alignment = NULL,
-  force.left.label = F, force.bottom.label = F, column.title = NULL,
-  row.title = NULL, column.title.size = 5, row.title.size = 5,
-  padding = 1, title = NULL, title.size = 5, title.alignment = NULL,
-  print.plot = TRUE)
+  yr.lim = NULL, yt.lim = NULL, yr.breaks = NULL, yt.breaks = NULL,
+  yr.break.labels = NULL, yt.break.labels = NULL,
+  bottom.label.text.size = 5, left.label.text.size = 5,
+  bottom.label.text.angle = NULL, left.label.text.angle = NULL,
+  bottom.label.size = NULL, left.label.size = NULL, left.label.col = NULL,
+  bottom.label.col = NULL, left.label.text.col = NULL,
+  bottom.label.text.col = NULL, left.label.text.alignment = NULL,
+  bottom.label.text.alignment = NULL, force.left.label = F,
+  force.bottom.label = F, column.title = NULL, row.title = NULL,
+  column.title.size = 5, row.title.size = 5, padding = 1, title = NULL,
+  title.size = 5, title.alignment = NULL, print.plot = TRUE)
 }
 \arguments{
 \item{X}{a matrix whose values are to be plotted in the heatmap.}
@@ -327,6 +328,16 @@ plot.}
 \item{yr.lim}{a vector of length two describing the y-axis limits.}
 
 \item{yt.lim}{a vector of length two describing the y-axis limits.}
+
+\item{yr.breaks}{a vector describing the position of the y-axis breaks.}
+
+\item{yt.breaks}{a vector describing the position of the y-axis breaks.}
+
+\item{yr.break.labels}{a vector describing the printed labels of the y-axis
+breaks.}
+
+\item{yt.break.labels}{a vector describing the printed labels of the y-axis
+breaks.}
 
 \item{bottom.label.text.size}{the size of the bottom heatmap label text. The
 default is 5.}

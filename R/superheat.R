@@ -1,4 +1,3 @@
-
 #' Generate supervised heatmaps.
 #'
 #' Superheat is used to generate and customize heatmaps.
@@ -197,6 +196,12 @@
 #'          transparency.
 #' @param yt.lim a vector of length two describing the y-axis limits.
 #' @param yr.lim a vector of length two describing the y-axis limits.
+#' @param yt.breaks a vector describing the position of the y-axis breaks.
+#' @param yr.breaks a vector describing the position of the y-axis breaks.
+#' @param yt.break.labels a vector describing the printed labels of the y-axis
+#'          breaks.
+#' @param yr.break.labels a vector describing the printed labels of the y-axis
+#'          breaks.
 #' @param bottom.label.text.size the size of the bottom heatmap label text. The
 #'          default is 5.
 #' @param left.label.text.size the size of the left heatmap label text. The
@@ -302,8 +307,8 @@ superheat <- function(X,
                                       "canberra", "binary", "minkowski"),
                       linkage.method = c("complete", "ward.D",
                                          "ward.D2", "single",
-                                          "average", "mcquitty",
-                                          "median", "centroid"),
+                                         "average", "mcquitty",
+                                         "median", "centroid"),
 
                       order.cols = NULL,
                       order.rows = NULL,
@@ -387,6 +392,10 @@ superheat <- function(X,
                       yt.line.size = NULL,
                       yr.lim = NULL,
                       yt.lim = NULL,
+                      yr.breaks = NULL,
+                      yt.breaks = NULL,
+                      yr.break.labels = NULL,
+                      yt.break.labels = NULL,
 
                       bottom.label.text.size = 5,
                       left.label.text.size = 5,
@@ -526,7 +535,7 @@ superheat <- function(X,
   if (!cluster.cols &
       ((bottom.label == "variable") | (bottom.label == "none"))) {
     if ((ncol(X) > 50) && !force.grid.vline) {
-       grid.vline <- FALSE
+      grid.vline <- FALSE
     }
   }
   if (!cluster.rows &
@@ -754,6 +763,8 @@ superheat <- function(X,
     y.line.size <- yt.line.size
     y.line.col <- yt.line.col
     y.lim <- yt.lim
+    y.breaks <- yt.breaks
+    y.break.labels <- yt.break.labels
     membership <- membership.cols
     location <- "top"
     axis.name <- yt.axis.name
@@ -776,7 +787,7 @@ superheat <- function(X,
     gg.top <- do.call(generate_add_on_plot, plot.arg.list)
   } else if (col.dendrogram) {
     suppressMessages(gg.top <- ggdendro::ggdendrogram(hclust.cols) +
-      ggplot2::scale_x_continuous(expand = c(1/(2 * ncol(X)), 1/(2 * ncol(X)))))
+                       ggplot2::scale_x_continuous(expand = c(1/(2 * ncol(X)), 1/(2 * ncol(X)))))
   }
 
   if (!is.null(yr) && (!row.dendrogram)) {
@@ -788,6 +799,8 @@ superheat <- function(X,
     y.line.size <- yr.line.size
     y.line.col <- yr.line.col
     y.lim <- yr.lim
+    y.breaks <- yr.breaks
+    y.break.labels <- yr.break.labels
     membership <- membership.rows
     location <- "right"
     axis.name <- yr.axis.name
@@ -810,7 +823,7 @@ superheat <- function(X,
     gg.right <- do.call(generate_add_on_plot, plot.arg.list)
   } else if (row.dendrogram) {
     suppressMessages(gg.right <- ggdendro::ggdendrogram(hclust.rows, rotate = T) +
-      ggplot2::scale_x_continuous(expand = c(1/(2 * nrow(X)), 1/(2 * nrow(X)))))
+                       ggplot2::scale_x_continuous(expand = c(1/(2 * nrow(X)), 1/(2 * nrow(X)))))
   }
 
   # Generate the bottom heatmap labels. There are two types:
@@ -972,13 +985,13 @@ superheat <- function(X,
   # Generate row and column titles
   if (!is.null(column.title)) {
     gg.column.title <- generate_names(name = column.title,
-                                     name.size = column.title.size,
-                                     location = "bottom")
+                                      name.size = column.title.size,
+                                      location = "bottom")
   }
   if (!is.null(row.title)) {
     gg.row.title <- generate_names(name = row.title,
-                                  name.size = row.title.size,
-                                  location = "left")
+                                   name.size = row.title.size,
+                                   location = "left")
   }
 
 
