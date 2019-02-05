@@ -428,15 +428,15 @@ superheat <- function(X,
   # drop exess factor levels
   # if (!is.null(membership.rows)) { - myc 20190205
   if (!is.null(membership.rows) && is.factor(membership.rows)) { # - myc  20190205
-    membership.rows <- as.factor(membership.rows)
-    membership.rows <- droplevels(membership.rows)
-    membership.rows <- forcats::fct_inorder(membership.rows)
+    # membership.rows <- as.factor(membership.rows)
+    membership.rows <- droplevels(membership.rows) # - myc  20190205
+    # membership.rows <- forcats::fct_inorder(membership.rows) # - myc  20190205
   }
   # if (!is.null(membership.cols)) { - myc 20190205
   if (!is.null(membership.cols) && is.factor(membership.cols)) { # - myc 20190205
-    membership.cols <- as.factor(membership.cols)
-    membership.cols <- droplevels(membership.cols)
-    membership.cols <- forcats::fct_inorder(membership.cols)
+    # membership.cols <- as.factor(membership.cols)
+    membership.cols <- droplevels(membership.cols) # - myc  20190205
+    # membership.cols <- forcats::fct_inorder(membership.cols) # - myc  20190205
   }
 
   if (row.dendrogram) {
