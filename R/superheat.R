@@ -730,6 +730,7 @@ superheat <- function(X,
     heat <- do.call(generate_heat, heat.arg.list)
   }
   # extract the heatmap object from the output
+
   gg.heat <- heat$gg.heat
   # extract the legend object from the output
   if (legend) {
@@ -983,13 +984,13 @@ superheat <- function(X,
   layout.arg.list <- c(as.list(environment()))
   layout.arg.list <- layout.arg.list[names(formals(generate_layout))]
   layout.arg.list <- layout.arg.list[!is.na(names(layout.arg.list))]
-  layout <- do.call(generate_layout, layout.arg.list)
+  suppressWarnings(layout <- do.call(generate_layout, layout.arg.list))
   # gtable::gtable_show_layout(layout)
   # place grobs in layout
   grob.arg.list <- c(as.list(environment()))
   grob.arg.list <- grob.arg.list[names(formals(generate_grobs))]
   grob.arg.list <- grob.arg.list[!is.na(names(grob.arg.list))]
-  grob.layout <- do.call(generate_grobs, grob.arg.list)
+  suppressWarnings(grob.layout <- do.call(generate_grobs, grob.arg.list))
 
   if (print.plot) {
     grid::grid.newpage()
