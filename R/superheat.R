@@ -71,7 +71,10 @@
 #'          "centroid" (= UPGMC).
 #'
 #' @param smooth.heat a logical specifying whether or not to smooth the colour
-#'          of the heatmap within clusters (by taking the median value).
+#'          of the heatmap within clusters (by taking the median/mean value
+#'          defined by smooth.heat.type).
+#' @param smooth.heat.type the type of smoothing used within clusters. This
+#'          must be one of "median","mean".
 #' @param scale a logical specifying whether or not to center and scale the
 #'          columns of X.
 #' @param left.label a character specifying the type of the label provided to
@@ -114,6 +117,8 @@
 #' @param X.text.col a single character string or a matrix of character strings
 #'          (whose dimension matches that of \code{X.text}) that specifies the
 #'          colours of each text entry in \code{X.text}.
+#' @param x.axis.reverse reverse x axis.
+#' @param y.axis.reverse reverse y axis (0 on top right corner).
 #' @param legend logical. If set to \code{FALSE}, then no legend is provided.
 #' @param grid.hline a logical specifying whether horizontal grid lines are
 #'          plotted in the heatmap.
@@ -255,7 +260,7 @@
 #' @param title.alignment the alignment of the title. The default is "center".
 #'          Options are "left", "right", "center".
 #' @param print.plot a logical specifying whether or not to output the plot.
-#'
+
 #' @references Barter and Yu (2018), Superheat: An R package for creating
 #'        beautiful and extendable heatmaps for visualizing complex data,
 #'        \url{https://www.tandfonline.com/doi/full/10.1080/10618600.2018.1473780},
@@ -309,6 +314,7 @@ superheat <- function(X,
                       order.rows = NULL,
 
                       smooth.heat = FALSE,
+                      smooth.heat.type = "median",
                       scale = FALSE,
 
                       left.label = NULL,
@@ -325,6 +331,9 @@ superheat <- function(X,
                       X.text.size = 5,
                       X.text.col = "black",
                       X.text.angle = 0,
+
+                      x.axis.reverse = F,
+                      y.axis.reverse = F,
 
                       yt.plot.type = c("scatter", "bar", "boxplot",
                                        "scattersmooth", "smooth",
@@ -417,15 +426,17 @@ superheat <- function(X,
   # The primary superheat function for plotting super heatmaps.
 
   # drop exess factor levels
-  if (!is.null(membership.rows)) {
-    membership.rows <- as.factor(membership.rows)
-    membership.rows <- droplevels(membership.rows)
-    membership.rows <- forcats::fct_inorder(membership.rows)
+  # if (!is.null(membership.rows)) { - myc 20190205
+  if (!is.null(membership.rows) && is.factor(membership.rows)) { # - myc  20190205
+    # membership.rows <- as.factor(membership.rows)
+    membership.rows <- droplevels(membership.rows) # - myc  20190205
+    # membership.rows <- forcats::fct_inorder(membership.rows) # - myc  20190205
   }
-  if (!is.null(membership.cols)) {
-    membership.cols <- as.factor(membership.cols)
-    membership.cols <- droplevels(membership.cols)
-    membership.cols <- forcats::fct_inorder(membership.cols)
+  # if (!is.null(membership.cols)) { - myc 20190205
+  if (!is.null(membership.cols) && is.factor(membership.cols)) { # - myc 20190205
+    # membership.cols <- as.factor(membership.cols)
+    membership.cols <- droplevels(membership.cols) # - myc  20190205
+    # membership.cols <- forcats::fct_inorder(membership.cols) # - myc  20190205
   }
 
   if (row.dendrogram) {
@@ -693,17 +704,25 @@ superheat <- function(X,
   }
   # rearrange label colors if needed
   if (!is.null(left.label.col)) {
-    left.label.col <- left.label.col[order.df.rows$order.rows]
+    if (left.label == "variable"){
+      left.label.col <- left.label.col[order.df.rows$order.rows]
+    }
   }
   if (!is.null(bottom.label.col)) {
-    bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+    if (left.label == "variable"){
+      bottom.label.col <- bottom.label.col[order.df.cols$order.cols]
+    }
   }
   # rearrange label text colors if needed
   if (!is.null(left.label.text.col)) {
+    if (left.label == "variable"){
     left.label.text.col <- left.label.text.col[order.df.rows$order.rows]
+    }
   }
   if (!is.null(bottom.label.text.col)) {
+    if (left.label == "variable"){
     bottom.label.text.col <- bottom.label.text.col[order.df.cols$order.cols]
+    }
   }
 
   # the default if clustering was not performed

@@ -7,7 +7,9 @@ generate_cluster_label <- function(membership,
                                    label.text.alignment = NULL,
                                    bottom.label.text.size = 5,
                                    left.label.text.size = 5,
-                                   text.angle = NULL) {
+                                   text.angle = NULL,
+                                   x.axis.reverse = F,
+                                   y.axis.reverse = F) {
 
 
   # set the defaults for the label alignment
@@ -137,8 +139,13 @@ generate_cluster_label <- function(membership,
                          size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
-      ggplot2::scale_y_continuous(expand = c(0, 0)) +
       ggplot2::scale_x_continuous(expand = c(0, 0))
+
+    if (y.axis.reverse) {
+      gg.left <- gg.left + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+    } else {
+      gg.left <- gg.left + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+    }
 
     return(gg.left)
   }
@@ -172,9 +179,19 @@ generate_cluster_label <- function(membership,
                          vjust = "centre",
                          size = bottom.label.text.size,
                          col = label.text.col,
-                         angle = text.angle) +
-      ggplot2::scale_x_continuous(expand = c(0, 0)) +
-      ggplot2::scale_y_continuous(expand = c(0, 0)))
+                         angle = text.angle))
+
+    if (x.axis.reverse) {
+      gg.bottom <- gg.bottom + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
+    } else {
+      gg.bottom <- gg.bottom + ggplot2::scale_x_continuous(name = "", expand = c(0, 0))
+    }
+
+    if (y.axis.reverse) {
+      gg.bottom <- gg.bottom + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+    } else {
+      gg.bottom <- gg.bottom + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+    }
 
     return(gg.bottom)
   }
@@ -198,7 +215,9 @@ generate_var_label <- function(names,
                                label.text.alignment = NULL,
                                bottom.label.text.size = 5,
                                left.label.text.size = 5,
-                               text.angle = NULL) {
+                               text.angle = NULL,
+                               x.axis.reverse = F,
+                               y.axis.reverse = F) {
 
   location <- match.arg(location)
 
@@ -321,8 +340,14 @@ generate_var_label <- function(names,
                          size = left.label.text.size,
                          angle = text.angle,
                          col = label.text.col) +
-      ggplot2::scale_y_continuous(expand = c(0, 0)) +
+      #ggplot2::scale_y_continuous(expand = c(0, 0)) +
       ggplot2::scale_x_continuous(expand = c(0, 0))
+
+    if (y.axis.reverse) {
+      gg.left <- gg.left + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+    } else {
+      gg.left <- gg.left + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+    }
 
     return(gg.left)
   }
@@ -354,10 +379,20 @@ generate_var_label <- function(names,
                          vjust = "centre",
                          size = bottom.label.text.size,
                          col = label.text.col,
-                         angle = text.angle) +
-      ggplot2::scale_x_continuous(expand = c(0, 0)) +
-      ggplot2::scale_y_continuous(expand = c(0, 0))
+                         angle = text.angle) # +
+      # ggplot2::scale_x_continuous(expand = c(0, 0)) +
+      # ggplot2::scale_y_continuous(expand = c(0, 0))
+    if (x.axis.reverse) {
+      gg.bottom <- gg.bottom + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
+    } else {
+      gg.bottom <- gg.bottom + ggplot2::scale_x_continuous(name = "", expand = c(0, 0))
+    }
 
+    if (y.axis.reverse) {
+      gg.bottom <- gg.bottom + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+    } else {
+      gg.bottom <- gg.bottom + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+    }
     return(gg.bottom)
   }
 

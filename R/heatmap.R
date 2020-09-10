@@ -1,9 +1,14 @@
 generate_heat <- function(X,
                           smooth.heat = FALSE,
+                          smooth.heat.type = "median", # default to median
                           X.text = NULL,
                           X.text.size = 5,
                           X.text.angle = 0,
                           X.text.col = "black",
+
+                          x.axis.reverse = F,
+                          y.axis.reverse = F,
+
                           membership.rows = NULL,
                           membership.cols = NULL,
                           order.x = NULL, # order of variables
@@ -110,7 +115,6 @@ generate_heat <- function(X,
     breaks <- legend.breaks
   }
 
-
   # define variables to fix visible binding check -- bit of a hack
   x <- X.df$x
   y <- X.df$y
@@ -134,12 +138,25 @@ generate_heat <- function(X,
                                   breaks = breaks,
                                   na.value = heat.na.col,
                                   limits = heat.lim) +
-    ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
-    ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
     theme_heatmap
+
+  #### Origin flip ####
+  if (x.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_x_continuous(name = "", expand = c(0, 0))
+  }
+
+  if (y.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+  }
 
   # add grid lines if desired
   if (grid.vline) {
@@ -178,7 +195,8 @@ generate_heat <- function(X,
                          membership.cols = membership.cols) +
       ggplot2::scale_colour_manual(values = col.values) +
       ggplot2::scale_size(range = c(min(X.text.size), max(X.text.size)))
-  }
+
+}
 
   return(list(gg.heat = gg.heat, gg.legend = gg.legend,
               heat.pal.values = heat.pal.values))
@@ -196,12 +214,17 @@ generate_smooth_heat <- function(X,
                                  heat.lim = NULL,
                                  extreme.values.na = TRUE,
                                  smooth.heat = TRUE,
+                                 smooth.heat.type = "median",
                                  membership.rows = NULL,
                                  membership.cols = NULL,
                                  order.x = NULL, # order of variables
                                  order.y = NULL, # order of observations
                                  heat.col.scheme = c("viridis", "red", "purple",
                                                      "blue", "grey", "green"),
+
+                                 x.axis.reverse = F, ## myc
+                                 y.axis.reverse = F, ## myc
+
                                  heat.pal = NULL,
                                  heat.pal.values = NULL,
                                  heat.na.col = "grey50",
@@ -307,10 +330,15 @@ generate_smooth_heat <- function(X,
 
 
   # average within cluster boxes:
-  X.smooth.df <- X.smooth.df %>% dplyr::group_by(cclust, rclust) %>%
-    dplyr::summarize(value = median(value, na.rm = T))
-  X.smooth.df <- dplyr::ungroup(X.smooth.df)
-
+  if(smooth.heat.type=="median"){
+    X.smooth.df <- X.smooth.df %>% dplyr::group_by(cclust, rclust) %>%
+      dplyr::summarize(value = median(value, na.rm = T))
+    X.smooth.df <- dplyr::ungroup(X.smooth.df)
+  }else if(smooth.heat.type=="mean"){
+    X.smooth.df <- X.smooth.df %>% dplyr::group_by(cclust, rclust) %>%
+      dplyr::summarize(value = mean(value, na.rm = T))
+    X.smooth.df <- dplyr::ungroup(X.smooth.df)
+  }
 
   # obtain ranges of the rectangles for the smoothed heatmap
   ymin <- rlines[-length(rlines)]
@@ -382,12 +410,25 @@ generate_smooth_heat <- function(X,
                                   breaks = breaks,
                                   na.value = heat.na.col,
                                   limits = heat.lim) +
-    ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
-    ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_y_continuous(name = "", expand = c(0, 0)) +
+    # ggplot2::scale_x_continuous(name = "", expand = c(0, 0)) +
     ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = legend.width * 10,
                                                    barheight = legend.height * 10)) +
     ggplot2::theme(legend.text = ggplot2::element_text(size = legend.text.size)) +
     theme_heatmap
+
+  #### Origin flip #### myc
+  if (x.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_x_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_x_continuous(name = "", expand = c(0, 0))
+  }
+
+  if (y.axis.reverse) {
+    gg.legend <- gg.legend + ggplot2::scale_y_reverse(name = "", expand = c(0, 0))
+  } else {
+    gg.legend <- gg.legend + ggplot2::scale_y_continuous(name = "", expand = c(0, 0))
+  }
 
   if (grid.vline) {
     for (i in 1:length(clines)) {
@@ -520,7 +561,6 @@ generate_text_heat <- function(X,
                                              size = as.numeric(size),
                                              angle = angle,
                                              col = col), data = X.df)
-
 
   return(gg.text)
 }

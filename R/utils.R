@@ -154,6 +154,7 @@ stopErrors <- function(X,
                         order.rows = NULL,
 
                         smooth.heat = FALSE,
+                        smooth.heat.type = "median",
                         scale = FALSE,
 
                         heat.col.scheme = c("viridis", "red", "purple", "blue",
